@@ -10,3 +10,4 @@ dist/
 Thumbs.db
 artifacts/
 outputs/*.tar.gz
+outputs/deployment-result.json
