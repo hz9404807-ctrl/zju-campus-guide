@@ -1,0 +1,16 @@
+.star-rating { min-width: 0; margin: 0; padding: 0; border: 0; }
+.star-rating legend { padding: 0; color: var(--ink); font-size: 14px; font-weight: 600; line-height: 1.7; }
+.star-rating-required { margin-left: 9px; color: #68778a; font-size: 11px; font-weight: 400; }
+.star-rating-row { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 9px; }
+.star-rating-options { display: flex; gap: 3px; }
+.star-rating-option { position: relative; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid transparent; border-radius: 8px; color: #7c899b; cursor: pointer; }
+.star-rating-option input { position: absolute; inset: 0; z-index: 1; width: 44px; height: 44px; margin: 0; opacity: 0; cursor: pointer; }
+.star-rating-option:hover { background: var(--warm-soft); }
+.star-rating-option.is-filled { color: #af7617; }
+.star-rating-option:has(input:focus-visible) { outline: 3px solid var(--blue); outline-offset: 2px; }
+.star-rating-value { color: #58677a; font-size: 13px; line-height: 1.7; }
+.star-rating-hint { margin-top: 8px; color: var(--muted); font-size: 12px; line-height: 1.75; }
+.star-rating-error { margin-top: 7px; color: #b32731; font-size: 12px; line-height: 1.8; }
+.star-rating-invalid .star-rating-options { border-radius: 8px; outline: 1px solid #d87f86; }
+.star-rating:disabled { opacity: .6; }
+.star-rating:disabled .star-rating-option, .star-rating:disabled .star-rating-option input { cursor: default; }

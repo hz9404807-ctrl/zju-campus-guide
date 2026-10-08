@@ -1,0 +1,53 @@
+.food-rating-panel.food-rating-panel-interactive { display: grid; grid-template-columns: 45px minmax(0, 1fr); gap: 17px; padding: 25px 28px; margin-top: 24px; border: 1px solid var(--line); border-radius: 16px; background: white; }
+.food-rating-panel-interactive .food-rating-panel-body { min-width: 0; }
+.food-rating-panel-interactive .food-rating-panel-icon { display: grid; place-items: center; width: 45px; height: 45px; color: var(--warm-dark); background: var(--warm-soft); border-radius: 13px; }
+.food-rating-panel-interactive h2 { font-size: 17px; line-height: 1.7; }
+.food-rating-panel-interactive .food-rating-rule { margin-top: 6px; color: var(--muted); font-size: 13px; line-height: 1.85; }
+.food-rating-panel-interactive .food-rating-form { margin-top: 19px; }
+.food-rating-panel-interactive .food-rating-context-note { margin: 0 0 16px; padding: 10px 13px; color: #775416; background: #fff8e9; border: 1px solid #eadbb7; border-radius: 9px; font-size: 12px; line-height: 1.8; }
+.food-rating-panel-interactive .star-rating-hint { margin-top: 8px; font-size: 12px; line-height: 1.75; }
+.food-rating-panel-interactive .star-rating-error { margin-top: 7px; color: #b32731; font-size: 12px; line-height: 1.8; }
+.food-rating-panel-interactive .food-rating-checking { display: flex; align-items: center; gap: 9px; margin-top: 17px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+.food-rating-panel-interactive .food-rating-check-error { margin-top: 16px; }
+.food-rating-panel-interactive .food-rating-check-error p, .food-rating-panel-interactive .food-rating-previous-error p { margin-top: 0; color: #a5323c; font-size: 13px; line-height: 1.85; }
+.food-rating-panel-interactive .food-rating-retry { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; padding: 9px 14px; margin-top: 11px; color: var(--blue); background: var(--blue-soft); border: 1px solid #d3e1f3; border-radius: 9px; font-size: 13px; font-weight: 500; }
+.food-rating-panel-interactive .food-rating-retry:hover { background: #e2edfa; }
+.food-rating-panel-interactive .food-rating-feedback { display: flex; align-items: flex-start; gap: 9px; padding: 12px 14px; margin-top: 17px; color: #a5323c; background: #fff4f3; border: 1px solid #efcecd; border-radius: 10px; }
+.food-rating-panel-interactive .food-rating-feedback > svg { margin-top: 2px; }
+.food-rating-panel-interactive .food-rating-feedback p { margin: 0; color: inherit; font-size: 13px; line-height: 1.8; }
+.food-rating-panel-interactive .food-rating-feedback:focus { outline: 2px solid #c57878; outline-offset: 3px; }
+.food-rating-panel-interactive .food-rating-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 18px; margin-top: 18px; }
+.food-rating-panel-interactive .food-rating-submit { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; min-width: 130px; padding: 11px 19px; color: white; background: var(--blue); border: 1px solid var(--blue); border-radius: 10px; font-size: 14px; font-weight: 600; transition: background .18s ease; }
+.food-rating-panel-interactive .food-rating-submit:hover:not(:disabled) { background: var(--blue-dark); }
+.food-rating-panel-interactive .food-rating-submit:disabled { opacity: .65; cursor: wait; }
+.food-rating-panel-interactive .food-rating-actions > p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.75; }
+.food-rating-panel-interactive .food-rating-locked { padding: 16px 18px; margin-top: 18px; background: #fff9ed; border: 1px solid #ebdfc5; border-radius: 12px; }
+.food-rating-panel-interactive .food-rating-locked-heading { display: flex; align-items: center; gap: 8px; color: #6f541e; font-size: 14px; line-height: 1.8; }
+.food-rating-panel-interactive .food-rating-locked-heading > svg { color: #846529; }
+.food-rating-panel-interactive .food-rating-success { margin-top: 5px; color: #5d6739; font-size: 13px; line-height: 1.8; }
+.food-rating-panel-interactive .food-rating-saved { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 13px; margin-top: 12px; color: #70521b; font-size: 13px; line-height: 1.8; }
+.food-rating-panel-interactive .food-rating-saved-stars { display: flex; gap: 4px; color: #8993a0; }
+.food-rating-panel-interactive .food-rating-saved-stars .is-filled { color: #a6761e; }
+.food-rating-panel-interactive .food-rating-previous-error { margin-top: 12px; }
+.food-rating-panel-interactive .food-rating-spinner { animation: food-rating-spin 1s linear infinite; }
+
+@keyframes food-rating-spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 680px) {
+  .food-rating-panel.food-rating-panel-interactive { grid-template-columns: 40px minmax(0, 1fr); gap: 13px; padding: 22px 20px; margin-top: 18px; }
+  .food-rating-panel-interactive .food-rating-panel-icon { width: 40px; height: 40px; }
+  .food-rating-panel-interactive h2 { font-size: 16px; }
+  .food-rating-panel-interactive .food-rating-rule { font-size: 12px; }
+}
+
+@media (max-width: 560px) {
+  .food-rating-panel.food-rating-panel-interactive { display: block; }
+  .food-rating-panel-interactive .food-rating-panel-icon { margin-bottom: 13px; }
+  .food-rating-panel-interactive .food-rating-submit { width: 100%; }
+  .food-rating-panel-interactive .food-rating-actions { gap: 9px; }
+  .food-rating-panel-interactive .food-rating-locked { padding: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .food-rating-panel-interactive .food-rating-spinner { animation: none; }
+}

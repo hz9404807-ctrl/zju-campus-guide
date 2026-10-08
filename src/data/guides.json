@@ -1,0 +1,82 @@
+[
+  {
+    "id": "campus-card-lost",
+    "title": "校园卡丢了怎么办",
+    "category": "校园卡",
+    "keywords": ["校园卡", "丢失", "遗失", "挂失", "补办"],
+    "summary": "示例说明：校园卡遗失后，需要确认挂失与补办的具体要求；办理入口、规则和费用均待补充、待核实。",
+    "steps": [
+      "示例：确认卡片是否遗失，并查找学校最新的校园卡相关通知；通知来源待补充。",
+      "示例：根据经核实的官方要求处理挂失；实际挂失入口、生效时间与使用规则待核实。",
+      "示例：如需补办，按经核实的要求准备材料；办理方式、费用和领取时间待补充、待核实。"
+    ],
+    "materials": ["具体材料要求待补充、待核实。"],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": null,
+    "verifiedAt": null,
+    "isExample": true
+  },
+  {
+    "id": "campus-card-replacement",
+    "title": "校园卡在哪里补办",
+    "category": "校园卡",
+    "keywords": ["校园卡", "补办", "办理地点", "卡务", "换卡"],
+    "summary": "示例说明：补办校园卡的地点、开放时间和所需材料尚未核实，本条仅用于展示如何查找和阅读办事指南。",
+    "steps": [
+      "示例：确认本人所在校区；各校区的补办方式与办理地点待补充、待核实。",
+      "示例：查看经核实的材料清单和开放时间；是否需要预约、携带证件或缴费均待核实。",
+      "示例：按经核实的流程办理并领取卡片；领取方式与办理时长待补充。"
+    ],
+    "materials": ["具体材料要求待补充、待核实。"],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": null,
+    "verifiedAt": null,
+    "isExample": true
+  },
+  {
+    "id": "venue-reservation",
+    "title": "场地怎么预约",
+    "category": "场地预约",
+    "keywords": ["场地", "预约", "体育场馆", "活动场地", "申请"],
+    "summary": "示例说明：场地预约通常需要先明确场地和使用时间；本校具体入口、预约资格及开放规则待补充、待核实。",
+    "steps": [
+      "示例：明确希望使用的场地、日期和时段；可预约的场地范围待核实。",
+      "示例：查阅经核实的预约说明；实际预约入口、资格要求和开放时间待补充。",
+      "示例：按照经核实的流程提交预约并查看结果；审批方式、取消规则和费用待核实。"
+    ],
+    "materials": ["是否需要申请材料及具体要求待补充、待核实。"],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": null,
+    "verifiedAt": null,
+    "isExample": true
+  },
+  {
+    "id": "campus-hospital-registration",
+    "title": "校医院怎么挂号",
+    "category": "就医服务",
+    "keywords": ["校医院", "挂号", "就医", "看病", "门诊", "预约"],
+    "summary": "示例说明：校医院的挂号方式、门诊安排和就诊材料尚未核实，本条仅展示指南结构，不作为实际就医流程。",
+    "steps": [
+      "示例：确认需要查询的院区和门诊信息；实际院区、科室与出诊安排待补充、待核实。",
+      "示例：查看经核实的挂号说明；线上或现场挂号方式、开放时间及费用待核实。",
+      "示例：按经核实的要求准备就诊材料；报到方式、就诊地点及其他要求待补充。"
+    ],
+    "materials": ["具体就诊材料要求待补充、待核实。"],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": null,
+    "verifiedAt": null,
+    "isExample": true
+  }
+]
