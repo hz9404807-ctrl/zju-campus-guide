@@ -16,4 +16,4 @@ The user authorizes connecting their selected GitHub account and uploading this 
 
 ## Current verification boundary
 
-The shared-service code and local checks are prepared, but the group leader's Supabase project creation is intentionally deferred. Do not claim that real anonymous authentication, uploads, or cross-device sharing have passed until they are actually tested against that project. Do not substitute local storage or sample data for shared service writes.
+The group leader created and connected a real Supabase project on 2026-10-08. Seventeen live service checks and browser upload/publication/rating/session-refresh checks passed; see docs/development-status.md. Two independent origins in one browser were verified, but physical cross-device, other-browser, real network-failure and public deployment checks remain pending. Keep all credentials and local environment files out of Git; never substitute local storage or sample data for shared service writes.
