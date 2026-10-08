@@ -16,6 +16,14 @@ export interface Guide {
   contact: string | null
   references: GuideReference[]
   source: string | null
+  sourceRows: number[]
+  sourceQuestions: string[]
+  importedAt: string
   verifiedAt: string | null
+  verificationScope: string | null
   isExample: boolean
+  kind: string
+  notes: string[]
+  relatedSourceIds: string[]
+  aliases?: string[]
 }

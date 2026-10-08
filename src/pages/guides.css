@@ -110,3 +110,14 @@
   .guide-meta-list dd { font-size: 13px; }
   .guide-reference-list { font-size: 13px; }
 }
+
+.guide-data-badge { font-size: 11px; color: var(--muted); line-height: 1.6; padding: 4px 8px; background: #f4f6f8; border-radius: 6px; }
+.guide-data-badge.checked { color: #2d705a; background: #edf7f1; }
+.guide-entry-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.guide-entry-links a { display: inline-flex; align-items: center; gap: 6px; padding: 9px 12px; min-height: 44px; max-width: 100%; font-size: 13px; border: 1px solid #c5d7ed; border-radius: 8px; background: white; overflow-wrap: anywhere; }
+.guide-explanation { margin-top: 20px; display: grid; gap: 14px; }
+.guide-explanation p { font-size: 14px; color: var(--muted); line-height: 1.9; overflow-wrap: anywhere; white-space: pre-line; }
+.guide-notes { border-left: 4px solid #d9a34a; }
+.guide-meta-hint { font-size: 12px !important; }
+.guide-related-accounts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+.guide-related-accounts a { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 8px 12px; background: var(--blue-soft); color: var(--blue); border-radius: 8px; font-size: 13px; overflow-wrap: anywhere; }

@@ -1,82 +1,3473 @@
 [
   {
-    "id": "campus-card-lost",
-    "title": "校园卡丢了怎么办",
+    "id": "campus-card-replacement",
+    "title": "校园卡丢了，在哪里挂失和补办？",
     "category": "校园卡",
-    "keywords": ["校园卡", "丢失", "遗失", "挂失", "补办"],
-    "summary": "示例说明：校园卡遗失后，需要确认挂失与补办的具体要求；办理入口、规则和费用均待补充、待核实。",
-    "steps": [
-      "示例：确认卡片是否遗失，并查找学校最新的校园卡相关通知；通知来源待补充。",
-      "示例：根据经核实的官方要求处理挂失；实际挂失入口、生效时间与使用规则待核实。",
-      "示例：如需补办，按经核实的要求准备材料；办理方式、费用和领取时间待补充、待核实。"
+    "keywords": [
+      "校园卡遗失了应该怎么办？去哪里补办？",
+      "校园卡换卡怎么办？",
+      "校园卡补办"
     ],
-    "materials": ["具体材料要求待补充、待核实。"],
-    "location": null,
+    "summary": "遗失后先办理挂失；补卡可选择校园卡自助终端或服务窗口，自助补卡费为20元。",
+    "steps": [
+      "在浙大校园卡应用办理挂失；若入口或状态异常，先联系校园卡服务窗口。",
+      "选择校园卡自助终端补卡，或携本人身份证原件到人工服务窗口办理。",
+      "自助补卡费用为20元，从校园卡余额扣除；领取后检查卡片使用状态。"
+    ],
+    "materials": [
+      "人工办理：本人身份证原件。"
+    ],
+    "location": "紫金港：东区大食堂校园卡服务部，或纳米楼115室20号窗口；玉泉：清真食堂对面校园卡服务部。",
     "openingHours": null,
     "contact": null,
-    "references": [],
-    "source": null,
-    "verifiedAt": null,
-    "isExample": true
+    "references": [
+      {
+        "label": "信息技术中心：校园卡服务",
+        "url": "https://itc.zju.edu.cn/xykwgr/list.htm"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第2、45、61行",
+    "sourceRows": [
+      2,
+      45,
+      61
+    ],
+    "sourceQuestions": [
+      "校园卡遗失了应该怎么办？去哪里补办？",
+      "校园卡换卡怎么办？",
+      "校园卡补办"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": "2026-10-08",
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [
+      "官网核对范围：补卡方式、20元自助补卡费、本人窗口办理材料及列出的地点；挂失入口来自小组资料。具体营业时段以窗口通知为准。"
+    ],
+    "verificationScope": "正文中明确标出的官网核对内容；其他资料细节仍需确认。",
+    "relatedSourceIds": [],
+    "aliases": [
+      "campus-card-lost"
+    ]
   },
   {
-    "id": "campus-card-replacement",
-    "title": "校园卡在哪里补办",
+    "id": "campus-002",
+    "title": "手机可以代替校园卡吗？",
     "category": "校园卡",
-    "keywords": ["校园卡", "补办", "办理地点", "卡务", "换卡"],
-    "summary": "示例说明：补办校园卡的地点、开放时间和所需材料尚未核实，本条仅用于展示如何查找和阅读办事指南。",
-    "steps": [
-      "示例：确认本人所在校区；各校区的补办方式与办理地点待补充、待核实。",
-      "示例：查看经核实的材料清单和开放时间；是否需要预约、携带证件或缴费均待核实。",
-      "示例：按经核实的流程办理并领取卡片；领取方式与办理时长待补充。"
+    "keywords": [
+      "校园卡可以被破解用于刷门禁吗？"
     ],
-    "materials": ["具体材料要求待补充、待核实。"],
+    "summary": "可使用浙大钉电子校园卡办理官方支持的二维码消费、充值和身份认证；门禁支持情况请向管理单位确认。",
+    "steps": [
+      "打开浙大钉工作台中的电子校园卡，查看可用功能。",
+      "需要使用门禁时，向宿管、图书馆等管理单位确认支持方式。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "信息技术中心：电子校园卡功能",
+        "url": "https://itc.zju.edu.cn/xykwgr/list.htm"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第3行",
+    "sourceRows": [
+      3
+    ],
+    "sourceQuestions": [
+      "校园卡可以被破解用于刷门禁吗？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": "2026-10-08",
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [
+      "原表第3行有关破解和手机NFC兼容性的说法缺少官方依据。本页改为官方电子校园卡使用说明，不提供破解或复制门禁卡方法。"
+    ],
+    "verificationScope": "正文中明确标出的官网核对内容；其他资料细节仍需确认。",
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-003",
+    "title": "校园卡经常余额不足，可以设置自动转入吗？",
+    "category": "校园卡",
+    "keywords": [
+      "校园卡经常余额不足，可以设置自动转入吗？"
+    ],
+    "summary": "小组资料提到可在中国银行App设置自动转入；具体入口、绑定要求与适用条件需向银行或校园卡服务部确认。",
+    "steps": [
+      "可以的，在中国银行移动端APP可以设置。"
+    ],
+    "materials": [],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [],
-    "source": null,
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第4行",
+    "sourceRows": [
+      4
+    ],
+    "sourceQuestions": [
+      "校园卡经常余额不足，可以设置自动转入吗？"
+    ],
+    "importedAt": "2026-10-08",
     "verifiedAt": null,
-    "isExample": true
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [
+      "小组资料仅提到中国银行App，未提供具体设置步骤或适用条件；自动转入规则应向银行与校园卡服务部确认。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-004",
+    "title": "校内共享单车优惠在校外可以用吗",
+    "category": "校园生活",
+    "keywords": [
+      "校内共享单车优惠在校外可以用吗"
+    ],
+    "summary": "需注意，共享单车可以从校内出发去校外，但是从校外出发不能享受专属优惠；共享电助力车只能在校内使用，超过校内范围会自动断电。",
+    "steps": [
+      "需注意，共享单车可以从校内出发去校外，但是从校外出发不能享受专属优惠",
+      "共享电助力车只能在校内使用，超过校内范围会自动断电。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第5行",
+    "sourceRows": [
+      5
+    ],
+    "sourceQuestions": [
+      "校内共享单车优惠在校外可以用吗"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-005",
+    "title": "怎么借用教学楼的教室",
+    "category": "场地与预约",
+    "keywords": [
+      "怎么借用教学楼的教室",
+      "浙江大学教室资源管理平台的网址是什么？可以预约哪些场地/办理哪些业务？",
+      "学生教室借用申请怎么办？"
+    ],
+    "summary": "请前往浙江大学教室资源管理平台jxzygl.zju.edu.cn 平台网址为jxzygl.zju.edu.cn，可办理紫金港东、西、北教学楼，蒙民伟楼，研究生教育综合楼各规模各类教室借用；也可查询自习教室、教室课表。 可通过学生教…",
+    "steps": [
+      "请前往浙江大学教室资源管理平台jxzygl.zju.edu.cn",
+      "平台网址为jxzygl.zju.edu.cn，可办理紫金港东、西、北教学楼，蒙民伟楼，研究生教育综合楼各规模各类教室借用",
+      "也可查询自习教室、教室课表。",
+      "可通过学生教学资源管理系统线上借用教室",
+      "需根据主管部门审批要求完成申请。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "jxzygl.zju.edu.cn（小组资料提供）",
+        "url": "https://jxzygl.zju.edu.cn"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第6、7、60行",
+    "sourceRows": [
+      6,
+      7,
+      60
+    ],
+    "sourceQuestions": [
+      "怎么借用教学楼的教室",
+      "浙江大学教室资源管理平台的网址是什么？可以预约哪些场地/办理哪些业务？",
+      "学生教室借用申请怎么办？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
   },
   {
     "id": "venue-reservation",
-    "title": "场地怎么预约",
-    "category": "场地预约",
-    "keywords": ["场地", "预约", "体育场馆", "活动场地", "申请"],
-    "summary": "示例说明：场地预约通常需要先明确场地和使用时间；本校具体入口、预约资格及开放规则待补充、待核实。",
-    "steps": [
-      "示例：明确希望使用的场地、日期和时段；可预约的场地范围待核实。",
-      "示例：查阅经核实的预约说明；实际预约入口、资格要求和开放时间待补充。",
-      "示例：按照经核实的流程提交预约并查看结果；审批方式、取消规则和费用待核实。"
+    "title": "活动场地怎么预约？启真在线在哪里？",
+    "category": "场地与预约",
+    "keywords": [
+      "启真在线的访问入口是什么？可以预约哪些场地/办理哪些业务？",
+      "活动空间查询"
     ],
-    "materials": ["是否需要申请材料及具体要求待补充、待核实。"],
+    "summary": "可从启真在线或浙大钉工作台进入，按场地类型查询可预约空间、时段和申请要求。",
+    "steps": [
+      "可以通过网址qzonline.zju.edu.cn访问，也可以在浙大钉工作台的【启真在线】入口进入，可预约小剧场、各学园研讨室、研究生教育综合楼讨论室，尧坤楼与蒙民伟楼玻璃房，会议室，体育场馆，室外广场（不统计限用教室）。",
+      "https://qzonline.zju.edu.cn/hom/uni#/home"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "qzonline.zju.edu.cn（小组资料提供）",
+        "url": "https://qzonline.zju.edu.cn"
+      },
+      {
+        "label": "qzonline.zju.edu.cn（小组资料提供）",
+        "url": "https://qzonline.zju.edu.cn/hom/uni#/home"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第8、72行",
+    "sourceRows": [
+      8,
+      72
+    ],
+    "sourceQuestions": [
+      "启真在线的访问入口是什么？可以预约哪些场地/办理哪些业务？",
+      "活动空间查询"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-008",
+    "title": "团在浙大（共青团浙江大学团委）平台的网址是什么？可以预约哪些场地/办理哪些业务？",
+    "category": "场地与预约",
+    "keywords": [
+      "团在浙大（共青团浙江大学团委）平台的网址是什么？可以预约哪些场地/办理哪些业务？"
+    ],
+    "summary": "平台网址为tzzd.zju.edu.cn，可办理尧坤楼教室借用，以及社团与社会实践相关事务。",
+    "steps": [
+      "平台网址为tzzd.zju.edu.cn，可办理尧坤楼教室借用，以及社团与社会实践相关事务。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "tzzd.zju.edu.cn（小组资料提供）",
+        "url": "https://tzzd.zju.edu.cn"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第9行",
+    "sourceRows": [
+      9
+    ],
+    "sourceQuestions": [
+      "团在浙大（共青团浙江大学团委）平台的网址是什么？可以预约哪些场地/办理哪些业务？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-009",
+    "title": "浙江大学图书馆预约系统的访问入口是什么？可以预约哪些场地？",
+    "category": "场地与预约",
+    "keywords": [
+      "浙江大学图书馆预约系统的访问入口是什么？可以预约哪些场地？",
+      "图书馆预约"
+    ],
+    "summary": "可以通过网址booking.lib.zju.edu.cn访问，也可以在浙大钉工作台的【图书馆】入口进入，可预约主馆、基础馆、古籍馆、农医馆的座位与空间。 https://booking.lib.zju.edu.cn/；或者钉钉工作…",
+    "steps": [
+      "可以通过网址booking.lib.zju.edu.cn访问，也可以在浙大钉工作台的【图书馆】入口进入，可预约主馆、基础馆、古籍馆、农医馆的座位与空间。",
+      "https://booking.lib.zju.edu.cn/",
+      "或者钉钉工作台的图书馆预约"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "booking.lib.zju.edu.cn（小组资料提供）",
+        "url": "https://booking.lib.zju.edu.cn"
+      },
+      {
+        "label": "booking.lib.zju.edu.cn（小组资料提供）",
+        "url": "https://booking.lib.zju.edu.cn/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第10、70行",
+    "sourceRows": [
+      10,
+      70
+    ],
+    "sourceQuestions": [
+      "浙江大学图书馆预约系统的访问入口是什么？可以预约哪些场地？",
+      "图书馆预约"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-010",
+    "title": "寝室报修、缴费与公寓功能房在哪里办理？",
+    "category": "校园生活",
+    "keywords": [
+      "浙江大学公寓管理服务中心怎么访问？可以办理哪些业务？",
+      "空调坏了、交水电费、定水、寝室报修，失物招领、班车查询、毕至居预约、自助洗衣、功能房预约、缴纳住宿费等"
+    ],
+    "summary": "在微信中查找浙大学生公寓管理服务中心，进入iHome查看报修、缴费、住宿及功能房相关服务。",
+    "steps": [
+      "在微信查找浙大学生公寓管理服务中心公众号，核对账号主体。",
+      "进入iHome，按需求选择寝室报修、水电缴费、订水、自助洗衣、失物招领、班车查询或功能房预约等入口。",
+      "查看对应服务要求并办理；现有资料未提供各项服务的开放时间与预约规则。"
+    ],
+    "materials": [],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [],
-    "source": null,
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第11、96行",
+    "sourceRows": [
+      11,
+      96
+    ],
+    "sourceQuestions": [
+      "浙江大学公寓管理服务中心怎么访问？可以办理哪些业务？",
+      "空调坏了、交水电费、定水、寝室报修，失物招领、班车查询、毕至居预约、自助洗衣、功能房预约、缴纳住宿费等"
+    ],
+    "importedAt": "2026-10-08",
     "verifiedAt": null,
-    "isExample": true
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": [
+      "account-18",
+      "account-48"
+    ]
+  },
+  {
+    "id": "campus-011",
+    "title": "体育馆、球场怎么预约或取消？",
+    "category": "场地与预约",
+    "keywords": [
+      "场馆预约在哪里？我要预约运动场地怎么办？",
+      "体育馆预约/球场预约/预约取消"
+    ],
+    "summary": "通过浙大体艺App查看羽毛球、网球、游泳及艺术教室等预约入口；按预约规则完成入场。",
+    "steps": [
+      "通过“浙大体艺”App进行预约办理，可预约个人羽毛球、网球、游泳馆，西三琴房等艺术教室，以及游泳健身个人场地，同时办理体艺类各项事务。",
+      "浙大体艺上可以预约球场",
+      "需要刷卡入场，否则会被判定违规进入黑名单",
+      "打体艺部电话88206528可以取消"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第12、63行",
+    "sourceRows": [
+      12,
+      63
+    ],
+    "sourceQuestions": [
+      "场馆预约在哪里？我要预约运动场地怎么办？",
+      "体育馆预约/球场预约/预约取消"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [
+      "原表第63行给出的取消咨询电话为88206528，尚未核对；取消期限、签到和违规规则以平台当期说明为准。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": [
+      "account-41"
+    ]
+  },
+  {
+    "id": "campus-012",
+    "title": "校外如何访问校园网内资源？",
+    "category": "网络与数字服务",
+    "keywords": [
+      "我需要在校外使用校网环境怎么办？",
+      "校园网连接"
+    ],
+    "summary": "从浙江大学WebVPN入口登录，访问需要校内网络环境的资源。",
+    "steps": [
+      "打开 https://webvpn.zju.edu.cn/，按页面提示登录。",
+      "在WebVPN中选择需要访问的校内服务；客户端方式请参考信息技术中心说明。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "webvpn.zju.edu.cn（小组资料提供）",
+        "url": "https://webvpn.zju.edu.cn/"
+      },
+      {
+        "label": "webvpn.zju.edu.cn（小组资料提供）",
+        "url": "https://webvpn.zju.edu.cn/login"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第13、62行",
+    "sourceRows": [
+      13,
+      62
+    ],
+    "sourceQuestions": [
+      "我需要在校外使用校网环境怎么办？",
+      "校园网连接"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [
+      "原表第62行将WebVPN标为“校园网连接”。它是校外访问内网资源的入口，不等同于校内Wi-Fi连接教程。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-013",
+    "title": "我想下载一些软件如OFFICE、matlab，我应该去哪",
+    "category": "网络与数字服务",
+    "keywords": [
+      "我想下载一些软件如OFFICE、matlab，我应该去哪"
+    ],
+    "summary": "去正版化软件，访问网站为http://ms.zju.edu.cn",
+    "steps": [
+      "去正版化软件，访问网站为http://ms.zju.edu.cn"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "ms.zju.edu.cn（小组资料提供）",
+        "url": "http://ms.zju.edu.cn"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第14行",
+    "sourceRows": [
+      14
+    ],
+    "sourceQuestions": [
+      "我想下载一些软件如OFFICE、matlab，我应该去哪"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-014",
+    "title": "学费在哪里缴费",
+    "category": "缴费与资助",
+    "keywords": [
+      "学费在哪里缴费"
+    ],
+    "summary": "可以通过浙江大学的计财处网站（ http://cwcx.zju.edu.cn/）或对应微信小程序进行缴费。",
+    "steps": [
+      "可以通过浙江大学的计财处网站（ http://cwcx.zju.edu.cn/）或对应微信小程序进行缴费。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "cwcx.zju.edu.cn（小组资料提供）",
+        "url": "http://cwcx.zju.edu.cn/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第15行",
+    "sourceRows": [
+      15
+    ],
+    "sourceQuestions": [
+      "学费在哪里缴费"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-015",
+    "title": "网络问题在哪里咨询？信息技术中心入口是什么？",
+    "category": "网络与数字服务",
+    "keywords": [
+      "信息技术中心网址",
+      "网络相关问题去哪里办理？"
+    ],
+    "summary": "可查看信息技术中心网站，或到所在校区的信息技术中心服务窗口咨询。",
+    "steps": [
+      "itc。zju.edu.cn",
+      "可到信息技术中心办理相关业务。不同校区受理地点包括行政服务办事大厅115室信息技术中心窗口、玉泉图书馆702、西溪六313、华家池纳米楼103等。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "itc.zju.edu.cn（小组资料提供）",
+        "url": "https://itc.zju.edu.cn"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第16、58行",
+    "sourceRows": [
+      16,
+      58
+    ],
+    "sourceQuestions": [
+      "信息技术中心网址",
+      "网络相关问题去哪里办理？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-016",
+    "title": "怎么找各学院的官网",
+    "category": "综合入口",
+    "keywords": [
+      "怎么找各学院的官网"
+    ],
+    "summary": "资料提供了怎么找各学院的官网的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://zjuers.com/welcome/basics/colleges/"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "zjuers.com（小组资料提供）",
+        "url": "https://zjuers.com/welcome/basics/colleges/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第17行",
+    "sourceRows": [
+      17
+    ],
+    "sourceQuestions": [
+      "怎么找各学院的官网"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-017",
+    "title": "关于教务问题除了咨询老师还可以去哪问",
+    "category": "教务与学习",
+    "keywords": [
+      "关于教务问题除了咨询老师还可以去哪问"
+    ],
+    "summary": "学校教务网配备智能体浙小本可以回答大多数简单问题，遇到问题还是优先联系本院教务科老师，联系方式在学院官网电话黄页里。",
+    "steps": [
+      "学校教务网配备智能体浙小本可以回答大多数简单问题，遇到问题还是优先联系本院教务科老师，联系方式在学院官网电话黄页里。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第18行",
+    "sourceRows": [
+      18
+    ],
+    "sourceQuestions": [
+      "关于教务问题除了咨询老师还可以去哪问"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-019",
+    "title": "选课有哪些重要事项需要注意？",
+    "category": "教务与学习",
+    "keywords": [
+      "选课有哪些重要事项需要注意？",
+      "新生不会选课怎么办？"
+    ],
+    "summary": "1. 选课前： 登录本科教学管理信息服务平台（zdbk.zju.edu.cn）查询推荐课表；根据培养方案拟订学习计划；③ 认真阅读选课提示，了解关键时间点；④ 学习《浙江大学教学管理信息服务平台学生操作手册》。2. 选课中：① 无…",
+    "steps": [
+      "1. 选课前： 登录本科教学管理信息服务平台（zdbk.zju.edu.cn）查询推荐课表",
+      "根据培养方案拟订学习计划",
+      "③ 认真阅读选课提示，了解关键时间点",
+      "④ 学习《浙江大学教学管理信息服务平台学生操作手册》。2. 选课中：① 无特殊情况不建议更换预置课表，避免因教学班容量限制或时间冲突而无法选上",
+      "② 优先选择学分高、课时长的必修课，并保障实验课安排",
+      "③ 仔细核对课程信息（课程代码、预修要求、面向对象等）。3. 选课后：① 及时查看并确认课表",
+      "② 选修实验课需密切关注实验室通知",
+      "③ 查询课表和考试信息时，请务必使用官方教务系统，谨慎对待“求是潮”等第三方平台。参考文件：《浙江大学本科生选课管理办法.docx》",
+      "多看看cc98上的经验贴，指路"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "zdbk.zju.edu.cn（小组资料提供）",
+        "url": "https://zdbk.zju.edu.cn"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第20、19行",
+    "sourceRows": [
+      20,
+      19
+    ],
+    "sourceQuestions": [
+      "选课有哪些重要事项需要注意？",
+      "新生不会选课怎么办？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-020",
+    "title": "每学期最多可以选修多少学分？",
+    "category": "教务与学习",
+    "keywords": [
+      "每学期最多可以选修多少学分？"
+    ],
+    "summary": "官方常见问题列出的长学期上限为35学分，符合条件的学生可增加到40学分；通常建议约25学分。",
+    "steps": [
+      "核对当期选课通知和本人适用身份。",
+      "官方FAQ列出的通常上限为35学分；竺可桢学院及已注册辅修、双专业、双学位学生可增加到40学分。",
+      "通常修读约25学分，最低15学分的规定对毕业班有例外；以当期通知及本人培养方案为准。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "浙大百事通：选课学分限制",
+        "url": "https://s2.zju.edu.cn/search/faq.do?words=%E9%80%89%E8%AF%BE"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第21行",
+    "sourceRows": [
+      21
+    ],
+    "sourceQuestions": [
+      "每学期最多可以选修多少学分？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": "2026-10-08",
+    "isExample": false,
+    "kind": "explanation",
+    "notes": [
+      "已纠正原表“毕业班学生同理”的错误；官方FAQ写明毕业班学生除外。"
+    ],
+    "verificationScope": "正文中明确标出的官网核对内容；其他资料细节仍需确认。",
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-021",
+    "title": "体育课程如何选修？",
+    "category": "教务与学习",
+    "keywords": [
+      "体育课程如何选修？"
+    ],
+    "summary": "1. 选课规则： 体育课采用俱乐部制，学生可在不同学期选择相同或不同的体育项目。每学期原则上只能选择 1个项目、1个教学班。 正常学生需要修读六个学期的体育课。 2. 重修与换项： 若体育课未通过，须在下一个选课周期重新选修该项目…",
+    "steps": [
+      "1. 选课规则：",
+      "体育课采用俱乐部制，学生可在不同学期选择相同或不同的体育项目。每学期原则上只能选择 1个项目、1个教学班。",
+      "正常学生需要修读六个学期的体育课。",
+      "2. 重修与换项：",
+      "若体育课未通过，须在下一个选课周期重新选修该项目，或重新选择其他体育项目。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第22行",
+    "sourceRows": [
+      22
+    ],
+    "sourceQuestions": [
+      "体育课程如何选修？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "explanation",
+    "notes": [
+      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-022",
+    "title": "若课程时间冲突或遇到特殊情况，是否可以更改选课",
+    "category": "教务与学习",
+    "keywords": [
+      "若课程时间冲突或遇到特殊情况，是否可以更改选课"
+    ],
+    "summary": "1. 退补选操作： 学生日常可通过教务系统按要求进行选修课程的退选与补选操作。 2. 时间安排： 退补选通常安排在开学初（如第一周周一至周三），需确保在规定的期限内申请与操作。",
+    "steps": [
+      "1. 退补选操作：",
+      "学生日常可通过教务系统按要求进行选修课程的退选与补选操作。",
+      "2. 时间安排：",
+      "退补选通常安排在开学初（如第一周周一至周三），需确保在规定的期限内申请与操作。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第23行",
+    "sourceRows": [
+      23
+    ],
+    "sourceQuestions": [
+      "若课程时间冲突或遇到特殊情况，是否可以更改选课"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "explanation",
+    "notes": [
+      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-023",
+    "title": "学籍档案中会包含哪些内容？",
+    "category": "教务与学习",
+    "keywords": [
+      "学籍档案中会包含哪些内容？"
+    ],
+    "summary": "学籍档案中包含：学生修读课程方式、课程考核结果、请假记录（含休学等）、学籍波动情况、对外交流经历、奖惩情况等",
+    "steps": [
+      "学籍档案中包含：学生修读课程方式、课程考核结果、请假记录（含休学等）、学籍波动情况、对外交流经历、奖惩情况等"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第24行",
+    "sourceRows": [
+      24
+    ],
+    "sourceQuestions": [
+      "学籍档案中会包含哪些内容？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "explanation",
+    "notes": [
+      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-024",
+    "title": "对已退学学生的课程学分记录和处理？",
+    "category": "教务与学习",
+    "keywords": [
+      "对已退学学生的课程学分记录和处理？"
+    ],
+    "summary": "学校会记录退学前期间已获得课程学分，并允许在5年内重新入学情况下申请课程学分替换。替换需符合拟毕业年级主修专业培养专业的方案要求。",
+    "steps": [
+      "学校会记录退学前期间已获得课程学分，并允许在5年内重新入学情况下申请课程学分替换。替换需符合拟毕业年级主修专业培养专业的方案要求。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第25行",
+    "sourceRows": [
+      25
+    ],
+    "sourceQuestions": [
+      "对已退学学生的课程学分记录和处理？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "explanation",
+    "notes": [
+      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-025",
+    "title": "校外课程或网络课程成绩能否计入浙江大学分？",
+    "category": "教务与学习",
+    "keywords": [
+      "校外课程或网络课程成绩能否计入浙江大学分？"
+    ],
+    "summary": "学生参加对外交流或非本校的课程，以及学校认可的开放式网络课程，经申请后可用于替换主修专业培养方案规定的课程，成绩单上会如实记载相关课程信息。",
+    "steps": [
+      "学生参加对外交流或非本校的课程，以及学校认可的开放式网络课程，经申请后可用于替换主修专业培养方案规定的课程，成绩单上会如实记载相关课程信息。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第26行",
+    "sourceRows": [
+      26
+    ],
+    "sourceQuestions": [
+      "校外课程或网络课程成绩能否计入浙江大学分？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "explanation",
+    "notes": [
+      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-026",
+    "title": "学科竞赛、社会实践等活动可以转化为学分吗？",
+    "category": "教务与学习",
+    "keywords": [
+      "学科竞赛、社会实践等活动可以转化为学分吗？"
+    ],
+    "summary": "是的，根据《浙江大学本科生第二、三、四课堂学分管理办法》，学生参与学科竞赛、科研计划、创新创业或发表论文等活动，可以折申请计算对应学分，计入学业成绩。",
+    "steps": [
+      "是的，根据《浙江大学本科生第二、三、四课堂学分管理办法》，学生参与学科竞赛、科研计划、创新创业或发表论文等活动，可以折申请计算对应学分，计入学业成绩。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第27行",
+    "sourceRows": [
+      27
+    ],
+    "sourceQuestions": [
+      "学科竞赛、社会实践等活动可以转化为学分吗？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "explanation",
+    "notes": [
+      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-027",
+    "title": "本研互通选课的学分能否互相转换",
+    "category": "教务与学习",
+    "keywords": [
+      "本研互通选课的学分能否互相转换"
+    ],
+    "summary": "本科生选修的研究生课程在成绩单上记录，部分学院允许用于本科相近选修课程的学分替换；若本科生成绩符合研究生学分要求，则后续攻读浙大研究生时，将直接带入研究生阶段。",
+    "steps": [
+      "本科生选修的研究生课程在成绩单上记录，部分学院允许用于本科相近选修课程的学分替换",
+      "若本科生成绩符合研究生学分要求，则后续攻读浙大研究生时，将直接带入研究生阶段。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第28行",
+    "sourceRows": [
+      28
+    ],
+    "sourceQuestions": [
+      "本研互通选课的学分能否互相转换"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "explanation",
+    "notes": [
+      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-028",
+    "title": "什么是科研训练项目",
+    "category": "科研与活动",
+    "keywords": [
+      "什么是科研训练项目"
+    ],
+    "summary": "大学生科研训练计划——学生科研训练计划（简称SRTP），是为校本科生设计的一项科研项目计划，引导学生进入学科前沿，了解社会发展动态。提高了学生实践创新能力，取得了部分科研成果。目前，我校已构建了“国家-省-校-院”四级大学生科研训…",
+    "steps": [
+      "大学生科研训练计划——学生科研训练计划（简称SRTP），是为校本科生设计的一项科研项目计划，引导学生进入学科前沿，了解社会发展动态。提高了学生实践创新能力，取得了部分科研成果。目前，我校已构建了“国家-省-校-院”四级大学生科研训练体系。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第29行",
+    "sourceRows": [
+      29
+    ],
+    "sourceQuestions": [
+      "什么是科研训练项目"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "explanation",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": [
+      "account-28"
+    ]
+  },
+  {
+    "id": "campus-029",
+    "title": "科研训练项目申报有哪些要求？",
+    "category": "科研与活动",
+    "keywords": [
+      "科研训练项目申报有哪些要求？"
+    ],
+    "summary": "本科生可按当年科研训练项目通知准备个人或团队申报，并联系指导教师。",
+    "steps": [
+      "查看科研训练项目当年申报通知，确认项目类型、申报对象和时间。",
+      "按通知组队、联系导师并准备申报材料。",
+      "人数、导师条件和项目限额以当年正式通知为准。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "科研训练与学科竞赛平台（小组提供）",
+        "url": "http://kyjs.zju.edu.cn/preview"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第30行",
+    "sourceRows": [
+      30
+    ],
+    "sourceQuestions": [
+      "科研训练项目申报有哪些要求？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "explanation",
+    "notes": [
+      "原表部分申报要求存在错字，且不同年度、项目类型可能不同；本页仅保留申请方向，人数、导师资格和年度限额须查当年申报通知。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-030",
+    "title": "通识选修课程修读要求是什么？",
+    "category": "教务与学习",
+    "keywords": [
+      "通识选修课程修读要求是什么？"
+    ],
+    "summary": "通识选修课程一般学分要求为10.5学分，修读要求为： 1）至少修读1门通识核心课程；2）至少修读1门“博雅生命技艺”类课程；3）理工农医学生在“中华传统”“世界文明”“当代社会”“文艺审美”四类中修读2门；人文社科学生在“科技创新…",
+    "steps": [
+      "通识选修课程一般学分要求为10.5学分，修读要求为： 1）至少修读1门通识核心课程",
+      "2）至少修读1门“博雅生命技艺”类课程",
+      "3）理工农医学生在“中华传统”“世界文明”“当代社会”“文艺审美”四类中修读2门",
+      "人文社科学生在“科技创新”“探索”两类中修读2门。特别提醒：部分专业有《大学写作》课程必修要求，涉农专业要求至少修读1门耕读相关通识课程。具体请查看本专业培养方案。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第31行",
+    "sourceRows": [
+      31
+    ],
+    "sourceQuestions": [
+      "通识选修课程修读要求是什么？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "explanation",
+    "notes": [
+      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-031",
+    "title": "境外交流项目有哪些，去哪里查看？",
+    "category": "交流与发展",
+    "keywords": [
+      "学校的境外交流项目有哪些类型？",
+      "对外交流服务平台/学校交流"
+    ],
+    "summary": "通过本科生对外交流服务平台查看校级与院级交流动态、项目列表及申请通知。",
+    "steps": [
+      "打开本科生对外交流服务平台，浏览项目总览和通知。",
+      "可关注联合培养、学期交换、短期课程、科研实习等方向。",
+      "具体合作学校、费用、学分和申请条件以各项目当期通知为准。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "ugrs.zju.edu.cn（小组资料提供）",
+        "url": "https://ugrs.zju.edu.cn/dwjlfwpt/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第32、71行",
+    "sourceRows": [
+      32,
+      71
+    ],
+    "sourceQuestions": [
+      "学校的境外交流项目有哪些类型？",
+      "对外交流服务平台/学校交流"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "explanation",
+    "notes": [
+      "原表第32行含明显错字和残缺句，未将其中合作学校名单、学费互免等概括性说法直接作为当前政策。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-032",
+    "title": "学生有几次转专业的机会？",
+    "category": "教务与学习",
+    "keywords": [
+      "学生有几次转专业的机会？"
+    ],
+    "summary": "转专业的申请范围和次数受年级、接收容量及学院细则约束，应查看本科生院与接收学院当期通知。",
+    "steps": [
+      "查询本科生院当期主修专业确认及转专业通知。",
+      "查看拟转入学院的接收条件、容量、申请材料与时间。",
+      "对申请范围或次数有疑问时咨询所在学院教学科；原始采集文字存在缺漏，不作为确定的资格判断。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "本科生院：本科教学信息",
+        "url": "https://ugrs.zju.edu.cn/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第33行",
+    "sourceRows": [
+      33
+    ],
+    "sourceQuestions": [
+      "学生有几次转专业的机会？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "explanation",
+    "notes": [
+      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。",
+      "原表包含残缺句，未直接转录其中的资格与次数表述。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-033",
+    "title": "转专业和主修专业确认的通知在哪里看？",
+    "category": "教务与学习",
+    "keywords": [
+      "我可以在哪里了解主修专业确认及转专业的相关通知要求呢？",
+      "转专业流程"
+    ],
+    "summary": "优先查看本科生院通知，以及接收学院的主修专业确认、转专业工作细则；论坛经验仅作补充。",
+    "steps": [
+      "1）本科生院网站-学籍管理-主修专业确认及转专业。 2）各专业所在学院的主修专业确认细则、转专业工作细则等（各学院网站，各学院本科生教学科）。",
+      "cc98"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第34、100行",
+    "sourceRows": [
+      34,
+      100
+    ],
+    "sourceQuestions": [
+      "我可以在哪里了解主修专业确认及转专业的相关通知要求呢？",
+      "转专业流程"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "explanation",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-034",
+    "title": "课程成绩是如何构成的？",
+    "category": "教务与学习",
+    "keywords": [
+      "课程成绩是如何构成的？"
+    ],
+    "summary": "课程成绩一般由平时成绩和期末成绩构成。其中，平时成绩由期中考试、课堂讨论、平时测验、作业、实验报告、论文等组成；期末成绩是课程结束时对学生学习状况进行的一次性评价。",
+    "steps": [
+      "课程成绩一般由平时成绩和期末成绩构成。其中，平时成绩由期中考试、课堂讨论、平时测验、作业、实验报告、论文等组成",
+      "期末成绩是课程结束时对学生学习状况进行的一次性评价。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第35行",
+    "sourceRows": [
+      35
+    ],
+    "sourceQuestions": [
+      "课程成绩是如何构成的？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "explanation",
+    "notes": [
+      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-035",
+    "title": "必修课程考核未通过怎么办？ 补考和重修有什么区别？",
+    "category": "教务与学习",
+    "keywords": [
+      "必修课程考核未通过怎么办？ 补考和重修有什么区别？"
+    ],
+    "summary": "可以补考或者重修。补考和重修的区别是：补考不参加课程的修读，没有平时成绩，及格后成绩点为1.5；重修需要参加课程的修读，成绩由平时成绩和期末成绩成绩组成。如果时间允许建议选择重修。",
+    "steps": [
+      "可以补考或者重修。补考和重修的区别是：补考不参加课程的修读，没有平时成绩，及格后成绩点为1.5",
+      "重修需要参加课程的修读，成绩由平时成绩和期末成绩成绩组成。如果时间允许建议选择重修。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第36行",
+    "sourceRows": [
+      36
+    ],
+    "sourceQuestions": [
+      "必修课程考核未通过怎么办？ 补考和重修有什么区别？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "explanation",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-036",
+    "title": "周学时代表什么意义",
+    "category": "教务与学习",
+    "keywords": [
+      "周学时代表什么意义"
+    ],
+    "summary": "每门课程均设置周学时，有两种形式：一般课程的周学时为xy形式，指该课程若安排在长学期（即16周）上课时，每周的课时数为x+y，其中x为理论课时数，y为实验或讨论课时数。实习课程和毕业论文的周学时一般排为+x形式，指该课程需占用x周…",
+    "steps": [
+      "每门课程均设置周学时，有两种形式：一般课程的周学时为xy形式，指该课程若安排在长学期（即16周）上课时，每周的课时数为x+y，其中x为理论课时数，y为实验或讨论课时数。实习课程和毕业论文的周学时一般排为+x形式，指该课程需占用x周集中进行。而实际的每周课时数还需根据具体课时情况决定。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第37行",
+    "sourceRows": [
+      37
+    ],
+    "sourceQuestions": [
+      "周学时代表什么意义"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "explanation",
+    "notes": [
+      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-037",
+    "title": "什么是个性修读课程？",
+    "category": "教务与学习",
+    "keywords": [
+      "什么是个性修读课程？"
+    ],
+    "summary": "个性修读为学生提供本专业进阶、跨专业学习和自主修读等方向；具体学分与认定以本人培养方案为准。",
+    "steps": [
+      "先查看本人专业、年级适用的培养方案。",
+      "比较本专业进阶、跨专业学习、自主修读方向，按个人学习规划选择。",
+      "涉及微辅修、外专业课程或研究生课程时，向学院确认课程范围、认定要求和证书条件。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第38行",
+    "sourceRows": [
+      38
+    ],
+    "sourceQuestions": [
+      "什么是个性修读课程？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "explanation",
+    "notes": [
+      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。",
+      "已清理原采集文字中的明显错字，没有将其中升学学分自动转换或证书获得的概括性说法作为保证。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-038",
+    "title": "校内论坛/cc98的网址",
+    "category": "网络与数字服务",
+    "keywords": [
+      "校内论坛/cc98的网址"
+    ],
+    "summary": "www.cc98.org或者cc98.zju.edu.cn",
+    "steps": [
+      "www.cc98.org或者cc98.zju.edu.cn"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "www.cc98.org（小组资料提供）",
+        "url": "https://www.cc98.org"
+      },
+      {
+        "label": "cc98.zju.edu.cn（小组资料提供）",
+        "url": "https://cc98.zju.edu.cn"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第39行",
+    "sourceRows": [
+      39
+    ],
+    "sourceQuestions": [
+      "校内论坛/cc98的网址"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-039",
+    "title": "知道校内网站名字不知道网址",
+    "category": "网络与数字服务",
+    "keywords": [
+      "知道校内网站名字不知道网址"
+    ],
+    "summary": "百度直接搜索或者通过webvpn搜索框跳转",
+    "steps": [
+      "百度直接搜索或者通过webvpn搜索框跳转"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第40行",
+    "sourceRows": [
+      40
+    ],
+    "sourceQuestions": [
+      "知道校内网站名字不知道网址"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-040",
+    "title": "校园网怎么缴费",
+    "category": "网络与数字服务",
+    "keywords": [
+      "校园网怎么缴费",
+      "网费管理/如何交网费"
+    ],
+    "summary": "通过钉钉工作台网络缴费进行缴费 https://myvpn.zju.edu.cn/",
+    "steps": [
+      "通过钉钉工作台网络缴费进行缴费",
+      "https://myvpn.zju.edu.cn/"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "myvpn.zju.edu.cn（小组资料提供）",
+        "url": "https://myvpn.zju.edu.cn/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第41、74行",
+    "sourceRows": [
+      41,
+      74
+    ],
+    "sourceQuestions": [
+      "校园网怎么缴费",
+      "网费管理/如何交网费"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-041",
+    "title": "怎么给亲友预约进校",
+    "category": "校园生活",
+    "keywords": [
+      "怎么给亲友预约进校"
+    ],
+    "summary": "打开浙大钉工作台 访客预约 进行预约或者邀约",
+    "steps": [
+      "打开浙大钉工作台 访客预约 进行预约或者邀约"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第42行",
+    "sourceRows": [
+      42
+    ],
+    "sourceQuestions": [
+      "怎么给亲友预约进校"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-042",
+    "title": "跨专业/跨学院课程怎么选？",
+    "category": "教务与学习",
+    "keywords": [
+      "跨专业/跨学院课程怎么选？"
+    ],
+    "summary": "1. 选课阶段：跨专业选课通常在第二轮或第三轮选课阶段向全校开放。 2. 注意事项：需先核对该课程是否有“预修课程要求”或面向对象限制；若占用了主修专业课时间，需提前确认是否冲突。",
+    "steps": [
+      "1. 选课阶段：跨专业选课通常在第二轮或第三轮选课阶段向全校开放。",
+      "2. 注意事项：需先核对该课程是否有“预修课程要求”或面向对象限制",
+      "若占用了主修专业课时间，需提前确认是否冲突。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第43行",
+    "sourceRows": [
+      43
+    ],
+    "sourceQuestions": [
+      "跨专业/跨学院课程怎么选？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [
+      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-043",
+    "title": "日常零星维修怎么报修？",
+    "category": "校园生活",
+    "keywords": [
+      "日常零星维修怎么报修？"
+    ],
+    "summary": "可通过后勤综合服务大厅、浙江大学移动门户APP“智慧后勤”应用、“浙大后勤”微信公众号中的校园零修功能进行线上报修；也可通过所在地物业管理人员报修或联系校区物业中心/水电中心。",
+    "steps": [
+      "可通过后勤综合服务大厅、浙江大学移动门户APP“智慧后勤”应用、“浙大后勤”微信公众号中的校园零修功能进行线上报修",
+      "也可通过所在地物业管理人员报修或联系校区物业中心/水电中心。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第44行",
+    "sourceRows": [
+      44
+    ],
+    "sourceQuestions": [
+      "日常零星维修怎么报修？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": [
+      "account-18"
+    ]
+  },
+  {
+    "id": "campus-045",
+    "title": "校园功能卡如何办理？",
+    "category": "校园卡",
+    "keywords": [
+      "校园功能卡如何办理？"
+    ],
+    "summary": "可登录“单位自招人员管理平台prs.zju.edu.cn”注册并填写个人信息，由单位管理员审核生成电子校园卡；也可使用浙大校园卡APP完成身份认证、充值并打开付款码支付。",
+    "steps": [
+      "可登录“单位自招人员管理平台prs.zju.edu.cn”注册并填写个人信息，由单位管理员审核生成电子校园卡",
+      "也可使用浙大校园卡APP完成身份认证、充值并打开付款码支付。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "prs.zju.edu.cn（小组资料提供）",
+        "url": "https://prs.zju.edu.cn"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第46行",
+    "sourceRows": [
+      46
+    ],
+    "sourceQuestions": [
+      "校园功能卡如何办理？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-046",
+    "title": "校园卡解挂怎么办？",
+    "category": "校园卡",
+    "keywords": [
+      "校园卡解挂怎么办？"
+    ],
+    "summary": "可打开校园宝APP：首页点击“全部”→卡片解挂→确认→完成；也可持本人身份证和校园卡到校区校园卡服务部或行政服务办事大厅115室20号窗口办理。",
+    "steps": [
+      "在校园宝App中查找全部 → 卡片解挂，确认当前卡片状态。",
+      "如线上入口不适用，携本人身份证和校园卡到校园卡服务窗口咨询。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第47行",
+    "sourceRows": [
+      47
+    ],
+    "sourceQuestions": [
+      "校园卡解挂怎么办？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [
+      "线上入口来自小组资料，尚未核对当前App版本。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-047",
+    "title": "校园卡转账充值业务怎么办理？",
+    "category": "校园卡",
+    "keywords": [
+      "校园卡转账充值业务怎么办理？"
+    ],
+    "summary": "可通过浙大校园卡APP：余额查询→立即充值→选择支付宝付款方式→确认充值；也可通过支付宝校园卡充值入口操作；还可持校园卡和现金到校园卡服务部或行政服务办事大厅办理。",
+    "steps": [
+      "可通过浙大校园卡APP：余额查询→立即充值→选择支付宝付款方式→确认充值",
+      "也可通过支付宝校园卡充值入口操作",
+      "还可持校园卡和现金到校园卡服务部或行政服务办事大厅办理。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第48行",
+    "sourceRows": [
+      48
+    ],
+    "sourceQuestions": [
+      "校园卡转账充值业务怎么办理？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-048",
+    "title": "实验废弃物处置申报怎么办？",
+    "category": "科研与活动",
+    "keywords": [
+      "实验废弃物处置申报怎么办？"
+    ],
+    "summary": "登录材料与化学品采购平台，进入化学品采购与管理板块，点击左侧化学品全程管理中的废弃物处理登记申报；也可通过“浙江大学实验设备处”微信公众号进入业务大厅办理废弃物处置登记申报。按规定分类收集、包装并贴好标签后送至校区废弃物中转站。",
+    "steps": [
+      "登录材料与化学品采购平台，进入化学品采购与管理板块，点击左侧化学品全程管理中的废弃物处理登记申报",
+      "也可通过“浙江大学实验设备处”微信公众号进入业务大厅办理废弃物处置登记申报。按规定分类收集、包装并贴好标签后送至校区废弃物中转站。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第49行",
+    "sourceRows": [
+      49
+    ],
+    "sourceQuestions": [
+      "实验废弃物处置申报怎么办？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-049",
+    "title": "校园卡销户怎么办？",
+    "category": "校园卡",
+    "keywords": [
+      "校园卡销户怎么办？"
+    ],
+    "summary": "本科生、研究生可持本人身份证到各校区校园卡服务部或行政服务办事大厅115室20号窗口办理。",
+    "steps": [
+      "本科生、研究生可持本人身份证到各校区校园卡服务部或行政服务办事大厅115室20号窗口办理。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第50行",
+    "sourceRows": [
+      50
+    ],
+    "sourceQuestions": [
+      "校园卡销户怎么办？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-050",
+    "title": "学生创业项目申请入驻大学科技园怎么办？",
+    "category": "科研与活动",
+    "keywords": [
+      "学生创业项目申请入驻大学科技园怎么办？"
+    ],
+    "summary": "准备申请全套材料发送至指定邮箱，由大学科技园管委会通知评审；申请人按要求携带证件或证明材料参加评审答辩，审核通过后办理入驻手续。",
+    "steps": [
+      "准备申请全套材料发送至指定邮箱，由大学科技园管委会通知评审",
+      "申请人按要求携带证件或证明材料参加评审答辩，审核通过后办理入驻手续。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第51行",
+    "sourceRows": [
+      51
+    ],
+    "sourceQuestions": [
+      "学生创业项目申请入驻大学科技园怎么办？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": [
+      "account-20"
+    ]
+  },
+  {
+    "id": "campus-051",
+    "title": "档案馆如何参观？",
+    "category": "校园生活",
+    "keywords": [
+      "档案馆如何参观？"
+    ],
+    "summary": "个人或参观者团体人数小于8人，可携有效证件入馆参观，在校史馆前做好入馆登记；8人以上团队参观需提前在网上预约登记并按规定办理入校手续。",
+    "steps": [
+      "个人或参观者团体人数小于8人，可携有效证件入馆参观，在校史馆前做好入馆登记",
+      "8人以上团队参观需提前在网上预约登记并按规定办理入校手续。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第52行",
+    "sourceRows": [
+      52
+    ],
+    "sourceQuestions": [
+      "档案馆如何参观？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-052",
+    "title": "本科生国家开发银行生源地国家助学贷款毕业生信息确认怎么办？",
+    "category": "缴费与资助",
+    "keywords": [
+      "本科生国家开发银行生源地国家助学贷款毕业生信息确认怎么办？"
+    ],
+    "summary": "登录生源地国家助学贷款系统进行信息确认，完成毕业确认申请；需由国家助学贷款中心审核确认。",
+    "steps": [
+      "登录生源地国家助学贷款系统进行信息确认，完成毕业确认申请",
+      "需由国家助学贷款中心审核确认。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第53行",
+    "sourceRows": [
+      53
+    ],
+    "sourceQuestions": [
+      "本科生国家开发银行生源地国家助学贷款毕业生信息确认怎么办？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-053",
+    "title": "本科生校内无息借款申请怎么办？",
+    "category": "缴费与资助",
+    "keywords": [
+      "本科生校内无息借款申请怎么办？"
+    ],
+    "summary": "每年4月、10月份学工部资助版块发布通知后，学生登录浙江大学三全育人平台进行线上申请，经学院审核、学工部汇总审核后确定名单并办理借款。",
+    "steps": [
+      "每年4月、10月份学工部资助版块发布通知后，学生登录浙江大学三全育人平台进行线上申请，经学院审核、学工部汇总审核后确定名单并办理借款。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第54行",
+    "sourceRows": [
+      54
+    ],
+    "sourceQuestions": [
+      "本科生校内无息借款申请怎么办？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [
+      "借款申请涉及年度通知与资格审核；原表提到4月、10月，仅作资料记录，不作为当前固定申请时间。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-054",
+    "title": "本科生校内无息借款毕业生借款减免申请怎么办？",
+    "category": "缴费与资助",
+    "keywords": [
+      "本科生校内无息借款毕业生借款减免申请怎么办？"
+    ],
+    "summary": "关注学工部资助版块通知，符合条件的学生通过浙江大学三全育人平台申请，经学院和学校审核后办理减免手续。",
+    "steps": [
+      "关注学工部资助版块通知，符合条件的学生通过浙江大学三全育人平台申请，经学院和学校审核后办理减免手续。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第55行",
+    "sourceRows": [
+      55
+    ],
+    "sourceQuestions": [
+      "本科生校内无息借款毕业生借款减免申请怎么办？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [
+      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-055",
+    "title": "普通高等学校退役士兵学费资助申请怎么办？",
+    "category": "缴费与资助",
+    "keywords": [
+      "普通高等学校退役士兵学费资助申请怎么办？"
+    ],
+    "summary": "符合条件的学生在线填写相关申请表，经学院审核、学工部资助办公室审核后报送国家相关部门，审核通过后办理资助。",
+    "steps": [
+      "符合条件的学生在线填写相关申请表，经学院审核、学工部资助办公室审核后报送国家相关部门，审核通过后办理资助。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第56行",
+    "sourceRows": [
+      56
+    ],
+    "sourceQuestions": [
+      "普通高等学校退役士兵学费资助申请怎么办？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [
+      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-056",
+    "title": "学生户籍迁入手续怎么办理？",
+    "category": "校园生活",
+    "keywords": [
+      "学生户籍迁入手续怎么办理？",
+      "户籍迁移"
+    ],
+    "summary": "新生准备录取通知书复印件、户口迁移证原件、身份证复印件等材料，按学校通知提交；具体办理地点根据校区户籍办公室安排。 纳米大楼107室",
+    "steps": [
+      "新生准备录取通知书复印件、户口迁移证原件、身份证复印件等材料，按学校通知提交",
+      "具体办理地点根据校区户籍办公室安排。",
+      "纳米大楼107室"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第57、101行",
+    "sourceRows": [
+      57,
+      101
+    ],
+    "sourceQuestions": [
+      "学生户籍迁入手续怎么办理？",
+      "户籍迁移"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-058",
+    "title": "校内单位进行学历学位认证查询学籍档案怎么办？",
+    "category": "综合入口",
+    "keywords": [
+      "校内单位进行学历学位认证查询学籍档案怎么办？"
+    ],
+    "summary": "校内单位可通过预约查询系统登记查询档案信息，选择部门直通车，档案馆审核后办理。",
+    "steps": [
+      "校内单位可通过预约查询系统登记查询档案信息，选择部门直通车，档案馆审核后办理。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第59行",
+    "sourceRows": [
+      59
+    ],
+    "sourceQuestions": [
+      "校内单位进行学历学位认证查询学籍档案怎么办？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-063",
+    "title": "浙大服务平台/综合服务平台",
+    "category": "综合入口",
+    "keywords": [
+      "浙大服务平台/综合服务平台"
+    ],
+    "summary": "https://service.zju.edu.cn/ 包含学在浙大，三全育人，智云课堂，班车查询等综合服务",
+    "steps": [
+      "https://service.zju.edu.cn/ 包含学在浙大，三全育人，智云课堂，班车查询等综合服务"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "service.zju.edu.cn（小组资料提供）",
+        "url": "https://service.zju.edu.cn/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第64行",
+    "sourceRows": [
+      64
+    ],
+    "sourceQuestions": [
+      "浙大服务平台/综合服务平台"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-064",
+    "title": "学校地图/校园导航/学校景点查询",
+    "category": "校园生活",
+    "keywords": [
+      "学校地图/校园导航/学校景点查询"
+    ],
+    "summary": "https://map.zju.edu.cn/index.html 可以查询紫金港，玉泉，西溪，华家池，之江，舟山，海宁，国际医学院的地图；还有导航功能；景点查询；单位查询；AED地点；食堂等多种服务",
+    "steps": [
+      "https://map.zju.edu.cn/index.html 可以查询紫金港，玉泉，西溪，华家池，之江，舟山，海宁，国际医学院的地图",
+      "还有导航功能",
+      "景点查询",
+      "单位查询",
+      "AED地点",
+      "食堂等多种服务"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "map.zju.edu.cn（小组资料提供）",
+        "url": "https://map.zju.edu.cn/index.html"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第65行",
+    "sourceRows": [
+      65
+    ],
+    "sourceQuestions": [
+      "学校地图/校园导航/学校景点查询"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-065",
+    "title": "浙大云盘",
+    "category": "网络与数字服务",
+    "keywords": [
+      "浙大云盘"
+    ],
+    "summary": "资料提供了浙大云盘的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://pan.zju.edu.cn/zjusso/"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "pan.zju.edu.cn（小组资料提供）",
+        "url": "https://pan.zju.edu.cn/zjusso/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第66行",
+    "sourceRows": [
+      66
+    ],
+    "sourceQuestions": [
+      "浙大云盘"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-066",
+    "title": "教师信息查询/找老师邮箱",
+    "category": "综合入口",
+    "keywords": [
+      "教师信息查询/找老师邮箱"
+    ],
+    "summary": "https://person.zju.edu.cn/index/ 可以查到老师的研究方向，邮箱，个人简介，研究成果以及教学信息等",
+    "steps": [
+      "https://person.zju.edu.cn/index/ 可以查到老师的研究方向，邮箱，个人简介，研究成果以及教学信息等"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "person.zju.edu.cn（小组资料提供）",
+        "url": "https://person.zju.edu.cn/index/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第67行",
+    "sourceRows": [
+      67
+    ],
+    "sourceQuestions": [
+      "教师信息查询/找老师邮箱"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-067",
+    "title": "学科竞赛信息/怎么查询竞赛或者科研相关的信息？",
+    "category": "科研与活动",
+    "keywords": [
+      "学科竞赛信息/怎么查询竞赛或者科研相关的信息？"
+    ],
+    "summary": "http://kyjs.zju.edu.cn/preview 包含学科竞赛系统和科研训练管理，还可以查阅最近的新闻动态，重点提示以及官方文件下载",
+    "steps": [
+      "http://kyjs.zju.edu.cn/preview 包含学科竞赛系统和科研训练管理，还可以查阅最近的新闻动态，重点提示以及官方文件下载"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "kyjs.zju.edu.cn（小组资料提供）",
+        "url": "http://kyjs.zju.edu.cn/preview"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第68行",
+    "sourceRows": [
+      68
+    ],
+    "sourceQuestions": [
+      "学科竞赛信息/怎么查询竞赛或者科研相关的信息？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-068",
+    "title": "素质拓展网/如何查看二三课堂学分以及劳育美育学分情况？",
+    "category": "科研与活动",
+    "keywords": [
+      "素质拓展网/如何查看二三课堂学分以及劳育美育学分情况？",
+      "二课分/启真问学/个人荣誉评定"
+    ],
+    "summary": "查看二三课堂，劳育，美育学分；以及学科竞赛和科研训练信息查询；https://sztz.zju.edu.cn/dekt/#/index/main ETA/三全育人平台",
+    "steps": [
+      "查看二三课堂，劳育，美育学分",
+      "以及学科竞赛和科研训练信息查询",
+      "https://sztz.zju.edu.cn/dekt/#/index/main",
+      "ETA/三全育人平台"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "sztz.zju.edu.cn（小组资料提供）",
+        "url": "https://sztz.zju.edu.cn/dekt/#/index/main"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第69、107行",
+    "sourceRows": [
+      69,
+      107
+    ],
+    "sourceQuestions": [
+      "素质拓展网/如何查看二三课堂学分以及劳育美育学分情况？",
+      "二课分/启真问学/个人荣誉评定"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": [
+      "account-37",
+      "account-40"
+    ]
+  },
+  {
+    "id": "campus-072",
+    "title": "浙大邮箱/学校邮箱怎么登录",
+    "category": "网络与数字服务",
+    "keywords": [
+      "浙大邮箱/学校邮箱怎么登录"
+    ],
+    "summary": "资料提供了浙大邮箱的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://zjuem.zju.edu.cn/"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "zjuem.zju.edu.cn（小组资料提供）",
+        "url": "https://zjuem.zju.edu.cn/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第73行",
+    "sourceRows": [
+      73
+    ],
+    "sourceQuestions": [
+      "浙大邮箱/学校邮箱怎么登录"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-074",
+    "title": "综合服务",
+    "category": "校园生活",
+    "keywords": [
+      "综合服务"
+    ],
+    "summary": "资料提供了综合服务的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://zhfw.zju.edu.cn/"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "zhfw.zju.edu.cn（小组资料提供）",
+        "url": "https://zhfw.zju.edu.cn/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第75行",
+    "sourceRows": [
+      75
+    ],
+    "sourceQuestions": [
+      "综合服务"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-075",
+    "title": "网络账号过户要准备什么？",
+    "category": "网络与数字服务",
+    "keywords": [
+      "过户服务"
+    ],
+    "summary": "携带过户双方完整申请材料到信息技术中心服务窗口办理，如接收方已有账号，需通过浙大钉【IT服务台】发起【多账号申请】。 申请材料： 1.双方有效身份证件原件及复印件 2.双方校园卡/工作证/学生证原件及复印件 3.网络账号过户申请说…",
+    "steps": [
+      "携带过户双方完整申请材料到信息技术中心服务窗口办理，如接收方已有账号，需通过浙大钉【IT服务台】发起【多账号申请】。",
+      "申请材料：",
+      "1.双方有效身份证件原件及复印件",
+      "2.双方校园卡/工作证/学生证原件及复印件",
+      "3.网络账号过户申请说明.docx",
+      "4.委托书.docx"
+    ],
+    "materials": [
+      "双方有效身份证件原件及复印件。",
+      "双方校园卡、工作证或学生证原件及复印件。",
+      "网络账号过户申请说明及委托书；模板和适用情况以IT服务台要求为准。"
+    ],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第76行",
+    "sourceRows": [
+      76
+    ],
+    "sourceQuestions": [
+      "过户服务"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-076",
+    "title": "多账号申请/网络账号申请",
+    "category": "网络与数字服务",
+    "keywords": [
+      "多账号申请/网络账号申请"
+    ],
+    "summary": "在编教职工因工作需要，可在已有网络账号的情况下实名制申请：登录【浙大钉】，打开底部【工作台】→【IT服务台】→【服务办理】→【多账号申请】。",
+    "steps": [
+      "在编教职工因工作需要，可在已有网络账号的情况下实名制申请：登录【浙大钉】，打开底部【工作台】→【IT服务台】→【服务办理】→【多账号申请】。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第77行",
+    "sourceRows": [
+      77
+    ],
+    "sourceQuestions": [
+      "多账号申请/网络账号申请"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-077",
+    "title": "班车查询",
+    "category": "校园生活",
+    "keywords": [
+      "班车查询"
+    ],
+    "summary": "资料提供了班车查询的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "http://www.life.zju.edu.cn/_web/_apps/lightapp/busQuery/mobile/app/pub/index.html"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "www.life.zju.edu.cn（小组资料提供）",
+        "url": "http://www.life.zju.edu.cn/_web/_apps/lightapp/busQuery/mobile/app/pub/index.html"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第78行",
+    "sourceRows": [
+      78
+    ],
+    "sourceQuestions": [
+      "班车查询"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-078",
+    "title": "就业服务/选调生信息查询/就业经验查询",
+    "category": "交流与发展",
+    "keywords": [
+      "就业服务/选调生信息查询/就业经验查询"
+    ],
+    "summary": "资料提供了就业服务的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://www.career.zju.edu.cn/，可以查看选调生公告汇总，各种校招经验和信息，就业嘉年华活动"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "www.career.zju.edu.cn（小组资料提供）",
+        "url": "https://www.career.zju.edu.cn/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第79行",
+    "sourceRows": [
+      79
+    ],
+    "sourceQuestions": [
+      "就业服务/选调生信息查询/就业经验查询"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": [
+      "account-34",
+      "account-46"
+    ]
+  },
+  {
+    "id": "campus-079",
+    "title": "紧急电话汇总/如何寻找报警电话？",
+    "category": "校园生活",
+    "keywords": [
+      "紧急电话汇总/如何寻找报警电话？"
+    ],
+    "summary": "资料提供了紧急电话汇总的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://mapp.zju.edu.cn/lightapp/jjdh/www/app/home.html"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "mapp.zju.edu.cn（小组资料提供）",
+        "url": "https://mapp.zju.edu.cn/lightapp/jjdh/www/app/home.html"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第80行",
+    "sourceRows": [
+      80
+    ],
+    "sourceQuestions": [
+      "紧急电话汇总/如何寻找报警电话？"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-080",
+    "title": "心理健康中心/心理测试",
+    "category": "校园生活",
+    "keywords": [
+      "心理健康中心/心理测试"
+    ],
+    "summary": "资料提供了心理健康中心的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "http://www.xlzx.zju.edu.cn/"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "www.xlzx.zju.edu.cn（小组资料提供）",
+        "url": "http://www.xlzx.zju.edu.cn/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第81行",
+    "sourceRows": [
+      81
+    ],
+    "sourceQuestions": [
+      "心理健康中心/心理测试"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [
+      "这是心理健康中心信息入口，不提供诊断或治疗建议。服务方式、预约条件与时间请向中心确认。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": [
+      "account-03"
+    ]
+  },
+  {
+    "id": "campus-081",
+    "title": "后勤集团查询",
+    "category": "校园生活",
+    "keywords": [
+      "后勤集团查询"
+    ],
+    "summary": "资料提供了后勤集团查询的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://zulg.zju.edu.cn/"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "zulg.zju.edu.cn（小组资料提供）",
+        "url": "https://zulg.zju.edu.cn/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第82行",
+    "sourceRows": [
+      82
+    ],
+    "sourceQuestions": [
+      "后勤集团查询"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-082",
+    "title": "浙大图书馆中文网",
+    "category": "校园生活",
+    "keywords": [
+      "浙大图书馆中文网"
+    ],
+    "summary": "资料提供了浙大图书馆中文网的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://libweb.zju.edu.cn/"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "libweb.zju.edu.cn（小组资料提供）",
+        "url": "https://libweb.zju.edu.cn/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第83行",
+    "sourceRows": [
+      83
+    ],
+    "sourceQuestions": [
+      "浙大图书馆中文网"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-083",
+    "title": "alphaxiv",
+    "category": "校外工具与资源",
+    "keywords": [
+      "alphaxiv"
+    ],
+    "summary": "小组收集的校外论文阅读与检索平台，实际功能和使用条件以网站当前说明为准。",
+    "steps": [
+      "打开alphaXiv网站，检索论文或查看其阅读功能。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "www.alphaxiv.org（小组资料提供）",
+        "url": "https://www.alphaxiv.org/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第84行",
+    "sourceRows": [
+      84
+    ],
+    "sourceQuestions": [
+      "alphaxiv"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [
+      "原表对AI模型、私人笔记和仓库关联功能的说明未在本次核对，未作为当前功能承诺。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-084",
+    "title": "必应学术",
+    "category": "校外工具与资源",
+    "keywords": [
+      "必应学术"
+    ],
+    "summary": "资料提供了必应学术的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://cn.bing.com/academic"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "cn.bing.com（小组资料提供）",
+        "url": "https://cn.bing.com/academic"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第85行",
+    "sourceRows": [
+      85
+    ],
+    "sourceQuestions": [
+      "必应学术"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [
+      "表格提供的入口未核对可用性；若页面无法使用，请更换检索平台。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-085",
+    "title": "多功能效率箱/网址生成/网络测速/二维码工具",
+    "category": "校外工具与资源",
+    "keywords": [
+      "多功能效率箱/网址生成/网络测速/二维码工具"
+    ],
+    "summary": "资料提供了多功能效率箱的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://ol.woobx.cn/，实用小网站，包含各种常用工具，文本工具，视频工具，开发工具等"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "ol.woobx.cn（小组资料提供）",
+        "url": "https://ol.woobx.cn/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第86行",
+    "sourceRows": [
+      86
+    ],
+    "sourceQuestions": [
+      "多功能效率箱/网址生成/网络测速/二维码工具"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-086",
+    "title": "工具箱",
+    "category": "校外工具与资源",
+    "keywords": [
+      "工具箱"
+    ],
+    "summary": "资料提供了工具箱的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://tool.browser.qq.com/"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "tool.browser.qq.com（小组资料提供）",
+        "url": "https://tool.browser.qq.com/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第87行",
+    "sourceRows": [
+      87
+    ],
+    "sourceQuestions": [
+      "工具箱"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-087",
+    "title": "缩略词复原",
+    "category": "校外工具与资源",
+    "keywords": [
+      "缩略词复原"
+    ],
+    "summary": "资料提供了缩略词复原的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://lab.magiconch.com/nbnhhsh/"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "lab.magiconch.com（小组资料提供）",
+        "url": "https://lab.magiconch.com/nbnhhsh/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第88行",
+    "sourceRows": [
+      88
+    ],
+    "sourceQuestions": [
+      "缩略词复原"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-088",
+    "title": "MOOC",
+    "category": "校外工具与资源",
+    "keywords": [
+      "MOOC"
+    ],
+    "summary": "资料提供了MOOC的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://www.icourse163.org/"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "www.icourse163.org（小组资料提供）",
+        "url": "https://www.icourse163.org/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第89行",
+    "sourceRows": [
+      89
+    ],
+    "sourceQuestions": [
+      "MOOC"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-089",
+    "title": "智慧树",
+    "category": "校外工具与资源",
+    "keywords": [
+      "智慧树"
+    ],
+    "summary": "资料提供了智慧树的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://www.zhihuishu.com/"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "www.zhihuishu.com（小组资料提供）",
+        "url": "https://www.zhihuishu.com/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第90行",
+    "sourceRows": [
+      90
+    ],
+    "sourceQuestions": [
+      "智慧树"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-090",
+    "title": "问卷星",
+    "category": "校外工具与资源",
+    "keywords": [
+      "问卷星"
+    ],
+    "summary": "资料提供了问卷星的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://www.wjx.cn/"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "www.wjx.cn（小组资料提供）",
+        "url": "https://www.wjx.cn/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第91行",
+    "sourceRows": [
+      91
+    ],
+    "sourceQuestions": [
+      "问卷星"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-091",
+    "title": "网络测速",
+    "category": "校外工具与资源",
+    "keywords": [
+      "网络测速"
+    ],
+    "summary": "资料提供了网络测速的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://wangsuceshi.bmcx.com/"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "wangsuceshi.bmcx.com（小组资料提供）",
+        "url": "https://wangsuceshi.bmcx.com/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第92行",
+    "sourceRows": [
+      92
+    ],
+    "sourceQuestions": [
+      "网络测速"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-092",
+    "title": "实时航班查询",
+    "category": "校外工具与资源",
+    "keywords": [
+      "实时航班查询"
+    ],
+    "summary": "资料提供了实时航班查询的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://zh.flightaware.com/live/"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "zh.flightaware.com（小组资料提供）",
+        "url": "https://zh.flightaware.com/live/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第93行",
+    "sourceRows": [
+      93
+    ],
+    "sourceQuestions": [
+      "实时航班查询"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-093",
+    "title": "浙大黄页",
+    "category": "校园生活",
+    "keywords": [
+      "浙大黄页"
+    ],
+    "summary": "资料提供了浙大黄页的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://zhfw.zju.edu.cn/65686/list.htm"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "zhfw.zju.edu.cn（小组资料提供）",
+        "url": "https://zhfw.zju.edu.cn/65686/list.htm"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第94行",
+    "sourceRows": [
+      94
+    ],
+    "sourceQuestions": [
+      "浙大黄页"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "academic-calendar",
+    "title": "浙大校历在哪里查？",
+    "category": "教务与学习",
+    "keywords": [
+      "浙大校历"
+    ],
+    "summary": "本科生院已公布2026—2027学年校历，可从官方校历页面查看。",
+    "steps": [
+      "打开本科生院的2026—2027学年校历页面。",
+      "核对所需学年及校区；考试和节假日教学安排还应查看补充通知。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "本科生院：2026—2027学年校历",
+        "url": "https://ugrs.zju.edu.cn/2026/0710/c28218a3187939/page.htm"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第95行",
+    "sourceRows": [
+      95
+    ],
+    "sourceQuestions": [
+      "浙大校历"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": "2026-10-08",
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [
+      "原表该行没有填写解决方法，现补入已查到的官网校历页面；未转录图片中的日期。"
+    ],
+    "verificationScope": "正文中明确标出的官网核对内容；其他资料细节仍需确认。",
+    "relatedSourceIds": []
+  },
+  {
+    "id": "exam-deferral",
+    "title": "如何申请课程缓考？",
+    "category": "教务与学习",
+    "keywords": [
+      "申请缓考"
+    ],
+    "summary": "按本科生院2026年4月公布的流程，在考试前通过教务平台提交课程缓考申请并跟进审批。",
+    "steps": [
+      "登录本科教学管理信息服务平台，进入考试管理 → 课程缓考与缓考考试申请。",
+      "选择课程缓考申请标签页，按要求提交并查看审核结果。",
+      "获批后如参加后续学期考试，通过同一入口选择缓考考试申请。开考后的紧急情况先联系学院教学科或辅导员。"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "本科生院：课程缓考申请办理流程（2026-04-30）",
+        "url": "https://zdbk.zju.edu.cn/jwglxt/xtgl/xwck_ckLoginNews.html?xwbh=50AA96418C25E042E0632AB3CA0AB796"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第97行",
+    "sourceRows": [
+      97
+    ],
+    "sourceQuestions": [
+      "申请缓考"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": "2026-10-08",
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [
+      "已用2026年流程更新原表的简略说明。具体证明材料和资格由申请页面及学院确认。"
+    ],
+    "verificationScope": "正文中明确标出的官网核对内容；其他资料细节仍需确认。",
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-097",
+    "title": "成绩单打印",
+    "category": "教务与学习",
+    "keywords": [
+      "成绩单打印"
+    ],
+    "summary": "纳米楼自助打印机上打印即可，24h开放",
+    "steps": [
+      "纳米楼自助打印机上打印即可，24h开放"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第98行",
+    "sourceRows": [
+      98
+    ],
+    "sourceQuestions": [
+      "成绩单打印"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [
+      "原表提到纳米楼自助打印机24小时开放，本次未核验当前开放时段、打印资格或费用；前往前请确认。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-098",
+    "title": "在读证明",
+    "category": "教务与学习",
+    "keywords": [
+      "在读证明"
+    ],
+    "summary": "玉泉：行政楼135；紫金港：纳米楼",
+    "steps": [
+      "玉泉：行政楼135",
+      "紫金港：纳米楼"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第99行",
+    "sourceRows": [
+      99
+    ],
+    "sourceQuestions": [
+      "在读证明"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [
+      "所列办理地点来自小组资料，本次未核对当前窗口、开放时间和在读证明获取方式。"
+    ],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-101",
+    "title": "快递点",
+    "category": "校园生活",
+    "keywords": [
+      "快递点"
+    ],
+    "summary": "玉泉：北门的菜鸟驿站；紫金港：翠柏4舍自行车库快递点，青溪翠柏快递站，碧峰快递点，银泉快递点，尧坤楼快递点；西溪：南园菜鸟驿站",
+    "steps": [
+      "玉泉：北门的菜鸟驿站",
+      "紫金港：翠柏4舍自行车库快递点，青溪翠柏快递站，碧峰快递点，银泉快递点，尧坤楼快递点",
+      "西溪：南园菜鸟驿站"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第102行",
+    "sourceRows": [
+      102
+    ],
+    "sourceQuestions": [
+      "快递点"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-102",
+    "title": "寻找志愿活动",
+    "category": "科研与活动",
+    "keywords": [
+      "寻找志愿活动"
+    ],
+    "summary": "志愿汇app；志愿者钉钉群；浙大青志公众号、各大学园/院的官网、公众号、钉钉群 各种学生组织、社团也会招募志愿者 然后还有一个信息整合网站https://www.tuotuzju.com/events",
+    "steps": [
+      "志愿汇app",
+      "志愿者钉钉群",
+      "浙大青志公众号、各大学园/院的官网、公众号、钉钉群",
+      "各种学生组织、社团也会招募志愿者",
+      "然后还有一个信息整合网站https://www.tuotuzju.com/events"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "www.tuotuzju.com（小组资料提供）",
+        "url": "https://www.tuotuzju.com/events"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第103行",
+    "sourceRows": [
+      103
+    ],
+    "sourceQuestions": [
+      "寻找志愿活动"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": [
+      "account-38"
+    ]
+  },
+  {
+    "id": "campus-103",
+    "title": "二课活动",
+    "category": "科研与活动",
+    "keywords": [
+      "二课活动"
+    ],
+    "summary": "在cc98上找",
+    "steps": [
+      "在cc98上找"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第104行",
+    "sourceRows": [
+      104
+    ],
+    "sourceQuestions": [
+      "二课活动"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": [
+      "account-40"
+    ]
+  },
+  {
+    "id": "campus-104",
+    "title": "校内活动信息去哪里看",
+    "category": "科研与活动",
+    "keywords": [
+      "校内活动信息去哪里看"
+    ],
+    "summary": "关注学院的官网和微信公众号",
+    "steps": [
+      "关注学院的官网和微信公众号"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第105行",
+    "sourceRows": [
+      105
+    ],
+    "sourceQuestions": [
+      "校内活动信息去哪里看"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": [
+      "account-29",
+      "account-42"
+    ]
+  },
+  {
+    "id": "campus-105",
+    "title": "智云课堂/课堂回放",
+    "category": "教务与学习",
+    "keywords": [
+      "智云课堂/课堂回放"
+    ],
+    "summary": "资料提供了智云课堂的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://classroom.zju.edu.cn/，查看各个老师的课堂回放"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "classroom.zju.edu.cn（小组资料提供）",
+        "url": "https://classroom.zju.edu.cn/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第106行",
+    "sourceRows": [
+      106
+    ],
+    "sourceQuestions": [
+      "智云课堂/课堂回放"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-107",
+    "title": "校友圈",
+    "category": "交流与发展",
+    "keywords": [
+      "校友圈"
+    ],
+    "summary": "朵朵校友圈https://www.duoduo.link/experience",
+    "steps": [
+      "朵朵校友圈https://www.duoduo.link/experience"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "www.duoduo.link（小组资料提供）",
+        "url": "https://www.duoduo.link/experience"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第108行",
+    "sourceRows": [
+      108
+    ],
+    "sourceQuestions": [
+      "校友圈"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-108",
+    "title": "综合网站",
+    "category": "综合入口",
+    "keywords": [
+      "综合网站"
+    ],
+    "summary": "zju轻首页https://zjuers.com/，综合各种页面信息",
+    "steps": [
+      "zju轻首页https://zjuers.com/，综合各种页面信息"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "zjuers.com（小组资料提供）",
+        "url": "https://zjuers.com/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第109行",
+    "sourceRows": [
+      109
+    ],
+    "sourceQuestions": [
+      "综合网站"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-109",
+    "title": "浙大官方信息获取/各类官方文件",
+    "category": "校园生活",
+    "keywords": [
+      "浙大官方信息获取/各类官方文件"
+    ],
+    "summary": "浙大百事通https://s2.zju.edu.cn/mobile/index.do",
+    "steps": [
+      "浙大百事通https://s2.zju.edu.cn/mobile/index.do"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "s2.zju.edu.cn（小组资料提供）",
+        "url": "https://s2.zju.edu.cn/mobile/index.do"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第110行",
+    "sourceRows": [
+      110
+    ],
+    "sourceQuestions": [
+      "浙大官方信息获取/各类官方文件"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
+  },
+  {
+    "id": "campus-110",
+    "title": "开源大模型/数据集获取",
+    "category": "校外工具与资源",
+    "keywords": [
+      "开源大模型/数据集获取"
+    ],
+    "summary": "资料提供了开源大模型的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "steps": [
+      "https://huggingface.co/"
+    ],
+    "materials": [],
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "references": [
+      {
+        "label": "huggingface.co（小组资料提供）",
+        "url": "https://huggingface.co/"
+      }
+    ],
+    "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第111行",
+    "sourceRows": [
+      111
+    ],
+    "sourceQuestions": [
+      "开源大模型/数据集获取"
+    ],
+    "importedAt": "2026-10-08",
+    "verifiedAt": null,
+    "isExample": false,
+    "kind": "resource",
+    "notes": [],
+    "verificationScope": null,
+    "relatedSourceIds": []
   },
   {
     "id": "campus-hospital-registration",
-    "title": "校医院怎么挂号",
-    "category": "就医服务",
-    "keywords": ["校医院", "挂号", "就医", "看病", "门诊", "预约"],
-    "summary": "示例说明：校医院的挂号方式、门诊安排和就诊材料尚未核实，本条仅展示指南结构，不作为实际就医流程。",
-    "steps": [
-      "示例：确认需要查询的院区和门诊信息；实际院区、科室与出诊安排待补充、待核实。",
-      "示例：查看经核实的挂号说明；线上或现场挂号方式、开放时间及费用待核实。",
-      "示例：按经核实的要求准备就诊材料；报到方式、就诊地点及其他要求待补充。"
+    "title": "校医院怎么预约挂号？",
+    "category": "校园生活",
+    "keywords": [
+      "校医院",
+      "就医",
+      "看病",
+      "挂号",
+      "门诊",
+      "数字医疗"
     ],
-    "materials": ["具体就诊材料要求待补充、待核实。"],
+    "summary": "校医院公布了微信公众号、浙大钉数字医疗平台和官网预约入口；院区及门诊安排请查看最新公告。",
+    "steps": [
+      "可在微信中查找浙江大学医院，或浙大二院公众号中的浙大院区。",
+      "也可从浙大钉数字医疗平台或校医院官网进入预约挂号。",
+      "核对需要的院区、科室和时段，按预约页面要求办理。"
+    ],
+    "materials": [],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
-    "source": null,
-    "verifiedAt": null,
-    "isExample": true
+    "references": [
+      {
+        "label": "校医院：挂号入口说明（2025-02-25）",
+        "url": "https://zdyy.zju.edu.cn/2025/0225/c9107a3019250/page.htm"
+      },
+      {
+        "label": "浙江大学校医院官网",
+        "url": "https://zdyy.zju.edu.cn/main.psp"
+      }
+    ],
+    "source": "既有网页示例，经浙江大学校医院官方通知补充",
+    "sourceRows": [],
+    "sourceQuestions": [],
+    "importedAt": "2026-10-08",
+    "verifiedAt": "2026-10-08",
+    "isExample": false,
+    "kind": "procedure",
+    "notes": [
+      "核对范围限预约渠道，不承诺具体门诊时间，也不提供诊疗建议。"
+    ],
+    "verificationScope": "2025年官方通知列出的预约渠道；具体出诊以最新通知为准。",
+    "relatedSourceIds": []
   }
 ]

@@ -1,0 +1,841 @@
+[
+  {
+    "id": "website-0fc11a295f",
+    "name": "校园卡丢了，在哪里挂失和补办？",
+    "url": "https://itc.zju.edu.cn/xykwgr/list.htm",
+    "category": "校园卡",
+    "summary": "遗失后先办理挂失；补卡可选择校园卡自助终端或服务窗口，自助补卡费为20元。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-card-replacement",
+      "campus-002"
+    ],
+    "sourceRows": [
+      2,
+      45,
+      61,
+      3
+    ],
+    "verifiedAt": "2026-10-08"
+  },
+  {
+    "id": "website-caa8a5e563",
+    "name": "怎么借用教学楼的教室",
+    "url": "https://jxzygl.zju.edu.cn",
+    "category": "场地与预约",
+    "summary": "请前往浙江大学教室资源管理平台jxzygl.zju.edu.cn 平台网址为jxzygl.zju.edu.cn，可办理紫金港东、西、北教学楼，蒙民伟楼，研究生教育综合楼各规模各类教室借用；也可查询自习教室、教室课表。 可通过学生教…",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-005"
+    ],
+    "sourceRows": [
+      6,
+      7,
+      60
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-fc8ff38e58",
+    "name": "活动场地怎么预约？启真在线在哪里？",
+    "url": "https://qzonline.zju.edu.cn",
+    "category": "场地与预约",
+    "summary": "可从启真在线或浙大钉工作台进入，按场地类型查询可预约空间、时段和申请要求。",
+    "scope": "学校域名",
+    "guideIds": [
+      "venue-reservation"
+    ],
+    "sourceRows": [
+      8,
+      72
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-768cfe38e4",
+    "name": "活动场地怎么预约？启真在线在哪里？",
+    "url": "https://qzonline.zju.edu.cn/hom/uni#/home",
+    "category": "场地与预约",
+    "summary": "可从启真在线或浙大钉工作台进入，按场地类型查询可预约空间、时段和申请要求。",
+    "scope": "学校域名",
+    "guideIds": [
+      "venue-reservation"
+    ],
+    "sourceRows": [
+      8,
+      72
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-b564abb9d2",
+    "name": "团在浙大（共青团浙江大学团委）平台的网址是什么？可以预约哪些场地/办理哪些业务？",
+    "url": "https://tzzd.zju.edu.cn",
+    "category": "场地与预约",
+    "summary": "平台网址为tzzd.zju.edu.cn，可办理尧坤楼教室借用，以及社团与社会实践相关事务。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-008"
+    ],
+    "sourceRows": [
+      9
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-86d600567b",
+    "name": "浙江大学图书馆预约系统的访问入口是什么？可以预约哪些场地？",
+    "url": "https://booking.lib.zju.edu.cn",
+    "category": "场地与预约",
+    "summary": "可以通过网址booking.lib.zju.edu.cn访问，也可以在浙大钉工作台的【图书馆】入口进入，可预约主馆、基础馆、古籍馆、农医馆的座位与空间。 https://booking.lib.zju.edu.cn/；或者钉钉工作…",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-009"
+    ],
+    "sourceRows": [
+      10,
+      70
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-efef1bf3a7",
+    "name": "校外如何访问校园网内资源？",
+    "url": "https://webvpn.zju.edu.cn/",
+    "category": "网络与数字服务",
+    "summary": "从浙江大学WebVPN入口登录，访问需要校内网络环境的资源。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-012"
+    ],
+    "sourceRows": [
+      13,
+      62
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-9705ee13db",
+    "name": "校外如何访问校园网内资源？",
+    "url": "https://webvpn.zju.edu.cn/login",
+    "category": "网络与数字服务",
+    "summary": "从浙江大学WebVPN入口登录，访问需要校内网络环境的资源。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-012"
+    ],
+    "sourceRows": [
+      13,
+      62
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-425f25443f",
+    "name": "我想下载一些软件如OFFICE、matlab，我应该去哪",
+    "url": "http://ms.zju.edu.cn",
+    "category": "网络与数字服务",
+    "summary": "去正版化软件，访问网站为http://ms.zju.edu.cn",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-013"
+    ],
+    "sourceRows": [
+      14
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-6639975c61",
+    "name": "学费在哪里缴费",
+    "url": "http://cwcx.zju.edu.cn/",
+    "category": "缴费与资助",
+    "summary": "可以通过浙江大学的计财处网站（ http://cwcx.zju.edu.cn/）或对应微信小程序进行缴费。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-014"
+    ],
+    "sourceRows": [
+      15
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-291059187e",
+    "name": "网络问题在哪里咨询？信息技术中心入口是什么？",
+    "url": "https://itc.zju.edu.cn",
+    "category": "网络与数字服务",
+    "summary": "可查看信息技术中心网站，或到所在校区的信息技术中心服务窗口咨询。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-015"
+    ],
+    "sourceRows": [
+      16,
+      58
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-a154af101c",
+    "name": "怎么找各学院的官网",
+    "url": "https://zjuers.com/welcome/basics/colleges/",
+    "category": "综合入口",
+    "summary": "资料提供了怎么找各学院的官网的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "校外网站",
+    "guideIds": [
+      "campus-016"
+    ],
+    "sourceRows": [
+      17
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-6ee508a6cf",
+    "name": "选课有哪些重要事项需要注意？",
+    "url": "https://zdbk.zju.edu.cn",
+    "category": "教务与学习",
+    "summary": "1. 选课前： 登录本科教学管理信息服务平台（zdbk.zju.edu.cn）查询推荐课表；根据培养方案拟订学习计划；③ 认真阅读选课提示，了解关键时间点；④ 学习《浙江大学教学管理信息服务平台学生操作手册》。2. 选课中：① 无…",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-019"
+    ],
+    "sourceRows": [
+      20,
+      19
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-376f5a7114",
+    "name": "每学期最多可以选修多少学分？",
+    "url": "https://s2.zju.edu.cn/search/faq.do?words=%E9%80%89%E8%AF%BE",
+    "category": "教务与学习",
+    "summary": "官方常见问题列出的长学期上限为35学分，符合条件的学生可增加到40学分；通常建议约25学分。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-020"
+    ],
+    "sourceRows": [
+      21
+    ],
+    "verifiedAt": "2026-10-08"
+  },
+  {
+    "id": "website-60df798aa2",
+    "name": "科研训练项目申报有哪些要求？",
+    "url": "http://kyjs.zju.edu.cn/preview",
+    "category": "科研与活动",
+    "summary": "本科生可按当年科研训练项目通知准备个人或团队申报，并联系指导教师。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-029",
+      "campus-067"
+    ],
+    "sourceRows": [
+      30,
+      68
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-a92b41e4e7",
+    "name": "境外交流项目有哪些，去哪里查看？",
+    "url": "https://ugrs.zju.edu.cn/dwjlfwpt/",
+    "category": "交流与发展",
+    "summary": "通过本科生对外交流服务平台查看校级与院级交流动态、项目列表及申请通知。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-031"
+    ],
+    "sourceRows": [
+      32,
+      71
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-8721f94d36",
+    "name": "校内论坛/cc98的网址",
+    "url": "https://www.cc98.org",
+    "category": "网络与数字服务",
+    "summary": "www.cc98.org或者cc98.zju.edu.cn",
+    "scope": "校外网站",
+    "guideIds": [
+      "campus-038"
+    ],
+    "sourceRows": [
+      39
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-19c488c560",
+    "name": "校内论坛/cc98的网址",
+    "url": "https://cc98.zju.edu.cn",
+    "category": "网络与数字服务",
+    "summary": "www.cc98.org或者cc98.zju.edu.cn",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-038"
+    ],
+    "sourceRows": [
+      39
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-9c5bb0179e",
+    "name": "校园网怎么缴费",
+    "url": "https://myvpn.zju.edu.cn/",
+    "category": "网络与数字服务",
+    "summary": "通过钉钉工作台网络缴费进行缴费 https://myvpn.zju.edu.cn/",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-040"
+    ],
+    "sourceRows": [
+      41,
+      74
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-1d905daff1",
+    "name": "校园功能卡如何办理？",
+    "url": "https://prs.zju.edu.cn",
+    "category": "校园卡",
+    "summary": "可登录“单位自招人员管理平台prs.zju.edu.cn”注册并填写个人信息，由单位管理员审核生成电子校园卡；也可使用浙大校园卡APP完成身份认证、充值并打开付款码支付。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-045"
+    ],
+    "sourceRows": [
+      46
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-a64676c8b3",
+    "name": "浙大服务平台/综合服务平台",
+    "url": "https://service.zju.edu.cn/",
+    "category": "综合入口",
+    "summary": "https://service.zju.edu.cn/ 包含学在浙大，三全育人，智云课堂，班车查询等综合服务",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-063"
+    ],
+    "sourceRows": [
+      64
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-190de34f1c",
+    "name": "学校地图/校园导航/学校景点查询",
+    "url": "https://map.zju.edu.cn/index.html",
+    "category": "校园生活",
+    "summary": "https://map.zju.edu.cn/index.html 可以查询紫金港，玉泉，西溪，华家池，之江，舟山，海宁，国际医学院的地图；还有导航功能；景点查询；单位查询；AED地点；食堂等多种服务",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-064"
+    ],
+    "sourceRows": [
+      65
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-ee3d8fcf49",
+    "name": "浙大云盘",
+    "url": "https://pan.zju.edu.cn/zjusso/",
+    "category": "网络与数字服务",
+    "summary": "资料提供了浙大云盘的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-065"
+    ],
+    "sourceRows": [
+      66
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-4b310fe423",
+    "name": "教师信息查询/找老师邮箱",
+    "url": "https://person.zju.edu.cn/index/",
+    "category": "综合入口",
+    "summary": "https://person.zju.edu.cn/index/ 可以查到老师的研究方向，邮箱，个人简介，研究成果以及教学信息等",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-066"
+    ],
+    "sourceRows": [
+      67
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-ecf5dd5ca3",
+    "name": "素质拓展网/如何查看二三课堂学分以及劳育美育学分情况？",
+    "url": "https://sztz.zju.edu.cn/dekt/#/index/main",
+    "category": "科研与活动",
+    "summary": "查看二三课堂，劳育，美育学分；以及学科竞赛和科研训练信息查询；https://sztz.zju.edu.cn/dekt/#/index/main ETA/三全育人平台",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-068"
+    ],
+    "sourceRows": [
+      69,
+      107
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-e3b9a6da7a",
+    "name": "浙大邮箱/学校邮箱怎么登录",
+    "url": "https://zjuem.zju.edu.cn/",
+    "category": "网络与数字服务",
+    "summary": "资料提供了浙大邮箱的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-072"
+    ],
+    "sourceRows": [
+      73
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-1594e13598",
+    "name": "综合服务",
+    "url": "https://zhfw.zju.edu.cn/",
+    "category": "校园生活",
+    "summary": "资料提供了综合服务的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-074"
+    ],
+    "sourceRows": [
+      75
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-d131c92460",
+    "name": "班车查询",
+    "url": "http://www.life.zju.edu.cn/_web/_apps/lightapp/busQuery/mobile/app/pub/index.html",
+    "category": "校园生活",
+    "summary": "资料提供了班车查询的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-077"
+    ],
+    "sourceRows": [
+      78
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-fd26afadef",
+    "name": "就业服务/选调生信息查询/就业经验查询",
+    "url": "https://www.career.zju.edu.cn/",
+    "category": "交流与发展",
+    "summary": "资料提供了就业服务的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-078"
+    ],
+    "sourceRows": [
+      79
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-ac6b337fdb",
+    "name": "紧急电话汇总/如何寻找报警电话？",
+    "url": "https://mapp.zju.edu.cn/lightapp/jjdh/www/app/home.html",
+    "category": "校园生活",
+    "summary": "资料提供了紧急电话汇总的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-079"
+    ],
+    "sourceRows": [
+      80
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-9ce11f6197",
+    "name": "心理健康中心/心理测试",
+    "url": "http://www.xlzx.zju.edu.cn/",
+    "category": "校园生活",
+    "summary": "资料提供了心理健康中心的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-080"
+    ],
+    "sourceRows": [
+      81
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-0560866fa3",
+    "name": "后勤集团查询",
+    "url": "https://zulg.zju.edu.cn/",
+    "category": "校园生活",
+    "summary": "资料提供了后勤集团查询的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-081"
+    ],
+    "sourceRows": [
+      82
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-976b2757c0",
+    "name": "浙大图书馆中文网",
+    "url": "https://libweb.zju.edu.cn/",
+    "category": "校园生活",
+    "summary": "资料提供了浙大图书馆中文网的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-082"
+    ],
+    "sourceRows": [
+      83
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-1dbc3c9778",
+    "name": "alphaxiv",
+    "url": "https://www.alphaxiv.org/",
+    "category": "校外工具与资源",
+    "summary": "小组收集的校外论文阅读与检索平台，实际功能和使用条件以网站当前说明为准。",
+    "scope": "校外网站",
+    "guideIds": [
+      "campus-083"
+    ],
+    "sourceRows": [
+      84
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-362eb6772f",
+    "name": "必应学术",
+    "url": "https://cn.bing.com/academic",
+    "category": "校外工具与资源",
+    "summary": "资料提供了必应学术的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "校外网站",
+    "guideIds": [
+      "campus-084"
+    ],
+    "sourceRows": [
+      85
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-504f9520ee",
+    "name": "多功能效率箱/网址生成/网络测速/二维码工具",
+    "url": "https://ol.woobx.cn/",
+    "category": "校外工具与资源",
+    "summary": "资料提供了多功能效率箱的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "校外网站",
+    "guideIds": [
+      "campus-085"
+    ],
+    "sourceRows": [
+      86
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-c468fbae43",
+    "name": "工具箱",
+    "url": "https://tool.browser.qq.com/",
+    "category": "校外工具与资源",
+    "summary": "资料提供了工具箱的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "校外网站",
+    "guideIds": [
+      "campus-086"
+    ],
+    "sourceRows": [
+      87
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-442d52acbd",
+    "name": "缩略词复原",
+    "url": "https://lab.magiconch.com/nbnhhsh/",
+    "category": "校外工具与资源",
+    "summary": "资料提供了缩略词复原的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "校外网站",
+    "guideIds": [
+      "campus-087"
+    ],
+    "sourceRows": [
+      88
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-93d3d97088",
+    "name": "MOOC",
+    "url": "https://www.icourse163.org/",
+    "category": "校外工具与资源",
+    "summary": "资料提供了MOOC的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "校外网站",
+    "guideIds": [
+      "campus-088"
+    ],
+    "sourceRows": [
+      89
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-26dd362b40",
+    "name": "智慧树",
+    "url": "https://www.zhihuishu.com/",
+    "category": "校外工具与资源",
+    "summary": "资料提供了智慧树的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "校外网站",
+    "guideIds": [
+      "campus-089"
+    ],
+    "sourceRows": [
+      90
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-f62fdde99a",
+    "name": "问卷星",
+    "url": "https://www.wjx.cn/",
+    "category": "校外工具与资源",
+    "summary": "资料提供了问卷星的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "校外网站",
+    "guideIds": [
+      "campus-090"
+    ],
+    "sourceRows": [
+      91
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-29747a87b4",
+    "name": "网络测速",
+    "url": "https://wangsuceshi.bmcx.com/",
+    "category": "校外工具与资源",
+    "summary": "资料提供了网络测速的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "校外网站",
+    "guideIds": [
+      "campus-091"
+    ],
+    "sourceRows": [
+      92
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-9000b7bc0f",
+    "name": "实时航班查询",
+    "url": "https://zh.flightaware.com/live/",
+    "category": "校外工具与资源",
+    "summary": "资料提供了实时航班查询的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "校外网站",
+    "guideIds": [
+      "campus-092"
+    ],
+    "sourceRows": [
+      93
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-98bcde0ce8",
+    "name": "浙大黄页",
+    "url": "https://zhfw.zju.edu.cn/65686/list.htm",
+    "category": "校园生活",
+    "summary": "资料提供了浙大黄页的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-093"
+    ],
+    "sourceRows": [
+      94
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-c497cf09bc",
+    "name": "浙大校历在哪里查？",
+    "url": "https://ugrs.zju.edu.cn/2026/0710/c28218a3187939/page.htm",
+    "category": "教务与学习",
+    "summary": "本科生院已公布2026—2027学年校历，可从官方校历页面查看。",
+    "scope": "学校域名",
+    "guideIds": [
+      "academic-calendar"
+    ],
+    "sourceRows": [
+      95
+    ],
+    "verifiedAt": "2026-10-08"
+  },
+  {
+    "id": "website-f7d073c50e",
+    "name": "如何申请课程缓考？",
+    "url": "https://zdbk.zju.edu.cn/jwglxt/xtgl/xwck_ckLoginNews.html?xwbh=50AA96418C25E042E0632AB3CA0AB796",
+    "category": "教务与学习",
+    "summary": "按本科生院2026年4月公布的流程，在考试前通过教务平台提交课程缓考申请并跟进审批。",
+    "scope": "学校域名",
+    "guideIds": [
+      "exam-deferral"
+    ],
+    "sourceRows": [
+      97
+    ],
+    "verifiedAt": "2026-10-08"
+  },
+  {
+    "id": "website-b2c334a655",
+    "name": "寻找志愿活动",
+    "url": "https://www.tuotuzju.com/events",
+    "category": "科研与活动",
+    "summary": "志愿汇app；志愿者钉钉群；浙大青志公众号、各大学园/院的官网、公众号、钉钉群 各种学生组织、社团也会招募志愿者 然后还有一个信息整合网站https://www.tuotuzju.com/events",
+    "scope": "校外网站",
+    "guideIds": [
+      "campus-102"
+    ],
+    "sourceRows": [
+      103
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-dd5593c782",
+    "name": "智云课堂/课堂回放",
+    "url": "https://classroom.zju.edu.cn/",
+    "category": "教务与学习",
+    "summary": "资料提供了智云课堂的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-105"
+    ],
+    "sourceRows": [
+      106
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-474a7a4d21",
+    "name": "校友圈",
+    "url": "https://www.duoduo.link/experience",
+    "category": "交流与发展",
+    "summary": "朵朵校友圈https://www.duoduo.link/experience",
+    "scope": "校外网站",
+    "guideIds": [
+      "campus-107"
+    ],
+    "sourceRows": [
+      108
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-db5c7569ff",
+    "name": "综合网站",
+    "url": "https://zjuers.com/",
+    "category": "综合入口",
+    "summary": "zju轻首页https://zjuers.com/，综合各种页面信息",
+    "scope": "校外网站",
+    "guideIds": [
+      "campus-108"
+    ],
+    "sourceRows": [
+      109
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-9d670503d4",
+    "name": "浙大官方信息获取/各类官方文件",
+    "url": "https://s2.zju.edu.cn/mobile/index.do",
+    "category": "校园生活",
+    "summary": "浙大百事通https://s2.zju.edu.cn/mobile/index.do",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-109"
+    ],
+    "sourceRows": [
+      110
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-9564f66ddc",
+    "name": "开源大模型/数据集获取",
+    "url": "https://huggingface.co/",
+    "category": "校外工具与资源",
+    "summary": "资料提供了开源大模型的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "scope": "校外网站",
+    "guideIds": [
+      "campus-110"
+    ],
+    "sourceRows": [
+      111
+    ],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-cbb75284bb",
+    "name": "校医院怎么预约挂号？",
+    "url": "https://zdyy.zju.edu.cn/2025/0225/c9107a3019250/page.htm",
+    "category": "校园生活",
+    "summary": "校医院公布了微信公众号、浙大钉数字医疗平台和官网预约入口；院区及门诊安排请查看最新公告。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-hospital-registration"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-08"
+  },
+  {
+    "id": "website-38d02fa702",
+    "name": "校医院怎么预约挂号？",
+    "url": "https://zdyy.zju.edu.cn/main.psp",
+    "category": "校园生活",
+    "summary": "校医院公布了微信公众号、浙大钉数字医疗平台和官网预约入口；院区及门诊安排请查看最新公告。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-hospital-registration"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-08"
+  },
+  {
+    "id": "website-7eb5b8917f",
+    "name": "学生有几次转专业的机会？",
+    "url": "https://ugrs.zju.edu.cn/",
+    "category": "教务与学习",
+    "summary": "转专业的申请范围和次数受年级、接收容量及学院细则约束，应查看本科生院与接收学院当期通知。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-032"
+    ],
+    "sourceRows": [
+      33
+    ],
+    "verifiedAt": null
+  }
+]

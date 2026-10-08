@@ -1,6 +1,6 @@
 # Project instructions
 
-This is the ZJU campus guide course prototype. Follow the final rules in `docs/project-requirements-v0.3.md` and the user's later instructions. Keep the third module as a placeholder and keep unverified guides clearly marked as examples.
+This is the ZJU campus guide course prototype. Follow the final rules in `docs/project-requirements-v0.3.md` and the user's later instructions. The user explicitly requested populating the third module from their supplied public-account collection on 2026-10-08. Maintain the populated account/site directory and sourced guide dataset; distinguish collected material from officially checked details, and retain source rows, screenshot mappings and collection notes.
 
 ## GitHub collaboration
 

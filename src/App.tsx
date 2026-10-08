@@ -14,6 +14,8 @@ import {
 import { GuideDetailPage, GuidePage } from './pages/GuidePages'
 import { FoodDetailPage, FoodPage } from './pages/FoodPages'
 import { FoodPublishPage } from './pages/FoodPublishPage'
+import { SourcesPage, SourceDetailPage } from './pages/SourcePages'
+import contentManifest from './data/content-manifest.json'
 import { initializeFoodIdentity } from './lib/foodService'
 
 const navigation = [
@@ -109,7 +111,7 @@ function HomePage() {
           </div>
           <h2>校园办事指南</h2>
           <p>遇到问题，从这里找答案。<br />办理步骤、材料和地点，清楚地放在一起。</p>
-          <div className="card-tags"><span>按问题查找</span><span>步骤与来源</span></div>
+          <div className="card-tags"><span>{contentManifest.guideCount}份指南</span><span>答案与来源</span></div>
           <span className="card-link">进入办事指南 <ArrowRight size={20} aria-hidden="true" /></span>
         </Link>
 
@@ -128,29 +130,10 @@ function HomePage() {
       <Link to="/sources" className="source-banner">
         <span className="source-icon"><Compass size={25} aria-hidden="true" /></span>
         <div><h2>校园信息源导航</h2><p>常用校园网站与公众号，集中整理，方便查找。</p></div>
-        <span className="source-status">正在整理中 <ArrowRight size={17} aria-hidden="true" /></span>
+        <span className="source-status">{contentManifest.accountCount}个公众号 · {contentManifest.websiteCount}个网站 <ArrowRight size={17} aria-hidden="true" /></span>
       </Link>
 
       <div className="home-note"><Info size={17} aria-hidden="true" /><p>信息正在逐步整理和核验，办事指南请以最新官方通知为准。</p></div>
-    </div>
-  )
-}
-
-function SourcesPage() {
-  return (
-    <div className="page module-page">
-      <div className="page-heading">
-        <Link to="/" className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回首页</Link>
-        <p className="eyebrow">找到信息，也找到它的出处</p>
-        <h1>校园信息源导航</h1>
-        <p className="page-description">常用校园网站与公众号的统一入口。</p>
-      </div>
-      <section className="module-empty">
-        <span className="empty-icon blue"><Compass size={32} aria-hidden="true" /></span>
-        <h2>正在整理中，敬请期待</h2>
-        <p>我们会逐步整理校园活动、讲座、竞赛等常用信息来源。</p>
-        <Link to="/" className="button-link">返回首页 <ArrowRight size={18} aria-hidden="true" /></Link>
-      </section>
     </div>
   )
 }
@@ -166,8 +149,8 @@ function AboutPage() {
       </div>
       <div className="about-grid">
         <article className="about-card"><h2>为什么做这个网站？</h2><p>校园信息分散在不同网站、公众号和群聊中。我们希望把常用信息重新整理，让办事和寻找美食更方便。</p></article>
-        <article className="about-card"><h2>信息从哪里来？</h2><p>办事指南将注明来源和最后核验时间；未确认的信息会明确标记。美食点评由使用者共同分享。</p></article>
-        <article className="about-card"><h2>现在进展到哪里？</h2><p>办事搜索、美食浏览、发布表单和星级选择已可用。美食共享服务未连接时会显示明确的示例与未提交提示。这里是《人类工效学》课程项目，不是学校官方平台。</p></article>
+        <article className="about-card"><h2>信息从哪里来？</h2><p>办事指南来自小组问题收集表，公众号来自截图与整理清单；每条保留来源，部分内容已官网核对。美食点评由使用者共同分享。</p></article>
+        <article className="about-card"><h2>现在进展到哪里？</h2><p>办事搜索、公众号与网站导航已补入小组资料；美食上传、发布和评分已连接共享服务。这里是《人类工效学》课程项目，不是学校官方平台。</p></article>
       </div>
       <Link to="/" className="text-link">返回首页 <ArrowRight size={18} aria-hidden="true" /></Link>
     </div>
@@ -197,7 +180,7 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    const title = pageTitles[location.pathname] ?? (location.pathname.startsWith('/guides/') ? '办事指南详情' : location.pathname.startsWith('/food/') ? '美食详情' : '页面未找到')
+    const title = pageTitles[location.pathname] ?? (location.pathname.startsWith('/guides/') ? '办事指南详情' : location.pathname.startsWith('/sources/') ? '公众号信息' : location.pathname.startsWith('/food/') ? '美食详情' : '页面未找到')
     document.title = `${title} · 浙大校园指南`
     if (previousPath.current !== location.pathname) {
       window.scrollTo({ top: 0, behavior: 'instant' })
@@ -219,6 +202,7 @@ export default function App() {
           <Route path="/food/new" element={<FoodPublishPage />} />
           <Route path="/food/:foodId" element={<FoodDetailPage />} />
           <Route path="/sources" element={<SourcesPage />} />
+          <Route path="/sources/:sourceId" element={<SourceDetailPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

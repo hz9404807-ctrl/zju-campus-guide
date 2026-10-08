@@ -1,0 +1,19 @@
+{
+  "importedAt": "2026-10-08",
+  "faqWorkbook": "副本校园信息问题-solution收集_合并(3).xlsx",
+  "faqSheet": "Sheet1",
+  "faqRows": 110,
+  "guideCount": 95,
+  "accountCount": 48,
+  "websiteCount": 55,
+  "sourceFiles": [
+    {
+      "name": "副本校园信息问题-solution收集_合并(3).xlsx",
+      "sha256": "13a0be875c845c2e1a96752c9365fd3a79696e8a3f7c739e9cef5ceaad5d9315"
+    },
+    {
+      "name": "公众号信息收集V1.zip",
+      "sha256": "4ed3a3041c71830cad2c9c7c016d1fbdfe5fe35124f6621163c109023a1cb11d"
+    }
+  ]
+}
