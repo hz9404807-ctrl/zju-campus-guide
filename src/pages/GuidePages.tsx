@@ -5,7 +5,7 @@ import ResultPager from '../components/ResultPager'
 import GuideStepActions from '../components/GuideStepActions'
 import GuideServiceWindows from '../components/GuideServiceWindows'
 import { useDebouncedValue } from '../hooks/useDebouncedValue'
-import { filterGuides, findRelatedSources, sourceSearchUrl, suggestGuides } from '../lib/campusContent'
+import { filterGuides, findRelatedSources, sourceSearchUrl, suggestGuides, websiteSearchDetails } from '../lib/campusContent'
 import guideData from '../data/guides.json'
 import accountData from '../data/accounts.json'
 import websiteData from '../data/websites.json'
@@ -62,7 +62,7 @@ export function GuidePage() {
     </section>
     {debouncedQuery.trim() && (sources.websites.length > 0 || sources.accounts.length > 0) && <section className="guide-search-sources" aria-label="相关网站与公众号" aria-busy={updating}>
       <h2>相关网站与公众号</h2><p className="guide-source-hint">与问题匹配的信息源，以及前几条指南关联的入口。</p>
-      {sources.websites.length > 0 && <div className="guide-source-group"><h3>网站入口</h3><ul>{sources.websites.slice(0, 3).map((site) => <li key={site.id}><a href={site.url} target="_blank" rel="noopener noreferrer">{site.name}<ExternalLink size={15} aria-hidden="true" /></a><span>{site.scope}</span></li>)}</ul><Link to={sourceSearchUrl(query, 'websites')} className="guide-bottom-back">继续查网站 <ArrowRight size={16} aria-hidden="true" /></Link></div>}
+      {sources.websites.length > 0 && <div className="guide-source-group"><h3>网站入口</h3><ul>{sources.websites.slice(0, 3).map((site) => <li key={site.id}><a href={site.url} target="_blank" rel="noopener noreferrer">{websiteSearchDetails(site, results).name}<ExternalLink size={15} aria-hidden="true" /></a><span>{site.scope}</span></li>)}</ul><Link to={sourceSearchUrl(query, 'websites')} className="guide-bottom-back">继续查网站 <ArrowRight size={16} aria-hidden="true" /></Link></div>}
       {sources.accounts.length > 0 && <div className="guide-source-group"><h3>微信公众号</h3><ul>{sources.accounts.slice(0, 3).map((account) => <li key={account.id}><Link to={`/sources/${account.id}?q=${encodeURIComponent(query)}`}>{account.name}<ArrowRight size={15} aria-hidden="true" /></Link><span>{account.topic}</span></li>)}</ul><Link to={sourceSearchUrl(query, 'accounts')} className="guide-bottom-back">继续查公众号 <ArrowRight size={16} aria-hidden="true" /></Link></div>}
     </section>}
   </div>

@@ -204,3 +204,11 @@ export function sourceSearchUrl(query: string, kind: 'websites' | 'accounts') {
 export function guideIdForWebsite(site: CampusWebsite, matchingGuides: Guide[]) {
   return matchingGuides.find((guide) => site.guideIds.includes(guide.id))?.id ?? site.guideIds[0]
 }
+
+
+export function websiteSearchDetails(site: CampusWebsite, matchingGuides: Guide[]) {
+  const guideId = guideIdForWebsite(site, matchingGuides)
+  const guide = matchingGuides.find((item) => item.id === guideId)
+  const reference = guide?.references.find((item) => item.url.replace(/\/$/, '') === site.url.replace(/\/$/, ''))
+  return { guideId, name: reference?.label ?? site.name, summary: guide?.summary ?? site.summary }
+}

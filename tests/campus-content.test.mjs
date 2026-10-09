@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { readFileSync, existsSync } from 'node:fs'
-import { filterGuides, filterAccounts, filterWebsites, findRelatedSources, sourceSearchUrl, suggestGuides, guideIdForWebsite } from '../src/lib/campusContent.ts'
+import { filterGuides, filterAccounts, filterWebsites, findRelatedSources, sourceSearchUrl, suggestGuides, guideIdForWebsite, websiteSearchDetails } from '../src/lib/campusContent.ts'
 const read = (name) => JSON.parse(readFileSync(new URL(`../src/data/${name}.json`, import.meta.url), 'utf8'))
 const guides = read('guides'), accounts = read('accounts'), websites = read('websites')
 
@@ -198,5 +198,8 @@ test('共用官网入口仍指向当前问题匹配的指南，而不是关联�
   const site = websites.find((item) => item.guideIds.includes('campus-046'))
   assert.equal(site.guideIds[0], 'campus-003')
   assert.equal(guideIdForWebsite(site, matched), 'campus-046')
+  assert.equal(websiteSearchDetails(site, matched).name, '后勤集团挂失与解挂操作说明')
+  assert.equal(websiteSearchDetails(site, matched).summary, guides.find((guide) => guide.id === 'campus-046').summary)
+  assert.equal(websiteSearchDetails(site, []).name, site.name)
   assert.equal(guideIdForWebsite(site, []), 'campus-003')
 })
