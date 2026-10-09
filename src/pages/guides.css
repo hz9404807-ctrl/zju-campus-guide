@@ -194,3 +194,11 @@
 .guide-card-footer a { position: relative; z-index: 1; }
 
 .guide-card-reference svg { flex-shrink: 0; }
+
+.guide-match-link { position: relative; z-index: 1; display: block; padding: 12px; margin: 0 0 15px; border-radius: 8px; background: #f5f7fb; color: var(--ink); font-size: 13px; line-height: 1.8; overflow-wrap: anywhere; }
+.guide-match-link > span:first-child { display: block; color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+.guide-match-go { display: flex; gap: 6px; align-items: center; margin-top: 7px; color: var(--blue); }
+.guide-match-link mark, .guide-detail-section mark { background: #fff0b6; color: inherit; padding: 0 2px; border-radius: 2px; }
+.guide-search-location { margin: 0 0 22px; font-size: 13px; }
+.guide-search-location a { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; color: var(--blue); overflow-wrap: anywhere; }
+[id^="guide-step-"], [id^="guide-help-"], [id^="guide-material-"] { scroll-margin-top: 100px; }

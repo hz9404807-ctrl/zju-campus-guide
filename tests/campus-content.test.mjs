@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { readFileSync, existsSync } from 'node:fs'
-import { filterGuides, filterAccounts, filterWebsites, findRelatedSources, sourceSearchUrl, suggestGuides, guideIdForWebsite, websiteSearchDetails, primaryGuideAction } from '../src/lib/campusContent.ts'
+import { filterGuides, filterAccounts, filterWebsites, findRelatedSources, sourceSearchUrl, suggestGuides, guideIdForWebsite, websiteSearchDetails, primaryGuideAction, guideSearchMatch, searchTextParts } from '../src/lib/campusContent.ts'
 const read = (name) => JSON.parse(readFileSync(new URL(`../src/data/${name}.json`, import.meta.url), 'utf8'))
 const guides = read('guides'), accounts = read('accounts'), websites = read('websites')
 
@@ -233,4 +233,36 @@ test('共用官网入口仍指向当前问题匹配的指南，而不是关联�
   assert.equal(websiteSearchDetails(site, matched).summary, guides.find((guide) => guide.id === 'campus-046').summary)
   assert.equal(websiteSearchDetails(site, []).name, site.name)
   assert.equal(guideIdForWebsite(site, []), 'campus-003')
+})
+
+
+test('量词自然问法识别已知事务，同时保留未知对象和条件', () => {
+  for (const [query, id] of [
+    ['我想预约一个自习座位', 'campus-009'], ['我要找一个自习位置', 'campus-009'],
+    ['请帮我打印一份成绩单', 'campus-097'], ['怎么预约一间研讨室', 'campus-009'],
+  ]) assert.equal(filterGuides(guides, query)[0]?.id, id, query)
+  for (const query of ['预约一个飞船999', '校园卡 飞船999', '图书馆 免费包过999']) assert.equal(filterGuides(guides, query).length, 0)
+})
+
+test('匹配片段来自对应正文并定位取消操作而不是一般阅读要求', () => {
+  const guide = guides.find((item) => item.id === 'campus-009')
+  const match = guideSearchMatch(guide, '图书馆 取消')
+  assert.equal(match.anchor, 'guide-step-3')
+  assert.ok(guide.steps[3].includes(match.text.replace(/^…|…$/g, '')))
+  assert.equal(guideSearchMatch(guide, ''), undefined)
+  assert.equal(guideSearchMatch(guide, '飞船999'), undefined)
+  const card = guides.find((item) => item.id === 'campus-card-replacement')
+  const windows = read('service-windows')
+  assert.equal(guideSearchMatch(card, '87572114', windows).anchor, 'guide-windows-heading')
+})
+
+test('文本高亮识别近义词，按字面处理特殊符号并完整保留原文', () => {
+  const text = '校园卡遗失，请先挂失；可用.*[a]和<script>字面搜索。'
+  for (const query of ['饭卡', '.*', '[a]', '<script>', '\\', '?']) {
+    const parts = searchTextParts(text, query)
+    assert.equal(parts.map((part) => part.text).join(''), text)
+  }
+  assert.ok(searchTextParts(text, '饭卡').some((part) => part.matched && part.text === '校园卡'))
+  assert.ok(searchTextParts('其他内容', '.*').every((part) => !part.matched))
+  assert.ok(searchTextParts('其他内容', '[a]').every((part) => !part.matched))
 })

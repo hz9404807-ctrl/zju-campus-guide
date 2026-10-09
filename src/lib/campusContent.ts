@@ -23,6 +23,8 @@ const searchAliases: [string, string[]][] = [
   ['预约', ['预订', '预定']],
   ['教室', ['自习室']],
   ['场地', ['场馆']],
+  ['座位', ['自习座位', '自习位置']],
+  ['研讨空间', ['研讨室', '讨论室', '研讨间']],
   ['成绩单', ['成绩证明']],
   ['在读证明', ['在校证明', '学籍证明']],
   ['缓考', ['延期考试']],
@@ -53,6 +55,7 @@ const concepts = [...new Set([
   '紫金港', '玉泉', '西溪', '华家池', '海宁', '舟山', '之江', '入校', '访客',
   '体育', '球场', '游泳', '学费', '贷款', '科研', '竞赛', '活动', '社团',
   '心理', '咨询', '挂号', '医院', '打印', '下载', '登录', '申请', '取消', '时间',
+  '座位', '研讨空间', '盖章', '密封', '签到',
 ])].sort((a, b) => b.length - a.length)
 const conceptPattern = new RegExp(concepts.join('|'), 'g')
 
@@ -70,6 +73,8 @@ function queryTerms(query: string) {
     .replace(/到哪里|去哪里|在哪里|如何|怎样|怎么/g, ' ')
     .trim()
     .replace(/^(请帮我|我想要|我需要|我想|我要|我的|请问|帮我|想要|请|查一下|查看|查询|我|查|找|在)+/, '')
+    // Remove quantities only before recognised task objects, retaining unknown conditions.
+    .replace(/(?:一个|几个|一间|一份|一张)(?=座位|研讨空间|教室|成绩单|在读证明)/g, '')
     .replace(/的/g, ' ')
     .trim()
   if (!cleaned) return []
@@ -217,4 +222,53 @@ export function websiteSearchDetails(site: CampusWebsite, matchingGuides: Guide[
 export function primaryGuideAction(guide: Guide) {
   const actions = (guide.stepActions ?? []).filter((action): action is Extract<GuideStepAction, { url: string }> => 'url' in action)
   return actions.find((action) => action.kind === 'service') ?? actions[0]
+}
+
+
+export function searchTextParts(value: string, query: string) {
+  const terms = queryTerms(query)
+  const needles = [...new Set(terms.flatMap((term) => [term,
+    ...(searchAliases.find(([canonical]) => canonical === term)?.[1] ?? []),
+  ]))].filter(Boolean).sort((a, b) => b.length - a.length)
+  if (!needles.length) return [{ text: value, matched: false }]
+  const escape = (text: string) => [...text].map((char) => '.*+?^${}()|[]\\'.includes(char) ? `\\${char}` : char).join('')
+  const pattern = new RegExp(needles.map(escape).join('|'), 'giu')
+  const parts: { text: string; matched: boolean }[] = []
+  let offset = 0
+  for (const match of value.matchAll(pattern)) {
+    if (match.index > offset) parts.push({ text: value.slice(offset, match.index), matched: false })
+    parts.push({ text: match[0], matched: true })
+    offset = match.index + match[0].length
+  }
+  if (offset < value.length) parts.push({ text: value.slice(offset), matched: false })
+  return parts
+}
+
+export interface GuideSearchMatch { text: string; label: string; anchor: string }
+
+export function guideSearchMatch(guide: Guide, query: string, windows: ServiceWindow[] = []): GuideSearchMatch | undefined {
+  const terms = queryTerms(query)
+  if (!terms.length) return undefined
+  const candidates = [
+    ...guide.steps.map((text, i) => ({ text, label: '相关操作', anchor: `guide-step-${i}` })),
+    ...(guide.troubleshooting ?? []).map((text, i) => ({ text, label: '遇到问题', anchor: `guide-help-${i}` })),
+    ...guide.materials.map((text, i) => ({ text, label: '准备材料', anchor: `guide-material-${i}` })),
+    ...windows.filter((window) => guide.serviceWindowIds?.includes(window.id)).map((window) => ({
+      text: `${window.campus} · ${window.name}：${window.location}；${window.openingHours}；${window.contacts.map((contact) => contact.number).join('、')}`,
+      label: '地点与时间', anchor: 'guide-windows-heading',
+    })),
+  ]
+  const intents = new Set(['取消', '签到', '盖章', '密封', '打印', '时间'])
+  const ranked = candidates.map((item, index) => ({ ...item, index,
+    score: terms.reduce((score, term) => score + (canonicalSearch(item.text).includes(term) ? (intents.has(term) ? 4 : 1) : 0), 0)
+      + (terms.includes('取消') && /取消(?:功能|入口|操作)|(?:提前|选择|点击|完成)取消/.test(item.text) ? 2 : 0),
+  })).filter((item) => item.score > 0).sort((a, b) => b.score - a.score || a.index - b.index)
+  const best = ranked[0]
+  if (!best) return undefined
+  const parts = searchTextParts(best.text, query)
+  const first = parts.findIndex((part) => part.matched)
+  const position = first < 0 ? 0 : parts.slice(0, first).reduce((total, part) => total + part.text.length, 0)
+  const start = Math.max(0, position - 20)
+  const end = Math.min(best.text.length, start + 95)
+  return { text: `${start ? '…' : ''}${best.text.slice(start, end)}${end < best.text.length ? '…' : ''}`, label: best.label, anchor: best.anchor }
 }
