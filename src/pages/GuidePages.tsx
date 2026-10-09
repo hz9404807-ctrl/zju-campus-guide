@@ -93,7 +93,7 @@ export function GuideDetailPage() {
         {guide.location && <div><dt>办理地点</dt><dd>{guide.location}</dd></div>}{guide.openingHours && <div><dt>开放时间</dt><dd>{guide.openingHours}</dd></div>}{guide.contact && <div><dt>联系方式</dt><dd>{guide.contact}</dd></div>}
       </dl></aside>}
     </div>
-    {guide.references.length > 0 && <section className="info-panel"><h2>{guide.category === '校园卡' ? '官方办事参考' : '办事入口与参考'}</h2><ul className="guide-reference-list">{guide.references.map((reference, i) => <li key={i}><a href={reference.url} target="_blank" rel="noopener noreferrer">{reference.label}<span className="guide-reference-note">（新标签页）</span></a></li>)}</ul></section>}
+    {guide.references.length > 0 && <section className="info-panel"><h2>{guide.category === '校园卡' ? '官方办事参考' : '办事入口与参考'}</h2><ul className="guide-reference-list">{guide.references.map((reference, i) => <li key={i}><a href={reference.url} target="_blank" rel="noopener noreferrer">{reference.label}</a></li>)}</ul></section>}
     {related.length > 0 && <section className="info-panel"><h2>相关公众号</h2><p>可从这些信息源继续查看通知。</p><div className="guide-related-accounts">{related.map((account) => <Link key={account.id} to={`/sources/${account.id}`}>{account.name}<ArrowRight size={16} aria-hidden="true" /></Link>)}</div></section>}
     <Link to={backTo} className="guide-bottom-back"><ArrowLeft size={16} aria-hidden="true" /> 返回{params.get('q') ? '搜索结果' : '办事指南'}</Link>
   </div>

@@ -64,7 +64,6 @@
 .guide-reference-list { margin: 11px 0 0; padding-left: 20px; color: #4f647d; font-size: 14px; line-height: 1.9; }
 .guide-reference-list li + li { margin-top: 8px; }
 .guide-reference-list a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
-.guide-reference-note { font-size: 12px; }
 .guide-bottom-back { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 21px; color: var(--blue); font-size: 14px; line-height: 1.7; border-radius: 4px; }
 .guide-bottom-back:hover { text-decoration: underline; text-underline-offset: 3px; }
 
