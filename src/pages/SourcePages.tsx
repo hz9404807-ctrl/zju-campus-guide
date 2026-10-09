@@ -23,7 +23,7 @@ export function SourcesPage() {
   const data = websites ? websiteData : accountData
   const categories = [...new Set(data.map((item) => item.category))]
   const accounts = filterAccounts(accountData, debounced, category)
-  const sites = filterWebsites(websiteData, debounced, category)
+  const sites = filterWebsites(websiteData, debounced, category, guides)
   const total = websites ? sites.length : accounts.length
   const page = Math.min(Math.max(1, Number(params.get('page')) || 1), Math.max(1, Math.ceil(total / pageSize)))
   function update(key: string, value: string) {
@@ -40,7 +40,7 @@ export function SourcesPage() {
     <aside className="content-source-note"><Info size={18} aria-hidden="true" /><p>公众号信息来自小组截图与整理清单；机构和认证仅代表截图所示，不代表本站认证。学校域名与校外网站分别标识。</p></aside>
     <section className="guide-search-panel" role="search" aria-label="查找校园信息源">
       <div className="source-tabs" aria-label="信息源类型"><button type="button" aria-pressed={!websites} onClick={() => update('kind', '')}>微信公众号 <span>{accountData.length}</span></button><button type="button" aria-pressed={websites} onClick={() => update('kind', 'websites')}>常用网站 <span>{websiteData.length}</span></button></div>
-      <SearchField id="source-search" label={websites ? '你需要哪个服务入口？' : '你想找哪类信息？'} placeholder={websites ? '例如：校历、邮箱、图书馆、云盘' : '例如：志愿、就业、微积分、美食、心理'} value={query} onChange={(value) => update('q', value)} hint={websites ? '按服务名称、类别、说明或网址搜索。' : '按公众号名称、主题、简介或截图中的机构搜索。'} />
+      <SearchField id="source-search" label={websites ? '你需要哪个服务入口？' : '你想找哪类信息？'} placeholder={websites ? '例如：校历、邮箱、图书馆、云盘' : '例如：志愿、就业、微积分、美食、心理'} value={query} onChange={(value) => update('q', value)} hint={websites ? '按问题、服务名称、类别、说明或网址搜索，也会查找相关指南的入口。' : '按公众号名称、主题、简介或截图中的机构搜索。'} />
       <div className="content-filter-row"><label htmlFor="source-category">按类别查找</label><select id="source-category" value={category} onChange={(event) => update('category', event.target.value)}><option value="">全部类别</option>{categories.map((item) => <option key={item} value={item}>{item}（{data.filter((entry) => entry.category === item).length}）</option>)}</select></div>
     </section>
     <section aria-labelledby="source-results-heading" aria-busy={query !== debounced}>

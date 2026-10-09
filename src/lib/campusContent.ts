@@ -5,8 +5,10 @@ export function normalizeSearch(value: string) {
 }
 
 function matches(query: string, fields: (string | null | undefined)[]) {
-  const text = normalizeSearch(fields.filter(Boolean).join(' '))
-  return normalizeSearch(query).split(/\s+/).filter(Boolean).every((term) => text.includes(term))
+  const terms = queryTerms(query)
+  if (normalizeSearch(query) && !terms.length) return false
+  const text = fields.map((field) => canonicalSearch(field ?? ''))
+  return terms.every((term) => text.some((field) => field.includes(term)))
 }
 
 const searchAliases: [string, string[]][] = [
@@ -42,6 +44,8 @@ replacements.set('补学生卡', '校园卡 补办')
 replacements.set('补饭卡', '校园卡 补办')
 replacements.set('交网费', '网络 缴费')
 replacements.set('交学费', '学费 缴费')
+replacements.set('不见了', '丢了')
+replacements.set('遗失了', '丢了')
 const aliasPattern = new RegExp([...replacements.keys()].sort((a, b) => b.length - a.length).join('|'), 'g')
 const concepts = [...new Set([
   ...searchAliases.map(([canonical]) => canonical),
@@ -63,7 +67,7 @@ function queryTerms(query: string) {
     .replace(/[，。！？、；"'‘’“”?,!;]/g, ' ')
     .trim()
     .replace(/(怎么办|怎么操作|怎么用|怎么做|如何办理|在哪里|哪里办理|一下|吗|呢|啊)+$/, '')
-    .replace(/如何|怎样|怎么|在哪里|去哪里/g, ' ')
+    .replace(/到哪里|去哪里|在哪里|如何|怎样|怎么/g, ' ')
     .trim()
     .replace(/^(请帮我|我想要|我需要|我想|我要|我的|请问|帮我|想要|请|查一下|查看|查询|我|查|找|在)+/, '')
     .replace(/的/g, ' ')
@@ -150,6 +154,48 @@ export function filterAccounts(accounts: CampusAccount[], query: string, categor
   ]))
 }
 
-export function filterWebsites(websites: CampusWebsite[], query: string, category = '') {
-  return websites.filter((site) => (!category || site.category === category) && matches(query, [site.name, site.category, site.summary, site.url, site.scope]))
+export function filterWebsites(websites: CampusWebsite[], query: string, category = '', guides: Guide[] = []) {
+  const relatedGuideIds = new Set(filterGuides(guides, query).slice(0, 3).map((guide) => guide.id))
+  return websites.filter((site) => (!category || site.category === category) &&
+    (matches(query, [site.name, site.category, site.summary, site.url, site.scope]) || site.guideIds.some((id) => relatedGuideIds.has(id))))
+}
+
+
+// Suggestions remain separate from exact results: unknown words are never dropped there.
+export function suggestGuides(guides: Guide[], query: string, category = '') {
+  const generic = new Set(['申请', '登录', '下载', '打印', '取消', '时间', '咨询'])
+  const terms = queryTerms(query).filter((term) => concepts.includes(term) && !generic.has(term))
+  if (!terms.length) return []
+  return guides.filter((guide) => !category || guide.category === category)
+    .map((guide, index) => {
+      const title = canonicalSearch(guide.title)
+      const keywords = canonicalSearch(guide.keywords.join(' '))
+      const score = terms.reduce((total, term) => total + (title.includes(term) ? 8 : 0) + (keywords.includes(term) ? 3 : 0), 0)
+      return { guide, score, index }
+    }).filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score || a.index - b.index)
+    .slice(0, 3).map((item) => item.guide)
+}
+
+export function findRelatedSources(websites: CampusWebsite[], accounts: CampusAccount[], query: string, matchedGuides: Guide[], category = '') {
+  if (!normalizeSearch(query) || !queryTerms(query).length) return { websites: [], accounts: [] }
+  const leading = matchedGuides.slice(0, 3)
+  const guideIds = new Set(leading.map((guide) => guide.id))
+  const accountIds = new Set(leading.flatMap((guide) => guide.relatedSourceIds))
+  const directSites = new Set(filterWebsites(websites, query, category).map((site) => site.id))
+  const directAccounts = new Set(filterAccounts(accounts, query).map((account) => account.id))
+  return {
+    websites: websites.filter((site) => (!category || site.category === category) &&
+      (directSites.has(site.id) || site.guideIds.some((id) => guideIds.has(id))))
+      .sort((a, b) => Number(directSites.has(b.id)) - Number(directSites.has(a.id))),
+    accounts: accounts.filter((account) => directAccounts.has(account.id) || accountIds.has(account.id))
+      .sort((a, b) => Number(directAccounts.has(b.id)) - Number(directAccounts.has(a.id))),
+  }
+}
+
+export function sourceSearchUrl(query: string, kind: 'websites' | 'accounts') {
+  const params = new URLSearchParams()
+  if (kind === 'websites') params.set('kind', 'websites')
+  if (query) params.set('q', query)
+  return `/sources${params.size ? `?${params.toString()}` : ''}`
 }

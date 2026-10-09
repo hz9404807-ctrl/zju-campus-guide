@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { readFileSync, existsSync } from 'node:fs'
-import { filterGuides, filterAccounts, filterWebsites } from '../src/lib/campusContent.ts'
+import { filterGuides, filterAccounts, filterWebsites, findRelatedSources, sourceSearchUrl, suggestGuides } from '../src/lib/campusContent.ts'
 const read = (name) => JSON.parse(readFileSync(new URL(`../src/data/${name}.json`, import.meta.url), 'utf8'))
 const guides = read('guides'), accounts = read('accounts'), websites = read('websites')
 
@@ -150,4 +150,30 @@ test('网站导航包含新办理入口和完整摘要，学校与校外链接�
   for (const site of websites) assert.doesNotMatch(site.summary, /…|原表|资料提供/, site.id)
   assert.ok(websites.some((site) => site.url === 'https://pay.zju.edu.cn/'))
   assert.ok(websites.some((site) => site.url === 'https://mail.zju.edu.cn/'))
+})
+
+
+test('丢卡和问地点的自然表述仍能找到补卡指南', () => {
+  for (const query of ['饭卡不见了', '到哪里补卡', '一卡通遗失了怎么办'])
+    assert.equal(filterGuides(guides, query)[0]?.id, 'campus-card-replacement', query)
+  assert.equal(filterWebsites(websites, '饭卡不见了', '', guides)[0]?.id, 'website-0fc11a295f')
+})
+
+test('相关信息源去重，未知问题不展示无关的全量目录', () => {
+  const related = findRelatedSources(websites, accounts, '饭卡不见了', filterGuides(guides, '饭卡不见了'))
+  assert.ok(related.websites.some((site) => site.url.includes('itc.zju.edu.cn')))
+  assert.equal(new Set(related.websites.map((site) => site.id)).size, related.websites.length)
+  for (const query of ['', '你好', '？', '不存在的事务987'])
+    assert.deepEqual(findRelatedSources(websites, accounts, query, []), { websites: [], accounts: [] })
+})
+
+test('近似建议与准确结果分开，并保持类别限制', () => {
+  assert.equal(filterGuides(guides, '校园卡 飞船999').length, 0)
+  assert.ok(suggestGuides(guides, '校园卡 飞船999').length > 0)
+  assert.equal(suggestGuides(guides, '你好').length, 0)
+  assert.equal(suggestGuides(guides, '校园卡 飞船999', '交流与发展').length, 0)
+  const url = new URL(sourceSearchUrl('饭卡不见了 & ?你好', 'websites'), 'https://example.com')
+  assert.equal(url.searchParams.get('q'), '饭卡不见了 & ?你好')
+  assert.equal(url.searchParams.get('kind'), 'websites')
+  assert.equal(new URL(sourceSearchUrl('你好', 'accounts'), 'https://example.com').searchParams.get('q'), '你好')
 })

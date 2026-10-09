@@ -1,12 +1,13 @@
 import { Link, useParams, useSearchParams } from 'react-router'
-import { ArrowLeft, ArrowRight, ClipboardList, Search } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ClipboardList, ExternalLink, Search } from 'lucide-react'
 import SearchField from '../components/SearchField'
 import ResultPager from '../components/ResultPager'
 import GuideServiceWindows from '../components/GuideServiceWindows'
 import { useDebouncedValue } from '../hooks/useDebouncedValue'
-import { filterGuides } from '../lib/campusContent'
+import { filterGuides, findRelatedSources, sourceSearchUrl, suggestGuides } from '../lib/campusContent'
 import guideData from '../data/guides.json'
 import accountData from '../data/accounts.json'
+import websiteData from '../data/websites.json'
 import serviceWindowData from '../data/service-windows.json'
 import type { Guide, ServiceWindow } from '../types/guide'
 import './guides.css'
@@ -25,6 +26,8 @@ export function GuidePage() {
   const results = filterGuides(guides, debouncedQuery, category, serviceWindows)
   const page = Math.min(Math.max(1, Number(params.get('page')) || 1), Math.max(1, Math.ceil(results.length / pageSize)))
   const updating = query !== debouncedQuery
+  const sources = findRelatedSources(websiteData, accountData, debouncedQuery, results, category)
+  const suggestions = !results.length ? suggestGuides(guides, debouncedQuery, category) : []
   function update(key: string, value: string) {
     const next = new URLSearchParams(params)
     if (value) next.set(key, value)
@@ -41,21 +44,26 @@ export function GuidePage() {
       <p className="page-description">校园卡、选课、预约、报修和校园服务，从你遇到的问题开始查找。</p>
     </div>
     <section className="guide-search-panel" role="search" aria-label="查找校园办事指南">
-      <SearchField id="guide-search" label="你想办什么事？" placeholder="例如：校园卡丢了、图书馆预约、寝室报修" value={query} onChange={(value) => update('q', value)} hint="可以直接输入问题，如“寝室灯坏了”；支持近义词、地点、时间和电话，匹配标题的结果优先。" />
+      <SearchField id="guide-search" label="你想办什么事？" placeholder="例如：校园卡丢了、图书馆预约、寝室报修" value={query} onChange={(value) => update('q', value)} hint="可以直接输入问题，如“寝室灯坏了”；支持近义词、地点、时间和电话，匹配标题的指南优先，并展示相关网站和公众号。" />
       <div className="content-filter-row"><label htmlFor="guide-category">按类别查找</label><select id="guide-category" value={category} onChange={(event) => update('category', event.target.value)}><option value="">全部类别（{guides.length}）</option>{categories.map((item) => <option key={item} value={item}>{item}（{guides.filter((guide) => guide.category === item).length}）</option>)}</select></div>
       <div className="guide-quick-search"><span>常见需求</span>{quickKeywords.map((keyword) => <button key={keyword} type="button" className="guide-keyword-button" onClick={() => update('q', keyword)}>{keyword}</button>)}</div>
     </section>
     <section aria-labelledby="guide-results-heading" aria-busy={updating}>
       <div className="guide-results-heading"><h2 id="guide-results-heading">{query || category ? '查找结果' : '办事问题'}</h2><p role="status" aria-live="polite">{updating ? '正在更新结果…' : `找到 ${results.length} 条指南`}</p></div>
       {results.length ? <>
-        <ul className="guide-result-grid" role="list">{results.slice((page - 1) * pageSize, page * pageSize).map((guide) => <li key={guide.id}><Link to={`/guides/${guide.id}${detailSearch}`} className="guide-result-card">
+        <ul className="guide-result-grid" role="list">{results.slice((page - 1) * pageSize, page * pageSize).map((guide) => <li key={guide.id}><article className="guide-result-card">
           <div className="guide-card-labels"><span className="guide-category">{guide.category}</span></div>
-          <h3>{guide.title}</h3><p className="guide-card-summary">{guide.summary}</p>
-          <div className="guide-card-footer"><span className="guide-card-action">查看办理方法 <ArrowRight size={17} aria-hidden="true" /></span></div>
-        </Link></li>)}</ul>
+          <h3><Link to={`/guides/${guide.id}${detailSearch}`} className="guide-card-title">{guide.title}</Link></h3><p className="guide-card-summary">{guide.summary}</p>
+          <div className="guide-card-footer"><Link to={`/guides/${guide.id}${detailSearch}`} className="guide-card-action">查看办理方法 <ArrowRight size={17} aria-hidden="true" /></Link>{guide.category === '校园卡' && guide.references[0] && <a href={guide.references[0].url} target="_blank" rel="noopener noreferrer" className="guide-card-reference">官方说明 <ExternalLink size={14} aria-hidden="true" /></a>}</div>
+        </article></li>)}</ul>
         <ResultPager page={page} total={results.length} pageSize={pageSize} onChange={(value) => update('page', String(value))} />
-      </> : <div className="guide-empty-state"><Search size={27} aria-hidden="true" /><h3>没有找到相关指南</h3><p>可以缩短关键词或切换到全部类别，也可以到信息源导航查找相关公众号。</p><button type="button" className="button-link" onClick={() => setParams({}, { replace: true })}>清除筛选，查看全部</button><Link to="/sources" className="guide-bottom-back">去信息源导航 <ArrowRight size={16} aria-hidden="true" /></Link></div>}
+      </> : <div className="guide-empty-state"><Search size={27} aria-hidden="true" /><h3>没有找到相关指南</h3><p>可以换一种说法，或带着当前问题继续查找网站和公众号。</p>{category && <button type="button" className="button-link" onClick={() => update('category', '')}>仅取消类别筛选</button>}{suggestions.length > 0 && <div className="guide-suggestions"><p>可能相关的事项（并非准确匹配）：</p>{suggestions.map((guide) => <Link key={guide.id} to={`/guides/${guide.id}${detailSearch}`}>{guide.title}<ArrowRight size={15} aria-hidden="true" /></Link>)}</div>}<div className="guide-entry-links"><Link to={sourceSearchUrl(query, 'websites')}>继续查网站 <ArrowRight size={16} aria-hidden="true" /></Link><Link to={sourceSearchUrl(query, 'accounts')}>继续查公众号 <ArrowRight size={16} aria-hidden="true" /></Link></div><button type="button" className="guide-reset-button" onClick={() => setParams({}, { replace: true })}>清除筛选，查看全部指南</button></div>}
     </section>
+    {debouncedQuery.trim() && (sources.websites.length > 0 || sources.accounts.length > 0) && <section className="guide-search-sources" aria-label="相关网站与公众号" aria-busy={updating}>
+      <h2>相关网站与公众号</h2><p className="guide-source-hint">与问题匹配的信息源，以及前几条指南关联的入口。</p>
+      {sources.websites.length > 0 && <div className="guide-source-group"><h3>网站入口</h3><ul>{sources.websites.slice(0, 3).map((site) => <li key={site.id}><a href={site.url} target="_blank" rel="noopener noreferrer">{site.name}<ExternalLink size={15} aria-hidden="true" /></a><span>{site.scope}</span></li>)}</ul><Link to={sourceSearchUrl(query, 'websites')} className="guide-bottom-back">继续查网站 <ArrowRight size={16} aria-hidden="true" /></Link></div>}
+      {sources.accounts.length > 0 && <div className="guide-source-group"><h3>微信公众号</h3><ul>{sources.accounts.slice(0, 3).map((account) => <li key={account.id}><Link to={`/sources/${account.id}?q=${encodeURIComponent(query)}`}>{account.name}<ArrowRight size={15} aria-hidden="true" /></Link><span>{account.topic}</span></li>)}</ul><Link to={sourceSearchUrl(query, 'accounts')} className="guide-bottom-back">继续查公众号 <ArrowRight size={16} aria-hidden="true" /></Link></div>}
+    </section>}
   </div>
 }
 
