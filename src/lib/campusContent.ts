@@ -1,4 +1,4 @@
-import type { Guide } from '../types/guide'
+import type { Guide, ServiceWindow } from '../types/guide'
 
 export function normalizeSearch(value: string) {
   return value.normalize('NFKC').toLocaleLowerCase().trim()
@@ -9,10 +9,11 @@ function matches(query: string, fields: (string | null | undefined)[]) {
   return normalizeSearch(query).split(/\s+/).filter(Boolean).every((term) => text.includes(term))
 }
 
-export function filterGuides(guides: Guide[], query: string, category = '') {
+export function filterGuides(guides: Guide[], query: string, category = '', windows: ServiceWindow[] = []) {
   return guides.filter((guide) => (!category || guide.category === category) && matches(query, [
     guide.title, guide.category, guide.summary, ...guide.keywords, ...guide.steps,
-    ...guide.materials, guide.location, guide.contact, ...guide.sourceQuestions,
+    ...guide.materials, ...guide.notes, ...(guide.troubleshooting ?? []), guide.completionNote, guide.location, guide.openingHours, guide.contact, ...guide.sourceQuestions,
+    ...windows.filter((window) => guide.serviceWindowIds?.includes(window.id)).flatMap((window) => [window.campus, window.name, window.location, window.openingHours, window.notice, ...window.contacts.map((contact) => contact.number)]),
     ...guide.references.map((reference) => reference.label),
   ]))
 }

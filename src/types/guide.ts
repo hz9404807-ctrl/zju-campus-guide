@@ -25,5 +25,20 @@ export interface Guide {
   kind: string
   notes: string[]
   relatedSourceIds: string[]
+  serviceWindowIds?: string[]
+  troubleshooting?: string[]
+  completionNote?: string
+  relatedGuideIds?: string[]
   aliases?: string[]
+}
+
+export interface ServiceWindow {
+  id: string
+  campus: string
+  name: string
+  location: string
+  openingHours: string
+  contacts: { label: string; number: string }[]
+  hoursStatus: 'published' | 'needs_confirmation'
+  notice: string | null
 }

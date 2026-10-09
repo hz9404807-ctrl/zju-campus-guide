@@ -2,6 +2,10 @@
 
 This is the ZJU campus guide course prototype. Follow the final rules in `docs/project-requirements-v0.3.md` and the user's later instructions. The user explicitly requested populating the third module from their supplied public-account collection on 2026-10-08. Maintain the populated account/site directory and sourced guide dataset; distinguish collected material from officially checked details, and retain source rows, screenshot mappings and collection notes.
 
+## Current local content work
+
+The user approved integrating the seven reviewed campus-card guides on 2026-10-09. Work in the local repository with Git commits and browser checks. Do not push to the classmate repository or publish the hosted site during this phase; later explicit user instructions take precedence over the historical synchronization rules below.
+
 ## GitHub collaboration
 
 The user requested a public GitHub repository on 2026-10-08 and authorized keeping subsequent development in this project synchronized there.

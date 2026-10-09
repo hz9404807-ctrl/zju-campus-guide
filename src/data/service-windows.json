@@ -1,0 +1,111 @@
+[
+  {
+    "id": "card-zjg-nano",
+    "campus": "紫金港",
+    "name": "纳米楼校园卡窗口",
+    "location": "纳米楼行政服务办事大厅115室20号窗口",
+    "openingHours": "周一至周五 8:30–12:00、13:30–17:30",
+    "contacts": [
+      {
+        "label": "窗口电话",
+        "number": "0571-88981606"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": null
+  },
+  {
+    "id": "card-zjg-canteen",
+    "campus": "紫金港",
+    "name": "东区大食堂校园卡服务部",
+    "location": "东区大食堂校园卡服务部大厅（一楼休闲餐厅南门左侧）",
+    "openingHours": "周一至周五 8:00–13:00、15:00–18:00",
+    "contacts": [
+      {
+        "label": "窗口电话",
+        "number": "0571-88206557"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": null
+  },
+  {
+    "id": "card-yuquan",
+    "campus": "玉泉",
+    "name": "玉泉校园卡服务部",
+    "location": "清真食堂对面校园卡服务部（后勤网称民族餐厅北面）",
+    "openingHours": "周一至周五 8:00–13:00、15:00–18:00",
+    "contacts": [
+      {
+        "label": "窗口电话",
+        "number": "0571-87951505"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": null
+  },
+  {
+    "id": "card-xixi",
+    "campus": "西溪",
+    "name": "西溪校园卡服务部",
+    "location": "官网分别列出南苑食堂一楼南门旁、田家炳书院一层；前往前确认现行地点。",
+    "openingHours": "周一至周五 8:00–13:00、15:00–18:00",
+    "contacts": [
+      {
+        "label": "窗口电话",
+        "number": "0571-88273662"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": "出发前拨打窗口电话，问“现在校园卡挂失、补卡窗口在哪里”，确认后再出发。"
+  },
+  {
+    "id": "card-huajiachi",
+    "campus": "华家池",
+    "name": "华家池校园卡服务部",
+    "location": "第二食堂（原第五食堂）校园卡服务部",
+    "openingHours": "周一至周五 8:00–13:00、15:00–18:00",
+    "contacts": [
+      {
+        "label": "窗口电话",
+        "number": "0571-86971023"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": null
+  },
+  {
+    "id": "card-haining",
+    "campus": "海宁",
+    "name": "校园服务站",
+    "location": "学生中心一楼东侧校园服务站",
+    "openingHours": "周一至周五 8:00–17:30；周末及节假日 8:30–17:00",
+    "contacts": [
+      {
+        "label": "服务站电话",
+        "number": "0573-87572114"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": "以上为服务站开放时间；特殊业务能否当场办理可提前询问。电话24小时可咨询不代表窗口24小时开放。"
+  },
+  {
+    "id": "card-zhoushan",
+    "campus": "舟山",
+    "name": "舟山校园卡服务部",
+    "location": "舟山食堂二楼校园卡服务部",
+    "openingHours": "现行时段待确认。旧服务网列为周一至周五 11:00–12:30，仅供询问时参考；出发前电话确认。",
+    "contacts": [
+      {
+        "label": "后勤网电话",
+        "number": "18879674891"
+      },
+      {
+        "label": "信息技术中心电话",
+        "number": "17799894646"
+      }
+    ],
+    "hoursStatus": "needs_confirmation",
+    "notice": "两处官网公布的电话不同，尚未电话核对。不要把旧时段当成已经确认的现行安排。"
+  }
+]

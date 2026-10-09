@@ -54,3 +54,29 @@ test('官网纠正的毕业班例外、补入的校历和旧详情链接均保�
   assert.ok(guides.some((guide) => guide.id === 'venue-reservation'))
   assert.ok(guides.some((guide) => guide.id === 'campus-hospital-registration'))
 })
+test('服务窗口电话与异常处理可被搜索，窗口关联不会落到其他类别', () => {
+  const windows = read('service-windows')
+  const campusCards = guides.filter((guide) => guide.category === '校园卡')
+  assert.equal(campusCards.length, 7)
+  assert.deepEqual(filterGuides(guides, '87572114', '', windows).map((guide) => guide.id).sort(), campusCards.map((guide) => guide.id).sort())
+  assert.ok(filterGuides(guides, '热水 校正', '校园卡', windows).some((guide) => guide.id === 'campus-card-replacement'))
+  assert.equal(filterGuides(guides, '87572114', '交流与发展', windows).length, 0)
+  for (const guide of campusCards) {
+    assert.ok(guide.serviceWindowIds.every((id) => windows.some((window) => window.id === id)))
+    assert.ok((guide.relatedGuideIds ?? []).every((id) => guides.some((target) => target.id === id)))
+  }
+})
+
+test('待确认窗口时间保留边界，充值方式不会被误列成顺序步骤', () => {
+  const windows = read('service-windows')
+  const zhoushan = windows.find((window) => window.campus === '舟山')
+  assert.equal(zhoushan.hoursStatus, 'needs_confirmation')
+  assert.match(zhoushan.openingHours, /旧.*参考/)
+  const recharge = guides.find((guide) => guide.id === 'campus-047')
+  assert.equal(recharge.kind, 'options')
+  assert.ok(recharge.completionNote)
+  for (const guide of guides.filter((guide) => guide.category === '校园卡')) {
+    assert.doesNotMatch([guide.summary, ...guide.steps, ...guide.troubleshooting].join(' '), /本稿|第[56]项|中国银行移动端APP可以设置/)
+    assert.equal(guide.references.length, 1)
+  }
+})
