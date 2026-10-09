@@ -199,3 +199,8 @@ export function sourceSearchUrl(query: string, kind: 'websites' | 'accounts') {
   if (query) params.set('q', query)
   return `/sources${params.size ? `?${params.toString()}` : ''}`
 }
+
+
+export function guideIdForWebsite(site: CampusWebsite, matchingGuides: Guide[]) {
+  return matchingGuides.find((guide) => site.guideIds.includes(guide.id))?.id ?? site.guideIds[0]
+}
