@@ -1,6 +1,5 @@
 export type GuideStepAction = { stepIndex: number } & (
-  | { kind: 'reference'; label: string; url: string }
-  | { kind: 'app'; label: string; path: string }
+  | { kind: 'reference' | 'service'; label: string; url: string }
   | { kind: 'windows'; label: string }
 )
 

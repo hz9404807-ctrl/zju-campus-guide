@@ -1,4 +1,4 @@
-import type { Guide, ServiceWindow } from '../types/guide'
+import type { Guide, GuideStepAction, ServiceWindow } from '../types/guide'
 
 export function normalizeSearch(value: string) {
   return value.normalize('NFKC').toLocaleLowerCase().trim()
@@ -211,4 +211,10 @@ export function websiteSearchDetails(site: CampusWebsite, matchingGuides: Guide[
   const guide = matchingGuides.find((item) => item.id === guideId)
   const reference = guide?.references.find((item) => item.url.replace(/\/$/, '') === site.url.replace(/\/$/, ''))
   return { guideId, name: reference?.label ?? site.name, summary: guide?.summary ?? site.summary }
+}
+
+// Cards use the same reviewed destination as the steps, so labels and URLs stay aligned.
+export function primaryGuideAction(guide: Guide) {
+  const actions = (guide.stepActions ?? []).filter((action): action is Extract<GuideStepAction, { url: string }> => 'url' in action)
+  return actions.find((action) => action.kind === 'service') ?? actions[0]
 }

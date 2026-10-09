@@ -159,7 +159,7 @@
 .guide-card-title { color: inherit; }
 .guide-card-title:hover { color: var(--blue); text-decoration: underline; text-underline-offset: 4px; }
 .guide-card-action, .guide-card-reference { min-height: 44px; }
-.guide-card-reference { display: inline-flex; align-items: center; gap: 6px; color: var(--blue); font-size: 13px; }
+.guide-card-reference { max-width: 100%; overflow-wrap: anywhere; display: inline-flex; align-items: center; gap: 6px; color: var(--blue); font-size: 13px; }
 .guide-reset-button { min-height: 44px; margin-top: 14px; padding: 8px 12px; color: var(--blue); background: transparent; border: 1px solid var(--line); border-radius: 8px; }
 .guide-suggestions { margin-top: 14px; text-align: left; max-width: 100%; }
 .guide-suggestions a { display: flex; align-items: center; gap: 8px; min-height: 44px; color: var(--blue); font-size: 14px; overflow-wrap: anywhere; }
@@ -180,11 +180,8 @@
 .guide-step-actions { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
 .guide-action-button { display: inline-flex; align-items: center; justify-content: flex-start; gap: 7px; min-height: 44px; max-width: 100%; padding: 9px 12px; color: var(--blue); background: var(--blue-soft); border: 1px solid #c5d7ed; border-radius: 8px; font: inherit; font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; text-align: left; }
 .guide-action-button svg { flex-shrink: 0; }
-.guide-app-route { width: 100%; padding: 12px; border-radius: 8px; background: #f7f9fc; }
-.guide-app-route > p { color: var(--ink); font-size: 13px; line-height: 1.8; overflow-wrap: anywhere; }
 .guide-copy-control { min-width: 0; }
 .guide-copy-control > p { color: var(--muted); font-size: 12px; line-height: 1.8; margin-top: 7px; overflow-wrap: anywhere; }
-.guide-app-route .guide-copy-control { margin-top: 8px; }
 .guide-window-actions { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 9px; margin-top: 12px; }
 .guide-map-hint, .guide-preference-note { color: var(--muted); font-size: 12px !important; line-height: 1.8; margin-top: 10px; }
 .guide-window-unavailable { padding: 14px; border: 1px solid var(--line); border-radius: 10px; }
@@ -196,3 +193,5 @@
 .guide-result-card { position: relative; }
 .guide-card-title::after { content: ''; position: absolute; inset: 0; border-radius: 16px; }
 .guide-card-footer a { position: relative; z-index: 1; }
+
+.guide-card-reference svg { flex-shrink: 0; }

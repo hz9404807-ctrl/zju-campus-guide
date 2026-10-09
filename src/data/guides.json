@@ -70,20 +70,14 @@
     "stepActions": [
       {
         "stepIndex": 0,
-        "kind": "app",
-        "label": "复制App操作路径",
-        "path": "浙大校园卡App → 应用 → 挂失·解挂 → 挂失"
+        "kind": "reference",
+        "label": "查看校园卡服务说明",
+        "url": "https://itc.zju.edu.cn/xykwgr/list.htm"
       },
       {
         "stepIndex": 2,
         "kind": "windows",
         "label": "查看办理窗口与时间"
-      },
-      {
-        "stepIndex": 0,
-        "kind": "reference",
-        "label": "查看官方说明",
-        "url": "https://itc.zju.edu.cn/xykwgr/list.htm"
       }
     ]
   },
@@ -143,14 +137,8 @@
     "stepActions": [
       {
         "stepIndex": 0,
-        "kind": "app",
-        "label": "复制App操作路径",
-        "path": "浙大钉 → 工作台 → 电子校园卡"
-      },
-      {
-        "stepIndex": 0,
         "kind": "reference",
-        "label": "查看官方说明",
+        "label": "查看电子校园卡说明",
         "url": "https://itc.zju.edu.cn/xykwgr/list.htm"
       }
     ]
@@ -213,15 +201,15 @@
     ],
     "stepActions": [
       {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看自动转账办理说明",
+        "url": "https://zulg.zju.edu.cn/info/1203/8336.htm"
+      },
+      {
         "stepIndex": 1,
         "kind": "windows",
         "label": "查看办理窗口与时间"
-      },
-      {
-        "stepIndex": 0,
-        "kind": "reference",
-        "label": "查看官方说明",
-        "url": "https://zulg.zju.edu.cn/info/1203/8336.htm"
       }
     ]
   },
@@ -268,6 +256,14 @@
     "completionNote": "以本次订单显示“已结束”和实际扣费为完成依据。",
     "troubleshooting": [
       "不同品牌和活动的优惠范围可能不同；没有查到当前校园专属规则时，按App普通计费标准预算。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查询学校办事百事通",
+        "url": "https://s2.zju.edu.cn/mobile/index.do"
+      }
     ]
   },
   {
@@ -328,6 +324,14 @@
     "completionNote": "审批通过且开门安排已确认后，再通知参加者到场。",
     "troubleshooting": [
       "系统没有个人申请权限时，请学院教学科或活动指导单位协助，不要借用他人账号。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开教室资源管理平台",
+        "url": "https://jxzygl.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -387,6 +391,14 @@
       "campus-005",
       "campus-009",
       "campus-011"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开启真在线场地预约",
+        "url": "https://qzonline.zju.edu.cn/hom/uni#/home"
+      }
     ]
   },
   {
@@ -439,6 +451,14 @@
     "relatedGuideIds": [
       "venue-reservation",
       "campus-104"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开团在浙大",
+        "url": "https://tzzd.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -501,6 +521,20 @@
     "relatedGuideIds": [
       "campus-012",
       "campus-082"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看图书馆预约服务",
+        "url": "https://libweb.zju.edu.cn/libweb/"
+      },
+      {
+        "stepIndex": 1,
+        "kind": "service",
+        "label": "打开研讨空间预约",
+        "url": "https://booking.lib.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -568,6 +602,20 @@
     ],
     "relatedGuideIds": [
       "campus-043"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看公寓线上服务说明",
+        "url": "https://www.zju.edu.cn/2019/0603/c32896a1510151/pagem.htm"
+      },
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看后勤报修说明",
+        "url": "https://zulg.zju.edu.cn/info/1203/8341.htm"
+      }
     ]
   },
   {
@@ -626,6 +674,14 @@
     "troubleshooting": [
       "不要以提交申请或单独扣款作为预约成功依据；未确认时先查记录。",
       "失约和取消规则因场馆而异，具体限制看所选场地的预约须知。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开体育场馆预约",
+        "url": "https://www.tyys.zju.edu.cn/cgyy/index"
+      }
     ]
   },
   {
@@ -687,6 +743,20 @@
     "relatedGuideIds": [
       "campus-015",
       "campus-082"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开WebVPN",
+        "url": "https://webvpn.zju.edu.cn/"
+      },
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看校外接入指南",
+        "url": "https://itc.zju.edu.cn/2021/0615/c49798a2395843/page.htm"
+      }
     ]
   },
   {
@@ -738,6 +808,14 @@
     "completionNote": "软件启动正常且许可状态有效。",
     "troubleshooting": [
       "安装或激活失败时，保留产品名、版本、系统和错误提示，到对应产品常见问题查找处理方法；可拨0571-87951669咨询。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看正版软件目录",
+        "url": "https://itc.zju.edu.cn/zbhrj/list.htm"
+      }
     ]
   },
   {
@@ -795,6 +873,14 @@
     ],
     "relatedGuideIds": [
       "campus-053"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开学校收费平台",
+        "url": "https://pay.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -855,6 +941,19 @@
       "network-yuquan",
       "network-huajiachi",
       "network-xixi"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 1,
+        "kind": "reference",
+        "label": "查看网络服务办理指南",
+        "url": "https://itc.zju.edu.cn/_s146/_t3343/90690/list.psp"
+      },
+      {
+        "stepIndex": 3,
+        "kind": "windows",
+        "label": "查看办理窗口与时间"
+      }
     ]
   },
   {
@@ -903,6 +1002,14 @@
     "completionNote": "找到学院官网中的目标通知或承办老师，而不是只有搜索到学院简称。",
     "troubleshooting": [
       "搜索结果混入非官方网站时，从学校官网的院系入口重新进入。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "打开学校官网查院系",
+        "url": "https://www.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -961,6 +1068,20 @@
     ],
     "relatedGuideIds": [
       "campus-016"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查询学校办事百事通",
+        "url": "https://s2.zju.edu.cn/mobile/index.do"
+      },
+      {
+        "stepIndex": 1,
+        "kind": "service",
+        "label": "打开本科教学平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -1023,6 +1144,14 @@
       "campus-020",
       "campus-022",
       "campus-042"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开本科教学平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -1075,6 +1204,14 @@
     ],
     "relatedGuideIds": [
       "campus-019"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看选课常见问题",
+        "url": "https://s2.zju.edu.cn/search/faq.do?words=%E9%80%89%E8%AF%BE"
+      }
     ]
   },
   {
@@ -1132,6 +1269,14 @@
     "completionNote": "正式选上教学班，后续体育要求在本人培养方案中得到满足。",
     "troubleshooting": [
       "受伤或身体状况不适合普通项目时，先向学院及公共体育与艺术部询问适用课程和申请材料，再选课。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 1,
+        "kind": "service",
+        "label": "打开本科教学平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -1190,6 +1335,14 @@
     "relatedGuideIds": [
       "campus-019",
       "campus-042"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开本科教学平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -1247,6 +1400,20 @@
     "relatedGuideIds": [
       "campus-058",
       "campus-098"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开本科教学平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      },
+      {
+        "stepIndex": 1,
+        "kind": "reference",
+        "label": "查看档案馆查档服务",
+        "url": "https://acv.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -1300,6 +1467,20 @@
     "completionNote": "拟认定学分已在本人适用培养方案中记录。",
     "troubleshooting": [
       "尚未重新入学或认定资格不明确时，先请学院核对学籍条件；不要据旧课程记录推断一定可以重新入学。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 1,
+        "kind": "reference",
+        "label": "查看学籍管理办法",
+        "url": "https://ugrs.zju.edu.cn/xjglbf/list.htm"
+      },
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开本科教学平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -1360,6 +1541,20 @@
     ],
     "relatedGuideIds": [
       "campus-031"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 1,
+        "kind": "reference",
+        "label": "查看成绩与学分管理办法",
+        "url": "https://meetc.zju.edu.cn/2024/0306/c79045a2885825/page.htm"
+      },
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看对外交流通知",
+        "url": "https://ugrs.zju.edu.cn/dwjlfwpt/"
+      }
     ]
   },
   {
@@ -1418,6 +1613,14 @@
     "relatedGuideIds": [
       "campus-068",
       "campus-103"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开素质拓展学分平台",
+        "url": "https://sztz.zju.edu.cn/dekt/#/index/main"
+      }
     ]
   },
   {
@@ -1471,6 +1674,20 @@
     "completionNote": "对应阶段的教学管理记录已完成认定。",
     "troubleshooting": [
       "本科修读研究生课程不代表研究生阶段一定免修；两阶段分别确认。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看本科生院通知",
+        "url": "https://ugrs.zju.edu.cn/"
+      },
+      {
+        "stepIndex": 1,
+        "kind": "service",
+        "label": "打开本科教学平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -1527,6 +1744,14 @@
       "campus-029",
       "campus-066",
       "campus-026"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看科研训练项目通知",
+        "url": "http://kyjs.zju.edu.cn/preview"
+      }
     ]
   },
   {
@@ -1578,6 +1803,14 @@
     ],
     "relatedGuideIds": [
       "campus-028"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看科研训练项目通知",
+        "url": "http://kyjs.zju.edu.cn/preview"
+      }
     ]
   },
   {
@@ -1635,6 +1868,14 @@
     ],
     "relatedGuideIds": [
       "campus-019"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开本科教学平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -1691,6 +1932,14 @@
     "relatedGuideIds": [
       "campus-025",
       "campus-097"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看对外交流项目通知",
+        "url": "https://ugrs.zju.edu.cn/dwjlfwpt/"
+      }
     ]
   },
   {
@@ -1746,6 +1995,20 @@
     ],
     "relatedGuideIds": [
       "campus-033"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看本科生院通知",
+        "url": "https://ugrs.zju.edu.cn/"
+      },
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看学籍管理办法",
+        "url": "https://ugrs.zju.edu.cn/xjglbf/list.htm"
+      }
     ]
   },
   {
@@ -1805,6 +2068,14 @@
       "campus-032",
       "campus-016",
       "campus-024"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看本科生院通知",
+        "url": "https://ugrs.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -1858,6 +2129,14 @@
     "completionNote": "取得核查结论；确认有误时，平台中的成绩已完成更正。",
     "troubleshooting": [
       "单纯对分数不满意和记录错误不同；先写清哪项记录或计算需要核查。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看课程成绩管理办法",
+        "url": "https://meetc.zju.edu.cn/2024/0306/c79045a2885825/page.htm"
+      }
     ]
   },
   {
@@ -1911,6 +2190,20 @@
     "completionNote": "平台显示课程已通过，并计入本人培养方案。",
     "troubleshooting": [
       "“弃修”“零分”“无效”等状态不能直接套用普通补考资格；联系学院按成绩办法核对。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开本科教学平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      },
+      {
+        "stepIndex": 1,
+        "kind": "reference",
+        "label": "查看课程成绩管理办法",
+        "url": "https://meetc.zju.edu.cn/2024/0306/c79045a2885825/page.htm"
+      }
     ]
   },
   {
@@ -1964,6 +2257,14 @@
     ],
     "relatedGuideIds": [
       "campus-022"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开本科教学平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -2020,6 +2321,14 @@
     "relatedGuideIds": [
       "campus-042",
       "campus-027"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开本科教学平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -2075,6 +2384,14 @@
     ],
     "relatedGuideIds": [
       "campus-012"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开CC98论坛",
+        "url": "https://www.cc98.org/"
+      }
     ]
   },
   {
@@ -2131,6 +2448,14 @@
     "relatedGuideIds": [
       "campus-063",
       "campus-012"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 1,
+        "kind": "reference",
+        "label": "打开学校办事中心",
+        "url": "https://service.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -2191,6 +2516,20 @@
     ],
     "relatedGuideIds": [
       "campus-015"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开网络用户自助中心",
+        "url": "https://myvpn.zju.edu.cn/"
+      },
+      {
+        "stepIndex": 1,
+        "kind": "reference",
+        "label": "查看网络缴费与恢复说明",
+        "url": "https://itc.zju.edu.cn/_s146/_t3343/90690/list.psp"
+      }
     ]
   },
   {
@@ -2248,6 +2587,14 @@
     ],
     "relatedGuideIds": [
       "campus-051"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查询学校访客预约说明",
+        "url": "https://s2.zju.edu.cn/mobile/index.do"
+      }
     ]
   },
   {
@@ -2305,6 +2652,14 @@
     "relatedGuideIds": [
       "campus-019",
       "campus-037"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开本科教学平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -2365,6 +2720,14 @@
     ],
     "relatedGuideIds": [
       "campus-010"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看后勤报修说明",
+        "url": "https://zulg.zju.edu.cn/info/1203/8341.htm"
+      }
     ]
   },
   {
@@ -2425,21 +2788,15 @@
     "relatedGuideIds": [],
     "stepActions": [
       {
-        "stepIndex": 2,
-        "kind": "app",
-        "label": "复制App操作路径",
-        "path": "浙大校园卡App → 身份认证 → 充值 → 付款码"
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看功能卡办理说明",
+        "url": "https://zulg.zju.edu.cn/info/1203/8336.htm"
       },
       {
         "stepIndex": 3,
         "kind": "windows",
         "label": "查看办理窗口与时间"
-      },
-      {
-        "stepIndex": 0,
-        "kind": "reference",
-        "label": "查看官方说明",
-        "url": "https://zulg.zju.edu.cn/info/1203/8336.htm"
       }
     ]
   },
@@ -2501,20 +2858,14 @@
     "stepActions": [
       {
         "stepIndex": 0,
-        "kind": "app",
-        "label": "复制App操作路径",
-        "path": "浙大校园卡App → 应用 → 挂失·解挂 → 解挂"
+        "kind": "reference",
+        "label": "查看挂失与解挂说明",
+        "url": "https://zulg.zju.edu.cn/info/1203/8336.htm"
       },
       {
         "stepIndex": 3,
         "kind": "windows",
         "label": "查看办理窗口与时间"
-      },
-      {
-        "stepIndex": 0,
-        "kind": "reference",
-        "label": "查看官方说明",
-        "url": "https://zulg.zju.edu.cn/info/1203/8336.htm"
       }
     ]
   },
@@ -2578,32 +2929,14 @@
     "stepActions": [
       {
         "stepIndex": 0,
-        "kind": "app",
-        "label": "复制App操作路径",
-        "path": "浙大钉 → 工作台 → 电子校园卡 → 充值"
-      },
-      {
-        "stepIndex": 1,
-        "kind": "app",
-        "label": "复制App操作路径",
-        "path": "浙大校园卡App → 首页 → 卡片充值"
-      },
-      {
-        "stepIndex": 2,
-        "kind": "app",
-        "label": "复制App操作路径",
-        "path": "支付宝 → 搜索“支付宝校园卡” → 一键充值 → 浙江大学"
+        "kind": "reference",
+        "label": "查看校园卡充值说明",
+        "url": "https://itc.zju.edu.cn/xykwgr/list.htm"
       },
       {
         "stepIndex": 3,
         "kind": "windows",
         "label": "查看办理窗口与时间"
-      },
-      {
-        "stepIndex": 0,
-        "kind": "reference",
-        "label": "查看官方说明",
-        "url": "https://itc.zju.edu.cn/xykwgr/list.htm"
       }
     ]
   },
@@ -2658,6 +2991,20 @@
     "completionNote": "废弃物由接收方验收，交接记录完整。",
     "troubleshooting": [
       "未确认类别、包装或中转站接收条件时，先询问实验室安全负责人，避免自行混装、运送或放入生活垃圾。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 1,
+        "kind": "reference",
+        "label": "查看实验室管理处办理说明",
+        "url": "https://zjulab.zju.edu.cn/"
+      },
+      {
+        "stepIndex": 3,
+        "kind": "reference",
+        "label": "查看废弃物中转站安排",
+        "url": "https://zulg.zju.edu.cn/info/1184/6290.htm"
+      }
     ]
   },
   {
@@ -2716,14 +3063,14 @@
     "stepActions": [
       {
         "stepIndex": 0,
-        "kind": "windows",
-        "label": "查看办理窗口与时间"
+        "kind": "reference",
+        "label": "查看校园卡注销说明",
+        "url": "https://itc.zju.edu.cn/xykwgr/list.htm"
       },
       {
         "stepIndex": 0,
-        "kind": "reference",
-        "label": "查看官方说明",
-        "url": "https://itc.zju.edu.cn/xykwgr/list.htm"
+        "kind": "windows",
+        "label": "查看办理窗口与时间"
       }
     ]
   },
@@ -2776,6 +3123,14 @@
     "completionNote": "取得正式入驻通知并完成协议或场地交接。",
     "troubleshooting": [
       "尚未开放招募时，请受理单位告知下一轮信息渠道；申请邮件发出不等于入驻批准。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "打开学校办事中心",
+        "url": "https://service.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -2835,6 +3190,25 @@
     ],
     "serviceWindowIds": [
       "museum-zijingang"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看校史馆实名预约说明",
+        "url": "https://xsg.zju.edu.cn/site/dlkx_view.html?id=2402"
+      },
+      {
+        "stepIndex": 3,
+        "kind": "reference",
+        "label": "查看校史馆开放安排",
+        "url": "https://xsg.zju.edu.cn/"
+      },
+      {
+        "stepIndex": 3,
+        "kind": "windows",
+        "label": "查看办理窗口与时间"
+      }
     ]
   },
   {
@@ -2888,6 +3262,14 @@
     "completionNote": "系统毕业确认与学校要求均已完成，后续联系方式有效。",
     "troubleshooting": [
       "忘记贷款密码时使用银行找回流程；继续升学等情况先向学院和经办贷款机构确认适用手续。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 1,
+        "kind": "service",
+        "label": "打开国开行学生在线服务",
+        "url": "https://sls.cdb.com.cn/"
+      }
     ]
   },
   {
@@ -2941,6 +3323,14 @@
     "completionNote": "审核通过，借款手续及到账已确认。",
     "troubleshooting": [
       "申请期未开放或资料不足时，先联系学院辅导员，不把平台登录成功当成已受理。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看学生资助通知",
+        "url": "https://www.xgb.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -2996,6 +3386,14 @@
     ],
     "relatedGuideIds": [
       "campus-053"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看学生资助通知",
+        "url": "https://www.xgb.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -3049,6 +3447,14 @@
     "completionNote": "资助审核结果已明确，收费或到账记录与结果一致。",
     "troubleshooting": [
       "材料需地方部门核验时，先确认办理顺序及盖章要求，避免遗漏导致退回。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看学生资助通知",
+        "url": "https://www.xgb.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -3101,6 +3507,14 @@
     "completionNote": "学校或户籍受理方确认已经完成落户。",
     "troubleshooting": [
       "不同培养类型和原户籍所在地的办理方式可能不同；迁往地址或材料有误时先让受理人员核对再补办。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查询学校户籍办事说明",
+        "url": "https://service.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -3150,6 +3564,14 @@
     "completionNote": "获得档案馆提供的对应查验材料或正式答复。",
     "troubleshooting": [
       "个人证明申请与单位查档要求不同，不能套用单位权限查询他人信息。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看档案馆查档服务",
+        "url": "https://acv.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -3206,6 +3628,14 @@
     "relatedGuideIds": [
       "campus-039",
       "campus-074"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "打开学校办事中心",
+        "url": "https://service.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -3256,6 +3686,14 @@
     "completionNote": "找到正确校区的目标位置，并核对可进入的入口。",
     "troubleshooting": [
       "没有搜到简称时改用楼宇或单位全称；紧急情况直接联系救援或现场人员，不只依赖地图。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开校园地图",
+        "url": "https://map.zju.edu.cn/index.html"
+      }
     ]
   },
   {
@@ -3309,6 +3747,14 @@
     "completionNote": "文件完整可用，接收人能按设定权限访问。",
     "troubleshooting": [
       "提示容量或权限不足时，查看平台说明或联系信息技术中心；不要将失败的上传当作已备份。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开浙大云盘",
+        "url": "https://pan.zju.edu.cn/zjusso/"
+      }
     ]
   },
   {
@@ -3362,6 +3808,14 @@
     "relatedGuideIds": [
       "campus-028",
       "campus-016"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开教师个人主页平台",
+        "url": "https://person.zju.edu.cn/index/"
+      }
     ]
   },
   {
@@ -3413,6 +3867,14 @@
     ],
     "relatedGuideIds": [
       "campus-026"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看学科竞赛通知",
+        "url": "http://kyjs.zju.edu.cn/preview"
+      }
     ]
   },
   {
@@ -3479,6 +3941,14 @@
     "relatedGuideIds": [
       "campus-026",
       "campus-103"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开素质拓展学分平台",
+        "url": "https://sztz.zju.edu.cn/dekt/#/index/main"
+      }
     ]
   },
   {
@@ -3536,6 +4006,26 @@
     "completionNote": "邮箱能登录，并能正常收发测试邮件。",
     "troubleshooting": [
       "邮箱别名只能设置一次，提交前核对拼写；别名不用于校园网认证。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开网络用户自助中心",
+        "url": "https://myvpn.zju.edu.cn/"
+      },
+      {
+        "stepIndex": 1,
+        "kind": "service",
+        "label": "打开浙大邮箱",
+        "url": "https://mail.zju.edu.cn/"
+      },
+      {
+        "stepIndex": 3,
+        "kind": "reference",
+        "label": "查看邮箱密码与开通说明",
+        "url": "https://itc.zju.edu.cn/90691/list.htm"
+      }
     ]
   },
   {
@@ -3591,6 +4081,14 @@
     "relatedGuideIds": [
       "campus-063",
       "campus-093"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "打开学校综合服务网",
+        "url": "https://zhfw.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -3648,6 +4146,19 @@
       "network-yuquan",
       "network-huajiachi",
       "network-xixi"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看网络账号过户说明",
+        "url": "https://itc.zju.edu.cn/_s146/_t3343/90690/list.psp"
+      },
+      {
+        "stepIndex": 3,
+        "kind": "windows",
+        "label": "查看办理窗口与时间"
+      }
     ]
   },
   {
@@ -3710,6 +4221,19 @@
       "network-yuquan",
       "network-huajiachi",
       "network-xixi"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看多账号申请说明",
+        "url": "https://itc.zju.edu.cn/_s146/_t3343/90690/list.psp"
+      },
+      {
+        "stepIndex": 0,
+        "kind": "windows",
+        "label": "查看办理窗口与时间"
+      }
     ]
   },
   {
@@ -3763,6 +4287,20 @@
     "completionNote": "已确定可乘班次、有效乘车条件和准确上车点。",
     "troubleshooting": [
       "没有适合班次时安排公共交通；寒暑假不要直接沿用平时截图。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开班车查询",
+        "url": "http://www.life.zju.edu.cn/_web/_apps/lightapp/busQuery/mobile/app/pub/index.html"
+      },
+      {
+        "stepIndex": 2,
+        "kind": "reference",
+        "label": "查看后勤交通服务说明",
+        "url": "https://zulg.zju.edu.cn/guide/traffic.htm"
+      }
     ]
   },
   {
@@ -3817,6 +4355,14 @@
     "completionNote": "各报名环节均确认成功，后续审核和考核安排可查询。",
     "troubleshooting": [
       "公告期限已过时不要继续按旧链接申请；改查新批次。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看就业招聘通知",
+        "url": "https://www.career.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -3873,6 +4419,14 @@
     "completionNote": "救援人员接到准确情况并能联系到现场。",
     "troubleshooting": [
       "紧急电话页面打不开时直接拨相应救援电话，不等待网页恢复。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 2,
+        "kind": "service",
+        "label": "查看学校紧急联系电话",
+        "url": "https://mapp.zju.edu.cn/lightapp/jjdh/www/app/home.html"
+      }
     ]
   },
   {
@@ -3928,6 +4482,14 @@
     "completionNote": "初访预约确认，后续服务安排明确。",
     "troubleshooting": [
       "心理测试结果不作为自行诊断依据；需要帮助时预约专业咨询。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "打开心理咨询中心官网",
+        "url": "http://www.xlzx.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -3983,6 +4545,14 @@
       "campus-043",
       "campus-101",
       "campus-077"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看后勤服务指南",
+        "url": "https://zulg.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -4037,6 +4607,14 @@
     "relatedGuideIds": [
       "campus-009",
       "campus-012"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开图书馆服务入口",
+        "url": "https://libweb.zju.edu.cn/libweb/"
+      }
     ]
   },
   {
@@ -4088,6 +4666,14 @@
     ],
     "relatedGuideIds": [
       "campus-082"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开alphaXiv",
+        "url": "https://www.alphaxiv.org/"
+      }
     ]
   },
   {
@@ -4142,6 +4728,20 @@
     ],
     "relatedGuideIds": [
       "campus-082"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开必应学术",
+        "url": "https://cn.bing.com/academic"
+      },
+      {
+        "stepIndex": 3,
+        "kind": "service",
+        "label": "打开图书馆检索入口",
+        "url": "https://libweb.zju.edu.cn/libweb/"
+      }
     ]
   },
   {
@@ -4195,6 +4795,14 @@
     ],
     "relatedGuideIds": [
       "campus-086"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开在线效率工具箱",
+        "url": "https://ol.woobx.cn/"
+      }
     ]
   },
   {
@@ -4243,6 +4851,14 @@
     "completionNote": "最终结果正确且能够正常使用。",
     "troubleshooting": [
       "没有需要的功能或超出限制时换工具；页面要求另行开通的功能先核对是否有必要。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开腾讯帮小忙",
+        "url": "https://tool.browser.qq.com/"
+      }
     ]
   },
   {
@@ -4292,6 +4908,14 @@
     "completionNote": "获得符合原句语境的理解；无法确认时保留不确定性。",
     "troubleshooting": [
       "没有结果或入口不可用时，向原信息发布者确认。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开缩略词查询工具",
+        "url": "https://lab.magiconch.com/nbnhhsh/"
+      }
     ]
   },
   {
@@ -4343,6 +4967,14 @@
     ],
     "relatedGuideIds": [
       "campus-025"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开中国大学MOOC",
+        "url": "https://www.icourse163.org/"
+      }
     ]
   },
   {
@@ -4393,6 +5025,14 @@
     ],
     "relatedGuideIds": [
       "campus-025"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开智慧树",
+        "url": "https://www.zhihuishu.com/"
+      }
     ]
   },
   {
@@ -4441,6 +5081,14 @@
     "completionNote": "正式问卷能顺利填写，导出数据可以对应每一道题。",
     "troubleshooting": [
       "回收后大幅改题会影响结果可比性；先确认是否需要结束原轮次再开展新一轮。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开问卷星",
+        "url": "https://www.wjx.cn/"
+      }
     ]
   },
   {
@@ -4499,6 +5147,20 @@
     ],
     "relatedGuideIds": [
       "campus-015"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 1,
+        "kind": "service",
+        "label": "打开网速测试",
+        "url": "https://wangsuceshi.bmcx.com/"
+      },
+      {
+        "stepIndex": 3,
+        "kind": "reference",
+        "label": "查看网络服务与报障说明",
+        "url": "https://itc.zju.edu.cn/_s146/_t3343/90690/list.psp"
+      }
     ]
   },
   {
@@ -4548,6 +5210,14 @@
     "completionNote": "找到正确日期和航段的状态，并确认实际出行安排。",
     "troubleshooting": [
       "动态信息会更新，延误、取消和改签以航空公司及机场通知为准。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开实时航班查询",
+        "url": "https://zh.flightaware.com/live/"
+      }
     ]
   },
   {
@@ -4601,6 +5271,14 @@
     "relatedGuideIds": [
       "campus-016",
       "campus-066"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "打开学校黄页",
+        "url": "https://zhfw.zju.edu.cn/65686/list.htm"
+      }
     ]
   },
   {
@@ -4655,6 +5333,14 @@
     "relatedGuideIds": [
       "campus-019",
       "exam-deferral"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看本科生院校历通知",
+        "url": "https://ugrs.zju.edu.cn/2026/0710/c28218a3187939/page.htm"
+      }
     ]
   },
   {
@@ -4704,6 +5390,14 @@
     "completionNote": "缓考获准，后续考试申请与考场安排也已确认。",
     "troubleshooting": [
       "开考后遇紧急情况，立即联系学院教学科或学园辅导员；政策咨询可拨本科生院学籍中心0571-88208655。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看课程缓考办理流程",
+        "url": "https://zdbk.zju.edu.cn/jwglxt/xtgl/xwck_ckLoginNews.html?xwbh=50AA96418C25E042E0632AB3CA0AB796"
+      }
     ]
   },
   {
@@ -4764,6 +5458,19 @@
     ],
     "serviceWindowIds": [
       "transcript-zijingang"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 2,
+        "kind": "reference",
+        "label": "查看成绩单盖章办理指南",
+        "url": "https://service.zju.edu.cn/_web/customized/serviceCenter/detailnew.html?_p=YXM9MiZ0PTUmZD0xNTcmcD0xJmY9MTA5Jm09TiY_&id=2664"
+      },
+      {
+        "stepIndex": 2,
+        "kind": "windows",
+        "label": "查看办理窗口与时间"
+      }
     ]
   },
   {
@@ -4822,6 +5529,20 @@
     "relatedGuideIds": [
       "campus-097",
       "campus-023"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 1,
+        "kind": "reference",
+        "label": "查看证明开具说明",
+        "url": "https://s2.zju.edu.cn/search/faq.do?words=%E8%AF%81%E6%98%8E"
+      },
+      {
+        "stepIndex": 1,
+        "kind": "reference",
+        "label": "打开学校办事中心",
+        "url": "https://service.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -4893,6 +5614,19 @@
       "post-huajiachi",
       "post-zhijiang-gate",
       "post-zhijiang-student"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 1,
+        "kind": "reference",
+        "label": "查看后勤邮政网点说明",
+        "url": "https://zulg.zju.edu.cn/guide/post.htm"
+      },
+      {
+        "stepIndex": 1,
+        "kind": "windows",
+        "label": "查看快递网点与时间"
+      }
     ]
   },
   {
@@ -4953,6 +5687,14 @@
     "relatedGuideIds": [
       "campus-026",
       "campus-104"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看学生平台活动列表",
+        "url": "https://www.tuotuzju.com/events"
+      }
     ]
   },
   {
@@ -5012,6 +5754,14 @@
       "campus-026",
       "campus-068",
       "campus-104"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开素质拓展学分平台",
+        "url": "https://sztz.zju.edu.cn/dekt/#/index/main"
+      }
     ]
   },
   {
@@ -5069,6 +5819,14 @@
       "campus-102",
       "campus-103",
       "campus-067"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "打开团在浙大查活动",
+        "url": "https://tzzd.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -5122,6 +5880,14 @@
     "completionNote": "打开正确课次的可用回放，或已确认未提供及替代学习方式。",
     "troubleshooting": [
       "并非所有课程都提供录像，也不保证所有身份均可查看。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开智云课堂",
+        "url": "https://classroom.zju.edu.cn/"
+      }
     ]
   },
   {
@@ -5172,6 +5938,14 @@
     ],
     "relatedGuideIds": [
       "campus-038"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开朵朵校友圈",
+        "url": "https://www.duoduo.link/experience"
+      }
     ]
   },
   {
@@ -5222,6 +5996,14 @@
     ],
     "relatedGuideIds": [
       "campus-039"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "打开ZJUers信息导航",
+        "url": "https://zjuers.com/"
+      }
     ]
   },
   {
@@ -5271,6 +6053,14 @@
     "completionNote": "找到适用的正式规则和明确办理方式。",
     "troubleshooting": [
       "网页抓取日期不是文件生效日期；不凭搜索排序判断哪份文件有效。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查询学校办事百事通",
+        "url": "https://s2.zju.edu.cn/mobile/index.do"
+      }
     ]
   },
   {
@@ -5324,6 +6114,20 @@
     "completionNote": "资源能够按说明加载，版本和使用条件已记录。",
     "troubleshooting": [
       "许可、依赖或数据来源不清楚时先阅读项目说明；模型演示结果不保证适合自己的任务。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开Hugging Face",
+        "url": "https://huggingface.co/"
+      },
+      {
+        "stepIndex": 2,
+        "kind": "reference",
+        "label": "查看Hub使用说明",
+        "url": "https://huggingface.co/docs/hub/index"
+      }
     ]
   },
   {
@@ -5376,6 +6180,20 @@
     "completionNote": "预约记录显示成功，院区、时段和就诊人信息准确。",
     "troubleshooting": [
       "预约问题可联系紫金港门诊服务中心0571-88206017；急需医疗救助时使用急救渠道，不等待普通门诊号。"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "service",
+        "label": "打开校医院数字医疗平台",
+        "url": "https://xyszyl.zju.edu.cn/"
+      },
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看校医院挂号渠道说明",
+        "url": "https://zdyy.zju.edu.cn/2025/0225/c9107a3019250/page.htm"
+      }
     ]
   }
 ]

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { readFileSync, existsSync } from 'node:fs'
-import { filterGuides, filterAccounts, filterWebsites, findRelatedSources, sourceSearchUrl, suggestGuides, guideIdForWebsite, websiteSearchDetails } from '../src/lib/campusContent.ts'
+import { filterGuides, filterAccounts, filterWebsites, findRelatedSources, sourceSearchUrl, suggestGuides, guideIdForWebsite, websiteSearchDetails, primaryGuideAction } from '../src/lib/campusContent.ts'
 const read = (name) => JSON.parse(readFileSync(new URL(`../src/data/${name}.json`, import.meta.url), 'utf8'))
 const guides = read('guides'), accounts = read('accounts'), websites = read('websites')
 
@@ -179,19 +179,50 @@ test('近似建议与准确结果分开，并保持类别限制', () => {
 })
 
 
-test('校园卡步骤按钮只指向匹配步骤、说明或本页窗口，不伪造App直达', () => {
-  for (const guide of guides.filter((guide) => guide.category === '校园卡')) {
-    assert.ok(guide.stepActions.length > 0)
+test('全部95份指南提供对应步骤的真实参考或平台链接，不再提供App路径复制', () => {
+  assert.equal(guides.length, 95)
+  const windows = read('service-windows')
+  for (const guide of guides) {
+    assert.ok(guide.stepActions.length > 0, guide.id)
+    const primary = primaryGuideAction(guide)
+    assert.ok(primary?.url && primary.label, guide.id)
+    assert.ok(guide.stepActions.includes(primary))
     for (const action of guide.stepActions) {
-      assert.ok(Number.isInteger(action.stepIndex) && action.stepIndex >= 0 && action.stepIndex < guide.steps.length)
-      if (action.kind === 'reference') assert.ok(guide.references.some((reference) => reference.url === action.url))
-      if (action.kind === 'windows') assert.ok(guide.serviceWindowIds.length > 0)
-      if (action.kind === 'app') { assert.ok(action.path); assert.equal(action.url, undefined) }
+      assert.ok(Number.isInteger(action.stepIndex) && action.stepIndex >= 0 && action.stepIndex < guide.steps.length, guide.id)
+      assert.ok(['reference', 'service', 'windows'].includes(action.kind))
+      assert.equal(action.path, undefined)
+      if (action.kind === 'windows') assert.ok(guide.serviceWindowIds?.some((id) => windows.some((window) => window.id === id)), guide.id)
+      else {
+        assert.ok(guide.references.some((reference) => reference.url === action.url), guide.id)
+        assert.ok(['https:', 'http:'].includes(new URL(action.url).protocol))
+      }
     }
   }
-  assert.ok(guides.filter((guide) => guide.category !== '校园卡').every((guide) => !guide.stepActions))
 })
 
+test('说明与系统用途明确，不把App操作、馆方说明或通知当业务表单', () => {
+  const actions = (id) => guides.find((guide) => guide.id === id).stepActions
+  assert.ok(guides.filter((guide) => guide.category === '校园卡').every((guide) => guide.stepActions.every((action) => action.kind !== 'service')))
+  for (const id of ['campus-041', 'campus-051', 'exam-deferral', 'academic-calendar', 'campus-097']) {
+    assert.ok(actions(id).every((action) => action.kind !== 'service'), id)
+  }
+  const library = actions('campus-009').find((action) => action.kind === 'service')
+  assert.equal(library.url, 'https://booking.lib.zju.edu.cn/')
+  assert.match(library.label, /研讨空间/)
+  assert.ok(!actions('campus-021').some((action) => action.url.includes('/cgyy/')))
+  assert.ok(!actions('campus-102').some((action) => action.label.includes('心理')))
+  assert.equal(primaryGuideAction(guides.find((guide) => guide.id === 'campus-hospital-registration')).url, 'https://xyszyl.zju.edu.cn/')
+})
+
+test('卡片入口优先提供平台，只有说明时使用说明，无入口时返回空', () => {
+  const reference = { stepIndex: 0, kind: 'reference', label: '查看说明', url: 'https://example.com/info' }
+  const service = { stepIndex: 1, kind: 'service', label: '打开平台', url: 'https://example.com/service' }
+  const window = { stepIndex: 2, kind: 'windows', label: '查看窗口' }
+  assert.equal(primaryGuideAction({ stepActions: [reference, window, service] }), service)
+  assert.equal(primaryGuideAction({ stepActions: [window, reference] }), reference)
+  assert.equal(primaryGuideAction({ stepActions: [window] }), undefined)
+  assert.equal(primaryGuideAction({}), undefined)
+})
 
 test('共用官网入口仍指向当前问题匹配的指南，而不是关联数组第一条', () => {
   const matched = filterGuides(guides, '找回校园卡')
