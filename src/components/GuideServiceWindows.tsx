@@ -6,6 +6,7 @@ export default function GuideServiceWindows({ windows }: { windows: ServiceWindo
   const [campus, setCampus] = useState(windows[0]?.campus ?? '')
   const campuses = [...new Set(windows.map((window) => window.campus))]
   const visible = windows.filter((window) => !campus || window.campus === campus)
+  const references = [...new Map(visible.flatMap((window) => window.references ?? []).map((reference) => [reference.url, reference])).values()]
   return <aside className="guide-detail-section guide-windows" aria-labelledby="guide-windows-heading">
     <h2 id="guide-windows-heading">办理地点与时间</h2>
     <div className="guide-window-filter">
@@ -15,7 +16,7 @@ export default function GuideServiceWindows({ windows }: { windows: ServiceWindo
         {campuses.map((item) => <option key={item} value={item}>{item}</option>)}
       </select>
     </div>
-    <p className="guide-window-count" role="status" aria-live="polite">显示{visible.length}个办理窗口</p>
+    <p className="guide-window-count" role="status" aria-live="polite">显示{visible.length}个服务点</p>
     <div className="guide-window-list">
       {visible.map((window) => <article key={window.id} className="guide-window-card" aria-label={`${window.campus} ${window.name}`}>
         <p className="guide-window-campus">{window.campus}</p>
@@ -30,12 +31,10 @@ export default function GuideServiceWindows({ windows }: { windows: ServiceWindo
       </article>)}
     </div>
     <ul className="guide-material-list guide-window-reminders">
-      <li>杭州窗口公布的是周一至周五时段；周末前往前确认是否开放。</li>
       <li>寒暑假及法定节假日可能调整，请向对应窗口确认当期安排。</li>
     </ul>
     <div className="guide-window-references">
-      <a href="https://zulg.zju.edu.cn/guide/food.htm" target="_blank" rel="noopener noreferrer">后勤窗口说明<ExternalLink size={14} aria-hidden="true" /></a>
-      <a href="https://www.intl.zju.edu.cn/zh-hans/campus-life/campus-service-hub" target="_blank" rel="noopener noreferrer">海宁服务站<ExternalLink size={14} aria-hidden="true" /></a>
+      {references.map((reference) => <a key={reference.url} href={reference.url} target="_blank" rel="noopener noreferrer">{reference.label}<ExternalLink size={14} aria-hidden="true" /></a>)}
     </div>
   </aside>
 }

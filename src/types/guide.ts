@@ -41,4 +41,5 @@ export interface ServiceWindow {
   contacts: { label: string; number: string }[]
   hoursStatus: 'published' | 'needs_confirmation'
   notice: string | null
+  references?: GuideReference[]
 }

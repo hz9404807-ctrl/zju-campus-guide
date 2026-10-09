@@ -22,7 +22,7 @@ test('48个公众号全部对应真实图片，个人和校外账号保留原始
 })
 
 test('指南可按答案地点与多个关键词搜索，并组合类别筛选', () => {
-  assert.ok(filterGuides(guides, '青溪翠柏').some((guide) => guide.title === '快递点'))
+  assert.ok(filterGuides(guides, '青溪翠柏').some((guide) => guide.id === 'campus-101'))
   assert.ok(filterGuides(guides, '校园卡 补办', '校园卡').some((guide) => guide.id === 'campus-card-replacement'))
   assert.equal(filterGuides(guides, '校园卡 补办', '交流与发展').length, 0)
   assert.ok(filterGuides(guides, 'ｖｐｎ').length > 0)
@@ -79,4 +79,75 @@ test('待确认窗口时间保留边界，充值方式不会被误列成顺序�
     assert.doesNotMatch([guide.summary, ...guide.steps, ...guide.troubleshooting].join(' '), /本稿|第[56]项|中国银行移动端APP可以设置/)
     assert.equal(guide.references.length, 1)
   }
+})
+
+test('自然提问与近义词把主要办事指南排在首位', () => {
+  const windows = read('service-windows')
+  for (const [query, expected] of [
+    ['寝室灯坏了', 'campus-010'],
+    ['寝室灯坏了怎么办？', 'campus-010'],
+    ['我想补学生卡', 'campus-card-replacement'],
+    ['图书馆自习怎么办', 'campus-009'],
+    ['宿舍报修', 'campus-010'],
+    ['请帮我补饭卡', 'campus-card-replacement'],
+    ['我的校园卡丢了', 'campus-card-replacement'],
+    ['图书馆自习', 'campus-009'],
+    ['我要打印成绩', 'campus-097'],
+    ['怎么申请在校证明？', 'campus-098'],
+    ['取消球场预约', 'campus-011'],
+    ['校外访问', 'campus-012'],
+    ['请问在哪里交网费', 'campus-040'],
+    ['ＯＦＦＩＣＥ', 'campus-013'],
+  ]) assert.equal(filterGuides(guides, query, '', windows)[0]?.id, expected, query)
+})
+
+test('未知问题与互不相关的组合不会因问句清理误返回全部指南', () => {
+  const windows = read('service-windows')
+  for (const query of ['你好', '怎么办', '？', '校园卡 奖学金', '图书馆 飞船999', '不存在的事务987'])
+    assert.equal(filterGuides(guides, query, '', windows).length, 0, query)
+  assert.equal(filterGuides(guides, '').length, 95)
+  assert.equal(filterGuides(guides, '寝室灯坏了', '校园卡').length, 0)
+})
+
+test('其余指南均具有完整操作信息，原始问题保留，关联不悬空', () => {
+  assert.equal(guides.filter((guide) => guide.category !== '校园卡').length, 88)
+  for (const guide of guides) {
+    assert.ok(guide.steps.length >= 3, guide.id)
+    assert.ok(guide.materials.length > 0, guide.id)
+    if (guide.category !== '校园卡') assert.ok(guide.completionNote, guide.id)
+    assert.ok(guide.troubleshooting?.length > 0, guide.id)
+    assert.ok(guide.references.length > 0, guide.id)
+    assert.doesNotMatch(guide.summary, /…|原表|原始资料|小组资料/, guide.id)
+    assert.doesNotMatch([...guide.notes, ...guide.steps].join(' '), /原表|本轮整理|本轮核对|本稿/, guide.id)
+    assert.ok((guide.relatedGuideIds ?? []).every((id) => id !== guide.id && guides.some((target) => target.id === id)), guide.id)
+    assert.ok(guide.relatedSourceIds.every((id) => accounts.some((account) => account.id === id)), guide.id)
+  }
+})
+
+test('不同业务窗口独立关联，电话和人工时段可检索', () => {
+  const windows = read('service-windows')
+  assert.equal(windows.length, 27)
+  assert.equal(new Set(windows.map((window) => window.id)).size, windows.length)
+  for (const guide of guides)
+    assert.ok((guide.serviceWindowIds ?? []).every((id) => windows.some((window) => window.id === id)), guide.id)
+  assert.equal(filterGuides(guides, '88273001', '', windows)[0].id, 'campus-015')
+  assert.equal(filterGuides(guides, '057188273001', '', windows)[0].id, 'campus-015')
+  assert.equal(filterGuides(guides, '8:30', '校园卡', windows).length, 7)
+  assert.equal(filterGuides(guides, '88981819', '', windows)[0].id, 'campus-101')
+  assert.equal(filterGuides(guides, '银泉 人工 18:30', '', windows)[0].id, 'campus-101')
+  assert.equal(windows.filter((window) => window.id.startsWith('post-')).length, 14)
+  assert.match(windows.find((window) => window.id === 'network-xixi').openingHours, /周二、四/)
+  assert.equal(windows.find((window) => window.id === 'network-xixi').location, '西六教学楼333室')
+})
+
+test('网站导航包含新办理入口和完整摘要，学校与校外链接区分保留', () => {
+  assert.equal(websites.length, 86)
+  assert.equal(read('content-manifest').websiteCount, websites.length)
+  assert.equal(read('content-manifest').serviceWindowCount, read('service-windows').length)
+  for (const guide of guides)
+    for (const reference of guide.references)
+      assert.ok(websites.some((site) => site.url.replace(/\/$/, '') === reference.url.replace(/\/$/, '') && site.guideIds.includes(guide.id)), reference.url)
+  for (const site of websites) assert.doesNotMatch(site.summary, /…|原表|资料提供/, site.id)
+  assert.ok(websites.some((site) => site.url === 'https://pay.zju.edu.cn/'))
+  assert.ok(websites.some((site) => site.url === 'https://mail.zju.edu.cn/'))
 })

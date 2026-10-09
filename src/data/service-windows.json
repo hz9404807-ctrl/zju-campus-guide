@@ -12,7 +12,13 @@
       }
     ],
     "hoursStatus": "published",
-    "notice": null
+    "notice": null,
+    "references": [
+      {
+        "label": "后勤校园卡窗口说明",
+        "url": "https://zulg.zju.edu.cn/guide/food.htm"
+      }
+    ]
   },
   {
     "id": "card-zjg-canteen",
@@ -27,7 +33,13 @@
       }
     ],
     "hoursStatus": "published",
-    "notice": null
+    "notice": null,
+    "references": [
+      {
+        "label": "后勤校园卡窗口说明",
+        "url": "https://zulg.zju.edu.cn/guide/food.htm"
+      }
+    ]
   },
   {
     "id": "card-yuquan",
@@ -42,7 +54,13 @@
       }
     ],
     "hoursStatus": "published",
-    "notice": null
+    "notice": null,
+    "references": [
+      {
+        "label": "后勤校园卡窗口说明",
+        "url": "https://zulg.zju.edu.cn/guide/food.htm"
+      }
+    ]
   },
   {
     "id": "card-xixi",
@@ -57,7 +75,13 @@
       }
     ],
     "hoursStatus": "published",
-    "notice": "出发前拨打窗口电话，问“现在校园卡挂失、补卡窗口在哪里”，确认后再出发。"
+    "notice": "出发前拨打窗口电话，问“现在校园卡挂失、补卡窗口在哪里”，确认后再出发。",
+    "references": [
+      {
+        "label": "后勤校园卡窗口说明",
+        "url": "https://zulg.zju.edu.cn/guide/food.htm"
+      }
+    ]
   },
   {
     "id": "card-huajiachi",
@@ -72,7 +96,13 @@
       }
     ],
     "hoursStatus": "published",
-    "notice": null
+    "notice": null,
+    "references": [
+      {
+        "label": "后勤校园卡窗口说明",
+        "url": "https://zulg.zju.edu.cn/guide/food.htm"
+      }
+    ]
   },
   {
     "id": "card-haining",
@@ -87,7 +117,13 @@
       }
     ],
     "hoursStatus": "published",
-    "notice": "以上为服务站开放时间；特殊业务能否当场办理可提前询问。电话24小时可咨询不代表窗口24小时开放。"
+    "notice": "以上为服务站开放时间；特殊业务能否当场办理可提前询问。电话24小时可咨询不代表窗口24小时开放。",
+    "references": [
+      {
+        "label": "海宁服务站说明",
+        "url": "https://www.intl.zju.edu.cn/zh-hans/campus-life/campus-service-hub"
+      }
+    ]
   },
   {
     "id": "card-zhoushan",
@@ -106,6 +142,432 @@
       }
     ],
     "hoursStatus": "needs_confirmation",
-    "notice": "两处官网公布的电话不同，尚未电话核对。不要把旧时段当成已经确认的现行安排。"
+    "notice": "两处官网公布的电话不同，尚未电话核对。不要把旧时段当成已经确认的现行安排。",
+    "references": [
+      {
+        "label": "校园卡办事说明",
+        "url": "https://itc.zju.edu.cn/xykwgr/list.htm"
+      }
+    ]
+  },
+  {
+    "id": "network-zijingang",
+    "campus": "紫金港",
+    "name": "网络服务窗口",
+    "location": "行政服务办事大厅115室19号窗口",
+    "openingHours": "周一至周四8:30–12:00、13:30–17:30；周五8:30–12:00、13:30–15:30。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-88981611"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": null,
+    "references": [
+      {
+        "label": "网络服务办理指南",
+        "url": "https://itc.zju.edu.cn/_s146/_t3343/90690/list.psp"
+      }
+    ]
+  },
+  {
+    "id": "network-yuquan",
+    "campus": "玉泉",
+    "name": "网络服务窗口",
+    "location": "图书馆702室",
+    "openingHours": "周一至周四8:30–11:30、13:00–16:45；周五8:30–11:30。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-87951762"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": null,
+    "references": [
+      {
+        "label": "网络服务办理指南",
+        "url": "https://itc.zju.edu.cn/_s146/_t3343/90690/list.psp"
+      }
+    ]
+  },
+  {
+    "id": "network-huajiachi",
+    "campus": "华家池",
+    "name": "网络服务窗口",
+    "location": "老图书馆103室",
+    "openingHours": "周一、三、五8:30–11:30。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-86971518"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": null,
+    "references": [
+      {
+        "label": "网络服务办理指南",
+        "url": "https://itc.zju.edu.cn/_s146/_t3343/90690/list.psp"
+      }
+    ]
+  },
+  {
+    "id": "network-xixi",
+    "campus": "西溪",
+    "name": "网络服务窗口",
+    "location": "西六教学楼333室",
+    "openingHours": "周二、四8:30–11:30。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-88273001"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": null,
+    "references": [
+      {
+        "label": "网络服务办理指南",
+        "url": "https://itc.zju.edu.cn/_s146/_t3343/90690/list.psp"
+      }
+    ]
+  },
+  {
+    "id": "post-chengyue",
+    "campus": "紫金港",
+    "name": "澄月服务站",
+    "location": "西区留学生食堂西侧澄月5幢C楼1135号",
+    "openingHours": "自助服务：24小时；人工服务：8:30–18:30。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-87072177"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": "自助设备可用时间与楼宇能否进入不同；寄件、签字领取或异常处理请在人工服务时间前往。",
+    "references": [
+      {
+        "label": "后勤邮政服务网点、时间与电话",
+        "url": "https://zulg.zju.edu.cn/guide/post.htm"
+      }
+    ]
+  },
+  {
+    "id": "post-nongshenghuan",
+    "campus": "紫金港",
+    "name": "农生环服务站",
+    "location": "农生环D座–E座天桥下",
+    "openingHours": "自助服务：24小时；人工服务：8:30–12:00、13:30–17:30；双休日及法定节假日休息。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-88206678"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": "自助设备可用时间与楼宇能否进入不同；寄件、签字领取或异常处理请在人工服务时间前往。",
+    "references": [
+      {
+        "label": "后勤邮政服务网点、时间与电话",
+        "url": "https://zulg.zju.edu.cn/guide/post.htm"
+      }
+    ]
+  },
+  {
+    "id": "post-medical",
+    "campus": "紫金港",
+    "name": "医学院服务站",
+    "location": "医学院教学C楼一楼大厅",
+    "openingHours": "自助服务：24小时；人工服务：8:30–12:00、13:00–17:30；周日休息。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-88208869"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": "自助设备可用时间与楼宇能否进入不同；寄件、签字领取或异常处理请在人工服务时间前往。",
+    "references": [
+      {
+        "label": "后勤邮政服务网点、时间与电话",
+        "url": "https://zulg.zju.edu.cn/guide/post.htm"
+      }
+    ]
+  },
+  {
+    "id": "post-baisha",
+    "campus": "紫金港",
+    "name": "白沙服务站",
+    "location": "白沙学园1幢底层",
+    "openingHours": "自助服务：24小时；人工服务：8:30–19:00。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-88206677"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": "自助设备可用时间与楼宇能否进入不同；寄件、签字领取或异常处理请在人工服务时间前往。",
+    "references": [
+      {
+        "label": "后勤邮政服务网点、时间与电话",
+        "url": "https://zulg.zju.edu.cn/guide/post.htm"
+      }
+    ]
+  },
+  {
+    "id": "post-yuhu",
+    "campus": "紫金港",
+    "name": "玉湖服务站",
+    "location": "西区玉湖学园尧坤楼南侧",
+    "openingHours": "自助服务：24小时；人工服务：8:30–18:30。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-88206344"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": "自助设备可用时间与楼宇能否进入不同；寄件、签字领取或异常处理请在人工服务时间前往。",
+    "references": [
+      {
+        "label": "后勤邮政服务网点、时间与电话",
+        "url": "https://zulg.zju.edu.cn/guide/post.htm"
+      }
+    ]
+  },
+  {
+    "id": "post-yinquan",
+    "campus": "紫金港",
+    "name": "银泉服务站",
+    "location": "银泉学园学生服务中心北侧",
+    "openingHours": "自助服务：24小时；人工服务：8:30–18:30。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-88981819"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": "自助设备可用时间与楼宇能否进入不同；寄件、签字领取或异常处理请在人工服务时间前往。",
+    "references": [
+      {
+        "label": "后勤邮政服务网点、时间与电话",
+        "url": "https://zulg.zju.edu.cn/guide/post.htm"
+      }
+    ]
+  },
+  {
+    "id": "post-nano",
+    "campus": "紫金港",
+    "name": "纳米楼微站点",
+    "location": "纳米楼大厅南厅内",
+    "openingHours": "自助服务：24小时；官网未列人工服务时段。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-88206678"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": "自助设备可用时间与楼宇能否进入不同；寄件、签字领取或异常处理请在人工服务时间前往。",
+    "references": [
+      {
+        "label": "后勤邮政服务网点、时间与电话",
+        "url": "https://zulg.zju.edu.cn/guide/post.htm"
+      }
+    ]
+  },
+  {
+    "id": "post-yuquan",
+    "campus": "玉泉",
+    "name": "北门服务站",
+    "location": "玉泉校区北门",
+    "openingHours": "自助服务：24小时；人工服务：8:30–19:00。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-87953100"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": "自助设备可用时间与楼宇能否进入不同；寄件、签字领取或异常处理请在人工服务时间前往。",
+    "references": [
+      {
+        "label": "后勤邮政服务网点、时间与电话",
+        "url": "https://zulg.zju.edu.cn/guide/post.htm"
+      }
+    ]
+  },
+  {
+    "id": "post-xixi-north",
+    "campus": "西溪",
+    "name": "北园服务站",
+    "location": "西溪北园食堂一楼西北角",
+    "openingHours": "自助服务：24小时；人工服务：8:30–17:30。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-88276133"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": "自助设备可用时间与楼宇能否进入不同；寄件、签字领取或异常处理请在人工服务时间前往。",
+    "references": [
+      {
+        "label": "后勤邮政服务网点、时间与电话",
+        "url": "https://zulg.zju.edu.cn/guide/post.htm"
+      }
+    ]
+  },
+  {
+    "id": "post-xixi-south",
+    "campus": "西溪",
+    "name": "南园服务站",
+    "location": "南园体操馆南",
+    "openingHours": "自助服务：24小时；人工服务：8:30–17:30。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-88273357"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": "自助设备可用时间与楼宇能否进入不同；寄件、签字领取或异常处理请在人工服务时间前往。",
+    "references": [
+      {
+        "label": "后勤邮政服务网点、时间与电话",
+        "url": "https://zulg.zju.edu.cn/guide/post.htm"
+      }
+    ]
+  },
+  {
+    "id": "post-xixi-design",
+    "campus": "西溪",
+    "name": "建筑设计院微站点",
+    "location": "南园东横一楼",
+    "openingHours": "自助服务：24小时；官网未列人工服务时段。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-88273357"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": "自助设备可用时间与楼宇能否进入不同；寄件、签字领取或异常处理请在人工服务时间前往。",
+    "references": [
+      {
+        "label": "后勤邮政服务网点、时间与电话",
+        "url": "https://zulg.zju.edu.cn/guide/post.htm"
+      }
+    ]
+  },
+  {
+    "id": "post-huajiachi",
+    "campus": "华家池",
+    "name": "服务站",
+    "location": "一食堂东北角",
+    "openingHours": "自助服务：24小时；人工服务：8:30–17:30。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-86971342"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": "自助设备可用时间与楼宇能否进入不同；寄件、签字领取或异常处理请在人工服务时间前往。",
+    "references": [
+      {
+        "label": "后勤邮政服务网点、时间与电话",
+        "url": "https://zulg.zju.edu.cn/guide/post.htm"
+      }
+    ]
+  },
+  {
+    "id": "post-zhijiang-gate",
+    "campus": "之江",
+    "name": "正大门服务站",
+    "location": "之江校区正大门",
+    "openingHours": "自助服务：24小时；人工服务：8:30–12:00、13:30–17:30；周日休息。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-86592712"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": "自助设备可用时间与楼宇能否进入不同；寄件、签字领取或异常处理请在人工服务时间前往。",
+    "references": [
+      {
+        "label": "后勤邮政服务网点、时间与电话",
+        "url": "https://zulg.zju.edu.cn/guide/post.htm"
+      }
+    ]
+  },
+  {
+    "id": "post-zhijiang-student",
+    "campus": "之江",
+    "name": "学生活动中心服务站",
+    "location": "学生活动中心负一楼",
+    "openingHours": "自助服务：24小时；官网未列人工服务时段。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-86592712"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": "自助设备可用时间与楼宇能否进入不同；寄件、签字领取或异常处理请在人工服务时间前往。",
+    "references": [
+      {
+        "label": "后勤邮政服务网点、时间与电话",
+        "url": "https://zulg.zju.edu.cn/guide/post.htm"
+      }
+    ]
+  },
+  {
+    "id": "museum-zijingang",
+    "campus": "紫金港",
+    "name": "校史馆",
+    "location": "月牙楼二楼",
+    "openingHours": "周一至周日8:30–17:00；16:45停止入馆。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-88206330"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": "寒假、法定节假日及临时性闭馆请查看馆方公告；参观前须完成实名预约。",
+    "references": [
+      {
+        "label": "校史馆参观预约与开放安排",
+        "url": "https://xsg.zju.edu.cn/"
+      }
+    ]
+  },
+  {
+    "id": "transcript-zijingang",
+    "campus": "紫金港",
+    "name": "本科生出国成绩单审核窗口",
+    "location": "行政服务办事大厅112室26、27号窗口",
+    "openingHours": "工作日8:30–12:00、13:30–17:30；周五15:30后不办公。",
+    "contacts": [
+      {
+        "label": "咨询",
+        "number": "0571-88206189"
+      }
+    ],
+    "hoursStatus": "published",
+    "notice": "此窗口针对本科生出国成绩单；其他身份或证明事项先向对应承办单位确认。",
+    "references": [
+      {
+        "label": "本科生出国成绩单办理指南",
+        "url": "https://service.zju.edu.cn/_web/customized/serviceCenter/detailnew.html?_p=YXM9MiZ0PTUmZD0xNTcmcD0xJmY9MTA5Jm09TiY_&id=2664"
+      }
+    ]
   }
 ]

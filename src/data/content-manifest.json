@@ -5,7 +5,7 @@
   "faqRows": 110,
   "guideCount": 95,
   "accountCount": 48,
-  "websiteCount": 55,
+  "websiteCount": 86,
   "sourceFiles": [
     {
       "name": "副本校园信息问题-solution收集_合并(3).xlsx",
@@ -15,5 +15,8 @@
       "name": "公众号信息收集V1.zip",
       "sha256": "4ed3a3041c71830cad2c9c7c016d1fbdfe5fe35124f6621163c109023a1cb11d"
     }
-  ]
+  ],
+  "initialWebsiteCount": 55,
+  "contentUpdatedAt": "2026-10-09",
+  "serviceWindowCount": 27
 }

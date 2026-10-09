@@ -41,7 +41,7 @@ export function GuidePage() {
       <p className="page-description">校园卡、选课、预约、报修和校园服务，从你遇到的问题开始查找。</p>
     </div>
     <section className="guide-search-panel" role="search" aria-label="查找校园办事指南">
-      <SearchField id="guide-search" label="你想办什么事？" placeholder="例如：校园卡丢了、图书馆预约、寝室报修" value={query} onChange={(value) => update('q', value)} hint="支持搜索问题、操作步骤、办理地点、时间和电话；多个关键词用空格分隔。" />
+      <SearchField id="guide-search" label="你想办什么事？" placeholder="例如：校园卡丢了、图书馆预约、寝室报修" value={query} onChange={(value) => update('q', value)} hint="可以直接输入问题，如“寝室灯坏了”；支持近义词、地点、时间和电话，匹配标题的结果优先。" />
       <div className="content-filter-row"><label htmlFor="guide-category">按类别查找</label><select id="guide-category" value={category} onChange={(event) => update('category', event.target.value)}><option value="">全部类别（{guides.length}）</option>{categories.map((item) => <option key={item} value={item}>{item}（{guides.filter((guide) => guide.category === item).length}）</option>)}</select></div>
       <div className="guide-quick-search"><span>常见需求</span>{quickKeywords.map((keyword) => <button key={keyword} type="button" className="guide-keyword-button" onClick={() => update('q', keyword)}>{keyword}</button>)}</div>
     </section>

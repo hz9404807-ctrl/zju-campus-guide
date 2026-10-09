@@ -181,21 +181,30 @@
   },
   {
     "id": "campus-004",
-    "title": "校内共享单车优惠在校外可以用吗",
+    "title": "校内共享单车骑到校外，怎样确认收费？",
     "category": "校园生活",
     "keywords": [
       "校内共享单车优惠在校外可以用吗"
     ],
-    "summary": "需注意，共享单车可以从校内出发去校外，但是从校外出发不能享受专属优惠；共享电助力车只能在校内使用，超过校内范围会自动断电。",
+    "summary": "先在车辆App核对校园优惠和运营范围，再选择行程、按指定区域还车，最后检查订单实付金额。",
     "steps": [
-      "需注意，共享单车可以从校内出发去校外，但是从校外出发不能享受专属优惠",
-      "共享电助力车只能在校内使用，超过校内范围会自动断电。"
+      "扫码打开车辆页面，先查看计费规则及本人账户是否显示校园优惠，不要仅凭学生身份默认享受优惠。",
+      "预计骑出校园时，在App地图确认目的地是否在运营区、是否有可还车点；找不到还车点时换一种出行方式。",
+      "按App要求锁车并完成还车，检查订单已结束、停车位置被系统接受。",
+      "打开本次订单核对计费时长和实付金额；优惠未使用或订单仍在计时，保存订单号，通过车辆App客服处理。"
     ],
-    "materials": [],
+    "materials": [
+      "使用车辆所属品牌的App或小程序；手机能够定位、扫码。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "学校办事百事通",
+        "url": "https://s2.zju.edu.cn/mobile/index.do"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第5行",
     "sourceRows": [
       5
@@ -209,33 +218,47 @@
     "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "以本次订单显示“已结束”和实际扣费为完成依据。",
+    "troubleshooting": [
+      "不同品牌和活动的优惠范围可能不同；没有查到当前校园专属规则时，按App普通计费标准预算。"
+    ]
   },
   {
     "id": "campus-005",
-    "title": "怎么借用教学楼的教室",
+    "title": "怎样借用教学楼教室？",
     "category": "场地与预约",
     "keywords": [
       "怎么借用教学楼的教室",
       "浙江大学教室资源管理平台的网址是什么？可以预约哪些场地/办理哪些业务？",
-      "学生教室借用申请怎么办？"
+      "学生教室借用申请怎么办？",
+      "借教室",
+      "教室申请",
+      "自习教室",
+      "教室课表"
     ],
-    "summary": "请前往浙江大学教室资源管理平台jxzygl.zju.edu.cn 平台网址为jxzygl.zju.edu.cn，可办理紫金港东、西、北教学楼，蒙民伟楼，研究生教育综合楼各规模各类教室借用；也可查询自习教室、教室课表。 可通过学生教…",
+    "summary": "先查空闲教室和使用时段，提交借用申请，获得批准并落实开门安排后按时使用。",
     "steps": [
-      "请前往浙江大学教室资源管理平台jxzygl.zju.edu.cn",
-      "平台网址为jxzygl.zju.edu.cn，可办理紫金港东、西、北教学楼，蒙民伟楼，研究生教育综合楼各规模各类教室借用",
-      "也可查询自习教室、教室课表。",
-      "可通过学生教学资源管理系统线上借用教室",
-      "需根据主管部门审批要求完成申请。"
+      "打开教室资源管理平台，按校区、日期、时段和人数查询教室课表，挑选没有排课的教室。",
+      "按平台申请要求填写活动用途、使用单位、负责人和联系方式；学生团队需要单位审核时，交由学院或指导单位办理。",
+      "提交后查看审批结果；空闲教室和已提交申请都不等于已经获准使用。",
+      "审批通过后保存借用凭证，向所在楼宇物业确认开门、设备和进出安排；临时取消或调整时间时同步告知管理人员。"
     ],
-    "materials": [],
+    "materials": [
+      "活动名称和用途、预计人数、日期及起止时间。",
+      "负责人联系方式；需要单位审批的活动准备学院或单位意见。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "jxzygl.zju.edu.cn（小组资料提供）",
-        "url": "https://jxzygl.zju.edu.cn"
+        "label": "教室资源管理平台",
+        "url": "https://jxzygl.zju.edu.cn/"
+      },
+      {
+        "label": "后勤物业服务指南",
+        "url": "https://zulg.zju.edu.cn/guide/property.htm"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第6、7、60行",
@@ -255,7 +278,11 @@
     "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "审批通过且开门安排已确认后，再通知参加者到场。",
+    "troubleshooting": [
+      "系统没有个人申请权限时，请学院教学科或活动指导单位协助，不要借用他人账号。"
+    ]
   },
   {
     "id": "venue-reservation",
@@ -263,24 +290,30 @@
     "category": "场地与预约",
     "keywords": [
       "启真在线的访问入口是什么？可以预约哪些场地/办理哪些业务？",
-      "活动空间查询"
+      "活动空间查询",
+      "活动室",
+      "借场地",
+      "启真在线",
+      "场地预约"
     ],
-    "summary": "可从启真在线或浙大钉工作台进入，按场地类型查询可预约空间、时段和申请要求。",
+    "summary": "进入启真在线，选择场地和时段，提交活动资料，审批通过后凭预约信息使用。",
     "steps": [
-      "可以通过网址qzonline.zju.edu.cn访问，也可以在浙大钉工作台的【启真在线】入口进入，可预约小剧场、各学园研讨室、研究生教育综合楼讨论室，尧坤楼与蒙民伟楼玻璃房，会议室，体育场馆，室外广场（不统计限用教室）。",
-      "https://qzonline.zju.edu.cn/hom/uni#/home"
+      "打开启真在线，或在浙大钉工作台进入启真在线应用，使用本人身份登录。",
+      "按校区、场地类型、人数和活动时间筛选可用空间，先阅读容量、设备和申请对象要求。",
+      "填写活动用途、主办单位、负责人、联系方式及页面要求的附件，提交申请。",
+      "在申请记录中确认审核结果；获准后保存场地、时段和入场说明，需要设备或开门协助时提前联系场地管理方。",
+      "活动取消或时间变更时，撤销原申请或联系管理方处理，确认释放原时段。"
     ],
-    "materials": [],
+    "materials": [
+      "活动用途、主办单位、人数、时间及联系人。",
+      "按所选场地要求准备活动方案或单位审批资料。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "qzonline.zju.edu.cn（小组资料提供）",
-        "url": "https://qzonline.zju.edu.cn"
-      },
-      {
-        "label": "qzonline.zju.edu.cn（小组资料提供）",
+        "label": "启真在线场地预约",
         "url": "https://qzonline.zju.edu.cn/hom/uni#/home"
       }
     ],
@@ -299,27 +332,44 @@
     "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "以审批通过的预约记录为准；提交成功提示不代表获准。",
+    "troubleshooting": [
+      "没有找到目标教室时，改用教室资源管理平台；体育馆和图书馆使用各自预约入口。"
+    ],
+    "relatedGuideIds": [
+      "campus-005",
+      "campus-009",
+      "campus-011"
+    ]
   },
   {
     "id": "campus-008",
-    "title": "团在浙大（共青团浙江大学团委）平台的网址是什么？可以预约哪些场地/办理哪些业务？",
+    "title": "团在浙大：怎样查找团务和社团办事入口？",
     "category": "场地与预约",
     "keywords": [
-      "团在浙大（共青团浙江大学团委）平台的网址是什么？可以预约哪些场地/办理哪些业务？"
+      "团在浙大（共青团浙江大学团委）平台的网址是什么？可以预约哪些场地/办理哪些业务？",
+      "团务",
+      "社团",
+      "团委"
     ],
-    "summary": "平台网址为tzzd.zju.edu.cn，可办理尧坤楼教室借用，以及社团与社会实践相关事务。",
+    "summary": "登录团在浙大，找到对应业务，按该事项要求提交资料并跟进处理结果。",
     "steps": [
-      "平台网址为tzzd.zju.edu.cn，可办理尧坤楼教室借用，以及社团与社会实践相关事务。"
+      "打开团在浙大，按页面要求登录，先选择与团务、社团或活动相关的业务。",
+      "进入目标事项后确认申请对象、负责人和材料清单；场地业务先核对名称、容量和可申请时段。",
+      "有线上申请入口时填写资料并提交；仅提供办事说明时，按说明联系负责老师或组织。",
+      "保留申请记录和审批结果；组织活动或使用场地前，确认申请已经获准。"
     ],
-    "materials": [],
+    "materials": [
+      "本人学号及组织信息；活动申请准备主办方、人数和时间。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "tzzd.zju.edu.cn（小组资料提供）",
-        "url": "https://tzzd.zju.edu.cn"
+        "label": "团在浙大",
+        "url": "https://tzzd.zju.edu.cn/"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第9行",
@@ -335,33 +385,49 @@
     "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "以对应事项的审核结果或负责人的确认回复为准。",
+    "troubleshooting": [
+      "平台没有显示所需业务时，联系学院团委确认承办单位；不要把其他系统的预约当作本平台审批。"
+    ],
+    "relatedGuideIds": [
+      "venue-reservation",
+      "campus-104"
+    ]
   },
   {
     "id": "campus-009",
-    "title": "浙江大学图书馆预约系统的访问入口是什么？可以预约哪些场地？",
+    "title": "图书馆自习座位和研讨空间怎样预约？",
     "category": "场地与预约",
     "keywords": [
       "浙江大学图书馆预约系统的访问入口是什么？可以预约哪些场地？",
-      "图书馆预约"
+      "图书馆预约",
+      "图书馆",
+      "自习",
+      "座位预约",
+      "研讨室",
+      "小组讨论"
     ],
-    "summary": "可以通过网址booking.lib.zju.edu.cn访问，也可以在浙大钉工作台的【图书馆】入口进入，可预约主馆、基础馆、古籍馆、农医馆的座位与空间。 https://booking.lib.zju.edu.cn/；或者钉钉工作…",
+    "summary": "先区分座位与研讨空间，选择分馆、位置和时段，预约后按规定签到，离开时结束使用。",
     "steps": [
-      "可以通过网址booking.lib.zju.edu.cn访问，也可以在浙大钉工作台的【图书馆】入口进入，可预约主馆、基础馆、古籍馆、农医馆的座位与空间。",
-      "https://booking.lib.zju.edu.cn/",
-      "或者钉钉工作台的图书馆预约"
+      "打开图书馆官网：个人自习选择“座位预约”，小组讨论选择“空间预约”；两类入口不要混用。",
+      "登录后选择分馆、日期、座位或空间及使用时段，阅读人数、签到和取消要求。",
+      "提交预约，查看预约记录中的地点、时间和状态；空间需要审核时，等待审核通过。",
+      "到馆后按预约页面或现场提示签到；临时离开、提前结束或不再前往时，使用对应离开、结束或取消功能。"
     ],
-    "materials": [],
+    "materials": [
+      "本人校园身份；小组预约准备人数、用途和联系人。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "booking.lib.zju.edu.cn（小组资料提供）",
-        "url": "https://booking.lib.zju.edu.cn"
+        "label": "图书馆服务：座位、空间与开放时间",
+        "url": "https://libweb.zju.edu.cn/libweb/"
       },
       {
-        "label": "booking.lib.zju.edu.cn（小组资料提供）",
+        "label": "图书馆空间预约",
         "url": "https://booking.lib.zju.edu.cn/"
       }
     ],
@@ -375,32 +441,61 @@
       "图书馆预约"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
     "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "官网分别提供座位预约和空间预约；具体签到时限需在登录后的预约规则中读取。",
+    "relatedSourceIds": [],
+    "completionNote": "预约记录有效且现场签到成功后，使用对应座位或空间。",
+    "troubleshooting": [
+      "没有空位时换分馆或时段；无法到场时提前取消，避免留下未到场记录。",
+      "校外打不开内网预约入口时，可先通过WebVPN接入。"
+    ],
+    "relatedGuideIds": [
+      "campus-012",
+      "campus-082"
+    ]
   },
   {
     "id": "campus-010",
-    "title": "寝室报修、缴费与公寓功能房在哪里办理？",
+    "title": "寝室灯坏了、漏水或水电缴费，怎样办理？",
     "category": "校园生活",
     "keywords": [
       "浙江大学公寓管理服务中心怎么访问？可以办理哪些业务？",
-      "空调坏了、交水电费、定水、寝室报修，失物招领、班车查询、毕至居预约、自助洗衣、功能房预约、缴纳住宿费等"
+      "空调坏了、交水电费、定水、寝室报修，失物招领、班车查询、毕至居预约、自助洗衣、功能房预约、缴纳住宿费等",
+      "宿舍灯故障",
+      "寝室灯坏了",
+      "漏水",
+      "空调坏了",
+      "水电费",
+      "iHome",
+      "学生公寓"
     ],
-    "summary": "在微信中查找浙大学生公寓管理服务中心，进入iHome查看报修、缴费、住宿及功能房相关服务。",
+    "summary": "在公寓线上服务选择报修或缴费，填写宿舍信息并提交，随后跟进维修单或核对缴费到账。",
     "steps": [
-      "在微信查找浙大学生公寓管理服务中心公众号，核对账号主体。",
-      "进入iHome，按需求选择寝室报修、水电缴费、订水、自助洗衣、失物招领、班车查询或功能房预约等入口。",
-      "查看对应服务要求并办理；现有资料未提供各项服务的开放时间与预约规则。"
+      "微信关注“浙大学生公寓管理服务中心”，从公寓服务入口进入iHome；按页面提示绑定本人身份和宿舍。",
+      "报修时填写校区、楼栋、房间、故障位置和联系方式，用照片说明灯不亮、漏水或设备故障，再提交维修单。",
+      "查看维修单处理状态，保持联系电话可接通；维修后检查设施能否正常使用，再按平台要求确认完成。",
+      "缴水电费时先核对校区、楼栋、房号和充值项目，支付后检查账单及房间剩余金额；订水、洗衣或功能房预约从各自服务办理。"
     ],
-    "materials": [],
+    "materials": [
+      "校区、宿舍楼栋、房号和联系方式。",
+      "报修准备故障照片；缴费先确认对应房间和支付方式。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "学生公寓线上服务介绍",
+        "url": "https://www.zju.edu.cn/2019/0603/c32896a1510151/pagem.htm"
+      },
+      {
+        "label": "后勤水电服务与报修说明",
+        "url": "https://zulg.zju.edu.cn/info/1203/8341.htm"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第11、96行",
     "sourceRows": [
       11,
@@ -419,28 +514,50 @@
     "relatedSourceIds": [
       "account-18",
       "account-48"
+    ],
+    "completionNote": "报修以设施恢复正常为准；缴费以房间账单或余额更新为准。",
+    "troubleshooting": [
+      "漏水影响用电等紧急情况，先联系本楼宿管或物业，请现场人员处理，再补充维修单。",
+      "找不到本人宿舍或绑定错误时，向本楼宿管核对，不要给陌生房间充值。"
+    ],
+    "relatedGuideIds": [
+      "campus-043"
     ]
   },
   {
     "id": "campus-011",
-    "title": "体育馆、球场怎么预约或取消？",
+    "title": "体育馆、球场怎样预约或取消？",
     "category": "场地与预约",
     "keywords": [
       "场馆预约在哪里？我要预约运动场地怎么办？",
-      "体育馆预约/球场预约/预约取消"
+      "体育馆预约/球场预约/预约取消",
+      "羽毛球",
+      "网球",
+      "游泳",
+      "球场",
+      "体育馆",
+      "取消预约"
     ],
-    "summary": "通过浙大体艺App查看羽毛球、网球、游泳及艺术教室等预约入口；按预约规则完成入场。",
+    "summary": "选择运动项目、场地和时段，完成预约与必要付款，按预约信息入场；不去时提前取消。",
     "steps": [
-      "通过“浙大体艺”App进行预约办理，可预约个人羽毛球、网球、游泳馆，西三琴房等艺术教室，以及游泳健身个人场地，同时办理体艺类各项事务。",
-      "浙大体艺上可以预约球场",
-      "需要刷卡入场，否则会被判定违规进入黑名单",
-      "打体艺部电话88206528可以取消"
+      "打开浙大体艺App的场馆预约服务，或公共体育与艺术部官网的场馆预约入口。",
+      "选择校区、运动项目、日期和时段，核对人数、预约资格、场地费用及入场要求。",
+      "填写参与信息并提交；有支付要求时完成付款，再到预约记录确认是否成功。",
+      "到场后出示系统提供的预约凭证或校园身份，按预约时段使用场地。",
+      "无法到场时，先在预约记录查找取消入口并核对退款规则；不能自行取消时，联系该场馆管理方处理。"
     ],
-    "materials": [],
+    "materials": [
+      "本人校园身份；按场地要求准备参与人信息。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "公共体育与艺术部场馆预约",
+        "url": "https://www.tyys.zju.edu.cn/cgyy/index"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第12、63行",
     "sourceRows": [
       12,
@@ -454,39 +571,50 @@
     "verifiedAt": null,
     "isExample": false,
     "kind": "procedure",
-    "notes": [
-      "原表第63行给出的取消咨询电话为88206528，尚未核对；取消期限、签到和违规规则以平台当期说明为准。"
-    ],
+    "notes": [],
     "verificationScope": null,
     "relatedSourceIds": [
       "account-41"
+    ],
+    "completionNote": "记录中显示预约成功并能够出示有效凭证后，再安排到场。",
+    "troubleshooting": [
+      "不要以提交申请或单独扣款作为预约成功依据；未确认时先查记录。",
+      "失约和取消规则因场馆而异，具体限制看所选场地的预约须知。"
     ]
   },
   {
     "id": "campus-012",
-    "title": "校外如何访问校园网内资源？",
+    "title": "在校外怎样打开校内网站和文献资源？",
     "category": "网络与数字服务",
     "keywords": [
       "我需要在校外使用校网环境怎么办？",
-      "校园网连接"
+      "校园网连接",
+      "VPN",
+      "校外访问",
+      "校内资源",
+      "文献下载"
     ],
-    "summary": "从浙江大学WebVPN入口登录，访问需要校内网络环境的资源。",
+    "summary": "网页资源先用WebVPN登录再打开；需要远程桌面等服务时，使用学校新版RVPN客户端。",
     "steps": [
-      "打开 https://webvpn.zju.edu.cn/，按页面提示登录。",
-      "在WebVPN中选择需要访问的校内服务；客户端方式请参考信息技术中心说明。"
+      "打开WebVPN，输入本人的校园网络账号和密码登录；这里使用网络账号，不要默认统一身份认证密码相同。",
+      "从WebVPN资源列表进入目标网站，或按该页面提供的地址输入功能访问校内网址。",
+      "进入目标业务后，如页面另要求统一身份认证，再按提示登录；文献资源也可从图书馆的校外访问入口进入。",
+      "需要SSH、远程桌面或FTP时，打开vpn.zju.edu.cn下载aTrust客户端，按官方教程配置和认证；纯网页访问无需先安装客户端。"
     ],
-    "materials": [],
+    "materials": [
+      "已激活的校园网络账号及密码。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "webvpn.zju.edu.cn（小组资料提供）",
+        "label": "WebVPN登录",
         "url": "https://webvpn.zju.edu.cn/"
       },
       {
-        "label": "webvpn.zju.edu.cn（小组资料提供）",
-        "url": "https://webvpn.zju.edu.cn/login"
+        "label": "信息技术中心校外接入指南",
+        "url": "https://itc.zju.edu.cn/2021/0615/c49798a2395843/page.htm"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第13、62行",
@@ -499,34 +627,52 @@
       "校园网连接"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
     "kind": "procedure",
-    "notes": [
-      "原表第62行将WebVPN标为“校园网连接”。它是校外访问内网资源的入口，不等同于校内Wi-Fi连接教程。"
+    "notes": [],
+    "verificationScope": "当前校外接入网页与新版RVPN适用范围核对。",
+    "relatedSourceIds": [],
+    "completionNote": "目标校内页面可以打开且相关业务登录成功，才说明接入可用。",
+    "troubleshooting": [
+      "网页打开但业务提示无权限时，向该业务承办单位确认本人资格；VPN不能替代业务授权。",
+      "网络账号问题拨打0571-87951669。"
     ],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedGuideIds": [
+      "campus-015",
+      "campus-082"
+    ]
   },
   {
     "id": "campus-013",
-    "title": "我想下载一些软件如OFFICE、matlab，我应该去哪",
+    "title": "Office、MATLAB等正版软件怎样下载安装？",
     "category": "网络与数字服务",
     "keywords": [
-      "我想下载一些软件如OFFICE、matlab，我应该去哪"
+      "我想下载一些软件如OFFICE、matlab，我应该去哪",
+      "正版软件",
+      "Office",
+      "MATLAB",
+      "下载软件",
+      "安装",
+      "激活"
     ],
-    "summary": "去正版化软件，访问网站为http://ms.zju.edu.cn",
+    "summary": "从学校正版软件目录找到对应产品，按产品说明下载、安装并激活，最后确认能够正常启动。",
     "steps": [
-      "去正版化软件，访问网站为http://ms.zju.edu.cn"
+      "打开信息技术中心“正版化软件”目录，选择Office、MATLAB等目标软件；不同产品对应的入口可能不同。",
+      "按软件页面提示登录或创建学校授权的产品账户，核对本人身份是否在授权范围内。",
+      "选择适合本机系统和版本的安装包，按该产品的安装及激活说明操作。",
+      "启动软件，查看许可或账户页面是否显示激活成功；需要续期时按产品页面提示办理。"
     ],
-    "materials": [],
+    "materials": [
+      "本人校园身份、可用的学校邮箱；确认电脑系统、版本和可用空间。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "ms.zju.edu.cn（小组资料提供）",
-        "url": "http://ms.zju.edu.cn"
+        "label": "学校正版软件目录与安装入口",
+        "url": "https://itc.zju.edu.cn/zbhrj/list.htm"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第14行",
@@ -537,32 +683,49 @@
       "我想下载一些软件如OFFICE、matlab，我应该去哪"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
     "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "当前官方软件目录和分产品入口核对；不保证所有身份均有全部软件授权。",
+    "relatedSourceIds": [],
+    "completionNote": "软件启动正常且许可状态有效。",
+    "troubleshooting": [
+      "安装或激活失败时，保留产品名、版本、系统和错误提示，到对应产品常见问题查找处理方法；可拨0571-87951669咨询。"
+    ]
   },
   {
     "id": "campus-014",
-    "title": "学费在哪里缴费",
+    "title": "学费、住宿费怎样缴纳并确认？",
     "category": "缴费与资助",
     "keywords": [
-      "学费在哪里缴费"
+      "学费在哪里缴费",
+      "交学费",
+      "学费缴费",
+      "住宿费",
+      "缴费凭证"
     ],
-    "summary": "可以通过浙江大学的计财处网站（ http://cwcx.zju.edu.cn/）或对应微信小程序进行缴费。",
+    "summary": "登录学校收费平台，核对待缴项目和金额，完成支付后检查缴费状态并保存凭证。",
     "steps": [
-      "可以通过浙江大学的计财处网站（ http://cwcx.zju.edu.cn/）或对应微信小程序进行缴费。"
+      "打开浙江大学收费平台，按页面登录要求使用本人身份登录。",
+      "查看本人待缴项目，逐项核对学费、住宿费等项目、所属学年和金额。",
+      "选择可用的支付方式，完成支付后返回平台查看订单和项目状态。",
+      "保存缴费凭证；毕业办理时如离校状态尚未更新，按学院离校通知刷新或联系计财处确认。"
     ],
-    "materials": [],
+    "materials": [
+      "本人学号和登录信息；可用的支付方式。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "cwcx.zju.edu.cn（小组资料提供）",
-        "url": "http://cwcx.zju.edu.cn/"
+        "label": "浙江大学收费平台",
+        "url": "https://pay.zju.edu.cn/"
+      },
+      {
+        "label": "学院毕业办理通知中的学校缴费渠道",
+        "url": "https://ls.zju.edu.cn/2026/0604/c64807a3174669/page.htm"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第15行",
@@ -573,34 +736,52 @@
       "学费在哪里缴费"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
     "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "2026官方学院离校通知确认pay.zju.edu.cn为学费、住宿费缴费入口。",
+    "relatedSourceIds": [],
+    "completionNote": "收费平台显示对应项目已缴清，而不是只有银行扣款通知。",
+    "troubleshooting": [
+      "已扣款但平台仍待缴时，先保存订单号、时间和金额，联系平台公布的收费咨询渠道，避免重复付款。",
+      "缴费有困难时先联系学院辅导员咨询缓缴或资助流程。"
+    ],
+    "relatedGuideIds": [
+      "campus-053"
+    ]
   },
   {
     "id": "campus-015",
-    "title": "网络问题在哪里咨询？信息技术中心入口是什么？",
+    "title": "校园网连不上，怎样报障和找服务窗口？",
     "category": "网络与数字服务",
     "keywords": [
       "信息技术中心网址",
-      "网络相关问题去哪里办理？"
+      "网络相关问题去哪里办理？",
+      "网络故障",
+      "断网",
+      "连不上网",
+      "网络报障",
+      "校园网咨询"
     ],
-    "summary": "可查看信息技术中心网站，或到所在校区的信息技术中心服务窗口咨询。",
+    "summary": "先记录网络故障和设备情况，通过浙大钉IT服务台报障或拨打热线，必要时到对应校区窗口办理。",
     "steps": [
-      "itc。zju.edu.cn",
-      "可到信息技术中心办理相关业务。不同校区受理地点包括行政服务办事大厅115室信息技术中心窗口、玉泉图书馆702、西溪六313、华家池纳米楼103等。"
+      "先确认是所有网站都打不开、只有一个系统打不开，还是单台设备无法联网；记录出现时间、校区楼栋和网络名称。",
+      "在浙大钉工作台打开IT服务台，提交自助报障，写明网络账号、故障范围、设备和错误截图。",
+      "急需协助时拨打0571-87951669，说明已有报障记录及联系方式。",
+      "需要账号激活、身份核验等线下事项时，带有效身份证件和校园卡，到下方对应校区窗口；先核对开放时间。"
     ],
-    "materials": [],
+    "materials": [
+      "网络账号、联系电话、设备系统和故障截图。",
+      "线下账号业务准备身份证件和校园卡。"
+    ],
     "location": null,
     "openingHours": null,
-    "contact": null,
+    "contact": "热线0571-87951669；紫金港0571-88981611；玉泉0571-87951762；华家池0571-86971518；西溪0571-88273001。",
     "references": [
       {
-        "label": "itc.zju.edu.cn（小组资料提供）",
-        "url": "https://itc.zju.edu.cn"
+        "label": "网络服务办理指南",
+        "url": "https://itc.zju.edu.cn/_s146/_t3343/90690/list.psp"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第16、58行",
@@ -613,32 +794,50 @@
       "网络相关问题去哪里办理？"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
     "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "当前官方网络服务页的热线、报障入口和四校区受理地点及时间核对。",
+    "relatedSourceIds": [],
+    "completionNote": "联网恢复正常或账号业务已办结后，再结束报障记录。",
+    "troubleshooting": [
+      "单个业务网站提示权限不足时，联系该业务单位；不要反复充值网费尝试解决业务权限问题。"
+    ],
+    "serviceWindowIds": [
+      "network-zijingang",
+      "network-yuquan",
+      "network-huajiachi",
+      "network-xixi"
+    ]
   },
   {
     "id": "campus-016",
-    "title": "怎么找各学院的官网",
+    "title": "怎样找到学院官网和教学科联系方式？",
     "category": "综合入口",
     "keywords": [
-      "怎么找各学院的官网"
+      "怎么找各学院的官网",
+      "学院官网",
+      "教学科",
+      "教务老师",
+      "学院联系方式"
     ],
-    "summary": "资料提供了怎么找各学院的官网的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "从学校官网定位学院主页，再进入学院通知或联系方式栏目，找到对应办事老师。",
     "steps": [
-      "https://zjuers.com/welcome/basics/colleges/"
+      "打开浙江大学官网，从院系相关栏目进入目标学院的学校域名主页。",
+      "教务事项查“本科生教育”“教学通知”或教学科联系方式；研究生事项查研究生教育栏目。",
+      "在联系方式或通知末尾找到该事项负责老师，发出咨询时附本人专业、年级、学号和具体问题。"
     ],
-    "materials": [],
+    "materials": [
+      "学院完整名称；咨询事项及本人专业、年级。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "zjuers.com（小组资料提供）",
-        "url": "https://zjuers.com/welcome/basics/colleges/"
+        "label": "浙江大学官网院系入口",
+        "url": "https://www.zju.edu.cn/"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第17行",
@@ -651,27 +850,51 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "找到学院官网中的目标通知或承办老师，而不是只有搜索到学院简称。",
+    "troubleshooting": [
+      "搜索结果混入非官方网站时，从学校官网的院系入口重新进入。"
+    ]
   },
   {
     "id": "campus-017",
-    "title": "关于教务问题除了咨询老师还可以去哪问",
+    "title": "教务问题怎样查答案和提交咨询？",
     "category": "教务与学习",
     "keywords": [
-      "关于教务问题除了咨询老师还可以去哪问"
+      "关于教务问题除了咨询老师还可以去哪问",
+      "教务咨询",
+      "浙小本",
+      "教务问题"
     ],
-    "summary": "学校教务网配备智能体浙小本可以回答大多数简单问题，遇到问题还是优先联系本院教务科老师，联系方式在学院官网电话黄页里。",
+    "summary": "先按事项查询学校答疑，找到办理通知；仍有疑问时，带具体课程或学籍信息咨询学院教学科。",
     "steps": [
-      "学校教务网配备智能体浙小本可以回答大多数简单问题，遇到问题还是优先联系本院教务科老师，联系方式在学院官网电话黄页里。"
+      "打开学校办事百事通，搜索选课、成绩、缓考或转专业等具体事项，优先阅读与本人身份对应的答复。",
+      "涉及申请或截止日期时，进入本科生院或教学管理平台的相关通知，确认本学期是否开放。",
+      "平台答复没有解决时，整理问题、课程代码、错误截图和已尝试的操作，联系学院本科教学科。"
     ],
-    "materials": [],
+    "materials": [
+      "本人年级、专业、课程代码或相关申请编号。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "学校办事百事通",
+        "url": "https://s2.zju.edu.cn/mobile/index.do"
+      },
+      {
+        "label": "本科生院办事通知",
+        "url": "https://ugrs.zju.edu.cn/"
+      },
+      {
+        "label": "本科教学管理平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第18行",
     "sourceRows": [
       18
@@ -685,36 +908,49 @@
     "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "得到明确的办理路径或承办人的答复，再进行申请。",
+    "troubleshooting": [
+      "智能问答涉及学籍资格或学分认定时，请承办教学科确认本人适用规则。"
+    ],
+    "relatedGuideIds": [
+      "campus-016"
+    ]
   },
   {
     "id": "campus-019",
-    "title": "选课有哪些重要事项需要注意？",
+    "title": "怎样按培养方案选课并确认选上？",
     "category": "教务与学习",
     "keywords": [
       "选课有哪些重要事项需要注意？",
-      "新生不会选课怎么办？"
+      "新生不会选课怎么办？",
+      "选课",
+      "课表",
+      "抢课",
+      "必修",
+      "推荐课表"
     ],
-    "summary": "1. 选课前： 登录本科教学管理信息服务平台（zdbk.zju.edu.cn）查询推荐课表；根据培养方案拟订学习计划；③ 认真阅读选课提示，了解关键时间点；④ 学习《浙江大学教学管理信息服务平台学生操作手册》。2. 选课中：① 无…",
+    "summary": "先对照培养方案列出课程，按本轮规则选课，筛选结束后核对选课结果与课表。",
     "steps": [
-      "1. 选课前： 登录本科教学管理信息服务平台（zdbk.zju.edu.cn）查询推荐课表",
-      "根据培养方案拟订学习计划",
-      "③ 认真阅读选课提示，了解关键时间点",
-      "④ 学习《浙江大学教学管理信息服务平台学生操作手册》。2. 选课中：① 无特殊情况不建议更换预置课表，避免因教学班容量限制或时间冲突而无法选上",
-      "② 优先选择学分高、课时长的必修课，并保障实验课安排",
-      "③ 仔细核对课程信息（课程代码、预修要求、面向对象等）。3. 选课后：① 及时查看并确认课表",
-      "② 选修实验课需密切关注实验室通知",
-      "③ 查询课表和考试信息时，请务必使用官方教务系统，谨慎对待“求是潮”等第三方平台。参考文件：《浙江大学本科生选课管理办法.docx》",
-      "多看看cc98上的经验贴，指路"
+      "登录本科教学管理平台，查看本学期选课通知，记录每轮开始、截止时间和筛选规则。",
+      "对照本专业、年级培养方案和推荐课表，先列必修课程，再安排通识、体育和个性修读；核对先修要求及考试时间。",
+      "按课程代码、教学班和时间选课，逐项检查上课与考试冲突；提交后留意课程是已选上还是待定。",
+      "在该轮筛选结束后查看正式结果，确认必修课和课表齐全；未选上的课程在后续开放轮次补选。"
     ],
-    "materials": [],
+    "materials": [
+      "本人年级培养方案、已修课程记录和本学期推荐课表。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "zdbk.zju.edu.cn（小组资料提供）",
-        "url": "https://zdbk.zju.edu.cn"
+        "label": "本科教学管理平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      },
+      {
+        "label": "学校选课常见问题",
+        "url": "https://s2.zju.edu.cn/search/faq.do?words=%E9%80%89%E8%AF%BE"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第20、19行",
@@ -732,28 +968,44 @@
     "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "选课结果显示已选上，且教学班与最终课表一致。",
+    "troubleshooting": [
+      "容量已满或不在可选对象范围时，按当轮通知申请或联系学院教学科；不要只凭旁听认定已经选课。"
+    ],
+    "relatedGuideIds": [
+      "campus-020",
+      "campus-022",
+      "campus-042"
+    ]
   },
   {
     "id": "campus-020",
-    "title": "每学期最多可以选修多少学分？",
+    "title": "选课学分上限怎样计算，超限怎么办？",
     "category": "教务与学习",
     "keywords": [
-      "每学期最多可以选修多少学分？"
+      "每学期最多可以选修多少学分？",
+      "学分上限",
+      "35学分",
+      "40学分",
+      "选课超限"
     ],
-    "summary": "官方常见问题列出的长学期上限为35学分，符合条件的学生可增加到40学分；通常建议约25学分。",
+    "summary": "先确认本人适用上限，合计已选、待定和补选申请学分，再调整课程或咨询学院。",
     "steps": [
-      "核对当期选课通知和本人适用身份。",
-      "官方FAQ列出的通常上限为35学分；竺可桢学院及已注册辅修、双专业、双学位学生可增加到40学分。",
-      "通常修读约25学分，最低15学分的规定对毕业班有例外；以当期通知及本人培养方案为准。"
+      "通常每个长学期上限为35学分；竺可桢学院及已注册辅修、双专业、双学位学生可增至40学分，先核对本人的注册身份。",
+      "将已选上课程、待定课程和补选申请课程的学分一起相加，不能只看已选上的学分。",
+      "安排课程时结合学习负担；官方答疑建议约25学分，通常最低15学分，但毕业班有例外。",
+      "超限时先删除不再需要的待定课程或撤回补选申请，再重试；身份已符合放宽条件但系统未更新时，带注册证明咨询学院教学科。"
     ],
-    "materials": [],
+    "materials": [
+      "已选、待定和补选申请清单；符合放宽条件时准备相关注册记录。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "浙大百事通：选课学分限制",
+        "label": "学校选课常见问题",
         "url": "https://s2.zju.edu.cn/search/faq.do?words=%E9%80%89%E8%AF%BE"
       }
     ],
@@ -765,35 +1017,58 @@
       "每学期最多可以选修多少学分？"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": "2026-10-08",
+    "verifiedAt": "2026-10-09",
     "isExample": false,
-    "kind": "explanation",
-    "notes": [
-      "已纠正原表“毕业班学生同理”的错误；官方FAQ写明毕业班学生除外。"
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": "官网FAQ的35/40学分上限、合计口径及毕业班最低学分例外。",
+    "relatedSourceIds": [],
+    "completionNote": "总学分符合本人上限，且所需课程最终选课成功。",
+    "troubleshooting": [
+      "不要为低于15学分的毕业班学生直接套用一般最低要求；特殊修读情况向学院核对。"
     ],
-    "verificationScope": "正文中明确标出的官网核对内容；其他资料细节仍需确认。",
-    "relatedSourceIds": []
+    "relatedGuideIds": [
+      "campus-019"
+    ]
   },
   {
     "id": "campus-021",
-    "title": "体育课程如何选修？",
+    "title": "体育课怎样选，怎样核对毕业要求？",
     "category": "教务与学习",
     "keywords": [
-      "体育课程如何选修？"
+      "体育课程如何选修？",
+      "体育选课",
+      "体育学分",
+      "体测",
+      "保健体育"
     ],
-    "summary": "1. 选课规则： 体育课采用俱乐部制，学生可在不同学期选择相同或不同的体育项目。每学期原则上只能选择 1个项目、1个教学班。 正常学生需要修读六个学期的体育课。 2. 重修与换项： 若体育课未通过，须在下一个选课周期重新选修该项目…",
+    "summary": "对照本人培养方案确认体育修读要求，选择适合的项目和时段，选课后按课程安排参加考核。",
     "steps": [
-      "1. 选课规则：",
-      "体育课采用俱乐部制，学生可在不同学期选择相同或不同的体育项目。每学期原则上只能选择 1个项目、1个教学班。",
-      "正常学生需要修读六个学期的体育课。",
-      "2. 重修与换项：",
-      "若体育课未通过，须在下一个选课周期重新选修该项目，或重新选择其他体育项目。"
+      "先查看本人专业、年级培养方案中的体育课程要求，核对已修课程及还需修读的学期或学分。",
+      "在本轮选课开放时进入教学平台，查看体育教学班的项目、时段、上课地点和选课限制。",
+      "选择能稳定出勤的教学班，提交后确认选上；通常一个学期只选一个项目，具体按当轮规则。",
+      "开课后向任课教师确认出勤、专项考核和体测安排；学期结束后检查课程成绩及培养方案完成情况。"
     ],
-    "materials": [],
+    "materials": [
+      "本人培养方案、体育已修记录和课表。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "本科教学管理平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      },
+      {
+        "label": "学校选课常见问题",
+        "url": "https://s2.zju.edu.cn/search/faq.do?words=%E9%80%89%E8%AF%BE"
+      },
+      {
+        "label": "公共体育与艺术部场馆预约",
+        "url": "https://www.tyys.zju.edu.cn/cgyy/index"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第22行",
     "sourceRows": [
       22
@@ -804,32 +1079,50 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "explanation",
-    "notes": [
-      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
-    ],
+    "kind": "procedure",
+    "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "正式选上教学班，后续体育要求在本人培养方案中得到满足。",
+    "troubleshooting": [
+      "受伤或身体状况不适合普通项目时，先向学院及公共体育与艺术部询问适用课程和申请材料，再选课。"
+    ]
   },
   {
     "id": "campus-022",
-    "title": "若课程时间冲突或遇到特殊情况，是否可以更改选课",
+    "title": "选课时间冲突，怎样退课、换课或补选？",
     "category": "教务与学习",
     "keywords": [
-      "若课程时间冲突或遇到特殊情况，是否可以更改选课"
+      "若课程时间冲突或遇到特殊情况，是否可以更改选课",
+      "课表冲突",
+      "退课",
+      "换课",
+      "补选",
+      "退补选"
     ],
-    "summary": "1. 退补选操作： 学生日常可通过教务系统按要求进行选修课程的退选与补选操作。 2. 时间安排： 退补选通常安排在开学初（如第一周周一至周三），需确保在规定的期限内申请与操作。",
+    "summary": "先核对本轮可操作时间，调整冲突课程；需要审批的补选或退课申请，待批准后复查课表。",
     "steps": [
-      "1. 退补选操作：",
-      "学生日常可通过教务系统按要求进行选修课程的退选与补选操作。",
-      "2. 时间安排：",
-      "退补选通常安排在开学初（如第一周周一至周三），需确保在规定的期限内申请与操作。"
+      "登录教学平台，核对冲突课程的周次、星期、时段及考试安排，确认需要保留哪一门。",
+      "选退课开放期间，按该轮规则退掉不需要的教学班，再选无冲突班级；退出前先确认替代班级容量。",
+      "不能直接修改时，查看当期通知中的补选、退课或特殊申请入口，说明冲突和修读需要并提交材料。",
+      "跟进审批结果，确认课表和选课名单已更新后，通知相关任课教师；选课、听课和考核必须对应同一教学班。"
     ],
-    "materials": [],
+    "materials": [
+      "冲突课表截图、课程代码、教学班和调整理由。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "本科教学管理平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      },
+      {
+        "label": "学校选课常见问题",
+        "url": "https://s2.zju.edu.cn/search/faq.do?words=%E9%80%89%E8%AF%BE"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第23行",
     "sourceRows": [
       23
@@ -840,29 +1133,53 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "explanation",
-    "notes": [
-      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
-    ],
+    "kind": "procedure",
+    "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "最终课表无冲突，申请涉及的课程在选课名单中正确显示。",
+    "troubleshooting": [
+      "开放期结束后不要默认还能退课；立即联系学院教学科确认能否办理特殊申请。"
+    ],
+    "relatedGuideIds": [
+      "campus-019",
+      "campus-042"
+    ]
   },
   {
     "id": "campus-023",
-    "title": "学籍档案中会包含哪些内容？",
+    "title": "怎样核对学籍记录或申请更正？",
     "category": "教务与学习",
     "keywords": [
-      "学籍档案中会包含哪些内容？"
+      "学籍档案中会包含哪些内容？",
+      "学籍",
+      "学籍信息",
+      "学籍更正",
+      "学籍档案"
     ],
-    "summary": "学籍档案中包含：学生修读课程方式、课程考核结果、请假记录（含休学等）、学籍波动情况、对外交流经历、奖惩情况等",
+    "summary": "先核对平台中的学籍与成绩信息，发现差异后带相应证明联系学院教学科，办结后复查。",
     "steps": [
-      "学籍档案中包含：学生修读课程方式、课程考核结果、请假记录（含休学等）、学籍波动情况、对外交流经历、奖惩情况等"
+      "登录教学管理平台，核对姓名、学号、专业、学籍状态和个人成绩等可查看记录。",
+      "申请证明或档案查验时，先明确对方需要学籍状态、成绩还是毕业学位材料，不要混用不同证明。",
+      "发现信息不一致时，整理正确信息、错误页面截图及身份证明，提交学院教学科核查。",
+      "按老师要求补充材料；处理后重新打开相关记录，确认更正已生效。"
     ],
-    "materials": [],
+    "materials": [
+      "本人身份信息；需要更正时准备截图和对应证明。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "本科教学管理平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      },
+      {
+        "label": "档案馆查档预约与办理说明",
+        "url": "https://acv.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第24行",
     "sourceRows": [
       24
@@ -873,29 +1190,53 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "explanation",
-    "notes": [
-      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
-    ],
+    "kind": "procedure",
+    "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "记录与有效证明一致，或已取得承办单位的核查结果。",
+    "troubleshooting": [
+      "个人无法在平台查看完整历史档案时，使用档案馆查档预约，说明年份和查档用途。"
+    ],
+    "relatedGuideIds": [
+      "campus-058",
+      "campus-098"
+    ]
   },
   {
     "id": "campus-024",
-    "title": "对已退学学生的课程学分记录和处理？",
+    "title": "重新入学后，原有课程学分怎样申请认定？",
     "category": "教务与学习",
     "keywords": [
-      "对已退学学生的课程学分记录和处理？"
+      "对已退学学生的课程学分记录和处理？",
+      "退学",
+      "重新入学",
+      "课程替换",
+      "学分认定"
     ],
-    "summary": "学校会记录退学前期间已获得课程学分，并允许在5年内重新入学情况下申请课程学分替换。替换需符合拟毕业年级主修专业培养专业的方案要求。",
+    "summary": "整理原成绩与现培养方案，向所在学院提出学分替换申请，审核后核对认定结果。",
     "steps": [
-      "学校会记录退学前期间已获得课程学分，并允许在5年内重新入学情况下申请课程学分替换。替换需符合拟毕业年级主修专业培养专业的方案要求。"
+      "取得原修读期间的成绩记录，标出已通过课程的代码、名称、学分和修读时间。",
+      "取得重新入学后适用年级、专业的培养方案，逐项比较拟替换课程，不把原学分自动当作现方案已完成。",
+      "将拟替换课程清单提交所在学院教学科，确认本人是否符合学籍办法中的认定条件和期限。",
+      "按学院要求提交申请及证明，审核后检查教学平台的替换记录和毕业要求完成情况。"
     ],
-    "materials": [],
+    "materials": [
+      "原成绩单、重新入学学籍信息、当前培养方案和拟替换清单。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "本科生学籍管理办法",
+        "url": "https://ugrs.zju.edu.cn/xjglbf/list.htm"
+      },
+      {
+        "label": "本科教学管理平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第25行",
     "sourceRows": [
       25
@@ -906,29 +1247,53 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "explanation",
-    "notes": [
-      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
-    ],
+    "kind": "procedure",
+    "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "拟认定学分已在本人适用培养方案中记录。",
+    "troubleshooting": [
+      "尚未重新入学或认定资格不明确时，先请学院核对学籍条件；不要据旧课程记录推断一定可以重新入学。"
+    ]
   },
   {
     "id": "campus-025",
-    "title": "校外课程或网络课程成绩能否计入浙江大学分？",
+    "title": "校外、交流或网络课程怎样申请学分认定？",
     "category": "教务与学习",
     "keywords": [
-      "校外课程或网络课程成绩能否计入浙江大学分？"
+      "校外课程或网络课程成绩能否计入浙江大学分？",
+      "校外课程",
+      "网课学分",
+      "交流学分",
+      "学分替换"
     ],
-    "summary": "学生参加对外交流或非本校的课程，以及学校认可的开放式网络课程，经申请后可用于替换主修专业培养方案规定的课程，成绩单上会如实记载相关课程信息。",
+    "summary": "修读前确认认可范围，修读后提交成绩与课程材料，学院审核后核对学分替换。",
     "steps": [
-      "学生参加对外交流或非本校的课程，以及学校认可的开放式网络课程，经申请后可用于替换主修专业培养方案规定的课程，成绩单上会如实记载相关课程信息。"
+      "准备拟修课程名称、开课学校、课程大纲、学分与考核方式，先向学院教学科确认是否可以纳入本人培养方案。",
+      "按获准的计划修读，保存正式成绩单、完成证明和最终课程大纲。",
+      "回校后按学院学分认定安排提交材料，注明每门课程拟替换的浙大课程及理由。",
+      "审核后在教学平台核对课程、学分和替换结果；仅完成网课或取得平台证书不等于已经获得浙大学分。"
     ],
-    "materials": [],
+    "materials": [
+      "正式成绩记录、课程大纲、课程学分与学时证明；交流项目另准备批准记录。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "本科课程成绩评定与管理办法",
+        "url": "https://meetc.zju.edu.cn/2024/0306/c79045a2885825/page.htm"
+      },
+      {
+        "label": "本科生对外交流服务平台",
+        "url": "https://ugrs.zju.edu.cn/dwjlfwpt/"
+      },
+      {
+        "label": "本科教学管理平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第26行",
     "sourceRows": [
       26
@@ -939,29 +1304,53 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "explanation",
-    "notes": [
-      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
-    ],
+    "kind": "procedure",
+    "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "学院认定通过，平台中的学分或课程替换记录已更新。",
+    "troubleshooting": [
+      "已经修完但事先未确认认可范围时，仍应提交真实材料请学院审查，不能承诺补认定一定通过。"
+    ],
+    "relatedGuideIds": [
+      "campus-031"
+    ]
   },
   {
     "id": "campus-026",
-    "title": "学科竞赛、社会实践等活动可以转化为学分吗？",
+    "title": "竞赛、科研和实践活动怎样申报素质拓展学分？",
     "category": "教务与学习",
     "keywords": [
-      "学科竞赛、社会实践等活动可以转化为学分吗？"
+      "学科竞赛、社会实践等活动可以转化为学分吗？",
+      "二课学分",
+      "三课学分",
+      "四课学分",
+      "素拓",
+      "学分申报"
     ],
-    "summary": "是的，根据《浙江大学本科生第二、三、四课堂学分管理办法》，学生参与学科竞赛、科研计划、创新创业或发表论文等活动，可以折申请计算对应学分，计入学业成绩。",
+    "summary": "先确认活动归属和证据，提交认定或核对统一导入记录，审核后检查学分到账。",
     "steps": [
-      "是的，根据《浙江大学本科生第二、三、四课堂学分管理办法》，学生参与学科竞赛、科研计划、创新创业或发表论文等活动，可以折申请计算对应学分，计入学业成绩。"
+      "登录素质拓展学分平台，查看本人已认定的二、三、四课堂及相关劳育、美育记录，先避免重复申报。",
+      "根据本年级认定规则和学院通知，把竞赛、科研结题、实践或志愿活动归到对应类别。",
+      "需要个人申报的项目，准备获奖证书、结题证明或主办方证明并提交；学校统一导入的活动先核对记录。",
+      "查看审核结果；退回时按具体理由补证或修正类别，再提交；通过后核对学分数量及培养方案完成情况。"
     ],
-    "materials": [],
+    "materials": [
+      "活动名称、时间、角色和对应证明；材料需能够核实本人参与及成果。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "素质拓展学分平台",
+        "url": "https://sztz.zju.edu.cn/dekt/#/index/main"
+      },
+      {
+        "label": "新素质拓展学分平台启用说明",
+        "url": "https://ls.zju.edu.cn/2024/0508/c65205a2912484/page.htm"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第27行",
     "sourceRows": [
       27
@@ -970,32 +1359,55 @@
       "学科竞赛、社会实践等活动可以转化为学分吗？"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
-    "kind": "explanation",
-    "notes": [
-      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": "当前素拓平台入口核对；具体项目学分不作统一承诺。",
+    "relatedSourceIds": [],
+    "completionNote": "平台显示认定通过且学分已计入。",
+    "troubleshooting": [
+      "在研项目不等于已经结题；只有报名记录也不能代替实际参与证明。"
     ],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedGuideIds": [
+      "campus-068",
+      "campus-103"
+    ]
   },
   {
     "id": "campus-027",
-    "title": "本研互通选课的学分能否互相转换",
+    "title": "本研互通课程的学分怎样核对和认定？",
     "category": "教务与学习",
     "keywords": [
-      "本研互通选课的学分能否互相转换"
+      "本研互通选课的学分能否互相转换",
+      "本研互通",
+      "研究生课程",
+      "提前修读",
+      "免修"
     ],
-    "summary": "本科生选修的研究生课程在成绩单上记录，部分学院允许用于本科相近选修课程的学分替换；若本科生成绩符合研究生学分要求，则后续攻读浙大研究生时，将直接带入研究生阶段。",
+    "summary": "选课前确认课程身份与认可范围，完成课程后分别核对本科记录和研究生阶段的认定要求。",
     "steps": [
-      "本科生选修的研究生课程在成绩单上记录，部分学院允许用于本科相近选修课程的学分替换",
-      "若本科生成绩符合研究生学分要求，则后续攻读浙大研究生时，将直接带入研究生阶段。"
+      "找到目标课程，记录课程代码、开课单位、课程层次和学分，向本科教学科确认是否允许修读及计入哪类本科要求。",
+      "按教学平台和学院安排申请选课，正式选上后参加该教学班学习与考核。",
+      "取得成绩后核对本科平台中的记录；需要替换本科课程时，按学院要求申请。",
+      "进入研究生阶段后，向录取学院确认已修课程能否认定、是否有期限或成绩要求，并提交对应材料。"
     ],
-    "materials": [],
+    "materials": [
+      "课程代码、课程大纲、正式成绩记录；本科和研究生分别适用的培养方案。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "本科生院办事通知",
+        "url": "https://ugrs.zju.edu.cn/"
+      },
+      {
+        "label": "本科教学管理平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第28行",
     "sourceRows": [
       28
@@ -1006,29 +1418,45 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "explanation",
-    "notes": [
-      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
-    ],
+    "kind": "procedure",
+    "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "对应阶段的教学管理记录已完成认定。",
+    "troubleshooting": [
+      "本科修读研究生课程不代表研究生阶段一定免修；两阶段分别确认。"
+    ]
   },
   {
     "id": "campus-028",
-    "title": "什么是科研训练项目",
+    "title": "想参加SRTP等科研训练，怎样开始？",
     "category": "科研与活动",
     "keywords": [
-      "什么是科研训练项目"
+      "什么是科研训练项目",
+      "SRTP",
+      "科研训练",
+      "找导师",
+      "本科科研"
     ],
-    "summary": "大学生科研训练计划——学生科研训练计划（简称SRTP），是为校本科生设计的一项科研项目计划，引导学生进入学科前沿，了解社会发展动态。提高了学生实践创新能力，取得了部分科研成果。目前，我校已构建了“国家-省-校-院”四级大学生科研训…",
+    "summary": "先选研究方向与导师，找到可申报项目，组队提交计划，立项后按要求开展和结题。",
     "steps": [
-      "大学生科研训练计划——学生科研训练计划（简称SRTP），是为校本科生设计的一项科研项目计划，引导学生进入学科前沿，了解社会发展动态。提高了学生实践创新能力，取得了部分科研成果。目前，我校已构建了“国家-省-校-院”四级大学生科研训练体系。"
+      "打开科研训练与学科竞赛平台，查看当前开放的科研训练项目通知，区分SRTP等项目类型。",
+      "结合兴趣和已有基础，联系相关教师；说明可投入时间、已有技能及想解决的问题，确认指导意愿。",
+      "与导师确定研究目标、工作分工和计划，再按通知组队并准备申报材料。",
+      "申报获准后按立项计划执行，保留过程记录和成果，按项目要求参加检查及结题；需要学分时另查认定要求。"
     ],
-    "materials": [],
+    "materials": [
+      "研究兴趣、可投入时间和简短个人介绍；申报时准备研究计划。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "科研训练与学科竞赛平台",
+        "url": "http://kyjs.zju.edu.cn/preview"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第29行",
     "sourceRows": [
       29
@@ -1039,33 +1467,48 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "explanation",
+    "kind": "procedure",
     "notes": [],
     "verificationScope": null,
     "relatedSourceIds": [
       "account-28"
+    ],
+    "completionNote": "项目立项后有明确导师、任务和进度，完成后取得正式结题记录。",
+    "troubleshooting": [
+      "暂未确定课题时，可先咨询导师是否有适合本科生参与的方向，不要为填申请表而编造研究内容。"
+    ],
+    "relatedGuideIds": [
+      "campus-029",
+      "campus-066",
+      "campus-026"
     ]
   },
   {
     "id": "campus-029",
-    "title": "科研训练项目申报有哪些要求？",
+    "title": "科研训练项目怎样准备和提交申请？",
     "category": "科研与活动",
     "keywords": [
-      "科研训练项目申报有哪些要求？"
+      "科研训练项目申报有哪些要求？",
+      "SRTP申报",
+      "科研申请",
+      "科研立项"
     ],
-    "summary": "本科生可按当年科研训练项目通知准备个人或团队申报，并联系指导教师。",
+    "summary": "核对本年度项目要求，落实导师与团队，提交研究计划，跟进审核并保存立项结果。",
     "steps": [
-      "查看科研训练项目当年申报通知，确认项目类型、申报对象和时间。",
-      "按通知组队、联系导师并准备申报材料。",
-      "人数、导师条件和项目限额以当年正式通知为准。"
+      "进入科研训练平台，打开所申请项目的本年度申报通知，核对对象、团队人数、导师条件、限额和截止时间。",
+      "确认指导教师及每位成员的工作分工，检查团队成员是否存在重复申报等限制。",
+      "按通知模板填写研究问题、方案、进度、预算和预期成果；提交前请导师确认内容及材料完整性。",
+      "在通知规定的系统或渠道提交，查看学院审核和立项结果；被退回时按意见修改。"
     ],
-    "materials": [],
+    "materials": [
+      "导师确认、团队信息、研究计划和当年度要求的附件。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "科研训练与学科竞赛平台（小组提供）",
+        "label": "科研训练与学科竞赛平台",
         "url": "http://kyjs.zju.edu.cn/preview"
       }
     ],
@@ -1079,32 +1522,53 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "explanation",
-    "notes": [
-      "原表部分申报要求存在错字，且不同年度、项目类型可能不同；本页仅保留申请方向，人数、导师资格和年度限额须查当年申报通知。"
-    ],
+    "kind": "procedure",
+    "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "收到立项结果并能够在平台或正式名单中找到项目。",
+    "troubleshooting": [
+      "不同项目和年度的成员人数、额度不同；申请条件未明确时直接询问通知中的联系人。"
+    ],
+    "relatedGuideIds": [
+      "campus-028"
+    ]
   },
   {
     "id": "campus-030",
-    "title": "通识选修课程修读要求是什么？",
+    "title": "通识课程怎样选，怎样检查还缺哪些要求？",
     "category": "教务与学习",
     "keywords": [
-      "通识选修课程修读要求是什么？"
+      "通识选修课程修读要求是什么？",
+      "通识选修",
+      "通识核心",
+      "博雅生命技艺",
+      "大学写作",
+      "耕读"
     ],
-    "summary": "通识选修课程一般学分要求为10.5学分，修读要求为： 1）至少修读1门通识核心课程；2）至少修读1门“博雅生命技艺”类课程；3）理工农医学生在“中华传统”“世界文明”“当代社会”“文艺审美”四类中修读2门；人文社科学生在“科技创新…",
+    "summary": "按本人专业、年级培养方案核对通识类别，列出缺项后选课，成绩通过再检查是否满足要求。",
     "steps": [
-      "通识选修课程一般学分要求为10.5学分，修读要求为： 1）至少修读1门通识核心课程",
-      "2）至少修读1门“博雅生命技艺”类课程",
-      "3）理工农医学生在“中华传统”“世界文明”“当代社会”“文艺审美”四类中修读2门",
-      "人文社科学生在“科技创新”“探索”两类中修读2门。特别提醒：部分专业有《大学写作》课程必修要求，涉农专业要求至少修读1门耕读相关通识课程。具体请查看本专业培养方案。"
+      "取得本人适用培养方案，找到通识课程要求，记录总学分、必修课程和各类别要求。",
+      "把已通过课程逐一对应到通识类别；不要只看通识总学分是否够。",
+      "针对缺项查找课程，核对课程是否属于通识核心、生命技艺或本方案要求的其他类别，再安排时段。",
+      "正式选上并通过课程后，复查方案中的类别与学分；特殊写作、耕读等要求按本人专业方案处理。"
     ],
-    "materials": [],
+    "materials": [
+      "本人年级培养方案、已通过课程及分类记录。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "本科教学管理平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      },
+      {
+        "label": "本科生院办事通知",
+        "url": "https://ugrs.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第31行",
     "sourceRows": [
       31
@@ -1115,34 +1579,46 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "explanation",
-    "notes": [
-      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
-    ],
+    "kind": "procedure",
+    "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "通识总学分和各类别要求都在本人方案中满足。",
+    "troubleshooting": [
+      "平台分类与课程名称判断不一致时，提供课程代码请学院教学科确认，避免修完才发现不能计入。"
+    ],
+    "relatedGuideIds": [
+      "campus-019"
+    ]
   },
   {
     "id": "campus-031",
-    "title": "境外交流项目有哪些，去哪里查看？",
+    "title": "境外交流项目怎样查找和申请？",
     "category": "交流与发展",
     "keywords": [
       "学校的境外交流项目有哪些类型？",
-      "对外交流服务平台/学校交流"
+      "对外交流服务平台/学校交流",
+      "交换",
+      "境外交流",
+      "出国交流",
+      "联合培养"
     ],
-    "summary": "通过本科生对外交流服务平台查看校级与院级交流动态、项目列表及申请通知。",
+    "summary": "筛选适合的项目，核对资格、费用和学分计划，按通知提交申请，获批后完成出行准备。",
     "steps": [
-      "打开本科生对外交流服务平台，浏览项目总览和通知。",
-      "可关注联合培养、学期交换、短期课程、科研实习等方向。",
-      "具体合作学校、费用、学分和申请条件以各项目当期通知为准。"
+      "打开本科生对外交流服务平台，查看校级和院级项目及当前申请通知。",
+      "按目的地、交流时长、语言、年级和专业筛选，逐项核对资格、截止时间、费用承担及是否有校内提名环节。",
+      "先和学院确认拟修课程及学分认定计划，再准备成绩单、语言证明、个人陈述等项目要求材料。",
+      "按通知渠道提交校内申请，跟进审核或面试；获批后再按项目要求办理对方学校申请、住宿及出行手续。"
     ],
-    "materials": [],
+    "materials": [
+      "本人年级专业、成绩记录、语言能力及时间预算；具体附件按项目通知。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "ugrs.zju.edu.cn（小组资料提供）",
+        "label": "本科生对外交流服务平台",
         "url": "https://ugrs.zju.edu.cn/dwjlfwpt/"
       }
     ],
@@ -1158,34 +1634,50 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "explanation",
-    "notes": [
-      "原表第32行含明显错字和残缺句，未将其中合作学校名单、学费互免等概括性说法直接作为当前政策。"
-    ],
+    "kind": "procedure",
+    "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "取得项目和接收方所需的正式确认，再安排出行。",
+    "troubleshooting": [
+      "各项目不统一保证学费互免或学分转换；不清楚费用和认定时，申请前询问项目联系人。"
+    ],
+    "relatedGuideIds": [
+      "campus-025",
+      "campus-097"
+    ]
   },
   {
     "id": "campus-032",
-    "title": "学生有几次转专业的机会？",
+    "title": "怎样确认自己是否能申请转专业？",
     "category": "教务与学习",
     "keywords": [
-      "学生有几次转专业的机会？"
+      "学生有几次转专业的机会？",
+      "转专业资格",
+      "转专业次数",
+      "换专业"
     ],
-    "summary": "转专业的申请范围和次数受年级、接收容量及学院细则约束，应查看本科生院与接收学院当期通知。",
+    "summary": "先定位本人年级和招生身份对应的规则，再核对接收学院条件，确认资格后提交申请。",
     "steps": [
-      "查询本科生院当期主修专业确认及转专业通知。",
-      "查看拟转入学院的接收条件、容量、申请材料与时间。",
-      "对申请范围或次数有疑问时咨询所在学院教学科；原始采集文字存在缺漏，不作为确定的资格判断。"
+      "打开本科生院主修专业确认、转专业通知，记录本人入学年级、招生类别、当前专业和已申请情况。",
+      "查看拟转入学院的当期细则，核对年级范围、课程要求、考核方式、接收容量及申请时间。",
+      "拿不准申请次数或跨招生类别资格时，把本人情况与目标专业发给学院教学科确认。",
+      "确认符合条件后按通知提交申请并参加相关考核；查看录取及学籍调整结果。"
     ],
-    "materials": [],
+    "materials": [
+      "本人招生身份、年级、当前专业、成绩记录及目标专业。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "本科生院：本科教学信息",
+        "label": "本科生院办事通知",
         "url": "https://ugrs.zju.edu.cn/"
+      },
+      {
+        "label": "本科生学籍管理办法",
+        "url": "https://ugrs.zju.edu.cn/xjglbf/list.htm"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第33行",
@@ -1198,32 +1690,51 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "explanation",
-    "notes": [
-      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。",
-      "原表包含残缺句，未直接转录其中的资格与次数表述。"
-    ],
+    "kind": "procedure",
+    "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "资格得到确认，审核结果和最终专业记录均已明确。",
+    "troubleshooting": [
+      "不要把同学的申请机会直接套用到自己；不同招生类别可能有不同限制。"
+    ],
+    "relatedGuideIds": [
+      "campus-033"
+    ]
   },
   {
     "id": "campus-033",
-    "title": "转专业和主修专业确认的通知在哪里看？",
+    "title": "主修专业确认和转专业怎样办理？",
     "category": "教务与学习",
     "keywords": [
       "我可以在哪里了解主修专业确认及转专业的相关通知要求呢？",
-      "转专业流程"
+      "转专业流程",
+      "主修专业确认",
+      "转专业通知"
     ],
-    "summary": "优先查看本科生院通知，以及接收学院的主修专业确认、转专业工作细则；论坛经验仅作补充。",
+    "summary": "查看学校时间安排及接收学院细则，提交志愿与材料，参加考核，录取后核对专业和课程衔接。",
     "steps": [
-      "1）本科生院网站-学籍管理-主修专业确认及转专业。 2）各专业所在学院的主修专业确认细则、转专业工作细则等（各学院网站，各学院本科生教学科）。",
-      "cc98"
+      "到本科生院网站的学籍管理相关栏目，打开主修专业确认及转专业当期通知。",
+      "进入目标学院官网，查看其接收专业、名额、资格、考核和材料要求；把校级截止日期与学院截止日期都记下。",
+      "在教学平台开放期间提交志愿和规定材料，确认提交记录；有笔试或面试时按学院通知参加。",
+      "查看公示和最终结果，录取后确认平台专业已更新，向接收学院核对原课程替换和补修课程。"
     ],
-    "materials": [],
+    "materials": [
+      "成绩单、个人陈述及接收学院指定材料。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "本科生院办事通知",
+        "url": "https://ugrs.zju.edu.cn/"
+      },
+      {
+        "label": "本科教学管理平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第34、100行",
     "sourceRows": [
       34,
@@ -1236,28 +1747,54 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "explanation",
+    "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "最终专业信息更新，后续课程计划已落实。",
+    "troubleshooting": [
+      "没有收到学院考核通知时，主动向通知联系人确认，不要仅凭平台提交成功等待。"
+    ],
+    "relatedGuideIds": [
+      "campus-032",
+      "campus-016",
+      "campus-024"
+    ]
   },
   {
     "id": "campus-034",
-    "title": "课程成绩是如何构成的？",
+    "title": "怎样核对课程评分和申请成绩复查？",
     "category": "教务与学习",
     "keywords": [
-      "课程成绩是如何构成的？"
+      "课程成绩是如何构成的？",
+      "平时成绩",
+      "期末成绩",
+      "成绩复查",
+      "评分比例"
     ],
-    "summary": "课程成绩一般由平时成绩和期末成绩构成。其中，平时成绩由期中考试、课堂讨论、平时测验、作业、实验报告、论文等组成；期末成绩是课程结束时对学生学习状况进行的一次性评价。",
+    "summary": "先查看任课教师公布的评分构成，核对成绩；有具体差异时在公示期内申请核查。",
     "steps": [
-      "课程成绩一般由平时成绩和期末成绩构成。其中，平时成绩由期中考试、课堂讨论、平时测验、作业、实验报告、论文等组成",
-      "期末成绩是课程结束时对学生学习状况进行的一次性评价。"
+      "开课初期查看课程大纲及教师公布的考核方式，记下各项比例、提交要求及是否设有最低分数要求。",
+      "保留作业、测验、实验和出勤等记录；期末前核对已公布的平时成绩，有漏记先联系教师。",
+      "总评公布后在教学平台查看课程成绩，与课程评分规则和本人记录核对。",
+      "如有明确疑点，在成绩公示期内向开课单位提出书面核查申请，附课程信息、争议项目和证明；核查后复查结果。"
     ],
-    "materials": [],
+    "materials": [
+      "课程大纲、课程代码、评分要求及相关提交记录。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "本科课程成绩评定与管理办法",
+        "url": "https://meetc.zju.edu.cn/2024/0306/c79045a2885825/page.htm"
+      },
+      {
+        "label": "本科教学管理平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第35行",
     "sourceRows": [
       35
@@ -1266,32 +1803,51 @@
       "课程成绩是如何构成的？"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
-    "kind": "explanation",
-    "notes": [
-      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
-    ],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": "官方成绩管理办法中的评分公开、成绩查询及核查流程。",
+    "relatedSourceIds": [],
+    "completionNote": "取得核查结论；确认有误时，平台中的成绩已完成更正。",
+    "troubleshooting": [
+      "单纯对分数不满意和记录错误不同；先写清哪项记录或计算需要核查。"
+    ]
   },
   {
     "id": "campus-035",
-    "title": "必修课程考核未通过怎么办？ 补考和重修有什么区别？",
+    "title": "必修课没通过，怎样申请补考或重修？",
     "category": "教务与学习",
     "keywords": [
-      "必修课程考核未通过怎么办？ 补考和重修有什么区别？"
+      "必修课程考核未通过怎么办？ 补考和重修有什么区别？",
+      "挂科",
+      "不及格",
+      "补考",
+      "重修"
     ],
-    "summary": "可以补考或者重修。补考和重修的区别是：补考不参加课程的修读，没有平时成绩，及格后成绩点为1.5；重修需要参加课程的修读，成绩由平时成绩和期末成绩成绩组成。如果时间允许建议选择重修。",
+    "summary": "先确认成绩状态和课程是否允许补考，再在规定时间申请补考或重新选课，最后核对通过记录。",
     "steps": [
-      "可以补考或者重修。补考和重修的区别是：补考不参加课程的修读，没有平时成绩，及格后成绩点为1.5",
-      "重修需要参加课程的修读，成绩由平时成绩和期末成绩成绩组成。如果时间允许建议选择重修。"
+      "在教学平台确认课程成绩状态、课程代码和是否属于本人必须通过的课程。",
+      "查看当期补考通知及课程类别；学校不安排补考的课程，需要重新修读，不能默认所有必修课都能补考。",
+      "选择补考时，在通知规定时间提出申请并核对考试名单；选择重修时，在选课开放期重新选上课程并参加学习和考核。",
+      "考试或重修结束后查看成绩与学分；仍未通过时及时与学院教学科安排后续修读，避免影响毕业。"
     ],
-    "materials": [],
+    "materials": [
+      "未通过课程清单、成绩状态、课表和补考通知。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "本科课程成绩评定与管理办法",
+        "url": "https://meetc.zju.edu.cn/2024/0306/c79045a2885825/page.htm"
+      },
+      {
+        "label": "本科教学管理平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第36行",
     "sourceRows": [
       36
@@ -1300,29 +1856,48 @@
       "必修课程考核未通过怎么办？ 补考和重修有什么区别？"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
-    "kind": "explanation",
+    "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "官方成绩办法的补考申请、不得补考情形及需重新修读类别；不作成绩点保证。",
+    "relatedSourceIds": [],
+    "completionNote": "平台显示课程已通过，并计入本人培养方案。",
+    "troubleshooting": [
+      "“弃修”“零分”“无效”等状态不能直接套用普通补考资格；联系学院按成绩办法核对。"
+    ]
   },
   {
     "id": "campus-036",
-    "title": "周学时代表什么意义",
+    "title": "怎样从课表判断每周上课和实践占用时间？",
     "category": "教务与学习",
     "keywords": [
-      "周学时代表什么意义"
+      "周学时代表什么意义",
+      "周学时",
+      "上课时间",
+      "实验时间",
+      "单双周",
+      "集中实践"
     ],
-    "summary": "每门课程均设置周学时，有两种形式：一般课程的周学时为xy形式，指该课程若安排在长学期（即16周）上课时，每周的课时数为x+y，其中x为理论课时数，y为实验或讨论课时数。实习课程和毕业论文的周学时一般排为+x形式，指该课程需占用x周…",
+    "summary": "先看课程详细排课，再对照理论、实验与集中实践安排，把实际时段加入个人课表。",
     "steps": [
-      "每门课程均设置周学时，有两种形式：一般课程的周学时为xy形式，指该课程若安排在长学期（即16周）上课时，每周的课时数为x+y，其中x为理论课时数，y为实验或讨论课时数。实习课程和毕业论文的周学时一般排为+x形式，指该课程需占用x周集中进行。而实际的每周课时数还需根据具体课时情况决定。"
+      "在教学平台打开课程详情，核对学期、起止周、单双周和每次上课节次，不单靠课程周学时数安排时间。",
+      "课程同时有理论和实验或讨论时，分别确认时间和地点，实验分组安排需看教师通知。",
+      "实习、毕业论文等集中实践课程，核对实际集中周次及是否需要校外或实验室安排。",
+      "把所有实际安排写入个人日程，与其他课程和考试时间比较，发现冲突时联系任课教师或教学科。"
     ],
-    "materials": [],
+    "materials": [
+      "课程详情、最新课表和实践环节安排。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "本科教学管理平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第37行",
     "sourceRows": [
       37
@@ -1333,31 +1908,51 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "explanation",
-    "notes": [
-      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
-    ],
+    "kind": "procedure",
+    "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "个人日程包含全部课程环节，没有遗漏实验或集中实践。",
+    "troubleshooting": [
+      "详情尚未公布实验时间时，先预留时间，开课后向教师确认。"
+    ],
+    "relatedGuideIds": [
+      "campus-022"
+    ]
   },
   {
     "id": "campus-037",
-    "title": "什么是个性修读课程？",
+    "title": "个性修读课程怎样规划和认定？",
     "category": "教务与学习",
     "keywords": [
-      "什么是个性修读课程？"
+      "什么是个性修读课程？",
+      "个性修读",
+      "微辅修",
+      "跨专业修读"
     ],
-    "summary": "个性修读为学生提供本专业进阶、跨专业学习和自主修读等方向；具体学分与认定以本人培养方案为准。",
+    "summary": "核对本人方案的个性修读要求，选择认可的进阶或跨专业课程，完成后检查学分归属。",
     "steps": [
-      "先查看本人专业、年级适用的培养方案。",
-      "比较本专业进阶、跨专业学习、自主修读方向，按个人学习规划选择。",
-      "涉及微辅修、外专业课程或研究生课程时，向学院确认课程范围、认定要求和证书条件。"
+      "取得本专业、本年级培养方案，记录个性修读的学分和可选择范围。",
+      "比较本专业进阶、跨专业和自主修读方向，列出计划课程及希望获得的学分或辅修资格。",
+      "涉及外专业课程、微辅修或研究生课程时，先向学院确认可认定课程及证书要求，再选课。",
+      "完成课程后检查成绩和个性修读学分；需要课程替换或额外认定时按学院流程申请。"
     ],
-    "materials": [],
+    "materials": [
+      "本人培养方案、拟修课程列表和已修记录。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "本科教学管理平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      },
+      {
+        "label": "本科生院办事通知",
+        "url": "https://ugrs.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第38行",
     "sourceRows": [
       38
@@ -1368,37 +1963,50 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "explanation",
-    "notes": [
-      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。",
-      "已清理原采集文字中的明显错字，没有将其中升学学分自动转换或证书获得的概括性说法作为保证。"
-    ],
+    "kind": "procedure",
+    "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "课程计入预期类别；证书申请另满足该项目条件。",
+    "troubleshooting": [
+      "“课程能选上”不代表能计入个性修读要求，修读前先确认。"
+    ],
+    "relatedGuideIds": [
+      "campus-042",
+      "campus-027"
+    ]
   },
   {
     "id": "campus-038",
-    "title": "校内论坛/cc98的网址",
+    "title": "怎样访问CC98并查找校内经验？",
     "category": "网络与数字服务",
     "keywords": [
-      "校内论坛/cc98的网址"
+      "校内论坛/cc98的网址",
+      "CC98",
+      "论坛",
+      "查课",
+      "课程评价"
     ],
-    "summary": "www.cc98.org或者cc98.zju.edu.cn",
+    "summary": "打开CC98，完成网络接入和账号登录，再按问题检索相关讨论。",
     "steps": [
-      "www.cc98.org或者cc98.zju.edu.cn"
+      "打开CC98；校外遇到校内访问限制时，先按学校VPN接入办法处理。",
+      "按论坛要求注册或登录本人账号，在搜索中输入课程代码、地点或问题关键词。",
+      "查看帖子时间和适用条件，优先阅读完整说明；涉及选课、资格和收费的结论，再对照正式办事规则。"
     ],
-    "materials": [],
+    "materials": [
+      "论坛账号；遇到网络限制时准备校园网络账号。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "www.cc98.org（小组资料提供）",
-        "url": "https://www.cc98.org"
+        "label": "CC98论坛",
+        "url": "https://www.cc98.org/"
       },
       {
-        "label": "cc98.zju.edu.cn（小组资料提供）",
-        "url": "https://cc98.zju.edu.cn"
+        "label": "信息技术中心校外接入指南",
+        "url": "https://itc.zju.edu.cn/2021/0615/c49798a2395843/page.htm"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第39行",
@@ -1411,27 +2019,51 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "找到与当前问题对应的讨论并确认其适用范围。",
+    "troubleshooting": [
+      "论坛经验与官方通知冲突时，以承办单位的当前规则处理。"
+    ],
+    "relatedGuideIds": [
+      "campus-012"
+    ]
   },
   {
     "id": "campus-039",
-    "title": "知道校内网站名字不知道网址",
+    "title": "知道学校网站名称，怎样找到入口？",
     "category": "网络与数字服务",
     "keywords": [
-      "知道校内网站名字不知道网址"
+      "知道校内网站名字不知道网址",
+      "学校网址",
+      "网站入口",
+      "不知道网址"
     ],
-    "summary": "百度直接搜索或者通过webvpn搜索框跳转",
+    "summary": "先在本站信息源导航查找名称，再从学校综合入口或官网进入目标系统，受限时使用VPN。",
     "steps": [
-      "百度直接搜索或者通过webvpn搜索框跳转"
+      "在本站“信息源导航”的网站入口中搜索系统名称或业务词，例如“素质拓展”“班车”“科研”。",
+      "没有找到时，打开学校办事中心或浙江大学官网，从对应服务栏目进入目标系统。",
+      "核对网页名称和所属单位；校内系统无法在校外打开时，按WebVPN方法接入。",
+      "进入后按系统说明使用本人账号；需要业务授权时联系承办单位确认。"
     ],
-    "materials": [],
+    "materials": [
+      "系统名称或要办的具体事项。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "学校办事中心",
+        "url": "https://service.zju.edu.cn/"
+      },
+      {
+        "label": "学校办事百事通",
+        "url": "https://s2.zju.edu.cn/mobile/index.do"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第40行",
     "sourceRows": [
       40
@@ -1445,29 +2077,49 @@
     "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "打开对应单位的目标业务页面。",
+    "troubleshooting": [
+      "只记得简称时，换成完整业务名称；不要把搜索到的非官方镜像作为办理入口。"
+    ],
+    "relatedGuideIds": [
+      "campus-063",
+      "campus-012"
+    ]
   },
   {
     "id": "campus-040",
-    "title": "校园网怎么缴费",
+    "title": "校园网费怎样充值并恢复上网？",
     "category": "网络与数字服务",
     "keywords": [
       "校园网怎么缴费",
-      "网费管理/如何交网费"
+      "网费管理/如何交网费",
+      "交网费",
+      "网费充值",
+      "网络缴费",
+      "恢复上网"
     ],
-    "summary": "通过钉钉工作台网络缴费进行缴费 https://myvpn.zju.edu.cn/",
+    "summary": "确认网络账号和套餐，选择缴费渠道支付，核对余额后测试联网。",
     "steps": [
-      "通过钉钉工作台网络缴费进行缴费",
-      "https://myvpn.zju.edu.cn/"
+      "打开网络用户自助中心，登录本人网络账号，先查看当前套餐、余额和是否暂停。",
+      "通过浙大钉工作台IT服务台的“网络账号缴费”或自助中心提供的缴费功能，核对账号及金额后支付。",
+      "返回自助中心查看余额或账单；账号处于暂停状态时按平台恢复说明处理，充值本身不一定解除暂停。",
+      "重新连接校园网并测试网页；需要调整套餐时先查看套餐及试用规则，再操作。"
     ],
-    "materials": [],
+    "materials": [
+      "网络账号和支付方式；校园卡缴费时确认卡内余额。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "myvpn.zju.edu.cn（小组资料提供）",
+        "label": "网络用户自助中心",
         "url": "https://myvpn.zju.edu.cn/"
+      },
+      {
+        "label": "网络服务办理指南",
+        "url": "https://itc.zju.edu.cn/_s146/_t3343/90690/list.psp"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第41、74行",
@@ -1480,29 +2132,55 @@
       "网费管理/如何交网费"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
     "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "当前网络服务页缴费入口、暂停恢复和试用注意事项。",
+    "relatedSourceIds": [],
+    "completionNote": "网络余额更新且可以正常上网。",
+    "troubleshooting": [
+      "扣款后余额未更新时保存订单信息联系0571-87951669，先查账再决定是否重试。",
+      "新激活账号的免费试用期内，缴费或更改套餐会结束试用，操作前先核对本人状态。"
+    ],
+    "relatedGuideIds": [
+      "campus-015"
+    ]
   },
   {
     "id": "campus-041",
-    "title": "怎么给亲友预约进校",
+    "title": "亲友来访，怎样预约进校？",
     "category": "校园生活",
     "keywords": [
-      "怎么给亲友预约进校"
+      "怎么给亲友预约进校",
+      "访客",
+      "亲友入校",
+      "家长进校",
+      "校园参观"
     ],
-    "summary": "打开浙大钉工作台 访客预约 进行预约或者邀约",
+    "summary": "填写访客、校区和到访时间，提交预约，确认获准后让访客携对应证件按时入校。",
     "steps": [
-      "打开浙大钉工作台 访客预约 进行预约或者邀约"
+      "在浙大钉工作台进入“访客预约”，选择要访问的校区及预约或邀约方式。",
+      "填写来访者真实身份信息、手机、到访日期和事由；有同行人员或车辆时按页面要求补充。",
+      "提交后查看审核或预约状态，核对日期、校区、入口及有效时段，再把系统提供的确认信息告知访客。",
+      "提醒访客带预约使用的有效证件，按确认时段到指定入口核验；参观校史馆等场所，还需完成相应场馆预约。"
     ],
-    "materials": [],
+    "materials": [
+      "访客姓名、证件信息、手机、来访校区和时间；车辆信息按页面要求。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "学校办事百事通",
+        "url": "https://s2.zju.edu.cn/mobile/index.do"
+      },
+      {
+        "label": "海宁国际校区访客预约",
+        "url": "https://www.intl.zju.edu.cn/zh-hans/visitor-center"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第42行",
     "sourceRows": [
       42
@@ -1516,26 +2194,50 @@
     "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "预约已获准，访客证件及到访时间与记录一致。",
+    "troubleshooting": [
+      "海宁国际校区可使用本校区官网访客预约；不同校区的预约规则不要直接互套。",
+      "预约不通过或当天临时变更时，先联系校区管理方，不要让访客仅凭提交截图前往。"
+    ],
+    "relatedGuideIds": [
+      "campus-051"
+    ]
   },
   {
     "id": "campus-042",
-    "title": "跨专业/跨学院课程怎么选？",
+    "title": "跨专业、跨学院课程怎样选？",
     "category": "教务与学习",
     "keywords": [
-      "跨专业/跨学院课程怎么选？"
+      "跨专业/跨学院课程怎么选？",
+      "跨专业选课",
+      "跨学院选课",
+      "外专业课",
+      "先修"
     ],
-    "summary": "1. 选课阶段：跨专业选课通常在第二轮或第三轮选课阶段向全校开放。 2. 注意事项：需先核对该课程是否有“预修课程要求”或面向对象限制；若占用了主修专业课时间，需提前确认是否冲突。",
+    "summary": "核对课程开放对象与先修要求，选择允许申请的教学班，确认学分归属后提交并核对结果。",
     "steps": [
-      "1. 选课阶段：跨专业选课通常在第二轮或第三轮选课阶段向全校开放。",
-      "2. 注意事项：需先核对该课程是否有“预修课程要求”或面向对象限制",
-      "若占用了主修专业课时间，需提前确认是否冲突。"
+      "在教学平台找到目标课程，记录课程代码、开课学院、先修要求、面向对象及容量。",
+      "查看当轮是否向本人开放；不要默认跨专业课程一定在某一固定轮次可选。",
+      "拟计入本专业要求时，向学院确认课程归属或替换办法；同时检查上课和考试是否冲突。",
+      "开放期间直接选课或按通知提交补选申请，筛选或审批后再查看正式结果。"
     ],
-    "materials": [],
+    "materials": [
+      "目标课程信息、本人培养方案和课表。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "本科教学管理平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      },
+      {
+        "label": "学校选课常见问题",
+        "url": "https://s2.zju.edu.cn/search/faq.do?words=%E9%80%89%E8%AF%BE"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第43行",
     "sourceRows": [
       43
@@ -1547,29 +2249,53 @@
     "verifiedAt": null,
     "isExample": false,
     "kind": "procedure",
-    "notes": [
-      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
-    ],
+    "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "课程正式选上，计入培养方案的方式明确。",
+    "troubleshooting": [
+      "系统提示不在选课对象中时，联系开课单位核对是否有申请渠道；未经批准旁听不等于取得学分。"
+    ],
+    "relatedGuideIds": [
+      "campus-019",
+      "campus-037"
+    ]
   },
   {
     "id": "campus-043",
-    "title": "日常零星维修怎么报修？",
+    "title": "教室、公共设施或水电故障怎样报修？",
     "category": "校园生活",
     "keywords": [
-      "日常零星维修怎么报修？"
+      "日常零星维修怎么报修？",
+      "公共设施报修",
+      "故障",
+      "维修",
+      "水电",
+      "教室设备"
     ],
-    "summary": "可通过后勤综合服务大厅、浙江大学移动门户APP“智慧后勤”应用、“浙大后勤”微信公众号中的校园零修功能进行线上报修；也可通过所在地物业管理人员报修或联系校区物业中心/水电中心。",
+    "summary": "说明故障地点与现象，提交后勤维修单，配合现场处理后检查修复结果。",
     "steps": [
-      "可通过后勤综合服务大厅、浙江大学移动门户APP“智慧后勤”应用、“浙大后勤”微信公众号中的校园零修功能进行线上报修",
-      "也可通过所在地物业管理人员报修或联系校区物业中心/水电中心。"
+      "关注“浙大后勤”微信公众号，进入“校园零修服务”，提交维修单；公寓寝室问题也可先使用公寓iHome或联系本楼宿管。",
+      "填写校区、楼宇、房间或公共位置、故障描述、照片和联系人；说明是否影响正常使用。",
+      "公费维修需经过相应单位物业或管理审批，自费维修按平台流程办理；提交后查看处理状态。",
+      "维修人员联系时确认现场位置和可进入时间；修好后检查恢复情况，按平台要求确认。"
     ],
-    "materials": [],
+    "materials": [
+      "准确地点、联系方式、故障现象及照片；单位公费维修准备单位信息。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "后勤水电服务与报修说明",
+        "url": "https://zulg.zju.edu.cn/info/1203/8341.htm"
+      },
+      {
+        "label": "后勤物业服务指南",
+        "url": "https://zulg.zju.edu.cn/guide/property.htm"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第44行",
     "sourceRows": [
       44
@@ -1578,13 +2304,21 @@
       "日常零星维修怎么报修？"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
     "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
+    "verificationScope": "官方水电FAQ的微信公众号菜单、维修单流程、受理时段和应急维修电话。",
     "relatedSourceIds": [
       "account-18"
+    ],
+    "completionNote": "设施恢复正常，维修单状态与现场处理一致。",
+    "troubleshooting": [
+      "工作日受理时间为8:30–12:00、13:30–17:30；非工作时间普通工单可能顺延处理。",
+      "紧急水电故障先联系校区维修电话：紫金港0571-88206160、玉泉0571-87951552、西溪0571-88273463、华家池0571-86971510、之江0571-86592707、舟山0580-2092160。"
+    ],
+    "relatedGuideIds": [
+      "campus-010"
     ]
   },
   {
@@ -1760,21 +2494,38 @@
   },
   {
     "id": "campus-048",
-    "title": "实验废弃物处置申报怎么办？",
+    "title": "实验废弃物怎样申报和交接？",
     "category": "科研与活动",
     "keywords": [
-      "实验废弃物处置申报怎么办？"
+      "实验废弃物处置申报怎么办？",
+      "实验废弃物",
+      "危废",
+      "化学废弃物",
+      "处置申报"
     ],
-    "summary": "登录材料与化学品采购平台，进入化学品采购与管理板块，点击左侧化学品全程管理中的废弃物处理登记申报；也可通过“浙江大学实验设备处”微信公众号进入业务大厅办理废弃物处置登记申报。按规定分类收集、包装并贴好标签后送至校区废弃物中转站。",
+    "summary": "先由实验室确认废弃物类别与处置要求，登记申报，再按批准流程交给对应中转站。",
     "steps": [
-      "登录材料与化学品采购平台，进入化学品采购与管理板块，点击左侧化学品全程管理中的废弃物处理登记申报",
-      "也可通过“浙江大学实验设备处”微信公众号进入业务大厅办理废弃物处置登记申报。按规定分类收集、包装并贴好标签后送至校区废弃物中转站。"
+      "先联系本实验室安全负责人，核对废弃物成分、类别、容器和标签要求；不明成分先由负责人确认。",
+      "进入实验室与设备管理处的废弃物办理说明，按其当前入口提交处置登记，填写实验室、类别、数量和联系人。",
+      "由实验室按规定分类、包装和贴签，确认申报及交接要求已满足。",
+      "核对对应校区中转站的接收类别和当期开放安排，由符合要求的人员送交，保存交接记录。"
     ],
-    "materials": [],
+    "materials": [
+      "实验室信息、废弃物类别和数量、处置登记及对应标签。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "实验室与设备管理处",
+        "url": "https://zjulab.zju.edu.cn/"
+      },
+      {
+        "label": "化学废弃物中转站服务说明",
+        "url": "https://zulg.zju.edu.cn/info/1184/6290.htm"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第49行",
     "sourceRows": [
       49
@@ -1783,12 +2534,16 @@
       "实验废弃物处置申报怎么办？"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
     "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "官网中转站服务与处置要求入口核对；具体分类包装按实验室及管理处规定，不提供化学处置配方。",
+    "relatedSourceIds": [],
+    "completionNote": "废弃物由接收方验收，交接记录完整。",
+    "troubleshooting": [
+      "未确认类别、包装或中转站接收条件时，先询问实验室安全负责人，避免自行混装、运送或放入生活垃圾。"
+    ]
   },
   {
     "id": "campus-049",
@@ -1846,21 +2601,34 @@
   },
   {
     "id": "campus-050",
-    "title": "学生创业项目申请入驻大学科技园怎么办？",
+    "title": "学生创业项目怎样申请入驻大学科技园？",
     "category": "科研与活动",
     "keywords": [
-      "学生创业项目申请入驻大学科技园怎么办？"
+      "学生创业项目申请入驻大学科技园怎么办？",
+      "创业项目",
+      "科技园",
+      "创业入驻",
+      "孵化器"
     ],
-    "summary": "准备申请全套材料发送至指定邮箱，由大学科技园管委会通知评审；申请人按要求携带证件或证明材料参加评审答辩，审核通过后办理入驻手续。",
+    "summary": "确认当前入驻招募，提交项目和团队材料，参加评审，获准后落实协议与入驻手续。",
     "steps": [
-      "准备申请全套材料发送至指定邮箱，由大学科技园管委会通知评审",
-      "申请人按要求携带证件或证明材料参加评审答辩，审核通过后办理入驻手续。"
+      "在学校办事中心查找学生创业项目入驻事项，联系受理单位确认当前是否开放、适用项目和申请渠道。",
+      "按本次招募清单准备项目计划、团队身份、运营情况和空间需求；需要指定表格时使用该次通知附件。",
+      "通过受理单位确认的邮箱或系统提交完整材料，保存提交回执，不使用未经确认的旧邮箱。",
+      "按通知参加项目评审或答辩；通过后核对入驻地点、期限、费用及退出要求，再办理协议和交接。"
     ],
-    "materials": [],
+    "materials": [
+      "项目简介及计划、负责人和团队信息、已有成果；企业资料按项目情况及招募要求。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "学校办事中心",
+        "url": "https://service.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第51行",
     "sourceRows": [
       51
@@ -1876,25 +2644,46 @@
     "verificationScope": null,
     "relatedSourceIds": [
       "account-20"
+    ],
+    "completionNote": "取得正式入驻通知并完成协议或场地交接。",
+    "troubleshooting": [
+      "尚未开放招募时，请受理单位告知下一轮信息渠道；申请邮件发出不等于入驻批准。"
     ]
   },
   {
     "id": "campus-051",
-    "title": "档案馆如何参观？",
+    "title": "校史馆怎样预约参观？",
     "category": "校园生活",
     "keywords": [
-      "档案馆如何参观？"
+      "档案馆如何参观？",
+      "校史馆",
+      "档案馆参观",
+      "参观预约"
     ],
-    "summary": "个人或参观者团体人数小于8人，可携有效证件入馆参观，在校史馆前做好入馆登记；8人以上团队参观需提前在网上预约登记并按规定办理入校手续。",
+    "summary": "完成实名参观预约，校外人员另预约进校，到场出示预约短信后入馆。",
     "steps": [
-      "个人或参观者团体人数小于8人，可携有效证件入馆参观，在校史馆前做好入馆登记",
-      "8人以上团队参观需提前在网上预约登记并按规定办理入校手续。"
+      "关注“浙大档案馆”微信公众号，进入“校史馆预约”，注册并登录个人账户。",
+      "5人及以下选择个人预约；6人及以上选择团队预约，按规定提前2–15天申请，填写人数和参观时间。",
+      "校外人员另预约紫金港进校，入校时段要与校史馆参观时间一致。",
+      "保存预约成功短信，到紫金港月牙楼二楼向前台出示；常规开放8:30–17:00，16:45停止入馆，假期和临时闭馆先看馆方公告。"
     ],
-    "materials": [],
+    "materials": [
+      "参观人员身份、人数、预约时间和联系手机。",
+      "校外访客需要同一时段有效的进校预约。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "校史馆参观预约与开放安排",
+        "url": "https://xsg.zju.edu.cn/"
+      },
+      {
+        "label": "校史馆实名预约办理说明",
+        "url": "https://xsg.zju.edu.cn/site/dlkx_view.html?id=2402"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第52行",
     "sourceRows": [
       52
@@ -1903,30 +2692,57 @@
       "档案馆如何参观？"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
     "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "官网实名预约、人数分界、提前天数、入馆凭证及常规时间。",
+    "relatedSourceIds": [],
+    "completionNote": "收到参观预约成功短信，进校条件也已满足。",
+    "troubleshooting": [
+      "团队预约原则上不接受电话或现场预约；系统问题可拨0571-88206330咨询。"
+    ],
+    "relatedGuideIds": [
+      "campus-041"
+    ],
+    "serviceWindowIds": [
+      "museum-zijingang"
+    ]
   },
   {
     "id": "campus-052",
-    "title": "本科生国家开发银行生源地国家助学贷款毕业生信息确认怎么办？",
+    "title": "生源地助学贷款毕业确认怎样办理？",
     "category": "缴费与资助",
     "keywords": [
-      "本科生国家开发银行生源地国家助学贷款毕业生信息确认怎么办？"
+      "本科生国家开发银行生源地国家助学贷款毕业生信息确认怎么办？",
+      "生源地贷款",
+      "毕业确认",
+      "国家开发银行",
+      "助学贷款"
     ],
-    "summary": "登录生源地国家助学贷款系统进行信息确认，完成毕业确认申请；需由国家助学贷款中心审核确认。",
+    "summary": "核对贷款与联系信息，在国开行系统提交毕业确认，再按学院通知完成学校审核和留档。",
     "steps": [
-      "登录生源地国家助学贷款系统进行信息确认，完成毕业确认申请",
-      "需由国家助学贷款中心审核确认。"
+      "先核对贷款银行及类型；本项适用于国家开发银行生源地助学贷款，不套用校园地或其他银行贷款流程。",
+      "登录国开行学生在线服务系统，检查本人和共同借款人联系方式、毕业去向等信息，需要修改时先完成信息变更。",
+      "进入毕业确认申请，核对后提交；按系统及学院要求保存或导出确认材料。",
+      "联系学院资助负责老师确认已纳入学校审核，按毕业通知完成签名、材料提交或其他要求；在贷款系统核对后续状态与还款安排。"
     ],
-    "materials": [],
+    "materials": [
+      "国开行账户、贷款记录、本人及共同借款人联系方式、毕业去向信息。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "国开行学生在线服务系统",
+        "url": "https://sls.cdb.com.cn/"
+      },
+      {
+        "label": "学生工作部资助通知",
+        "url": "https://www.xgb.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第53行",
     "sourceRows": [
       53
@@ -1940,24 +2756,46 @@
     "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "系统毕业确认与学校要求均已完成，后续联系方式有效。",
+    "troubleshooting": [
+      "忘记贷款密码时使用银行找回流程；继续升学等情况先向学院和经办贷款机构确认适用手续。"
+    ]
   },
   {
     "id": "campus-053",
-    "title": "本科生校内无息借款申请怎么办？",
+    "title": "本科生校内无息借款怎样申请？",
     "category": "缴费与资助",
     "keywords": [
-      "本科生校内无息借款申请怎么办？"
+      "本科生校内无息借款申请怎么办？",
+      "无息借款",
+      "经济困难",
+      "校内借款",
+      "资助申请"
     ],
-    "summary": "每年4月、10月份学工部资助版块发布通知后，学生登录浙江大学三全育人平台进行线上申请，经学院审核、学工部汇总审核后确定名单并办理借款。",
+    "summary": "确认当期申请通知与资格，提交借款申请，完成学院和学校审核，再核对到账。",
     "steps": [
-      "每年4月、10月份学工部资助版块发布通知后，学生登录浙江大学三全育人平台进行线上申请，经学院审核、学工部汇总审核后确定名单并办理借款。"
+      "查看学工部资助通知，或联系学院辅导员，确认本期是否开放、本人是否符合申请条件及截止时间。",
+      "按通知要求填写借款申请；使用三全育人线上办理时，以当前通知给出的业务入口为准。",
+      "如需证明或学院审核材料，按清单上传或交给辅导员，保留申请记录并跟进补充材料要求。",
+      "审核及公示后，按通知完成借款确认；核对本人收款账户和到账情况，同时记下后续归还要求。"
     ],
-    "materials": [],
+    "materials": [
+      "本人学籍和联系方式、申请理由、通知要求的资格或经济情况材料及收款信息。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "学生工作部资助通知",
+        "url": "https://www.xgb.zju.edu.cn/"
+      },
+      {
+        "label": "三全育人平台",
+        "url": "https://eta.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第54行",
     "sourceRows": [
       54
@@ -1969,28 +2807,47 @@
     "verifiedAt": null,
     "isExample": false,
     "kind": "procedure",
-    "notes": [
-      "借款申请涉及年度通知与资格审核；原表提到4月、10月，仅作资料记录，不作为当前固定申请时间。"
-    ],
+    "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "审核通过，借款手续及到账已确认。",
+    "troubleshooting": [
+      "申请期未开放或资料不足时，先联系学院辅导员，不把平台登录成功当成已受理。"
+    ]
   },
   {
     "id": "campus-054",
-    "title": "本科生校内无息借款毕业生借款减免申请怎么办？",
+    "title": "毕业前无息借款减免怎样申请？",
     "category": "缴费与资助",
     "keywords": [
-      "本科生校内无息借款毕业生借款减免申请怎么办？"
+      "本科生校内无息借款毕业生借款减免申请怎么办？",
+      "无息借款减免",
+      "毕业还款",
+      "借款减免"
     ],
-    "summary": "关注学工部资助版块通知，符合条件的学生通过浙江大学三全育人平台申请，经学院和学校审核后办理减免手续。",
+    "summary": "核对本人借款与减免条件，提交证明，等待审核后确认应还余额。",
     "steps": [
-      "关注学工部资助版块通知，符合条件的学生通过浙江大学三全育人平台申请，经学院和学校审核后办理减免手续。"
+      "查看毕业生无息借款减免通知，核对借款记录、申请资格及减免材料取得时间等要求。",
+      "按当前通知要求填写减免申请，上传相应证书或证明；学院需要纸质核验时带原件。",
+      "跟进学院和学校审核，收到补充材料要求时在期限内补齐。",
+      "结果公布后核对减免金额与剩余应还借款，按通知完成剩余还款或离校确认。"
     ],
-    "materials": [],
+    "materials": [
+      "本人借款记录、减免条件对应的有效证明、联系信息。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "学生工作部资助通知",
+        "url": "https://www.xgb.zju.edu.cn/"
+      },
+      {
+        "label": "三全育人平台",
+        "url": "https://eta.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第55行",
     "sourceRows": [
       55
@@ -2002,28 +2859,51 @@
     "verifiedAt": null,
     "isExample": false,
     "kind": "procedure",
-    "notes": [
-      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
-    ],
+    "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "批准结果与借款余额一致，剩余还款安排明确。",
+    "troubleshooting": [
+      "资格或额度不清楚时向学院资助负责人核对；提出申请不等于暂时免除还款义务。"
+    ],
+    "relatedGuideIds": [
+      "campus-053"
+    ]
   },
   {
     "id": "campus-055",
-    "title": "普通高等学校退役士兵学费资助申请怎么办？",
+    "title": "退役士兵学费资助怎样申请？",
     "category": "缴费与资助",
     "keywords": [
-      "普通高等学校退役士兵学费资助申请怎么办？"
+      "普通高等学校退役士兵学费资助申请怎么办？",
+      "退役士兵",
+      "入伍",
+      "学费资助",
+      "学费补偿"
     ],
-    "summary": "符合条件的学生在线填写相关申请表，经学院审核、学工部资助办公室审核后报送国家相关部门，审核通过后办理资助。",
+    "summary": "确认本人适用资助类型，填写指定申请表并核验材料，交学院审核后跟进资助结果。",
     "steps": [
-      "符合条件的学生在线填写相关申请表，经学院审核、学工部资助办公室审核后报送国家相关部门，审核通过后办理资助。"
+      "联系学院辅导员或学校武装部，确认本人属于退役复学、退役入学或其他适用类型，领取当前通知和材料清单。",
+      "按通知指定入口填写申请表，准备身份、退役及学籍材料；涉及既往学费或贷款时核对对应记录。",
+      "按表格要求完成签名和相关单位核验，向学院提交完整材料；不要自行套用其他资助类型表格。",
+      "跟进学院和学校审核，结果确认后核对减免、补偿或到账是否与批准内容一致。"
     ],
-    "materials": [],
+    "materials": [
+      "身份证明、退役证明、录取或复学信息；学费记录及其他证明按当前申请清单。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "学生工作部资助通知",
+        "url": "https://www.xgb.zju.edu.cn/"
+      },
+      {
+        "label": "学校办事中心",
+        "url": "https://service.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第56行",
     "sourceRows": [
       56
@@ -2035,31 +2915,45 @@
     "verifiedAt": null,
     "isExample": false,
     "kind": "procedure",
-    "notes": [
-      "此项涉及培养方案、资格或年度规定，小组资料未提供发布年份和完整正式文件，需按本人专业、年级和当期通知确认。"
-    ],
+    "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "资助审核结果已明确，收费或到账记录与结果一致。",
+    "troubleshooting": [
+      "材料需地方部门核验时，先确认办理顺序及盖章要求，避免遗漏导致退回。"
+    ]
   },
   {
     "id": "campus-056",
-    "title": "学生户籍迁入手续怎么办理？",
+    "title": "新生户口怎样迁入学校？",
     "category": "校园生活",
     "keywords": [
       "学生户籍迁入手续怎么办理？",
-      "户籍迁移"
+      "户籍迁移",
+      "迁户口",
+      "户口迁入",
+      "户籍",
+      "新生落户"
     ],
-    "summary": "新生准备录取通知书复印件、户口迁移证原件、身份证复印件等材料，按学校通知提交；具体办理地点根据校区户籍办公室安排。 纳米大楼107室",
+    "summary": "先确认本人迁入安排，按通知办理户口迁移材料，交学院或户籍受理点，随后核对落户结果。",
     "steps": [
-      "新生准备录取通知书复印件、户口迁移证原件、身份证复印件等材料，按学校通知提交",
-      "具体办理地点根据校区户籍办公室安排。",
-      "纳米大楼107室"
+      "查看本年级、本人培养类型的新生户籍迁移通知，确认是否自愿迁入、目标校区和学校接收方式。",
+      "需要迁移证时，到原户籍地按通知中的迁往地址办理，逐项核对姓名、身份证号和地址，防止错填校区。",
+      "准备录取通知书、身份证复印件和户口迁移证等通知要求材料，按新生集中收取安排交学院或指定窗口。",
+      "保留交接记录，按通知查询或向受理点确认是否已落户；需要户籍证明时另询问开具方式。"
     ],
-    "materials": [],
+    "materials": [
+      "录取通知书复印件、有效身份证明；户口迁移证等材料以本人新生通知为准。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "学校办事中心",
+        "url": "https://service.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第57、101行",
     "sourceRows": [
       57,
@@ -2075,24 +2969,42 @@
     "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "学校或户籍受理方确认已经完成落户。",
+    "troubleshooting": [
+      "不同培养类型和原户籍所在地的办理方式可能不同；迁往地址或材料有误时先让受理人员核对再补办。"
+    ]
   },
   {
     "id": "campus-058",
-    "title": "校内单位进行学历学位认证查询学籍档案怎么办？",
+    "title": "校内单位怎样申请查验学历、学位和学籍档案？",
     "category": "综合入口",
     "keywords": [
-      "校内单位进行学历学位认证查询学籍档案怎么办？"
+      "校内单位进行学历学位认证查询学籍档案怎么办？",
+      "学历查验",
+      "学位查验",
+      "查档",
+      "部门直通车"
     ],
-    "summary": "校内单位可通过预约查询系统登记查询档案信息，选择部门直通车，档案馆审核后办理。",
+    "summary": "由单位确认查档目的与授权，提交档案预约及证明，档案馆审核后领取查验结果。",
     "steps": [
-      "校内单位可通过预约查询系统登记查询档案信息，选择部门直通车，档案馆审核后办理。"
+      "打开档案馆查档预约入口，核对单位查询可使用的服务及办理要求。",
+      "填写被查询人的姓名、在校年份、学院专业、拟查材料和单位用途，按要求提供单位介绍信及授权等证明。",
+      "提交预约；有“部门直通车”业务时按本单位适用方式办理，等待档案馆确认受理及反馈。",
+      "按确认方式领取或查看档案证明，核对姓名、材料项目和使用要求；缺项时带申请编号联系档案馆。"
     ],
-    "materials": [],
+    "materials": [
+      "查询人员信息、具体材料与用途；单位介绍信、授权及身份材料按档案馆清单。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "档案馆查档预约与办理说明",
+        "url": "https://acv.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第59行",
     "sourceRows": [
       59
@@ -2106,27 +3018,43 @@
     "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "获得档案馆提供的对应查验材料或正式答复。",
+    "troubleshooting": [
+      "个人证明申请与单位查档要求不同，不能套用单位权限查询他人信息。"
+    ]
   },
   {
     "id": "campus-063",
-    "title": "浙大服务平台/综合服务平台",
+    "title": "综合服务平台怎样找到具体业务？",
     "category": "综合入口",
     "keywords": [
-      "浙大服务平台/综合服务平台"
+      "浙大服务平台/综合服务平台",
+      "综合服务平台",
+      "学在浙大",
+      "服务入口"
     ],
-    "summary": "https://service.zju.edu.cn/ 包含学在浙大，三全育人，智云课堂，班车查询等综合服务",
+    "summary": "登录学校服务平台，按事项查找入口，进入承办系统办理，再检查提交结果。",
     "steps": [
-      "https://service.zju.edu.cn/ 包含学在浙大，三全育人，智云课堂，班车查询等综合服务"
+      "打开学校服务平台，按页面要求登录本人身份。",
+      "用业务名称查找服务，如学在浙大、班车、智云课堂或证明开具，核对所选事项的对象及承办单位。",
+      "进入具体系统后按该事项的申请或使用说明操作；平台入口登录不等于目标业务已经办理。",
+      "有申请记录时保存编号并跟进结果；找不到对应事项可改用办事百事通查询。"
     ],
-    "materials": [],
+    "materials": [
+      "本人校园身份及具体业务名称。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "service.zju.edu.cn（小组资料提供）",
+        "label": "学校办事中心",
         "url": "https://service.zju.edu.cn/"
+      },
+      {
+        "label": "学校办事百事通",
+        "url": "https://s2.zju.edu.cn/mobile/index.do"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第64行",
@@ -2139,34 +3067,47 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "目标业务已完成或申请状态可查询。",
+    "troubleshooting": [
+      "入口跳转失败时，试用该业务的直接网址；校外受限网页可按VPN办法接入。"
+    ],
+    "relatedGuideIds": [
+      "campus-039",
+      "campus-074"
+    ]
   },
   {
     "id": "campus-064",
-    "title": "学校地图/校园导航/学校景点查询",
+    "title": "怎样用校园地图找楼、单位和服务点？",
     "category": "校园生活",
     "keywords": [
-      "学校地图/校园导航/学校景点查询"
+      "学校地图/校园导航/学校景点查询",
+      "导航",
+      "校园地图",
+      "找楼",
+      "食堂位置",
+      "AED位置"
     ],
-    "summary": "https://map.zju.edu.cn/index.html 可以查询紫金港，玉泉，西溪，华家池，之江，舟山，海宁，国际医学院的地图；还有导航功能；景点查询；单位查询；AED地点；食堂等多种服务",
+    "summary": "先选正确校区，再搜索地点或单位，确认位置后按导航前往。",
     "steps": [
-      "https://map.zju.edu.cn/index.html 可以查询紫金港，玉泉，西溪，华家池，之江，舟山，海宁，国际医学院的地图",
-      "还有导航功能",
-      "景点查询",
-      "单位查询",
-      "AED地点",
-      "食堂等多种服务"
+      "打开学校校园地图，先切换到本人要去的校区，避免同名楼宇造成误判。",
+      "输入楼名、单位、食堂或服务点名称，查看地图中的具体位置。",
+      "需要导航时按页面提示授权定位，核对起点和目的地，再按道路指引前往。",
+      "联系窗口或参加活动时，同时确认房间号、入口和开放时间；地图只解决到达位置。"
     ],
-    "materials": [],
+    "materials": [
+      "目的地名称、所属校区及具体房间或入口信息。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "map.zju.edu.cn（小组资料提供）",
+        "label": "浙江大学校园地图",
         "url": "https://map.zju.edu.cn/index.html"
       }
     ],
@@ -2180,30 +3121,47 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "找到正确校区的目标位置，并核对可进入的入口。",
+    "troubleshooting": [
+      "没有搜到简称时改用楼宇或单位全称；紧急情况直接联系救援或现场人员，不只依赖地图。"
+    ]
   },
   {
     "id": "campus-065",
-    "title": "浙大云盘",
+    "title": "浙大云盘怎样上传和分享资料？",
     "category": "网络与数字服务",
     "keywords": [
-      "浙大云盘"
+      "浙大云盘",
+      "云盘",
+      "上传文件",
+      "分享文件",
+      "备份"
     ],
-    "summary": "资料提供了浙大云盘的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "登录云盘，上传文件，按需要设置分享范围，再检查接收方能否打开。",
     "steps": [
-      "https://pan.zju.edu.cn/zjusso/"
+      "打开浙大云盘，按页面要求使用本人校园身份登录。",
+      "建立便于识别的文件夹并上传资料，等上传完成后确认文件名称、大小和版本正确。",
+      "需要分享时，按页面可提供的分享方式设置对象、访问权限及有效期限。",
+      "使用分享地址检查能否按预期查看或下载，再发送给目标接收人；资料更新后确认分享仍指向正确文件。"
     ],
-    "materials": [],
+    "materials": [
+      "本人校园身份、待上传文件和接收对象。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "pan.zju.edu.cn（小组资料提供）",
+        "label": "浙大云盘",
         "url": "https://pan.zju.edu.cn/zjusso/"
+      },
+      {
+        "label": "信息技术中心服务入口",
+        "url": "https://itc.zju.edu.cn/"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第66行",
@@ -2216,29 +3174,42 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "文件完整可用，接收人能按设定权限访问。",
+    "troubleshooting": [
+      "提示容量或权限不足时，查看平台说明或联系信息技术中心；不要将失败的上传当作已备份。"
+    ]
   },
   {
     "id": "campus-066",
-    "title": "教师信息查询/找老师邮箱",
+    "title": "怎样找教师邮箱和研究方向？",
     "category": "综合入口",
     "keywords": [
-      "教师信息查询/找老师邮箱"
+      "教师信息查询/找老师邮箱",
+      "找老师",
+      "教师邮箱",
+      "联系导师",
+      "老师研究方向"
     ],
-    "summary": "https://person.zju.edu.cn/index/ 可以查到老师的研究方向，邮箱，个人简介，研究成果以及教学信息等",
+    "summary": "在教师个人主页搜索姓名，确认学院与研究方向，再用公布的邮箱联系。",
     "steps": [
-      "https://person.zju.edu.cn/index/ 可以查到老师的研究方向，邮箱，个人简介，研究成果以及教学信息等"
+      "打开浙江大学教师个人主页平台，输入教师完整姓名；同名时用学院或专业确认对象。",
+      "进入主页，查看研究方向、教学信息及公开的联系方式。",
+      "联系科研导师时，说明本人年级、背景、想参与的问题和可投入时间；课程问题附课程代码及教学班。",
+      "使用主页公布的邮箱发送，保留邮件；主页没有联系方式时，向所在学院查询承办或联系渠道。"
     ],
-    "materials": [],
+    "materials": [
+      "教师姓名及所属学院；简要、具体的咨询内容。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "person.zju.edu.cn（小组资料提供）",
+        "label": "浙江大学教师个人主页",
         "url": "https://person.zju.edu.cn/index/"
       }
     ],
@@ -2252,29 +3223,45 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "找到正确教师及其公开联系渠道。",
+    "troubleshooting": [
+      "个人主页未更新时，结合学院师资页面核对，不根据姓名自行拼接邮箱。"
+    ],
+    "relatedGuideIds": [
+      "campus-028",
+      "campus-016"
+    ]
   },
   {
     "id": "campus-067",
-    "title": "学科竞赛信息/怎么查询竞赛或者科研相关的信息？",
+    "title": "怎样查找竞赛通知并报名？",
     "category": "科研与活动",
     "keywords": [
-      "学科竞赛信息/怎么查询竞赛或者科研相关的信息？"
+      "学科竞赛信息/怎么查询竞赛或者科研相关的信息？",
+      "学科竞赛",
+      "竞赛报名",
+      "比赛通知"
     ],
-    "summary": "http://kyjs.zju.edu.cn/preview 包含学科竞赛系统和科研训练管理，还可以查阅最近的新闻动态，重点提示以及官方文件下载",
+    "summary": "筛选当前竞赛，核对组队与报名要求，按通知提交，保留报名及参赛结果。",
     "steps": [
-      "http://kyjs.zju.edu.cn/preview 包含学科竞赛系统和科研训练管理，还可以查阅最近的新闻动态，重点提示以及官方文件下载"
+      "打开科研训练与学科竞赛平台，查看当前竞赛通知与相关文件。",
+      "核对赛事对象、项目组别、队伍人数、指导教师、校内选拔和比赛时间，确认适合本人。",
+      "按通知组队并准备报名信息；有校内报名环节时先完成学校要求，不只在赛事外网注册。",
+      "提交后核对报名状态及后续培训、选拔安排；获奖后保存官方证明，按需要申报素质拓展学分。"
     ],
-    "materials": [],
+    "materials": [
+      "赛事通知、团队及指导教师信息；项目资料按报名清单。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "kyjs.zju.edu.cn（小组资料提供）",
+        "label": "科研训练与学科竞赛平台",
         "url": "http://kyjs.zju.edu.cn/preview"
       }
     ],
@@ -2288,34 +3275,54 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "学校及赛事所需报名环节均确认成功。",
+    "troubleshooting": [
+      "赛事通知过期时，查该赛事的新一届信息；不同赛事的组队人数和学分认定不通用。"
+    ],
+    "relatedGuideIds": [
+      "campus-026"
+    ]
   },
   {
     "id": "campus-068",
-    "title": "素质拓展网/如何查看二三课堂学分以及劳育美育学分情况？",
+    "title": "怎样查二三四课堂、劳育和美育学分？",
     "category": "科研与活动",
     "keywords": [
       "素质拓展网/如何查看二三课堂学分以及劳育美育学分情况？",
-      "二课分/启真问学/个人荣誉评定"
+      "二课分/启真问学/个人荣誉评定",
+      "二课分",
+      "三课分",
+      "四课分",
+      "劳育",
+      "美育",
+      "素质拓展"
     ],
-    "summary": "查看二三课堂，劳育，美育学分；以及学科竞赛和科研训练信息查询；https://sztz.zju.edu.cn/dekt/#/index/main ETA/三全育人平台",
+    "summary": "登录素拓平台，核对各类学分和审核状态，缺项时查证明与申报安排，再复查记录。",
     "steps": [
-      "查看二三课堂，劳育，美育学分",
-      "以及学科竞赛和科研训练信息查询",
-      "https://sztz.zju.edu.cn/dekt/#/index/main",
-      "ETA/三全育人平台"
+      "打开素质拓展学分平台，使用本人身份登录，进入个人学分或认定记录。",
+      "分别核对二、三、四课堂及相关劳育、美育记录，区分已认定、审核中和退回项目。",
+      "与本年级培养方案要求比较，列出还缺的类别、学分或项目。",
+      "已经参加但没有记录的活动，先联系主办方确认是否统一导入；需个人申报时按学院通知补交材料。",
+      "处理完成后再次核对记录和剩余要求，不仅查看提交次数。"
     ],
-    "materials": [],
+    "materials": [
+      "本人培养方案、参与活动或成果证明。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "sztz.zju.edu.cn（小组资料提供）",
+        "label": "素质拓展学分平台",
         "url": "https://sztz.zju.edu.cn/dekt/#/index/main"
+      },
+      {
+        "label": "新素质拓展学分平台启用说明",
+        "url": "https://ls.zju.edu.cn/2024/0508/c65205a2912484/page.htm"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第69、107行",
@@ -2328,35 +3335,60 @@
       "二课分/启真问学/个人荣誉评定"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
     "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
+    "verificationScope": "当前素质拓展平台与官方启用说明核对。",
     "relatedSourceIds": [
       "account-37",
       "account-40"
+    ],
+    "completionNote": "相应学分已认定，并能够清楚看到仍需完成的要求。",
+    "troubleshooting": [
+      "重复记录或分类错误时，带项目名称和记录截图咨询学院负责老师。"
+    ],
+    "relatedGuideIds": [
+      "campus-026",
+      "campus-103"
     ]
   },
   {
     "id": "campus-072",
-    "title": "浙大邮箱/学校邮箱怎么登录",
+    "title": "浙大邮箱怎样开通、登录和找回密码？",
     "category": "网络与数字服务",
     "keywords": [
-      "浙大邮箱/学校邮箱怎么登录"
+      "浙大邮箱/学校邮箱怎么登录",
+      "学校邮箱",
+      "浙大邮箱",
+      "邮箱密码",
+      "开通邮箱"
     ],
-    "summary": "资料提供了浙大邮箱的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "先开通学校邮箱，再用网络账号登录；忘记密码时通过邮箱页面验证找回。",
     "steps": [
-      "https://zjuem.zju.edu.cn/"
+      "打开网络用户自助中心，激活网络账号时可同步开通邮箱；未开通时在“个人信息管理”进入“开通邮箱”。",
+      "打开mail.zju.edu.cn，按登录页要求填写网络账号或邮箱地址和对应密码；默认邮箱为网络账号@zju.edu.cn。",
+      "登录后先核对收件箱，用另一邮箱发送测试邮件检查是否收发正常。",
+      "忘记密码时在邮箱页点击“忘记密码”，依次完成账号填写、身份验证和新密码设置；无法验证时联系信息技术中心。"
     ],
-    "materials": [],
+    "materials": [
+      "网络账号、可用的身份验证方式。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "zjuem.zju.edu.cn（小组资料提供）",
-        "url": "https://zjuem.zju.edu.cn/"
+        "label": "浙大邮箱登录",
+        "url": "https://mail.zju.edu.cn/"
+      },
+      {
+        "label": "邮箱开通、登录与密码说明",
+        "url": "https://itc.zju.edu.cn/90691/list.htm"
+      },
+      {
+        "label": "网络用户自助中心",
+        "url": "https://myvpn.zju.edu.cn/"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第73行",
@@ -2367,32 +3399,47 @@
       "浙大邮箱/学校邮箱怎么登录"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "官网邮箱入口、开通路径、默认地址和找回密码办法。",
+    "relatedSourceIds": [],
+    "completionNote": "邮箱能登录，并能正常收发测试邮件。",
+    "troubleshooting": [
+      "邮箱别名只能设置一次，提交前核对拼写；别名不用于校园网认证。"
+    ]
   },
   {
     "id": "campus-074",
-    "title": "综合服务",
+    "title": "怎样通过综合服务网查询办事通知？",
     "category": "校园生活",
     "keywords": [
-      "综合服务"
+      "综合服务",
+      "综合服务网",
+      "办事通知"
     ],
-    "summary": "资料提供了综合服务的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "按具体业务找到部门和办理说明，核对适用对象，再进入对应服务办理。",
     "steps": [
-      "https://zhfw.zju.edu.cn/"
+      "打开综合服务网，搜索具体事项或部门，例如证明、财务、后勤或学生事务。",
+      "查看业务说明，记下办理对象、材料、承办单位、受理地点及咨询方式。",
+      "有直接办理链接时进入对应系统；需要现场或单位提交时按清单准备材料。",
+      "办结后检查回执、记录或证明内容；没有找到事项时使用办事百事通进一步定位。"
     ],
-    "materials": [],
+    "materials": [
+      "业务名称和本人身份类型。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "zhfw.zju.edu.cn（小组资料提供）",
+        "label": "浙江大学综合服务网",
         "url": "https://zhfw.zju.edu.cn/"
+      },
+      {
+        "label": "学校办事百事通",
+        "url": "https://s2.zju.edu.cn/mobile/index.do"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第75行",
@@ -2405,36 +3452,47 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "找到明确承办单位，并完成对应办理步骤。",
+    "troubleshooting": [
+      "同一名字的服务可能面向教师、学生或单位，先核对对象。"
+    ],
+    "relatedGuideIds": [
+      "campus-063",
+      "campus-093"
+    ]
   },
   {
     "id": "campus-075",
-    "title": "网络账号过户要准备什么？",
+    "title": "网络账号怎样申请过户？",
     "category": "网络与数字服务",
     "keywords": [
-      "过户服务"
+      "过户服务",
+      "网络账号过户",
+      "账号转让"
     ],
-    "summary": "携带过户双方完整申请材料到信息技术中心服务窗口办理，如接收方已有账号，需通过浙大钉【IT服务台】发起【多账号申请】。 申请材料： 1.双方有效身份证件原件及复印件 2.双方校园卡/工作证/学生证原件及复印件 3.网络账号过户申请说…",
+    "summary": "确认接收方资格和所需材料，提交过户申请，核验后检查账号归属与登录。",
     "steps": [
-      "携带过户双方完整申请材料到信息技术中心服务窗口办理，如接收方已有账号，需通过浙大钉【IT服务台】发起【多账号申请】。",
-      "申请材料：",
-      "1.双方有效身份证件原件及复印件",
-      "2.双方校园卡/工作证/学生证原件及复印件",
-      "3.网络账号过户申请说明.docx",
-      "4.委托书.docx"
+      "在浙大钉IT服务台或信息技术中心官网的个人服务中找到“网络账号过户”，先核对双方资格和当前材料清单。",
+      "准备双方身份证件、校园卡或学生工作证及申请说明；代办时按要求补充授权委托材料。",
+      "接收方已有网络账号时，先请IT服务台确认是否需要多账号申请及本人是否适用，不直接借用其他身份申请。",
+      "按服务台要求线上提交或到指定窗口核验，办结后确认账号登记归属、登录和余额处理结果。"
     ],
     "materials": [
-      "双方有效身份证件原件及复印件。",
-      "双方校园卡、工作证或学生证原件及复印件。",
-      "网络账号过户申请说明及委托书；模板和适用情况以IT服务台要求为准。"
+      "双方有效身份证件及校园身份证明；申请说明、复印件与委托书按当前事项清单。"
     ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "网络服务办理指南",
+        "url": "https://itc.zju.edu.cn/_s146/_t3343/90690/list.psp"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第76行",
     "sourceRows": [
       76
@@ -2443,29 +3501,60 @@
       "过户服务"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
     "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "当前官网存在网络账号过户服务入口；身份材料及多账号适用条件需在办事页确认。",
+    "relatedSourceIds": [],
+    "completionNote": "信息技术中心确认过户办结，接收方信息与登录正常。",
+    "troubleshooting": [
+      "窗口位置和受理时间可查看网络报障指南；过户涉及的原邮箱和余额先请服务台说明。"
+    ],
+    "relatedGuideIds": [
+      "campus-015",
+      "campus-076"
+    ],
+    "serviceWindowIds": [
+      "network-zijingang",
+      "network-yuquan",
+      "network-huajiachi",
+      "network-xixi"
+    ]
   },
   {
     "id": "campus-076",
-    "title": "多账号申请/网络账号申请",
+    "title": "已有网络账号，还需要多账号怎样申请？",
     "category": "网络与数字服务",
     "keywords": [
-      "多账号申请/网络账号申请"
+      "多账号申请/网络账号申请",
+      "多账号申请",
+      "网络账号申请",
+      "账号激活"
     ],
-    "summary": "在编教职工因工作需要，可在已有网络账号的情况下实名制申请：登录【浙大钉】，打开底部【工作台】→【IT服务台】→【服务办理】→【多账号申请】。",
+    "summary": "先确认本人是否适用多账号服务，填写用途和申请信息，批准后核对新增账号。",
     "steps": [
-      "在编教职工因工作需要，可在已有网络账号的情况下实名制申请：登录【浙大钉】，打开底部【工作台】→【IT服务台】→【服务办理】→【多账号申请】。"
+      "在浙大钉工作台进入IT服务台，或从信息技术中心官网“多账号申请”进入办理页。",
+      "阅读申请对象及要求；此业务不要当作所有学生的普通新账号注册流程。",
+      "符合条件时填写申请原因、用途、本人单位及联系信息，提交并查看审核结果。",
+      "审核通过后按通知完成账号开通或缴费，确认账号与用途、归属一致。"
     ],
-    "materials": [],
+    "materials": [
+      "本人身份、单位、申请用途及事项要求的证明。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "网络服务办理指南",
+        "url": "https://itc.zju.edu.cn/_s146/_t3343/90690/list.psp"
+      },
+      {
+        "label": "网络用户自助中心",
+        "url": "https://myvpn.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第77行",
     "sourceRows": [
       77
@@ -2474,32 +3563,59 @@
       "多账号申请/网络账号申请"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
     "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "当前官方多账号申请与普通账号激活入口区分。",
+    "relatedSourceIds": [],
+    "completionNote": "新增账号得到批准并能按指定用途使用。",
+    "troubleshooting": [
+      "第一次开通本人校园网络账号时，使用用户自助中心的账号激活功能；资格不明先询问IT服务台。"
+    ],
+    "relatedGuideIds": [
+      "campus-015",
+      "campus-040"
+    ],
+    "serviceWindowIds": [
+      "network-zijingang",
+      "network-yuquan",
+      "network-huajiachi",
+      "network-xixi"
+    ]
   },
   {
     "id": "campus-077",
-    "title": "班车查询",
+    "title": "跨校区班车怎样查时间和乘车地点？",
     "category": "校园生活",
     "keywords": [
-      "班车查询"
+      "班车查询",
+      "校车",
+      "班车时刻表",
+      "跨校区",
+      "班车时间"
     ],
-    "summary": "资料提供了班车查询的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "按出发校区、目的校区和日期查班次，核对上车点与乘车要求，再按时到站。",
     "steps": [
-      "http://www.life.zju.edu.cn/_web/_apps/lightapp/busQuery/mobile/app/pub/index.html"
+      "打开班车查询，选择或查找出发校区和目的校区，确认查询的是正确方向。",
+      "核对日期、工作日或节假日安排、发车时间、途中站点和是否有临时调整。",
+      "查看班次面向对象、乘车凭证、费用或预约要求；页面未说明时向班车服务咨询。",
+      "把上车地点和发车时间保存到日程，提前到站；回程另查反方向时刻，不默认来回时间相同。"
     ],
-    "materials": [],
+    "materials": [
+      "出发校区、目的校区、日期和本人身份。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "www.life.zju.edu.cn（小组资料提供）",
+        "label": "浙江大学班车查询",
         "url": "http://www.life.zju.edu.cn/_web/_apps/lightapp/busQuery/mobile/app/pub/index.html"
+      },
+      {
+        "label": "后勤交通服务",
+        "url": "https://zulg.zju.edu.cn/guide/traffic.htm"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第78行",
@@ -2512,29 +3628,44 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "已确定可乘班次、有效乘车条件和准确上车点。",
+    "troubleshooting": [
+      "没有适合班次时安排公共交通；寒暑假不要直接沿用平时截图。"
+    ]
   },
   {
     "id": "campus-078",
-    "title": "就业服务/选调生信息查询/就业经验查询",
+    "title": "就业招聘和选调通知怎样查找并报名？",
     "category": "交流与发展",
     "keywords": [
-      "就业服务/选调生信息查询/就业经验查询"
+      "就业服务/选调生信息查询/就业经验查询",
+      "就业",
+      "校招",
+      "实习",
+      "选调生",
+      "招聘",
+      "宣讲会"
     ],
-    "summary": "资料提供了就业服务的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "筛选岗位或地区，核对公告与截止日期，提交所需报名，保存确认记录。",
     "steps": [
-      "https://www.career.zju.edu.cn/，可以查看选调生公告汇总，各种校招经验和信息，就业嘉年华活动"
+      "打开浙江大学就业服务平台，查找招聘、宣讲、选调或就业指导栏目。",
+      "按地区、单位、学历及专业筛选，打开完整公告，记录资格条件、申请材料和截止时间。",
+      "需要校内推荐或报名时先完成学校流程；还需用人单位报名的，按公告另行提交。",
+      "保存报名编号，跟进资格审核、笔试面试或宣讲地点；经验文章可帮助准备，但不替代当年招录条件。"
     ],
-    "materials": [],
+    "materials": [
+      "个人简历、成绩及岗位要求的证明；具体按公告准备。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "www.career.zju.edu.cn（小组资料提供）",
+        "label": "浙江大学就业服务平台",
         "url": "https://www.career.zju.edu.cn/"
       }
     ],
@@ -2548,33 +3679,53 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
     "verificationScope": null,
     "relatedSourceIds": [
       "account-34",
       "account-46"
+    ],
+    "completionNote": "各报名环节均确认成功，后续审核和考核安排可查询。",
+    "troubleshooting": [
+      "公告期限已过时不要继续按旧链接申请；改查新批次。"
     ]
   },
   {
     "id": "campus-079",
-    "title": "紧急电话汇总/如何寻找报警电话？",
+    "title": "紧急情况怎样报警或找到校内联系电话？",
     "category": "校园生活",
     "keywords": [
-      "紧急电话汇总/如何寻找报警电话？"
+      "紧急电话汇总/如何寻找报警电话？",
+      "紧急电话",
+      "报警",
+      "急救",
+      "保卫处",
+      "110",
+      "119",
+      "120"
     ],
-    "summary": "资料提供了紧急电话汇总的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "先按紧急类型联系救援并报告准确位置，再通知校内相关值班人员协助。",
     "steps": [
-      "https://mapp.zju.edu.cn/lightapp/jjdh/www/app/home.html"
+      "有人身危险或治安事件拨110，火警拨119，医疗急救拨120；电话接通后按接线人员要求说明情况。",
+      "清楚报出浙江大学、具体校区、入口、楼栋和房间，以及现场情况、联系人和可到达路线。",
+      "打开学校紧急电话汇总，选择对应校区或部门，让现场同伴联系校内值班人员协助引导。",
+      "保持电话畅通，按接线人员或现场专业人员指示行动；需要时安排人员到入口引导救援。"
     ],
-    "materials": [],
+    "materials": [
+      "准确校区、现场位置和可回拨电话；无法确定位置时让附近人员协助。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "mapp.zju.edu.cn（小组资料提供）",
+        "label": "浙江大学紧急电话汇总",
         "url": "https://mapp.zju.edu.cn/lightapp/jjdh/www/app/home.html"
+      },
+      {
+        "label": "国家应急广播应急电话说明",
+        "url": "https://www.cneb.gov.cn/kepuku/kpzsk/"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第80行",
@@ -2587,30 +3738,47 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "救援人员接到准确情况并能联系到现场。",
+    "troubleshooting": [
+      "紧急电话页面打不开时直接拨相应救援电话，不等待网页恢复。"
+    ]
   },
   {
     "id": "campus-080",
-    "title": "心理健康中心/心理测试",
+    "title": "怎样预约学校心理咨询？",
     "category": "校园生活",
     "keywords": [
-      "心理健康中心/心理测试"
+      "心理健康中心/心理测试",
+      "心理咨询",
+      "心理预约",
+      "心理测试",
+      "初访"
     ],
-    "summary": "资料提供了心理健康中心的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "在心理中心预约初访，确认校区和时间，完成初访后按安排参加后续咨询。",
     "steps": [
-      "http://www.xlzx.zju.edu.cn/"
+      "打开心理健康教育与咨询中心网站，进入咨询服务系统，用本人身份登录。",
+      "按当前可用时段预约初访，填写服务所需信息，确认地点或线上方式及联系手机。",
+      "保存预约结果，按时参加初访，由中心人员协助安排后续服务。",
+      "需要改期或取消时通过系统或中心联系办理；无法预约可在工作时间拨0571-88206286询问。"
     ],
-    "materials": [],
+    "materials": [
+      "本人校园身份、可用时段和联系方式。"
+    ],
     "location": null,
     "openingHours": null,
-    "contact": null,
+    "contact": "心理中心接待咨询：0571-88206286（工作时间）。",
     "references": [
       {
-        "label": "www.xlzx.zju.edu.cn（小组资料提供）",
+        "label": "心理健康教育与咨询中心",
         "url": "http://www.xlzx.zju.edu.cn/"
+      },
+      {
+        "label": "学校心理咨询与志愿服务答疑",
+        "url": "https://s2.zju.edu.cn/search/faq.do?words=%E5%92%A8%E8%AF%A2"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第81行",
@@ -2621,35 +3789,46 @@
       "心理健康中心/心理测试"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
-    "kind": "resource",
-    "notes": [
-      "这是心理健康中心信息入口，不提供诊断或治疗建议。服务方式、预约条件与时间请向中心确认。"
-    ],
-    "verificationScope": null,
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": "学校FAQ的初访预约、后续服务及接待电话。",
     "relatedSourceIds": [
       "account-03"
+    ],
+    "completionNote": "初访预约确认，后续服务安排明确。",
+    "troubleshooting": [
+      "心理测试结果不作为自行诊断依据；需要帮助时预约专业咨询。"
     ]
   },
   {
     "id": "campus-081",
-    "title": "后勤集团查询",
+    "title": "后勤事项怎样找到负责部门？",
     "category": "校园生活",
     "keywords": [
-      "后勤集团查询"
+      "后勤集团查询",
+      "后勤服务",
+      "物业",
+      "水电",
+      "邮政"
     ],
-    "summary": "资料提供了后勤集团查询的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "按水电、物业、邮政或交通找到服务说明，再使用对应入口提交并跟进。",
     "steps": [
-      "https://zulg.zju.edu.cn/"
+      "打开后勤集团官网的服务指南，按问题选择水电、物业、邮政、交通等业务。",
+      "查看服务对象、办理地点、时间与联系电话，分清本人是公寓问题还是公共设施问题。",
+      "线上事项使用对应申请入口，现场事项按材料清单办理；涉及工单保留编号。",
+      "处理后检查结果；问题尚未解决时向对应业务中心反馈已有记录。"
     ],
-    "materials": [],
+    "materials": [
+      "具体校区、楼栋位置、问题描述及联系人。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "zulg.zju.edu.cn（小组资料提供）",
+        "label": "浙江大学后勤集团服务指南",
         "url": "https://zulg.zju.edu.cn/"
       }
     ],
@@ -2663,30 +3842,50 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "目标事项已办结或有明确受理记录。",
+    "troubleshooting": [
+      "只有后勤首页时不要停在新闻栏目，进入服务指南定位负责部门。"
+    ],
+    "relatedGuideIds": [
+      "campus-010",
+      "campus-043",
+      "campus-101",
+      "campus-077"
+    ]
   },
   {
     "id": "campus-082",
-    "title": "浙大图书馆中文网",
+    "title": "图书馆怎样查书、找文献和使用服务？",
     "category": "校园生活",
     "keywords": [
-      "浙大图书馆中文网"
+      "浙大图书馆中文网",
+      "借书",
+      "查书",
+      "文献检索",
+      "论文下载",
+      "图书馆开放时间"
     ],
-    "summary": "资料提供了浙大图书馆中文网的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "选择馆藏或学术资源检索，确认书刊位置或全文访问，再按需使用预约与借阅服务。",
     "steps": [
-      "https://libweb.zju.edu.cn/"
+      "打开图书馆官网：借纸质书用馆藏检索，找论文用求是学术搜索或数据库入口。",
+      "输入书名、作者、论文题名或关键词，核对结果的出版信息与版本。",
+      "纸质书查看馆藏分馆、索书号和可借状态；电子文献从学校购买资源或数据库入口打开全文。",
+      "需要到馆时查对应分馆开放时间；座位和研讨空间分别使用各自预约服务。"
     ],
-    "materials": [],
+    "materials": [
+      "题名、作者或主题词；受限资源需要本人校园身份。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "libweb.zju.edu.cn（小组资料提供）",
-        "url": "https://libweb.zju.edu.cn/"
+        "label": "图书馆服务：座位、空间与开放时间",
+        "url": "https://libweb.zju.edu.cn/libweb/"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第83行",
@@ -2697,31 +3896,47 @@
       "浙大图书馆中文网"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "当前官网馆藏、学术搜索、数据库、预约和校外访问入口。",
+    "relatedSourceIds": [],
+    "completionNote": "找到目标书刊的可借信息或可以打开的文献全文。",
+    "troubleshooting": [
+      "校外打不开全文时使用图书馆校外访问或学校WebVPN；没有购买的资源可查询文献传递服务。"
+    ],
+    "relatedGuideIds": [
+      "campus-009",
+      "campus-012"
+    ]
   },
   {
     "id": "campus-083",
-    "title": "alphaxiv",
+    "title": "怎样用alphaXiv查找和阅读论文？",
     "category": "校外工具与资源",
     "keywords": [
-      "alphaxiv"
+      "alphaxiv",
+      "alphaXiv",
+      "论文阅读",
+      "论文搜索"
     ],
-    "summary": "小组收集的校外论文阅读与检索平台，实际功能和使用条件以网站当前说明为准。",
+    "summary": "检索题目或主题，打开论文及原文，记录相关研究并核对关键结论。",
     "steps": [
-      "打开alphaXiv网站，检索论文或查看其阅读功能。"
+      "打开alphaXiv，输入论文题名、主题或相关研究者信息，查看匹配结果。",
+      "进入论文页面，核对题名、作者和版本，打开其提供的原文入口。",
+      "结合摘要、方法、结果和原文定位阅读；使用平台回答或讨论时，回到论文相应内容核对。",
+      "记录可引用的原文链接和文献信息，按研究问题整理已读论文。"
     ],
-    "materials": [],
+    "materials": [
+      "明确的研究主题、题名或关键词。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "www.alphaxiv.org（小组资料提供）",
+        "label": "alphaXiv（校外论文平台）",
         "url": "https://www.alphaxiv.org/"
       }
     ],
@@ -2733,34 +3948,50 @@
       "alphaxiv"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
-    "kind": "resource",
-    "notes": [
-      "原表对AI模型、私人笔记和仓库关联功能的说明未在本次核对，未作为当前功能承诺。"
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": "平台主页当前存在，定位为校外论文发现入口。",
+    "relatedSourceIds": [],
+    "completionNote": "找到相关原文，并能够说明结论来自哪个研究或版本。",
+    "troubleshooting": [
+      "没有全文或结果不匹配时，改用图书馆检索、出版方或预印本入口。"
     ],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedGuideIds": [
+      "campus-082"
+    ]
   },
   {
     "id": "campus-084",
-    "title": "必应学术",
+    "title": "必应学术怎样检索，搜不到时怎么办？",
     "category": "校外工具与资源",
     "keywords": [
-      "必应学术"
+      "必应学术",
+      "Bing学术",
+      "学术搜索"
     ],
-    "summary": "资料提供了必应学术的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "用题名、作者或主题检索，核对文献原始页面；结果不足时切换学校图书馆检索。",
     "steps": [
-      "https://cn.bing.com/academic"
+      "打开必应学术入口，输入论文题名或主题词；题名检索可优先用原文标题。",
+      "查看匹配结果，核对作者、年份和出版信息，不把一般网页摘要当作论文全文。",
+      "从结果进入出版方或原文地址；有访问限制时再使用学校图书馆资源入口。",
+      "入口无结果或不可用时，改用图书馆求是学术搜索及数据库检索，记录找到的正式文献信息。"
     ],
-    "materials": [],
+    "materials": [
+      "题名、作者或主题关键词。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "cn.bing.com（小组资料提供）",
+        "label": "必应学术（校外检索入口）",
         "url": "https://cn.bing.com/academic"
+      },
+      {
+        "label": "图书馆服务：座位、空间与开放时间",
+        "url": "https://libweb.zju.edu.cn/libweb/"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第85行",
@@ -2773,31 +4004,44 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "resource",
-    "notes": [
-      "表格提供的入口未核对可用性；若页面无法使用，请更换检索平台。"
+    "kind": "procedure",
+    "notes": [],
+    "verificationScope": "公开入口仍返回学术检索页面，但未验证检索覆盖和结果质量。",
+    "relatedSourceIds": [],
+    "completionNote": "得到目标文献的正式信息和可用原文入口。",
+    "troubleshooting": [
+      "该入口不保证覆盖所有文献；无结果不能说明论文不存在。"
     ],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedGuideIds": [
+      "campus-082"
+    ]
   },
   {
     "id": "campus-085",
-    "title": "多功能效率箱/网址生成/网络测速/二维码工具",
+    "title": "效率工具箱怎样生成或处理信息？",
     "category": "校外工具与资源",
     "keywords": [
-      "多功能效率箱/网址生成/网络测速/二维码工具"
+      "多功能效率箱/网址生成/网络测速/二维码工具",
+      "效率工具",
+      "二维码",
+      "文本转换"
     ],
-    "summary": "资料提供了多功能效率箱的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "先选择具体工具，输入所需内容，检查结果后再保存或复制。",
     "steps": [
-      "https://ol.woobx.cn/，实用小网站，包含各种常用工具，文本工具，视频工具，开发工具等"
+      "打开效率工具箱，按需要选择二维码、文本处理或其他页面当前提供的工具。",
+      "阅读所选工具要求，输入网址、文本或文件；处理文件时先保留原件。",
+      "生成后检查输出：二维码实际扫码核对地址，文本检查内容，文件打开检查格式。",
+      "确认结果正确后复制或下载，保留所用工具及原始输入以便重做。"
     ],
-    "materials": [],
+    "materials": [
+      "待处理内容；涉及文件时准备原件及副本。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "ol.woobx.cn（小组资料提供）",
+        "label": "在线效率工具箱（校外网站）",
         "url": "https://ol.woobx.cn/"
       }
     ],
@@ -2811,29 +4055,46 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "resource",
-    "notes": [],
+    "kind": "procedure",
+    "notes": [
+      "该校外入口访问稳定性尚未确认；可使用下方相关工具箱作为替代。"
+    ],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "输出能够正常打开或使用，并与输入目标一致。",
+    "troubleshooting": [
+      "入口打不开时使用另一工具箱；不依赖单一校外网站完成紧急任务。"
+    ],
+    "relatedGuideIds": [
+      "campus-086"
+    ]
   },
   {
     "id": "campus-086",
-    "title": "工具箱",
+    "title": "腾讯帮小忙工具箱怎样使用？",
     "category": "校外工具与资源",
     "keywords": [
-      "工具箱"
+      "工具箱",
+      "帮小忙",
+      "图片处理",
+      "文本处理"
     ],
-    "summary": "资料提供了工具箱的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "选定工具，按要求提交输入，预览并核对输出，再保存结果。",
     "steps": [
-      "https://tool.browser.qq.com/"
+      "打开帮小忙工具箱，按任务查找图片、文本或其他当前可用的工具。",
+      "查看文件格式、大小及功能要求，输入内容或选择文件，保留原件。",
+      "运行工具后预览结果，检查内容、尺寸、编码或格式是否符合用途。",
+      "结果正确后复制或下载，并打开最终文件再次确认可用。"
     ],
-    "materials": [],
+    "materials": [
+      "待处理文本或文件及目标格式。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "tool.browser.qq.com（小组资料提供）",
+        "label": "帮小忙：腾讯QQ浏览器工具箱（校外）",
         "url": "https://tool.browser.qq.com/"
       }
     ],
@@ -2845,31 +4106,42 @@
       "工具箱"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "当前平台入口核对，不保证每项工具免费或长期可用。",
+    "relatedSourceIds": [],
+    "completionNote": "最终结果正确且能够正常使用。",
+    "troubleshooting": [
+      "没有需要的功能或超出限制时换工具；页面要求另行开通的功能先核对是否有必要。"
+    ]
   },
   {
     "id": "campus-087",
-    "title": "缩略词复原",
+    "title": "怎样查询网络缩写的可能含义？",
     "category": "校外工具与资源",
     "keywords": [
-      "缩略词复原"
+      "缩略词复原",
+      "缩写",
+      "缩略词",
+      "字母简称"
     ],
-    "summary": "资料提供了缩略词复原的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "输入缩写，比较候选结果，再结合原句确认是否适用。",
     "steps": [
-      "https://lab.magiconch.com/nbnhhsh/"
+      "打开缩略词复原工具，输入需要查询的字母缩写，不必提交整段聊天内容。",
+      "查看返回的可能解释，注意同一缩写可能对应多个含义。",
+      "回到原句和上下文比较，必要时直接向使用者询问，避免只凭第一条候选判断。"
     ],
-    "materials": [],
+    "materials": [
+      "待查询缩写及理解所需的上下文。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "lab.magiconch.com（小组资料提供）",
+        "label": "缩略词复原工具（校外网站）",
         "url": "https://lab.magiconch.com/nbnhhsh/"
       }
     ],
@@ -2883,29 +4155,43 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "resource",
-    "notes": [],
+    "kind": "procedure",
+    "notes": [
+      "工具给出候选，不保证唯一含义；入口访问稳定性尚未确认。"
+    ],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "获得符合原句语境的理解；无法确认时保留不确定性。",
+    "troubleshooting": [
+      "没有结果或入口不可用时，向原信息发布者确认。"
+    ]
   },
   {
     "id": "campus-088",
-    "title": "MOOC",
+    "title": "中国大学MOOC课程怎样加入和学习？",
     "category": "校外工具与资源",
     "keywords": [
-      "MOOC"
+      "MOOC",
+      "慕课",
+      "网课",
+      "在线学习"
     ],
-    "summary": "资料提供了MOOC的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "选择当前课程班次，加入学习，完成任务并核对成绩；计入学校学分需另行确认。",
     "steps": [
-      "https://www.icourse163.org/"
+      "打开中国大学MOOC，搜索课程名称或学习主题，核对授课学校、教师和当前班次。",
+      "查看开课时间、学习内容、考核和证书要求，再登录平台加入课程。",
+      "按课程进度观看内容、完成作业与考核，留意任务截止时间。",
+      "结束后查看成绩及可提供的完成记录；需要计入浙大学分时，先按学院认定流程确认。"
     ],
-    "materials": [],
+    "materials": [
+      "课程班次、可投入时间和平台账号。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "www.icourse163.org（小组资料提供）",
+        "label": "中国大学MOOC（校外课程平台）",
         "url": "https://www.icourse163.org/"
       }
     ],
@@ -2917,31 +4203,45 @@
       "MOOC"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "当前课程平台入口核对。",
+    "relatedSourceIds": [],
+    "completionNote": "课程记录显示已完成相应任务或考核；校内学分另以学院认定为准。",
+    "troubleshooting": [
+      "不能把平台证书直接当作浙大课程成绩；修读前确认认可范围。"
+    ],
+    "relatedGuideIds": [
+      "campus-025"
+    ]
   },
   {
     "id": "campus-089",
-    "title": "智慧树",
+    "title": "智慧树课程怎样学习和查看任务？",
     "category": "校外工具与资源",
     "keywords": [
-      "智慧树"
+      "智慧树",
+      "在线课程",
+      "网络课程"
     ],
-    "summary": "资料提供了智慧树的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "确认课程来源与班级，登录对应课程，完成任务后检查成绩和学习记录。",
     "steps": [
-      "https://www.zhihuishu.com/"
+      "打开智慧树，按课程通知选择学校课程或公开课程，不混用不同课程班次。",
+      "登录后核对课程名称、学校、教师、班级及开课时间；教师指定的课程按教学通知加入。",
+      "查看任务及考核要求，按截止时间完成视频、作业、测验等实际任务。",
+      "查看完成状态和成绩；学分或课程成绩由学校认定的，按教师和学院要求另核对。"
     ],
-    "materials": [],
+    "materials": [
+      "课程通知、正确班次及平台账号。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "www.zhihuishu.com（小组资料提供）",
+        "label": "智慧树（校外课程平台）",
         "url": "https://www.zhihuishu.com/"
       }
     ],
@@ -2953,31 +4253,46 @@
       "智慧树"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "当前平台入口核对，不推断浙大课程绑定方式。",
+    "relatedSourceIds": [],
+    "completionNote": "正确课程班次中的任务已完成，成绩或认定结果明确。",
+    "troubleshooting": [
+      "找不到学校指定课程时，先向任课教师确认加入方式，避免学习另一个同名公开班次。"
+    ],
+    "relatedGuideIds": [
+      "campus-025"
+    ]
   },
   {
     "id": "campus-090",
-    "title": "问卷星",
+    "title": "怎样用问卷星制作、收集和导出问卷？",
     "category": "校外工具与资源",
     "keywords": [
-      "问卷星"
+      "问卷星",
+      "问卷",
+      "调查",
+      "导出数据"
     ],
-    "summary": "资料提供了问卷星的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "根据调查目的建题，先预览试填并修改，再发布收集，结束后导出检查数据。",
     "steps": [
-      "https://www.wjx.cn/"
+      "登录问卷星，新建问卷，先写清目标对象、要回答的问题和预计用时。",
+      "逐题设置题型、选项和是否必答；需要分支时设置跳转并检查各路径。",
+      "用预览链接完整试填，包括手机、漏填、不同选项和分支情况，修正后再生成正式链接或二维码。",
+      "发布后查看回收情况，完成收集时停止或调整回收，导出数据并检查字段、缺失及重复情况。"
     ],
-    "materials": [],
+    "materials": [
+      "调查目的、目标人群、题目与选项草案。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "www.wjx.cn（小组资料提供）",
+        "label": "问卷星（校外问卷平台）",
         "url": "https://www.wjx.cn/"
       }
     ],
@@ -2989,32 +4304,49 @@
       "问卷星"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "当前问卷平台入口核对；调查设计建议为通用操作整理。",
+    "relatedSourceIds": [],
+    "completionNote": "正式问卷能顺利填写，导出数据可以对应每一道题。",
+    "troubleshooting": [
+      "回收后大幅改题会影响结果可比性；先确认是否需要结束原轮次再开展新一轮。"
+    ]
   },
   {
     "id": "campus-091",
-    "title": "网络测速",
+    "title": "怎样测速并区分网络故障范围？",
     "category": "校外工具与资源",
     "keywords": [
-      "网络测速"
+      "网络测速",
+      "网速",
+      "测速",
+      "网络慢",
+      "卡顿"
     ],
-    "summary": "资料提供了网络测速的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "固定设备和连接条件进行测速，记录多次结果，再带地点与截图反馈问题。",
     "steps": [
-      "https://wangsuceshi.bmcx.com/"
+      "先记下校区位置、设备、连接的是Wi-Fi还是有线，以及当前是否运行下载或VPN。",
+      "打开测速工具，按页面提示开始测试；为便于比较，测试时暂时停止大文件下载等明显占用网络的任务。",
+      "在相同位置和设备条件下重复测试，保存时间、结果及错误提示；网页可用时另外检查实际访问问题。",
+      "问题持续时，把测速记录及无法访问的网页或服务一起提交IT服务台报障。"
     ],
-    "materials": [],
+    "materials": [
+      "可联网设备、网络账号及准确地点。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "wangsuceshi.bmcx.com（小组资料提供）",
+        "label": "网速测试（校外网站）",
         "url": "https://wangsuceshi.bmcx.com/"
+      },
+      {
+        "label": "网络服务办理指南",
+        "url": "https://itc.zju.edu.cn/_s146/_t3343/90690/list.psp"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第92行",
@@ -3027,29 +4359,47 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "resource",
-    "notes": [],
+    "kind": "procedure",
+    "notes": [
+      "校外测速站的访问与测速结果可能受外部网络影响。"
+    ],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "得到可重复的测试记录，持续故障已有报障信息。",
+    "troubleshooting": [
+      "单次测速不等于全部网络质量；校外测速站不可用时仍可直接提交实际故障截图。"
+    ],
+    "relatedGuideIds": [
+      "campus-015"
+    ]
   },
   {
     "id": "campus-092",
-    "title": "实时航班查询",
+    "title": "怎样查询实时航班动态？",
     "category": "校外工具与资源",
     "keywords": [
-      "实时航班查询"
+      "实时航班查询",
+      "航班",
+      "飞机",
+      "接机",
+      "航班动态"
     ],
-    "summary": "资料提供了实时航班查询的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "输入航班号或机场，核对日期与时区，查看动态后再与航空公司确认出行安排。",
     "steps": [
-      "https://zh.flightaware.com/live/"
+      "打开FlightAware，输入完整航班号或机场名称，选择对应航班。",
+      "核对日期、出发及到达机场、航段，避免把同一航班号的其他日期当成当天信息。",
+      "查看计划、预计或实际起降时间，确认页面所用时区及状态。",
+      "出行、接机或改签前，再核对航空公司和机场公布的信息；保存正确航班的链接便于更新。"
     ],
-    "materials": [],
+    "materials": [
+      "航空公司、航班号、日期和出发到达机场。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "zh.flightaware.com（小组资料提供）",
+        "label": "FlightAware实时航班查询（校外）",
         "url": "https://zh.flightaware.com/live/"
       }
     ],
@@ -3061,31 +4411,44 @@
       "实时航班查询"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "当前航班查询入口核对，不提供固定航班实时状态。",
+    "relatedSourceIds": [],
+    "completionNote": "找到正确日期和航段的状态，并确认实际出行安排。",
+    "troubleshooting": [
+      "动态信息会更新，延误、取消和改签以航空公司及机场通知为准。"
+    ]
   },
   {
     "id": "campus-093",
-    "title": "浙大黄页",
+    "title": "怎样用浙大黄页找到部门电话？",
     "category": "校园生活",
     "keywords": [
-      "浙大黄页"
+      "浙大黄页",
+      "黄页",
+      "部门电话",
+      "办公室电话",
+      "联系部门"
     ],
-    "summary": "资料提供了浙大黄页的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "按部门或业务找到联系条目，核对校区与职责，再带具体问题联系。",
     "steps": [
-      "https://zhfw.zju.edu.cn/65686/list.htm"
+      "打开综合服务网的浙大黄页，按学院、部门或业务名称定位联系条目。",
+      "核对联系人负责事项、所在校区、办公室和公布电话；同名部门先确认是否为目标单位。",
+      "电话咨询时说明本人身份、业务及已有申请编号，记录具体处理要求。",
+      "联系不上或信息有变时，进入该部门官网核对最新联系方式。"
     ],
-    "materials": [],
+    "materials": [
+      "部门名称、具体事项、本人身份及相关申请编号。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "zhfw.zju.edu.cn（小组资料提供）",
+        "label": "浙江大学综合服务网黄页",
         "url": "https://zhfw.zju.edu.cn/65686/list.htm"
       }
     ],
@@ -3099,30 +4462,47 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "联系到负责本事项的承办人员并获得办理指引。",
+    "troubleshooting": [
+      "黄页没有承办人时，使用学院或部门官网通知末尾的联系方式。"
+    ],
+    "relatedGuideIds": [
+      "campus-016",
+      "campus-066"
+    ]
   },
   {
     "id": "academic-calendar",
-    "title": "浙大校历在哪里查？",
+    "title": "浙大校历怎样查，怎样安排开学和考试？",
     "category": "教务与学习",
     "keywords": [
-      "浙大校历"
+      "浙大校历",
+      "校历",
+      "开学",
+      "放假",
+      "教学周",
+      "考试周"
     ],
-    "summary": "本科生院已公布2026—2027学年校历，可从官方校历页面查看。",
+    "summary": "选择正确学年校历，核对学期与教学周，把重要节点加入日程，再用课程通知确认具体安排。",
     "steps": [
-      "打开本科生院的2026—2027学年校历页面。",
-      "核对所需学年及校区；考试和节假日教学安排还应查看补充通知。"
+      "打开本科生院校历通知，选择自己需要的学年，先核对标题，不直接沿用上学年图片。",
+      "查看报到、开学、教学周、考试周和寒暑假安排，将相关时间保存到日程。",
+      "课程的上课周次、具体考试日期及选课申请截止时间，另外在教学平台和本学期通知中核对。",
+      "学期内收到临时调整通知时更新日程，保留校历链接便于复查。"
     ],
-    "materials": [],
+    "materials": [
+      "当前学年、本人课表及需安排的事项。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "本科生院：2026—2027学年校历",
+        "label": "本科生院校历通知",
         "url": "https://ugrs.zju.edu.cn/2026/0710/c28218a3187939/page.htm"
       }
     ],
@@ -3137,32 +4517,45 @@
     "verifiedAt": "2026-10-08",
     "isExample": false,
     "kind": "procedure",
-    "notes": [
-      "原表该行没有填写解决方法，现补入已查到的官网校历页面；未转录图片中的日期。"
+    "notes": [],
+    "verificationScope": "保留已核对的官方校历入口；不将图片内日期猜测成文本。",
+    "relatedSourceIds": [],
+    "completionNote": "日程使用正确学年，课程和申请的具体时间另有确认。",
+    "troubleshooting": [
+      "校历标出考试周不代表每门课同一天考试；以本人考试安排为准。"
     ],
-    "verificationScope": "正文中明确标出的官网核对内容；其他资料细节仍需确认。",
-    "relatedSourceIds": []
+    "relatedGuideIds": [
+      "campus-019",
+      "exam-deferral"
+    ]
   },
   {
     "id": "exam-deferral",
-    "title": "如何申请课程缓考？",
+    "title": "课程缓考怎样申请并安排后续考试？",
     "category": "教务与学习",
     "keywords": [
-      "申请缓考"
+      "申请缓考",
+      "缓考",
+      "延期考试",
+      "缓考申请",
+      "缓考考试"
     ],
-    "summary": "按本科生院2026年4月公布的流程，在考试前通过教务平台提交课程缓考申请并跟进审批。",
+    "summary": "考试前提交缓考申请并跟进审核，获批后另申请参加后续同课程考试。",
     "steps": [
-      "登录本科教学管理信息服务平台，进入考试管理 → 课程缓考与缓考考试申请。",
-      "选择课程缓考申请标签页，按要求提交并查看审核结果。",
-      "获批后如参加后续学期考试，通过同一入口选择缓考考试申请。开考后的紧急情况先联系学院教学科或辅导员。"
+      "在考试前登录本科教学平台，进入“考试管理 → 课程缓考与缓考考试申请”，选择“课程缓考申请”。",
+      "选择课程，填写申请理由并上传符合本人情况的有效证明；核对课程和考试时间后提交。",
+      "及时查看审核流程和结果；申请被退回时按理由补充，不能只凭提交成功判断可以不参加考试。",
+      "获批后，拟参加后续学期同课程期末考试时，在同一入口选择“缓考考试申请”，提交并确认考试安排。"
     ],
-    "materials": [],
+    "materials": [
+      "课程代码、教学班、考试日期、缓考理由及相应有效证明。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "本科生院：课程缓考申请办理流程（2026-04-30）",
+        "label": "本科生院课程缓考办理流程",
         "url": "https://zdbk.zju.edu.cn/jwglxt/xtgl/xwck_ckLoginNews.html?xwbh=50AA96418C25E042E0632AB3CA0AB796"
       }
     ],
@@ -3174,31 +4567,52 @@
       "申请缓考"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": "2026-10-08",
+    "verifiedAt": "2026-10-09",
     "isExample": false,
     "kind": "procedure",
-    "notes": [
-      "已用2026年流程更新原表的简略说明。具体证明材料和资格由申请页面及学院确认。"
-    ],
-    "verificationScope": "正文中明确标出的官网核对内容；其他资料细节仍需确认。",
-    "relatedSourceIds": []
+    "notes": [],
+    "verificationScope": "2026官方通知明确的两阶段申请入口和紧急联系方法。",
+    "relatedSourceIds": [],
+    "completionNote": "缓考获准，后续考试申请与考场安排也已确认。",
+    "troubleshooting": [
+      "开考后遇紧急情况，立即联系学院教学科或学园辅导员；政策咨询可拨本科生院学籍中心0571-88208655。"
+    ]
   },
   {
     "id": "campus-097",
-    "title": "成绩单打印",
+    "title": "成绩单怎样打印、盖章或密封？",
     "category": "教务与学习",
     "keywords": [
-      "成绩单打印"
+      "成绩单打印",
+      "打印成绩",
+      "中英文成绩单",
+      "成绩盖章",
+      "密封成绩单"
     ],
-    "summary": "纳米楼自助打印机上打印即可，24h开放",
+    "summary": "先确认接收方格式要求，打印所需成绩单，按用途办理盖章或密封，再核对材料。",
     "steps": [
-      "纳米楼自助打印机上打印即可，24h开放"
+      "先问清接收方需要中英文、全部还是阶段成绩、份数、盖章或密封要求，避免打印后重办。",
+      "在学校自助打印设备或学院确认的成绩单办理渠道取得对应成绩单，核对姓名、学号、课程和成绩。",
+      "在校本科生出国成绩单需要审核盖章时，按办事中心说明到本科生院26、27号窗口；需要密封时一并提出。",
+      "离开前核对份数、印章、密封及接收要求，保存办理结果；研究生或国际联合学院按对应院系流程办理。"
     ],
-    "materials": [],
+    "materials": [
+      "本人身份证、校园卡或学生证；接收方格式与份数要求。",
+      "代办准备本人证件复印件、代办人证件和本人签名委托书，先向窗口确认。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "本科生出国成绩单办理指南",
+        "url": "https://service.zju.edu.cn/_web/customized/serviceCenter/detailnew.html?_p=YXM9MiZ0PTUmZD0xNTcmcD0xJmY9MTA5Jm09TiY_&id=2664"
+      },
+      {
+        "label": "本科教学管理平台",
+        "url": "https://zdbk.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第98行",
     "sourceRows": [
       98
@@ -3207,32 +4621,58 @@
       "成绩单打印"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
     "kind": "procedure",
-    "notes": [
-      "原表提到纳米楼自助打印机24小时开放，本次未核验当前开放时段、打印资格或费用；前往前请确认。"
+    "notes": [],
+    "verificationScope": "官网在校本科生出国成绩单材料、流程与窗口信息；不推广为所有学生统一办理地点或24小时人工服务。",
+    "relatedSourceIds": [],
+    "completionNote": "成绩单内容、印章或密封符合接收方要求。",
+    "troubleshooting": [
+      "成绩未录入完整时，先联系开课单位核查；课程查询截图不能自动代替正式成绩单。"
     ],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedGuideIds": [
+      "campus-098"
+    ],
+    "serviceWindowIds": [
+      "transcript-zijingang"
+    ]
   },
   {
     "id": "campus-098",
-    "title": "在读证明",
+    "title": "在读证明怎样开具？",
     "category": "教务与学习",
     "keywords": [
-      "在读证明"
+      "在读证明",
+      "在校证明",
+      "学籍证明",
+      "中英文证明",
+      "申请在读证明",
+      "开具在读证明"
     ],
-    "summary": "玉泉：行政楼135；紫金港：纳米楼",
+    "summary": "确认接收方需要的语言与内容，取得学校认可的证明，核对身份和盖章后使用。",
     "steps": [
-      "玉泉：行政楼135",
-      "紫金港：纳米楼"
+      "先明确证明用途，问清接收方需要中英文、学籍状态、年级、预计毕业时间等哪些内容。",
+      "通过学校办事中心查找在读证明；本科生可按学校说明使用办事大厅自助打印或预约网提供的模板办理。",
+      "选择本人对应证明，核对姓名、学号、专业和在读信息；需要额外内容时向学院教学科确认如何开具。",
+      "按所用渠道完成审核或盖章；离开前核对印章、语言、份数及接收要求。"
     ],
-    "materials": [],
+    "materials": [
+      "本人有效身份证明、校园身份及接收方要求。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "学校证明开具常见问题",
+        "url": "https://s2.zju.edu.cn/search/faq.do?words=%E8%AF%81%E6%98%8E"
+      },
+      {
+        "label": "学校办事中心",
+        "url": "https://service.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第99行",
     "sourceRows": [
       99
@@ -3241,33 +4681,56 @@
       "在读证明"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
     "kind": "procedure",
-    "notes": [
-      "所列办理地点来自小组资料，本次未核对当前窗口、开放时间和在读证明获取方式。"
+    "notes": [],
+    "verificationScope": "学校FAQ所列模板和现场自助办理方向；未确认所有校区自助机地点或全天开放。",
+    "relatedSourceIds": [],
+    "completionNote": "证明信息正确，签章或核验方式符合接收方要求。",
+    "troubleshooting": [
+      "已毕业、休学或其他学籍状态不应直接使用普通在读模板；先由学院确认可开具的证明类型。"
     ],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedGuideIds": [
+      "campus-097",
+      "campus-023"
+    ]
   },
   {
     "id": "campus-101",
-    "title": "快递点",
+    "title": "快递怎样取件、寄件和查服务点？",
     "category": "校园生活",
     "keywords": [
-      "快递点"
+      "快递点",
+      "取快递",
+      "寄快递",
+      "包裹",
+      "青溪翠柏",
+      "白沙",
+      "银泉",
+      "澄月",
+      "玉湖"
     ],
-    "summary": "玉泉：北门的菜鸟驿站；紫金港：翠柏4舍自行车库快递点，青溪翠柏快递站，碧峰快递点，银泉快递点，尧坤楼快递点；西溪：南园菜鸟驿站",
+    "summary": "先以取件通知定位服务点，按人工或自助时间取件；寄件核验物品后保存运单。",
     "steps": [
-      "玉泉：北门的菜鸟驿站",
-      "紫金港：翠柏4舍自行车库快递点，青溪翠柏快递站，碧峰快递点，银泉快递点，尧坤楼快递点",
-      "西溪：南园菜鸟驿站"
+      "查看短信或购物App物流提示，确认是已到服务点还是仅显示物流签收，并核对实际站点和取件凭证。",
+      "选择下方对应校区网点核对地点；自助柜按系统提示操作，需人工帮助、寄件或签字领取时在人工服务时间前往。",
+      "取件时使用通知中的身份码或有效证件，核对收件人和运单后领取。",
+      "寄件可到服务站出示本人身份证，按现场要求开箱验视、下单和支付，保留运单号后查看物流。"
     ],
-    "materials": [],
+    "materials": [
+      "取件通知、取件凭证或有效证件。",
+      "寄件准备收件信息、手机和身份证；现场验视前不要封死包裹。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "后勤邮政服务网点、时间与电话",
+        "url": "https://zulg.zju.edu.cn/guide/post.htm"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第102行",
     "sourceRows": [
       102
@@ -3276,35 +4739,66 @@
       "快递点"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
     "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "后勤当前邮政指南的14个网点、人工与自助时段、电话及取寄件流程。",
+    "relatedSourceIds": [],
+    "completionNote": "包裹对应运单已领到；寄件已取得有效运单记录。",
+    "troubleshooting": [
+      "显示签收但没有取件通知时，先联系快递方确认实际投递地点。",
+      "自助服务标为24小时不代表楼宇入口始终可进入，也不代表人工柜台全天开放。"
+    ],
+    "serviceWindowIds": [
+      "post-chengyue",
+      "post-nongshenghuan",
+      "post-medical",
+      "post-baisha",
+      "post-yuhu",
+      "post-yinquan",
+      "post-nano",
+      "post-yuquan",
+      "post-xixi-north",
+      "post-xixi-south",
+      "post-xixi-design",
+      "post-huajiachi",
+      "post-zhijiang-gate",
+      "post-zhijiang-student"
+    ]
   },
   {
     "id": "campus-102",
-    "title": "寻找志愿活动",
+    "title": "志愿活动怎样报名并记录服务时长？",
     "category": "科研与活动",
     "keywords": [
-      "寻找志愿活动"
+      "寻找志愿活动",
+      "志愿活动",
+      "志愿者",
+      "志愿汇",
+      "志愿时长",
+      "义工"
     ],
-    "summary": "志愿汇app；志愿者钉钉群；浙大青志公众号、各大学园/院的官网、公众号、钉钉群 各种学生组织、社团也会招募志愿者 然后还有一个信息整合网站https://www.tuotuzju.com/events",
+    "summary": "筛选学校或组织发布的项目，确认报名后按要求参加，结束后核对时长记录。",
     "steps": [
-      "志愿汇app",
-      "志愿者钉钉群",
-      "浙大青志公众号、各大学园/院的官网、公众号、钉钉群",
-      "各种学生组织、社团也会招募志愿者",
-      "然后还有一个信息整合网站https://www.tuotuzju.com/events"
+      "查看浙大青志、学院或活动主办方通知，找到当前可报名项目，核对服务地点、日期、人数与任务。",
+      "按通知进入志愿汇或指定报名渠道，填写本人资料，确认录用结果而不只看报名成功提示。",
+      "到场按主办方要求签到、参加服务和签退，保存必要参与证明。",
+      "活动结束后查看志愿时长记录；缺漏先联系主办方，学期核查有异议时按公示要求咨询浙大青志。"
     ],
-    "materials": [],
+    "materials": [
+      "可参与时间、本人志愿账号及项目要求的条件。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "www.tuotuzju.com（小组资料提供）",
+        "label": "学校心理咨询与志愿服务答疑",
+        "url": "https://s2.zju.edu.cn/search/faq.do?words=%E5%92%A8%E8%AF%A2"
+      },
+      {
+        "label": "拓浙活动列表（学生平台）",
         "url": "https://www.tuotuzju.com/events"
       }
     ],
@@ -3316,31 +4810,56 @@
       "寻找志愿活动"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
     "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
+    "verificationScope": "官方FAQ确认志愿汇时长核查和浙大青志咨询；各项目报名渠道由主办方通知确定。",
     "relatedSourceIds": [
       "account-38"
+    ],
+    "completionNote": "服务实际完成，时长记录与主办方确认一致。",
+    "troubleshooting": [
+      "志愿活动报名、时长认定和素质拓展学分是不同环节，学分需要另核对。"
+    ],
+    "relatedGuideIds": [
+      "campus-026",
+      "campus-104"
     ]
   },
   {
     "id": "campus-103",
-    "title": "二课活动",
+    "title": "二课活动怎样参与和确认学分？",
     "category": "科研与活动",
     "keywords": [
-      "二课活动"
+      "二课活动",
+      "第二课堂活动",
+      "活动学分",
+      "素拓活动"
     ],
-    "summary": "在cc98上找",
+    "summary": "找到符合要求的活动，完成报名与实际参与，再核对组织导入或个人申报结果。",
     "steps": [
-      "在cc98上找"
+      "在素拓平台及学院、学生组织通知中查找当前活动，先核对活动类别、报名资格和认定条件。",
+      "按通知报名，确认录用、地点、时段及签到方式；不要只为学分报名无法参加的活动。",
+      "现场按要求完成签到、活动任务和签退，保留需要的参与或成果证明。",
+      "结束后核对组织统一导入记录；需要个人申报时按学院认定通知提交材料，再检查学分是否计入。"
     ],
-    "materials": [],
+    "materials": [
+      "活动通知、本人可参与时间及平台账号。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "素质拓展学分平台",
+        "url": "https://sztz.zju.edu.cn/dekt/#/index/main"
+      },
+      {
+        "label": "新素质拓展学分平台启用说明",
+        "url": "https://ls.zju.edu.cn/2024/0508/c65205a2912484/page.htm"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第104行",
     "sourceRows": [
       104
@@ -3356,24 +4875,47 @@
     "verificationScope": null,
     "relatedSourceIds": [
       "account-40"
+    ],
+    "completionNote": "实际参与完成，平台显示对应认定结果。",
+    "troubleshooting": [
+      "活动宣传标有学分时仍需满足参加要求；报名记录不等于已获得学分。"
+    ],
+    "relatedGuideIds": [
+      "campus-026",
+      "campus-068",
+      "campus-104"
     ]
   },
   {
     "id": "campus-104",
-    "title": "校内活动信息去哪里看",
+    "title": "校园讲座、社团和活动信息怎样查找？",
     "category": "科研与活动",
     "keywords": [
-      "校内活动信息去哪里看"
+      "校内活动信息去哪里看",
+      "校内活动",
+      "讲座",
+      "社团活动",
+      "活动报名"
     ],
-    "summary": "关注学院的官网和微信公众号",
+    "summary": "按兴趣和时间找到活动通知，核对报名及参与要求，获确认后到场。",
     "steps": [
-      "关注学院的官网和微信公众号"
+      "在本站信息源导航按学术、社团、志愿等主题查公众号，进入对应组织的通知渠道。",
+      "核对活动举办日期、校区地点、主办方、报名截止时间和面向对象。",
+      "有报名、抽签或筛选要求时提交申请并查看结果，把确定参加的活动加入日程。",
+      "到场前再检查临时变更通知；需要证明或学分时按活动要求完成参与并核对后续记录。"
     ],
-    "materials": [],
+    "materials": [
+      "兴趣主题、可用时间和校区。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
-    "references": [],
+    "references": [
+      {
+        "label": "团在浙大",
+        "url": "https://tzzd.zju.edu.cn/"
+      }
+    ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第105行",
     "sourceRows": [
       105
@@ -3390,27 +4932,49 @@
     "relatedSourceIds": [
       "account-29",
       "account-42"
+    ],
+    "completionNote": "活动报名或参与条件明确，地点与时间已确认。",
+    "troubleshooting": [
+      "转发图缺少主办方或日期时，先找到完整通知，不直接沿用截图中的旧链接。"
+    ],
+    "relatedGuideIds": [
+      "campus-102",
+      "campus-103",
+      "campus-067"
     ]
   },
   {
     "id": "campus-105",
-    "title": "智云课堂/课堂回放",
+    "title": "智云课堂回放怎样查找和观看？",
     "category": "教务与学习",
     "keywords": [
-      "智云课堂/课堂回放"
+      "智云课堂/课堂回放",
+      "课堂回放",
+      "课程录像",
+      "智云课堂",
+      "回看"
     ],
-    "summary": "资料提供了智云课堂的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "登录平台，找到正确课程和课次，选择可用回放；没有录像时向教师确认。",
     "steps": [
-      "https://classroom.zju.edu.cn/，查看各个老师的课堂回放"
+      "打开智云课堂，使用本人校园身份登录。",
+      "按课程名称、教师、日期或课程通知给出的入口查找对应课程，核对教学班。",
+      "选择提供回放的课次，检查录像日期和内容，按学习需要观看并记下问题。",
+      "没有回放、权限受限或内容缺失时，把课程代码和日期提供给任课教师或平台支持人员确认。"
     ],
-    "materials": [],
+    "materials": [
+      "课程名称、教师、教学班及需要回看的日期。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "classroom.zju.edu.cn（小组资料提供）",
+        "label": "智云课堂",
         "url": "https://classroom.zju.edu.cn/"
+      },
+      {
+        "label": "信息技术中心服务入口",
+        "url": "https://itc.zju.edu.cn/"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第106行",
@@ -3423,29 +4987,40 @@
     "importedAt": "2026-10-08",
     "verifiedAt": null,
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "打开正确课次的可用回放，或已确认未提供及替代学习方式。",
+    "troubleshooting": [
+      "并非所有课程都提供录像，也不保证所有身份均可查看。"
+    ]
   },
   {
     "id": "campus-107",
-    "title": "校友圈",
+    "title": "怎样使用朵朵校友圈查找校园经验？",
     "category": "交流与发展",
     "keywords": [
-      "校友圈"
+      "校友圈",
+      "校园经验",
+      "朵朵"
     ],
-    "summary": "朵朵校友圈https://www.duoduo.link/experience",
+    "summary": "选择对应学校和主题，查阅经验并核对适用时间，再联系相关信息发布者。",
     "steps": [
-      "朵朵校友圈https://www.duoduo.link/experience"
+      "打开朵朵校友圈入口，按平台提示选择学校、主题并登录需要的账号。",
+      "搜索课程、校园生活或发展经验，核对内容对应学校、时间及发布者说明。",
+      "涉及具体办事时，把经验中的关键要求与学校对应业务规则比较。",
+      "需要进一步了解时使用平台允许的联系或讨论方式，问清自己的具体情况。"
     ],
-    "materials": [],
+    "materials": [
+      "学校、主题或具体问题。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "www.duoduo.link（小组资料提供）",
+        "label": "朵朵校友圈（校外平台）",
         "url": "https://www.duoduo.link/experience"
       }
     ],
@@ -3461,27 +5036,41 @@
     "isExample": false,
     "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "入口返回页面但没有可提取正文；功能与学校绑定未实测。",
+    "relatedSourceIds": [],
+    "completionNote": "找到适合当前情况的经验，并核对涉及正式办理的要求。",
+    "troubleshooting": [
+      "这是校外交流平台；页面或功能打不开时可改用CC98或官方办事渠道。"
+    ],
+    "relatedGuideIds": [
+      "campus-038"
+    ]
   },
   {
     "id": "campus-108",
-    "title": "综合网站",
+    "title": "ZJUers导航怎样用来查校园信息？",
     "category": "综合入口",
     "keywords": [
-      "综合网站"
+      "综合网站",
+      "校园导航",
+      "ZJUers",
+      "新生指引"
     ],
-    "summary": "zju轻首页https://zjuers.com/，综合各种页面信息",
+    "summary": "按主题找到相关条目，再进入原始业务网站，核对当前要求后办理。",
     "steps": [
-      "zju轻首页https://zjuers.com/，综合各种页面信息"
+      "打开ZJUers，按学习、校园生活或服务入口等主题查找信息。",
+      "查看条目的适用年级、校区和更新时间，把涉及办理的链接打开到原网站。",
+      "正式申请、费用、资格和期限以业务网站或承办单位说明核对后再执行。"
     ],
-    "materials": [],
+    "materials": [
+      "问题主题、年级与所在校区。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "zjuers.com（小组资料提供）",
+        "label": "ZJUers（校外整理导航）",
         "url": "https://zjuers.com/"
       }
     ],
@@ -3498,26 +5087,42 @@
     "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "找到目标业务的原始入口及当前要求。",
+    "troubleshooting": [
+      "该网站属于校外整理导航，经验条目不自动成为学校规定。"
+    ],
+    "relatedGuideIds": [
+      "campus-039"
+    ]
   },
   {
     "id": "campus-109",
-    "title": "浙大官方信息获取/各类官方文件",
+    "title": "怎样查学校正式文件和办事规则？",
     "category": "校园生活",
     "keywords": [
-      "浙大官方信息获取/各类官方文件"
+      "浙大官方信息获取/各类官方文件",
+      "官方文件",
+      "管理办法",
+      "学校规定",
+      "规章制度"
     ],
-    "summary": "浙大百事通https://s2.zju.edu.cn/mobile/index.do",
+    "summary": "按事项检索正式文件，确认发布单位和适用范围，再按当前有效规则办理。",
     "steps": [
-      "浙大百事通https://s2.zju.edu.cn/mobile/index.do"
+      "打开学校办事百事通，输入具体事项或文件关键词，查看网站资讯、常见问题和相关制度。",
+      "打开正式文件，核对标题、发布单位、文件编号及适用对象；同主题文件要确认是否有后续修订。",
+      "把与本人办理有关的材料、资格、审批和期限列出来，按承办单位当前流程操作。",
+      "规则之间有冲突或本人属于特殊情况时，带文件名称及具体情况向承办单位咨询。"
     ],
-    "materials": [],
+    "materials": [
+      "业务名称或文件关键词、本人的适用身份。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "s2.zju.edu.cn（小组资料提供）",
+        "label": "学校办事百事通",
         "url": "https://s2.zju.edu.cn/mobile/index.do"
       }
     ],
@@ -3534,27 +5139,44 @@
     "kind": "procedure",
     "notes": [],
     "verificationScope": null,
-    "relatedSourceIds": []
+    "relatedSourceIds": [],
+    "completionNote": "找到适用的正式规则和明确办理方式。",
+    "troubleshooting": [
+      "网页抓取日期不是文件生效日期；不凭搜索排序判断哪份文件有效。"
+    ]
   },
   {
     "id": "campus-110",
-    "title": "开源大模型/数据集获取",
+    "title": "Hugging Face怎样查找模型和数据集？",
     "category": "校外工具与资源",
     "keywords": [
-      "开源大模型/数据集获取"
+      "开源大模型/数据集获取",
+      "开源模型",
+      "数据集",
+      "Hugging Face",
+      "大模型"
     ],
-    "summary": "资料提供了开源大模型的访问入口；具体功能与使用要求以目标页面说明为准。",
+    "summary": "按任务搜索模型或数据集，阅读说明与许可，再按官方用法下载或试用。",
     "steps": [
-      "https://huggingface.co/"
+      "打开Hugging Face，按Models或Datasets选择对象，搜索任务、数据类型或项目名。",
+      "进入对应项目，阅读Model Card或Dataset Card，核对作者、版本、适用任务、数据来源和许可。",
+      "查看文件列表及用法说明，按项目要求下载、加载或申请受限访问；资源要求先与本机条件比较。",
+      "试用后记录项目标识与版本，检查输入输出是否符合任务，避免只根据榜单名称选择。"
     ],
-    "materials": [],
+    "materials": [
+      "明确任务、设备条件及需要遵守的项目许可；受限项目可能需要账号和授权。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "huggingface.co（小组资料提供）",
+        "label": "Hugging Face（校外模型与数据平台）",
         "url": "https://huggingface.co/"
+      },
+      {
+        "label": "Hugging Face Hub使用说明",
+        "url": "https://huggingface.co/docs/hub/index"
       }
     ],
     "source": "副本校园信息问题-solution收集_合并(3).xlsx · Sheet1 · 第111行",
@@ -3565,16 +5187,20 @@
       "开源大模型/数据集获取"
     ],
     "importedAt": "2026-10-08",
-    "verifiedAt": null,
+    "verifiedAt": "2026-10-09",
     "isExample": false,
-    "kind": "resource",
+    "kind": "procedure",
     "notes": [],
-    "verificationScope": null,
-    "relatedSourceIds": []
+    "verificationScope": "平台官方Hub文档确认模型、数据集及说明入口。",
+    "relatedSourceIds": [],
+    "completionNote": "资源能够按说明加载，版本和使用条件已记录。",
+    "troubleshooting": [
+      "许可、依赖或数据来源不清楚时先阅读项目说明；模型演示结果不保证适合自己的任务。"
+    ]
   },
   {
     "id": "campus-hospital-registration",
-    "title": "校医院怎么预约挂号？",
+    "title": "校医院怎样预约挂号和确认院区？",
     "category": "校园生活",
     "keywords": [
       "校医院",
@@ -3582,39 +5208,46 @@
       "看病",
       "挂号",
       "门诊",
-      "数字医疗"
+      "数字医疗",
+      "预约挂号"
     ],
-    "summary": "校医院公布了微信公众号、浙大钉数字医疗平台和官网预约入口；院区及门诊安排请查看最新公告。",
+    "summary": "选择挂号渠道，核对院区、科室与时段，完成预约后按提示准备证件并到院。",
     "steps": [
-      "可在微信中查找浙江大学医院，或浙大二院公众号中的浙大院区。",
-      "也可从浙大钉数字医疗平台或校医院官网进入预约挂号。",
-      "核对需要的院区、科室和时段，按预约页面要求办理。"
+      "微信进入“浙江大学医院”公众号，或“浙大二院”公众号选择“浙大院区”；也可从浙大钉“数字医疗平台”或校医院官网预约。",
+      "按页面要求添加或选择本人就诊信息，核对姓名和证件信息。",
+      "选择需要的院区、科室及当期可预约时段，不把不同院区的地点混用。",
+      "完成预约及页面要求的支付，保存预约信息；就诊前查看取号、报到及证件要求，按时前往。",
+      "需要改期或取消时，在所用平台查看预约记录及取消要求，再处理。"
     ],
-    "materials": [],
+    "materials": [
+      "有效身份证明、就诊所需医保信息；有既往资料时按预约提示携带。"
+    ],
     "location": null,
     "openingHours": null,
     "contact": null,
     "references": [
       {
-        "label": "校医院：挂号入口说明（2025-02-25）",
+        "label": "校医院官方挂号渠道说明",
         "url": "https://zdyy.zju.edu.cn/2025/0225/c9107a3019250/page.htm"
       },
       {
-        "label": "浙江大学校医院官网",
-        "url": "https://zdyy.zju.edu.cn/main.psp"
+        "label": "校医院数字医疗预约入口",
+        "url": "https://xyszyl.zju.edu.cn/"
       }
     ],
     "source": "既有网页示例，经浙江大学校医院官方通知补充",
     "sourceRows": [],
     "sourceQuestions": [],
     "importedAt": "2026-10-08",
-    "verifiedAt": "2026-10-08",
+    "verifiedAt": "2026-10-09",
     "isExample": false,
     "kind": "procedure",
-    "notes": [
-      "核对范围限预约渠道，不承诺具体门诊时间，也不提供诊疗建议。"
-    ],
-    "verificationScope": "2025年官方通知列出的预约渠道；具体出诊以最新通知为准。",
-    "relatedSourceIds": []
+    "notes": [],
+    "verificationScope": "官方挂号渠道与紫金港门诊服务咨询电话；出诊时段仅由预约平台实时提供。",
+    "relatedSourceIds": [],
+    "completionNote": "预约记录显示成功，院区、时段和就诊人信息准确。",
+    "troubleshooting": [
+      "预约问题可联系紫金港门诊服务中心0571-88206017；急需医疗救助时使用急救渠道，不等待普通门诊号。"
+    ]
   }
 ]
