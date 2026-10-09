@@ -8,6 +8,20 @@ export interface GuideReference {
   url: string
 }
 
+export interface GuideRoute {
+  id: string
+  label: string
+  intentTerms: string[]
+  excludedTerms?: string[]
+  summary: string
+  materials: string[]
+  steps: string[]
+  stepActions: GuideStepAction[]
+  troubleshooting: string[]
+  completionNote: string
+  serviceWindowIds: string[]
+}
+
 export interface Guide {
   id: string
   title: string
@@ -36,6 +50,8 @@ export interface Guide {
   relatedGuideIds?: string[]
   stepActions?: GuideStepAction[]
   aliases?: string[]
+  routes?: GuideRoute[]
+  routeChoiceLabel?: string
 }
 
 export interface ServiceWindow {

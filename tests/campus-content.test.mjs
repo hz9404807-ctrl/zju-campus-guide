@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { readFileSync, existsSync } from 'node:fs'
-import { filterGuides, filterAccounts, filterWebsites, findRelatedSources, sourceSearchUrl, suggestGuides, guideIdForWebsite, websiteSearchDetails, primaryGuideAction, guideSearchMatch, searchTextParts } from '../src/lib/campusContent.ts'
+import { filterGuides, filterAccounts, filterWebsites, findRelatedSources, sourceSearchUrl, suggestGuides, guideIdForWebsite, websiteSearchDetails, primaryGuideAction, guideSearchMatch, searchTextParts, resolveGuideRoute, guideRouteView } from '../src/lib/campusContent.ts'
 const read = (name) => JSON.parse(readFileSync(new URL(`../src/data/${name}.json`, import.meta.url), 'utf8'))
 const guides = read('guides'), accounts = read('accounts'), websites = read('websites')
 
@@ -185,8 +185,11 @@ test('全部95份指南提供对应步骤的真实参考或平台链接，不再
   for (const guide of guides) {
     assert.ok(guide.stepActions.length > 0, guide.id)
     const primary = primaryGuideAction(guide)
-    assert.ok(primary?.url && primary.label, guide.id)
-    assert.ok(guide.stepActions.includes(primary))
+    if (guide.routes?.length) assert.equal(primary, undefined, guide.id)
+    else {
+      assert.ok(primary?.url && primary.label, guide.id)
+      assert.ok(guide.stepActions.includes(primary))
+    }
     for (const action of guide.stepActions) {
       assert.ok(Number.isInteger(action.stepIndex) && action.stepIndex >= 0 && action.stepIndex < guide.steps.length, guide.id)
       assert.ok(['reference', 'service', 'windows'].includes(action.kind))
@@ -265,4 +268,72 @@ test('文本高亮识别近义词，按字面处理特殊符号并完整保留�
   assert.ok(searchTextParts(text, '饭卡').some((part) => part.matched && part.text === '校园卡'))
   assert.ok(searchTextParts('其他内容', '.*').every((part) => !part.matched))
   assert.ok(searchTextParts('其他内容', '[a]').every((part) => !part.matched))
+})
+
+
+test('情形选择只在明确需求时推断，显式选择和歧义都有安全回退', () => {
+  const library = guides.find((g) => g.id === 'campus-009')
+  const transcript = guides.find((g) => g.id === 'campus-097')
+  assert.equal(resolveGuideRoute(library, '我想预约一个自习座位').id, 'seat')
+  assert.equal(resolveGuideRoute(library, '预约研讨室').id, 'space')
+  for (const query of ['', '图书馆预约', '座位 研讨空间']) assert.equal(resolveGuideRoute(library, query), undefined)
+  assert.equal(resolveGuideRoute(library, '座位', 'space').id, 'space')
+  for (const id of ['all', 'wrong']) assert.equal(resolveGuideRoute(library, '座位', id), undefined)
+  assert.equal(resolveGuideRoute(transcript, '请帮我打印一份成绩单').id, 'print')
+  assert.equal(resolveGuideRoute(transcript, '成绩单 打印 盖章').id, 'seal')
+  assert.equal(resolveGuideRoute(transcript, '成绩单'), undefined)
+})
+
+test('卡片和正文使用同一路线，个人座位不误导到研讨空间，打印不误导到盖章窗口', () => {
+  const library = guides.find((g) => g.id === 'campus-009')
+  const transcript = guides.find((g) => g.id === 'campus-097')
+  assert.equal(primaryGuideAction(library, '图书馆预约'), undefined)
+  assert.equal(primaryGuideAction(library, '研讨室').url, 'https://booking.lib.zju.edu.cn/')
+  assert.equal(primaryGuideAction(library, '自习座位').kind, 'reference')
+  assert.match(primaryGuideAction(library, '自习座位').label, /官网找座位/)
+  const view = guideRouteView(transcript, resolveGuideRoute(transcript, '打印成绩单'))
+  assert.deepEqual(view.serviceWindowIds, [])
+  assert.ok(!view.stepActions.some((action) => action.kind === 'windows'))
+  assert.deepEqual(view.sourceRows, transcript.sourceRows)
+  assert.equal(view.id, transcript.id)
+  const seal = guideRouteView(transcript, resolveGuideRoute(transcript, '密封成绩单'))
+  assert.deepEqual(seal.serviceWindowIds, ['transcript-zijingang'])
+  const seat = guideRouteView(library, resolveGuideRoute(library, '座位取消'))
+  const match = guideSearchMatch(seat, '座位 取消')
+  assert.match(seat.steps[Number(match.anchor.split('-').at(-1))], /取消功能/)
+})
+
+test('试点路线的入口、步骤索引与原始来源一致，不生成未经核实的业务入口', () => {
+  const windows = read('service-windows')
+  assert.equal(guides.filter((g) => g.routes).length, 2)
+  for (const guide of guides.filter((g) => g.routes)) {
+    assert.equal(new Set(guide.routes.map((r) => r.id)).size, guide.routes.length)
+    for (const route of guide.routes) {
+      assert.ok(route.summary && route.steps.length && route.completionNote)
+      for (const action of route.stepActions) {
+        assert.ok(action.stepIndex >= 0 && action.stepIndex < route.steps.length)
+        if (action.kind === 'windows') assert.ok(route.serviceWindowIds.some((id) => windows.some((w) => w.id === id)))
+        else assert.ok(guide.references.some((reference) => reference.url === action.url))
+      }
+    }
+  }
+  const transcript = guides.find((g) => g.id === 'campus-097')
+  const seal = transcript.routes.find((r) => r.id === 'seal')
+  assert.match(seal.materials.join(' '), /在校本科生/)
+  assert.match(seal.materials.join(' '), /A4手写委托书/)
+  assert.match(seal.steps.join(' '), /周五15:30后/)
+  assert.match(seal.steps.join(' '), /刷校园卡/)
+})
+
+
+test('选定路线的正文参考和搜索信息源不混入另一业务入口', () => {
+  const library = guides.find((g) => g.id === 'campus-009')
+  const seat = guideRouteView(library, resolveGuideRoute(library, '自习座位'))
+  assert.ok(seat.references.every((r) => !r.url.includes('booking.lib')))
+  const seatSources = findRelatedSources(websites, accounts, '我想预约一个自习座位', filterGuides(guides, '我想预约一个自习座位'))
+  assert.ok(seatSources.websites.length)
+  assert.ok(!seatSources.websites.some((s) => s.url.includes('booking.lib')))
+  const spaceSources = findRelatedSources(websites, accounts, '预约研讨室', filterGuides(guides, '预约研讨室'))
+  assert.ok(spaceSources.websites.some((s) => s.url.includes('booking.lib')))
+  assert.deepEqual(guideRouteView(library).references, library.references)
 })

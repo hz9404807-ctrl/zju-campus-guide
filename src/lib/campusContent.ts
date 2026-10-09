@@ -1,4 +1,4 @@
-import type { Guide, GuideStepAction, ServiceWindow } from '../types/guide'
+import type { Guide, GuideRoute, GuideStepAction, ServiceWindow } from '../types/guide'
 
 export function normalizeSearch(value: string) {
   return value.normalize('NFKC').toLocaleLowerCase().trim()
@@ -96,6 +96,8 @@ function guideSearchFields(guide: Guide, windows: ServiceWindow[]) {
     guide.title, guide.category, guide.summary, ...guide.keywords, ...guide.steps,
     ...guide.materials, ...guide.notes, ...(guide.troubleshooting ?? []), guide.completionNote,
     guide.location, guide.openingHours, guide.contact, ...guide.sourceQuestions,
+    ...(guide.routes ?? []).flatMap((route) => [route.label, route.summary, ...route.intentTerms,
+      ...route.steps, ...route.materials, ...route.troubleshooting, route.completionNote]),
     ...windows.filter((window) => guide.serviceWindowIds?.includes(window.id)).flatMap((window) => [
       window.campus, window.name, window.location, window.openingHours, window.notice,
       ...window.contacts.map((contact) => contact.number),
@@ -187,10 +189,18 @@ export function findRelatedSources(websites: CampusWebsite[], accounts: CampusAc
   const leading = matchedGuides.slice(0, 3)
   const guideIds = new Set(leading.map((guide) => guide.id))
   const accountIds = new Set(leading.flatMap((guide) => guide.relatedSourceIds))
+  // Suppress destinations belonging exclusively to an unselected route.
+  const routeExcludedUrls = new Set(leading.flatMap((guide) => {
+    const route = resolveGuideRoute(guide, query)
+    if (!route) return []
+    const selected = new Set(route.stepActions.flatMap((action) => 'url' in action ? [action.url.replace(/\/$/, '')] : []))
+    return (guide.routes ?? []).flatMap((other) => other.stepActions.flatMap((action) =>
+      'url' in action && !selected.has(action.url.replace(/\/$/, '')) ? [action.url.replace(/\/$/, '')] : []))
+  }))
   const directSites = new Set(filterWebsites(websites, query, category).map((site) => site.id))
   const directAccounts = new Set(filterAccounts(accounts, query).map((account) => account.id))
   return {
-    websites: websites.filter((site) => (!category || site.category === category) &&
+    websites: websites.filter((site) => !routeExcludedUrls.has(site.url.replace(/\/$/, '')) && (!category || site.category === category) &&
       (directSites.has(site.id) || site.guideIds.some((id) => guideIds.has(id))))
       .sort((a, b) => Number(directSites.has(b.id)) - Number(directSites.has(a.id))),
     accounts: accounts.filter((account) => directAccounts.has(account.id) || accountIds.has(account.id))
@@ -219,8 +229,29 @@ export function websiteSearchDetails(site: CampusWebsite, matchingGuides: Guide[
 }
 
 // Cards use the same reviewed destination as the steps, so labels and URLs stay aligned.
-export function primaryGuideAction(guide: Guide) {
-  const actions = (guide.stepActions ?? []).filter((action): action is Extract<GuideStepAction, { url: string }> => 'url' in action)
+// Explicit choices override inferred intent, including "all" or an invalid route.
+export function resolveGuideRoute(guide: Guide, query = '', routeId: string | null = null): GuideRoute | undefined {
+  if (routeId !== null) return guide.routes?.find((route) => route.id === routeId)
+  const terms = queryTerms(query)
+  const text = terms.join(' ')
+  if (!text) return undefined
+  const routes = (guide.routes ?? []).filter((route) =>
+    route.intentTerms.some((term) => text.includes(canonicalSearch(term))) &&
+    !(route.excludedTerms ?? []).some((term) => text.includes(canonicalSearch(term))))
+  return routes.length === 1 ? routes[0] : undefined
+}
+
+export function guideRouteView(guide: Guide, route?: GuideRoute): Guide {
+  return route ? { ...guide, summary: route.summary, steps: route.steps, materials: route.materials,
+    stepActions: route.stepActions, troubleshooting: route.troubleshooting,
+    completionNote: route.completionNote, serviceWindowIds: route.serviceWindowIds,
+    references: guide.references.filter((reference) => route.stepActions.some((action) => 'url' in action && action.url === reference.url)) } : guide
+}
+
+export function primaryGuideAction(guide: Guide, query = '') {
+  const route = resolveGuideRoute(guide, query)
+  if (guide.routes?.length && !route) return undefined
+  const actions = (route?.stepActions ?? guide.stepActions ?? []).filter((action): action is Extract<GuideStepAction, { url: string }> => 'url' in action)
   return actions.find((action) => action.kind === 'service') ?? actions[0]
 }
 

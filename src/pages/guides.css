@@ -202,3 +202,10 @@
 .guide-search-location { margin: 0 0 22px; font-size: 13px; }
 .guide-search-location a { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; color: var(--blue); overflow-wrap: anywhere; }
 [id^="guide-step-"], [id^="guide-help-"], [id^="guide-material-"] { scroll-margin-top: 100px; }
+
+.guide-route-panel { margin: 20px 0 28px; padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: #fff; }
+.guide-route-panel h2 { margin: 0 0 16px; font-size: 19px; }
+.guide-route-choices { display: flex; flex-wrap: wrap; gap: 10px; }
+.guide-route-choices button { min-height: 44px; padding: 11px 16px; border: 1px solid #d6e0ee; border-radius: 10px; background: #f6f8fc; color: #344761; font: inherit; cursor: pointer; }
+.guide-route-choices button[aria-pressed="true"] { border-color: #315da9; background: #315da9; color: #fff; }
+.guide-route-panel > p { margin: 16px 0 0; color: var(--muted); line-height: 1.6; }
