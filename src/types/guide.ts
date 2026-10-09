@@ -1,3 +1,9 @@
+export type GuideStepAction = { stepIndex: number } & (
+  | { kind: 'reference'; label: string; url: string }
+  | { kind: 'app'; label: string; path: string }
+  | { kind: 'windows'; label: string }
+)
+
 export interface GuideReference {
   label: string
   url: string
@@ -29,6 +35,7 @@ export interface Guide {
   troubleshooting?: string[]
   completionNote?: string
   relatedGuideIds?: string[]
+  stepActions?: GuideStepAction[]
   aliases?: string[]
 }
 

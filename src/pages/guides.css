@@ -175,3 +175,24 @@
 .guide-source-group li span { color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
 .guide-source-group .guide-bottom-back { margin-top: 8px; }
 @media (max-width: 560px) { .guide-search-sources { padding: 20px; } }
+
+
+.guide-step-actions { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.guide-action-button { display: inline-flex; align-items: center; justify-content: flex-start; gap: 7px; min-height: 44px; max-width: 100%; padding: 9px 12px; color: var(--blue); background: var(--blue-soft); border: 1px solid #c5d7ed; border-radius: 8px; font: inherit; font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; text-align: left; }
+.guide-action-button svg { flex-shrink: 0; }
+.guide-app-route { width: 100%; padding: 12px; border-radius: 8px; background: #f7f9fc; }
+.guide-app-route > p { color: var(--ink); font-size: 13px; line-height: 1.8; overflow-wrap: anywhere; }
+.guide-copy-control { min-width: 0; }
+.guide-copy-control > p { color: var(--muted); font-size: 12px; line-height: 1.8; margin-top: 7px; overflow-wrap: anywhere; }
+.guide-app-route .guide-copy-control { margin-top: 8px; }
+.guide-window-actions { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 9px; margin-top: 12px; }
+.guide-map-hint, .guide-preference-note { color: var(--muted); font-size: 12px !important; line-height: 1.8; margin-top: 10px; }
+.guide-window-unavailable { padding: 14px; border: 1px solid var(--line); border-radius: 10px; }
+.guide-window-unavailable p { font-size: 13px; line-height: 1.8; margin-bottom: 10px; }
+#guide-windows-heading { scroll-margin-top: 90px; }
+.guide-option-list > li > p { margin: 0; }
+
+/* Keep the whole guide card clickable while its reference link remains independent. */
+.guide-result-card { position: relative; }
+.guide-card-title::after { content: ''; position: absolute; inset: 0; border-radius: 16px; }
+.guide-card-footer a { position: relative; z-index: 1; }

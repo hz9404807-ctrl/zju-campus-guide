@@ -66,6 +66,25 @@
     ],
     "relatedGuideIds": [
       "campus-046"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "app",
+        "label": "复制App操作路径",
+        "path": "浙大校园卡App → 应用 → 挂失·解挂 → 挂失"
+      },
+      {
+        "stepIndex": 2,
+        "kind": "windows",
+        "label": "查看办理窗口与时间"
+      },
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看官方说明",
+        "url": "https://itc.zju.edu.cn/xykwgr/list.htm"
+      }
     ]
   },
   {
@@ -120,7 +139,21 @@
       "card-haining",
       "card-zhoushan"
     ],
-    "relatedGuideIds": []
+    "relatedGuideIds": [],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "app",
+        "label": "复制App操作路径",
+        "path": "浙大钉 → 工作台 → 电子校园卡"
+      },
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看官方说明",
+        "url": "https://itc.zju.edu.cn/xykwgr/list.htm"
+      }
+    ]
   },
   {
     "id": "campus-003",
@@ -177,6 +210,19 @@
     ],
     "relatedGuideIds": [
       "campus-047"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 1,
+        "kind": "windows",
+        "label": "查看办理窗口与时间"
+      },
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看官方说明",
+        "url": "https://zulg.zju.edu.cn/info/1203/8336.htm"
+      }
     ]
   },
   {
@@ -2376,7 +2422,26 @@
       "card-haining",
       "card-zhoushan"
     ],
-    "relatedGuideIds": []
+    "relatedGuideIds": [],
+    "stepActions": [
+      {
+        "stepIndex": 2,
+        "kind": "app",
+        "label": "复制App操作路径",
+        "path": "浙大校园卡App → 身份认证 → 充值 → 付款码"
+      },
+      {
+        "stepIndex": 3,
+        "kind": "windows",
+        "label": "查看办理窗口与时间"
+      },
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看官方说明",
+        "url": "https://zulg.zju.edu.cn/info/1203/8336.htm"
+      }
+    ]
   },
   {
     "id": "campus-046",
@@ -2432,6 +2497,25 @@
     ],
     "relatedGuideIds": [
       "campus-card-replacement"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "app",
+        "label": "复制App操作路径",
+        "path": "浙大校园卡App → 应用 → 挂失·解挂 → 解挂"
+      },
+      {
+        "stepIndex": 3,
+        "kind": "windows",
+        "label": "查看办理窗口与时间"
+      },
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看官方说明",
+        "url": "https://zulg.zju.edu.cn/info/1203/8336.htm"
+      }
     ]
   },
   {
@@ -2490,6 +2574,37 @@
     ],
     "relatedGuideIds": [
       "campus-003"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "app",
+        "label": "复制App操作路径",
+        "path": "浙大钉 → 工作台 → 电子校园卡 → 充值"
+      },
+      {
+        "stepIndex": 1,
+        "kind": "app",
+        "label": "复制App操作路径",
+        "path": "浙大校园卡App → 首页 → 卡片充值"
+      },
+      {
+        "stepIndex": 2,
+        "kind": "app",
+        "label": "复制App操作路径",
+        "path": "支付宝 → 搜索“支付宝校园卡” → 一键充值 → 浙江大学"
+      },
+      {
+        "stepIndex": 3,
+        "kind": "windows",
+        "label": "查看办理窗口与时间"
+      },
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看官方说明",
+        "url": "https://itc.zju.edu.cn/xykwgr/list.htm"
+      }
     ]
   },
   {
@@ -2597,7 +2712,20 @@
       "card-haining",
       "card-zhoushan"
     ],
-    "relatedGuideIds": []
+    "relatedGuideIds": [],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "windows",
+        "label": "查看办理窗口与时间"
+      },
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看官方说明",
+        "url": "https://itc.zju.edu.cn/xykwgr/list.htm"
+      }
+    ]
   },
   {
     "id": "campus-050",

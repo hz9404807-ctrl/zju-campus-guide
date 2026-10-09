@@ -177,3 +177,17 @@ test('近似建议与准确结果分开，并保持类别限制', () => {
   assert.equal(url.searchParams.get('kind'), 'websites')
   assert.equal(new URL(sourceSearchUrl('你好', 'accounts'), 'https://example.com').searchParams.get('q'), '你好')
 })
+
+
+test('校园卡步骤按钮只指向匹配步骤、说明或本页窗口，不伪造App直达', () => {
+  for (const guide of guides.filter((guide) => guide.category === '校园卡')) {
+    assert.ok(guide.stepActions.length > 0)
+    for (const action of guide.stepActions) {
+      assert.ok(Number.isInteger(action.stepIndex) && action.stepIndex >= 0 && action.stepIndex < guide.steps.length)
+      if (action.kind === 'reference') assert.ok(guide.references.some((reference) => reference.url === action.url))
+      if (action.kind === 'windows') assert.ok(guide.serviceWindowIds.length > 0)
+      if (action.kind === 'app') { assert.ok(action.path); assert.equal(action.url, undefined) }
+    }
+  }
+  assert.ok(guides.filter((guide) => guide.category !== '校园卡').every((guide) => !guide.stepActions))
+})

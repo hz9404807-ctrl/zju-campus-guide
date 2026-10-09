@@ -2,6 +2,7 @@ import { Link, useParams, useSearchParams } from 'react-router'
 import { ArrowLeft, ArrowRight, ClipboardList, ExternalLink, Search } from 'lucide-react'
 import SearchField from '../components/SearchField'
 import ResultPager from '../components/ResultPager'
+import GuideStepActions from '../components/GuideStepActions'
 import GuideServiceWindows from '../components/GuideServiceWindows'
 import { useDebouncedValue } from '../hooks/useDebouncedValue'
 import { filterGuides, findRelatedSources, sourceSearchUrl, suggestGuides } from '../lib/campusContent'
@@ -12,7 +13,7 @@ import serviceWindowData from '../data/service-windows.json'
 import type { Guide, ServiceWindow } from '../types/guide'
 import './guides.css'
 
-const guides: Guide[] = guideData
+const guides = guideData as Guide[]
 const serviceWindows = serviceWindowData as ServiceWindow[]
 const categories = [...new Set(guides.map((guide) => guide.category))]
 const quickKeywords = ['校园卡', '场地', '选课', '报修', 'VPN', '志愿', '校历']
@@ -83,12 +84,12 @@ export function GuideDetailPage() {
     <section className="guide-answer-panel" aria-labelledby="guide-answer-heading"><h2 id="guide-answer-heading">{['procedure', 'options'].includes(guide.kind) ? '整体流程' : '事项概览'}</h2><p>{guide.summary}</p></section>
     <div className={`guide-detail-grid${hasServiceInfo ? ' has-service-info' : ''}`}><div className="guide-detail-main">
       {guide.materials.length > 0 && <section className="guide-detail-section"><h2>办理前准备</h2><ul className="guide-material-list">{guide.materials.map((material, i) => <li key={i}>{material}</li>)}</ul></section>}
-      <section className="guide-detail-section"><h2>{mainHeading}</h2>{guide.kind === 'procedure' ? <ol className="guide-step-list">{guide.steps.map((step, i) => <li key={i}><p>{step}</p></li>)}</ol> : guide.kind === 'options' ? <ul className="guide-option-list">{guide.steps.map((step, i) => <li key={i}>{step}</li>)}</ul> : <div className="guide-explanation">{guide.steps.map((step, i) => <p key={i}>{step}</p>)}</div>}{guide.completionNote && <p className="guide-completion-note">{guide.completionNote}</p>}</section>
+      <section className="guide-detail-section"><h2>{mainHeading}</h2>{guide.kind === 'procedure' ? <ol className="guide-step-list">{guide.steps.map((step, i) => <li key={i}><p>{step}</p><GuideStepActions actions={(guide.stepActions ?? []).filter((action) => action.stepIndex === i)} /></li>)}</ol> : guide.kind === 'options' ? <ul className="guide-option-list">{guide.steps.map((step, i) => <li key={i}><p>{step}</p><GuideStepActions actions={(guide.stepActions ?? []).filter((action) => action.stepIndex === i)} /></li>)}</ul> : <div className="guide-explanation">{guide.steps.map((step, i) => <p key={i}>{step}</p>)}</div>}{guide.completionNote && <p className="guide-completion-note">{guide.completionNote}</p>}</section>
       {guide.troubleshooting && guide.troubleshooting.length > 0 && <section className="guide-detail-section guide-notes"><h2>遇到问题怎么办</h2><ul className="guide-material-list">{guide.troubleshooting.map((note, i) => <li key={i}>{note}</li>)}</ul></section>}
       {guide.notes.length > 0 && <section className="guide-detail-section guide-notes"><h2>办理前留意</h2><ul className="guide-material-list">{guide.notes.map((note, i) => <li key={i}>{note}</li>)}</ul></section>}
       {relatedGuides.length > 0 && <section className="guide-detail-section"><h2>相关办理</h2><div className="guide-related-accounts">{relatedGuides.map((item) => <Link key={item.id} to={`/guides/${item.id}${params.toString() ? `?${params.toString()}` : ''}`}>{item.title}<ArrowRight size={16} aria-hidden="true" /></Link>)}</div></section>}
     </div>
-      {windows.length > 0 ? <GuideServiceWindows key={guide.id} windows={windows} /> : hasServiceInfo && <aside className="guide-detail-section"><h2>办理地点与时间</h2><dl className="guide-meta-list">
+      {windows.length > 0 ? <GuideServiceWindows key={guide.id} windows={windows} allCampuses={serviceWindows.map((window) => window.campus)} /> : hasServiceInfo && <aside className="guide-detail-section"><h2>办理地点与时间</h2><dl className="guide-meta-list">
         {guide.location && <div><dt>办理地点</dt><dd>{guide.location}</dd></div>}{guide.openingHours && <div><dt>开放时间</dt><dd>{guide.openingHours}</dd></div>}{guide.contact && <div><dt>联系方式</dt><dd>{guide.contact}</dd></div>}
       </dl></aside>}
     </div>
