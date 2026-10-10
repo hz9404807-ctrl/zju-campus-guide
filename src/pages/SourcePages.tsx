@@ -1,7 +1,7 @@
-import { useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router'
-import { ArrowLeft, ArrowRight, Copy, ExternalLink, Info, Search } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ExternalLink, Info, Search } from 'lucide-react'
 import SearchField from '../components/SearchField'
+import CopyTextButton from '../components/CopyTextButton'
 import ResultPager from '../components/ResultPager'
 import { useDebouncedValue } from '../hooks/useDebouncedValue'
 import { filterAccounts, filterWebsites, searchGuides, websiteSearchDetails } from '../lib/campusContent'
@@ -62,18 +62,13 @@ export function SourcesPage() {
 export function SourceDetailPage() {
   const { sourceId } = useParams()
   const [params] = useSearchParams()
-  const [copyStatus, setCopyStatus] = useState('')
   const account = accountData.find((item) => item.id === sourceId)
   const backTo = `/sources${params.toString() ? `?${params.toString()}` : ''}`
   if (!account) return <div className="page module-page"><div className="guide-empty-state"><h1>没有找到这个信息源</h1><Link to={backTo} className="button-link">返回信息源导航</Link></div></div>
   const related = guides.filter((guide) => guide.relatedSourceIds.includes(account.id))
-  async function copyName() {
-    try { await navigator.clipboard.writeText(account!.name); setCopyStatus('名称已复制，可在微信中搜索') }
-    catch { setCopyStatus('复制未完成，可以选中上方名称手动复制') }
-  }
   return <div className="page module-page">
     <div className="page-heading"><Link to={backTo} className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回信息源列表</Link><p className="eyebrow">{account.category} · {account.topic}</p><h1>{account.name}</h1><p className="page-description">按收集截图查看账号信息，在微信中搜索公众号名称。</p></div>
-    <div className="source-detail-grid"><section className="source-detail-copy"><h2>这个账号提供什么？</h2>{account.summary && <p className="source-description">{account.summary}</p>}{account.organization && <dl className="guide-meta-list"><div><dt>截图中的机构 / 认证信息</dt><dd>{account.organization}</dd></div></dl>}<div className="source-copy-actions"><button type="button" className="button-link" onClick={copyName}><Copy size={16} aria-hidden="true" /> 复制公众号名称</button><p role="status" aria-live="polite">{copyStatus}</p></div><p className="source-wechat-hint">资料未提供公众号跳转链接或关注二维码，请在微信“搜一搜”中查找，并核对账号主体。</p>{account.notes && <aside className="source-notes"><h3>收集备注</h3><p>{account.notes}</p></aside>}<dl className="guide-meta-list"><div><dt>资料来源</dt><dd>{account.source}</dd></div><div><dt>整理时间</dt><dd>{account.importedAt}（不是账号更新时间）</dd></div></dl></section><figure className="source-original"><a href={account.image} target="_blank" rel="noopener noreferrer" aria-label={`在新标签页查看${account.name}完整截图`}><img src={account.image} alt={`${account.name}公众号原始收集截图`} /></a><figcaption>小组收集截图 · 点击查看原图</figcaption></figure></div>
+    <div className="source-detail-grid"><section className="source-detail-copy"><h2>这个账号提供什么？</h2>{account.summary && <p className="source-description">{account.summary}</p>}{account.organization && <dl className="guide-meta-list"><div><dt>截图中的机构 / 认证信息</dt><dd>{account.organization}</dd></div></dl>}<div className="source-copy-actions"><CopyTextButton text={account.name} label="复制公众号名称" /></div><p className="source-wechat-hint">资料未提供公众号跳转链接或关注二维码，请在微信“搜一搜”中查找，并核对账号主体。</p>{account.notes && <aside className="source-notes"><h3>收集备注</h3><p>{account.notes}</p></aside>}<dl className="guide-meta-list"><div><dt>资料来源</dt><dd>{account.source}</dd></div><div><dt>整理时间</dt><dd>{account.importedAt}（不是账号更新时间）</dd></div></dl></section><figure className="source-original"><a href={account.image} target="_blank" rel="noopener noreferrer" aria-label={`在新标签页查看${account.name}完整截图`}><img src={account.image} alt={`${account.name}公众号原始收集截图`} /></a><figcaption>小组收集截图 · 点击查看原图</figcaption></figure></div>
     {related.length > 0 && <section className="info-panel"><h2>相关办事指南</h2><div className="guide-related-accounts">{related.map((guide) => <Link key={guide.id} to={`/guides/${guide.id}`}>{guide.title}<ArrowRight size={16} aria-hidden="true" /></Link>)}</div></section>}
     <Link to={backTo} className="guide-bottom-back"><ArrowLeft size={16} aria-hidden="true" /> 返回信息源列表</Link>
   </div>
