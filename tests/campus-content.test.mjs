@@ -141,7 +141,7 @@ test('不同业务窗口独立关联，电话和人工时段可检索', () => {
 })
 
 test('网站导航包含新办理入口和完整摘要，学校与校外链接区分保留', () => {
-  assert.equal(websites.length, 88)
+  assert.equal(websites.length, 90)
   assert.equal(read('content-manifest').websiteCount, websites.length)
   assert.equal(read('content-manifest').serviceWindowCount, read('service-windows').length)
   for (const guide of guides)
@@ -371,7 +371,7 @@ test('自习座位与研讨空间在完整目录和相关网站中使用一致�
 })
 
 test('日常问题对应真实业务；金额夜间与退款条件明确保持未回答，未知条件不丢失', () => {
-  for (const [q,id] of [['宿舍没网','campus-015'],['校园卡没钱了','campus-047'],['预约篮球场','campus-011']]) {
+  for (const [q,id] of [['宿舍没网','campus-015'],['校园卡没钱了','campus-047'],['预约篮球场','campus-011'],['报修一直没人来','campus-010']]) {
     assert.equal(searchGuides(guides,q).guides[0]?.id,id,q)
   }
   for (const q of ['校园卡补办多少钱','晚上可以补校园卡吗','预约取消后钱没退']) {
@@ -391,6 +391,13 @@ test('明确校区优先使用已核实校区参考，不向其他校区扩展�
   assert.ok(guideRouteView(guide,undefined,'紫金港访客').references.every((r)=>!r.url.includes('visitor-center')))
 })
 
+test('失败恢复给出记录、实际承办方式及完成核对，不承诺未经核实的退款时限', () => {
+  const byId=(id)=>guides.find((g)=>g.id===id)
+  assert.match(byId('campus-010').troubleshooting.join(' '), /工单号.*宿管值班处/)
+  assert.match(byId('campus-015').troubleshooting.join(' '), /工单号.*0571-87951669/)
+  assert.match(byId('campus-011').troubleshooting.join(' '), /订单号.*取消时间/)
+  assert.match(byId('campus-011').troubleshooting.join(' '), /不保证直接处理退款/)
+})
 
 
 test('窗口电话查询在指南和网站目录共用窗口数据，路线入口名称说明相同用途', () => {
@@ -404,3 +411,9 @@ test('窗口电话查询在指南和网站目录共用窗口数据，路线入�
 })
 
 
+test('已取消但未退款的问题定位异常处理，而非只定位取消入口', () => {
+  const guide=guides.find((g)=>g.id==='campus-011')
+  const match=guideSearchMatch(guide,'预约取消后钱没退')
+  assert.match(match.anchor,/^guide-help-/)
+  assert.match(guide.troubleshooting[Number(match.anchor.split('-').at(-1))],/退款状态/)
+})

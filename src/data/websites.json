@@ -1482,5 +1482,37 @@
       98
     ],
     "verifiedAt": "2026-10-10"
+  },
+  {
+    "id": "website-75032ed33f",
+    "name": "后勤维修服务范围：宿舍与网络的受理区分",
+    "url": "https://zulg.zju.edu.cn/guide/energy.htm",
+    "category": "校园生活",
+    "summary": "在公寓线上服务选择报修或缴费，填写宿舍信息并提交，随后跟进维修单或核对缴费到账。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-010"
+    ],
+    "sourceRows": [
+      11,
+      96
+    ],
+    "verifiedAt": "2026-10-10"
+  },
+  {
+    "id": "website-4bc42fb5d5",
+    "name": "公共体育与艺术部联系方式",
+    "url": "https://tyys.zju.edu.cn/",
+    "category": "场地与预约",
+    "summary": "选择运动项目、场地和时段，完成预约与必要付款，按预约信息入场；不去时提前取消。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-011"
+    ],
+    "sourceRows": [
+      12,
+      63
+    ],
+    "verifiedAt": "2026-10-10"
   }
 ]
