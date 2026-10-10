@@ -211,4 +211,9 @@
 .guide-route-panel > p { margin: 16px 0 0; color: var(--muted); line-height: 1.6; }
 
 .guide-condition-note { padding: 14px 18px; border-left: 3px solid var(--blue); background: var(--blue-soft); color: var(--ink); font-size: 14px; line-height: 1.8; overflow-wrap: anywhere; }
-.guide-route-choices button:disabled { cursor: default; opacity: .5; }
+.guide-route-scope { color: var(--ink) !important; }
+.guide-method-list { display: grid; gap: 18px; list-style: none; padding: 0; }
+.guide-method-list > li { padding: 18px; border: 1px solid var(--line); border-radius: 12px; }
+.guide-method-list h3 { margin: 0; font-size: 17px; }
+
+.guide-copy-fallback { user-select: text; overflow-wrap: anywhere; padding: 10px; border: 1px solid var(--line); border-radius: 8px; }

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { readFileSync, existsSync } from 'node:fs'
-import { filterGuides, filterAccounts, filterWebsites, findRelatedSources, sourceSearchUrl, suggestGuides, guideIdForWebsite, websiteSearchDetails, primaryGuideAction, guideSearchMatch, searchTextParts, resolveGuideRoute, guideRouteView, searchGuides } from '../src/lib/campusContent.ts'
+import { filterGuides, filterAccounts, filterWebsites, findRelatedSources, sourceSearchUrl, suggestGuides, guideIdForWebsite, websiteSearchDetails, primaryGuideAction, guideSearchMatch, searchTextParts, resolveGuideRoute, guideDetailContext, guideRouteView, searchGuides } from '../src/lib/campusContent.ts'
 const read = (name) => JSON.parse(readFileSync(new URL(`../src/data/${name}.json`, import.meta.url), 'utf8'))
 const guides = read('guides'), accounts = read('accounts'), websites = read('websites')
 
@@ -141,7 +141,7 @@ test('不同业务窗口独立关联，电话和人工时段可检索', () => {
 })
 
 test('网站导航包含新办理入口和完整摘要，学校与校外链接区分保留', () => {
-  assert.equal(websites.length, 90)
+  assert.equal(websites.length, 93)
   assert.equal(read('content-manifest').websiteCount, websites.length)
   assert.equal(read('content-manifest').serviceWindowCount, read('service-windows').length)
   for (const guide of guides)
@@ -343,7 +343,7 @@ test('研究生和毕业身份在卡片、显式路线及网站目录中不被�
   const guide = guides.find((g) => g.id === 'campus-097')
   for (const q of ['研究生成绩单盖章', '研究生打印成绩单', '毕业研究生成绩单']) {
     assert.equal(resolveGuideRoute(guide, q).id, 'graduate')
-    assert.equal(resolveGuideRoute(guide, q, 'seal').id, 'graduate')
+    assert.equal(resolveGuideRoute(guide, q, 'seal').id, 'seal')
     assert.ok(!primaryGuideAction(guide, q).url.includes('id=2664'))
     const sites = filterWebsites(websites, q, '', guides)
     assert.ok(sites.some((s) => s.url.includes('polymer.zju.edu.cn')))
@@ -351,7 +351,7 @@ test('研究生和毕业身份在卡片、显式路线及网站目录中不被�
     for (const site of sites) assert.equal(websiteSearchDetails(site, [guide], q).routeId, 'graduate')
   }
   assert.equal(resolveGuideRoute(guide, '毕业生打印成绩单').id, 'other')
-  assert.equal(primaryGuideAction(guide, '毕业生打印成绩单'), undefined)
+  assert.equal(primaryGuideAction(guide, '毕业生打印成绩单').url, 'https://acv.zju.edu.cn/yu/pages/cydjManager/yycd.html')
   assert.equal(resolveGuideRoute(guide, 'ZJE成绩单').id, 'zje')
   assert.equal(resolveGuideRoute(guide, '本科生 研究生 成绩单盖章'), undefined)
 })
@@ -416,4 +416,41 @@ test('已取消但未退款的问题定位异常处理，而非只定位取消�
   const match=guideSearchMatch(guide,'预约取消后钱没退')
   assert.match(match.anchor,/^guide-help-/)
   assert.match(guide.troubleshooting[Number(match.anchor.split('-').at(-1))],/退款状态/)
+})
+
+
+test('旧搜索身份不会锁住任何已发布路线，主动切换后不定位旧问题', () => {
+  for (const guide of guides.filter((g) => g.routes?.length)) {
+    for (const q of ['研究生成绩单盖章', '已毕业本科生成绩单', 'ZJE成绩单', '预约自习座位', '预约研讨室']) {
+      const recommended = resolveGuideRoute(guide, q)
+      for (const choice of guide.routes) {
+        const context = guideDetailContext(guide, q, choice.id)
+        assert.equal(context.route.id, choice.id, `${guide.id}: ${q} -> ${choice.id}`)
+        const view = guideRouteView(guide, context.route, context.contentQuery)
+        assert.deepEqual(view.steps, choice.steps)
+        assert.deepEqual(view.materials, choice.materials)
+        assert.equal(context.contentQuery, recommended?.id === choice.id ? q : '')
+        if (context.contentQuery === '') assert.equal(guideSearchMatch(view, context.contentQuery), undefined)
+      }
+      const all = guideDetailContext(guide, q, 'all')
+      assert.equal(all.route, undefined)
+      if (recommended) assert.equal(all.contentQuery, '')
+    }
+  }
+})
+
+test('成绩单每一种身份均有适用范围和真实官方参考，毕业路线有实际预约入口', () => {
+  const guide = guides.find((g) => g.id === 'campus-097')
+  for (const choice of guide.routes) {
+    assert.ok(choice.audienceNote)
+    const view = guideRouteView(guide, choice)
+    assert.ok(view.references.length > 0, choice.id)
+    assert.ok(view.references.every((ref) => new URL(ref.url).hostname.endsWith('.zju.edu.cn')))
+  }
+  const alumni = guide.routes.find((r) => r.id === 'other')
+  assert.match(alumni.steps.join(' '), /C座616室/)
+  assert.match(alumni.steps.join(' '), /周五下午不对外查档/)
+  assert.ok(alumni.stepActions.some((action) => action.kind === 'service'))
+  assert.equal(resolveGuideRoute(guide, '国际联合学院成绩单'), undefined)
+  assert.equal(resolveGuideRoute(guide, '浙大爱丁堡成绩单').id, 'zje')
 })

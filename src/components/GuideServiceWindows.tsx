@@ -10,7 +10,7 @@ function browserStorage() {
 
 export default function GuideServiceWindows({ windows, allCampuses }: { windows: ServiceWindow[]; allCampuses: string[] }) {
   const campuses = [...new Set(allCampuses)]
-  const [campus, setCampus] = useState(() => readCampusPreference(browserStorage(), campuses, windows[0]?.campus ?? ''))
+  const [campus, setCampus] = useState(() => readCampusPreference(browserStorage(), [...new Set(windows.map((window) => window.campus))], windows[0]?.campus ?? ''))
   const [preferenceError, setPreferenceError] = useState(false)
   function chooseCampus(value: string) {
     setCampus(value)

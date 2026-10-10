@@ -270,11 +270,10 @@ export function routeMatchesAudience(route: GuideRoute, query: string) {
   return !(route.excludedAudiences ?? []).some((audience) => text.includes(normalizeSearch(audience)))
 }
 
-// Explicit route choices preserve task intent, but cannot bypass an explicit audience conflict.
+// Search recommends a route; the user can always choose another published workflow.
 export function resolveGuideRoute(guide: Guide, query = '', routeId: string | null = null): GuideRoute | undefined {
   if (routeId !== null) {
-    const explicit = guide.routes?.find((route) => route.id === routeId)
-    if (!explicit || routeMatchesAudience(explicit, query)) return explicit
+    return guide.routes?.find((route) => route.id === routeId)
   }
   const text = queryTerms(query).join(' ')
   if (!text) return undefined
@@ -282,6 +281,14 @@ export function resolveGuideRoute(guide: Guide, query = '', routeId: string | nu
     route.intentTerms.some((term) => text.includes(canonicalSearch(term))) &&
     !(route.excludedTerms ?? []).some((term) => text.includes(canonicalSearch(term))))
   return routes.length === 1 ? routes[0] : undefined
+}
+
+// Keep return-to-search context without highlighting an unrelated task after a manual switch.
+export function guideDetailContext(guide: Guide, query: string, routeId: string | null) {
+  const recommended = resolveGuideRoute(guide, query)
+  const route = resolveGuideRoute(guide, query, routeId)
+  const contentQuery = routeId !== null && route?.id !== recommended?.id ? '' : query
+  return { route, contentQuery }
 }
 
 const campuses = ['紫金港', '玉泉', '西溪', '华家池', '海宁', '舟山', '之江']

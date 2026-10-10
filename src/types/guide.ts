@@ -11,6 +11,7 @@ export interface GuideReference {
 export interface GuideRoute {
   id: string
   label: string
+  audienceNote?: string
   intentTerms: string[]
   excludedTerms?: string[]
   excludedAudiences?: string[]

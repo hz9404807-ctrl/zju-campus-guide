@@ -1514,5 +1514,50 @@
       63
     ],
     "verifiedAt": "2026-10-10"
+  },
+  {
+    "id": "website-ee47a727f4",
+    "name": "档案馆预约查档与材料要求",
+    "url": "https://acv.zju.edu.cn/zh_CN/",
+    "category": "教务与学习",
+    "summary": "通过档案馆预约查档，准备身份和毕业材料，按预约申请领取或邮寄馆藏成绩材料；需要英文、盖章或密封时先确认接收要求及相应承办渠道。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-097"
+    ],
+    "sourceRows": [
+      98
+    ],
+    "verifiedAt": "2026-10-10"
+  },
+  {
+    "id": "website-400b439231",
+    "name": "档案馆成绩单查阅办理说明",
+    "url": "https://acv.zju.edu.cn/site/ywycs_bslc_view.html?id=1130",
+    "category": "教务与学习",
+    "summary": "通过档案馆预约查档，准备身份和毕业材料，按预约申请领取或邮寄馆藏成绩材料；需要英文、盖章或密封时先确认接收要求及相应承办渠道。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-097"
+    ],
+    "sourceRows": [
+      98
+    ],
+    "verifiedAt": "2026-10-10"
+  },
+  {
+    "id": "website-10e2458ac7",
+    "name": "档案馆手机扫码预约登记",
+    "url": "https://acv.zju.edu.cn/yu/pages/cydjManager/yycd.html",
+    "category": "教务与学习",
+    "summary": "通过档案馆预约查档，准备身份和毕业材料，按预约申请领取或邮寄馆藏成绩材料；需要英文、盖章或密封时先确认接收要求及相应承办渠道。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-097"
+    ],
+    "sourceRows": [
+      98
+    ],
+    "verifiedAt": "2026-10-10"
   }
 ]
