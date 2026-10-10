@@ -48,6 +48,10 @@ replacements.set('交网费', '网络 缴费')
 replacements.set('交学费', '学费 缴费')
 replacements.set('不见了', '丢了')
 replacements.set('遗失了', '丢了')
+replacements.set('没网', '网络 故障')
+replacements.set('篮球场', '球场')
+replacements.set('取消后钱没退', '取消 退款')
+replacements.set('退款没到账', '退款')
 const aliasPattern = new RegExp([...replacements.keys()].sort((a, b) => b.length - a.length).join('|'), 'g')
 const concepts = [...new Set([
   ...searchAliases.map(([canonical]) => canonical),
@@ -60,7 +64,7 @@ const concepts = [...new Set([
 const conceptPattern = new RegExp(concepts.join('|'), 'g')
 
 function canonicalSearch(value: string) {
-  return normalizeSearch(value).replace(aliasPattern, (alias) => replacements.get(alias)!).replace(/(\d)[-–—](?=\d)/g, '$1')
+  return normalizeSearch(value).replace(/校园卡(?:里)?(?:没钱了|没钱|余额不够|余额不足)/g, '校园卡 充值').replace(aliasPattern, (alias) => replacements.get(alias)!).replace(/(\d)[-–—](?=\d)/g, '$1')
 }
 
 function queryTerms(query: string) {
@@ -102,7 +106,6 @@ function guideSearchFields(guide: Guide, windows: ServiceWindow[]) {
       window.campus, window.name, window.location, window.openingHours, window.notice,
       ...window.contacts.map((contact) => contact.number),
     ]),
-    ...guide.references.map((reference) => reference.label),
   ]
 }
 
@@ -122,6 +125,7 @@ export function filterGuides(guides: Guide[], query: string, category = '', wind
       const score = terms.reduce((total, term) =>
         total + (title.includes(term) ? 12 : 0) + (keywords.includes(term) ? 6 : 0) + (summary.includes(term) ? 3 : 0), 0)
         + (literal && normalizeSearch(guide.title).includes(literal) ? 30 : 0)
+        + (literal && guide.keywords.some((keyword) => canonicalSearch(keyword).replace(/\s/g, '') === canonicalSearch(query).replace(/\s/g, '')) ? 20 : 0)
       return { guide, index, matched, score }
     })
     .filter((result) => result.matched)
@@ -161,12 +165,49 @@ export function filterAccounts(accounts: CampusAccount[], query: string, categor
   ]))
 }
 
-export function filterWebsites(websites: CampusWebsite[], query: string, category = '', guides: Guide[] = []) {
-  const relatedGuideIds = new Set(filterGuides(guides, query).slice(0, 3).map((guide) => guide.id))
-  return websites.filter((site) => (!category || site.category === category) &&
+function normalizedUrl(url: string) { return url.replace(/\/$/, '') }
+
+function excludedDestinationUrls(guides: Guide[], query: string) {
+  return new Set(guides.flatMap((guide) => {
+    const route = resolveGuideRoute(guide, query)
+    const view = guideRouteView(guide, route, query)
+    const allowed = new Set(view.references.map((ref) => normalizedUrl(ref.url)))
+    const rejected = route ? guide.references.filter((ref) => !allowed.has(normalizedUrl(ref.url))).map((ref) => ref.url) : []
+    const campus = queryCampus(query)
+    return [...rejected, ...(guide.stepActions ?? []).flatMap((action) =>
+      'url' in action && action.campus && campus && action.campus !== campus ? [action.url] : [])].map(normalizedUrl)
+  }))
+}
+
+function sourceContextGuides(guides: Guide[], query: string) {
+  const focused = guides.filter((guide) => resolveGuideRoute(guide, query))
+  return (focused.length ? focused : guides).slice(0, 3)
+}
+
+export function filterWebsites(websites: CampusWebsite[], query: string, category = '', guides: Guide[] = [], windows: ServiceWindow[] = []) {
+  const relatedGuideIds = new Set(sourceContextGuides(searchGuides(guides, query, '', windows).guides, query).map((guide) => guide.id))
+  const excludedUrls = excludedDestinationUrls(guides, query)
+  return websites.filter((site) => !excludedUrls.has(normalizedUrl(site.url)) && (!category || site.category === category) &&
     (matches(query, [site.name, site.category, site.summary, site.url, site.scope]) || site.guideIds.some((id) => relatedGuideIds.has(id))))
 }
 
+// A recognised question about a condition remains visible as an unanswered condition.
+// Arbitrary unknown words still have to match; they are never discarded.
+export function searchGuides(guides: Guide[], query: string, category = '', windows: ServiceWindow[] = []) {
+  const notices: string[] = []
+  let task = normalizeSearch(query)
+  if (/多少钱|费用|收费/.test(task)) {
+    notices.push('具体费用尚未核实；这里提供相关办理方法，付款前向办理窗口或订单页面确认金额。')
+    task = task.replace(/多少钱|费用|收费/g, ' ')
+  }
+  if (/晚上|夜间/.test(task)) {
+    notices.push('夜间能否办理尚未确认；查看对应校区的常规开放时间，临时安排需向窗口确认。')
+    task = task.replace(/(?:晚上|夜间)(?:可以)?/g, ' ')
+  }
+  if (/退款|钱没退|退钱/.test(task)) notices.push('这里提供取消及退款异常的处理方法；是否可退、金额和到账时限需核对该订单规则。')
+  const results = normalizeSearch(query) && !task.trim() ? [] : filterGuides(guides, task, category, windows)
+  return { guides: results, notice: results.length ? notices.join(' ') : '', taskQuery: task }
+}
 
 // Suggestions remain separate from exact results: unknown words are never dropped there.
 export function suggestGuides(guides: Guide[], query: string, category = '') {
@@ -186,21 +227,14 @@ export function suggestGuides(guides: Guide[], query: string, category = '') {
 
 export function findRelatedSources(websites: CampusWebsite[], accounts: CampusAccount[], query: string, matchedGuides: Guide[], category = '') {
   if (!normalizeSearch(query) || !queryTerms(query).length) return { websites: [], accounts: [] }
-  const leading = matchedGuides.slice(0, 3)
+  const leading = sourceContextGuides(matchedGuides, query)
   const guideIds = new Set(leading.map((guide) => guide.id))
   const accountIds = new Set(leading.flatMap((guide) => guide.relatedSourceIds))
-  // Suppress destinations belonging exclusively to an unselected route.
-  const routeExcludedUrls = new Set(leading.flatMap((guide) => {
-    const route = resolveGuideRoute(guide, query)
-    if (!route) return []
-    const selected = new Set(route.stepActions.flatMap((action) => 'url' in action ? [action.url.replace(/\/$/, '')] : []))
-    return (guide.routes ?? []).flatMap((other) => other.stepActions.flatMap((action) =>
-      'url' in action && !selected.has(action.url.replace(/\/$/, '')) ? [action.url.replace(/\/$/, '')] : []))
-  }))
-  const directSites = new Set(filterWebsites(websites, query, category).map((site) => site.id))
+  const excludedUrls = excludedDestinationUrls(leading, query)
+  const directSites = new Set(filterWebsites(websites, query, category, leading).map((site) => site.id))
   const directAccounts = new Set(filterAccounts(accounts, query).map((account) => account.id))
   return {
-    websites: websites.filter((site) => !routeExcludedUrls.has(site.url.replace(/\/$/, '')) && (!category || site.category === category) &&
+    websites: websites.filter((site) => !excludedUrls.has(normalizedUrl(site.url)) && (!category || site.category === category) &&
       (directSites.has(site.id) || site.guideIds.some((id) => guideIds.has(id))))
       .sort((a, b) => Number(directSites.has(b.id)) - Number(directSites.has(a.id))),
     accounts: accounts.filter((account) => directAccounts.has(account.id) || accountIds.has(account.id))
@@ -221,38 +255,60 @@ export function guideIdForWebsite(site: CampusWebsite, matchingGuides: Guide[]) 
 }
 
 
-export function websiteSearchDetails(site: CampusWebsite, matchingGuides: Guide[]) {
+export function websiteSearchDetails(site: CampusWebsite, matchingGuides: Guide[], query = '') {
   const guideId = guideIdForWebsite(site, matchingGuides)
   const guide = matchingGuides.find((item) => item.id === guideId)
-  const reference = guide?.references.find((item) => item.url.replace(/\/$/, '') === site.url.replace(/\/$/, ''))
-  return { guideId, name: reference?.label ?? site.name, summary: guide?.summary ?? site.summary }
+  const route = guide ? resolveGuideRoute(guide, query) : undefined
+  const view = guide ? guideRouteView(guide, route, query) : undefined
+  const reference = view?.references.find((item) => normalizedUrl(item.url) === normalizedUrl(site.url))
+  const action = route?.stepActions.find((item) => 'url' in item && normalizedUrl(item.url) === normalizedUrl(site.url))
+  return { guideId, routeId: route?.id, name: action?.label ?? reference?.label ?? site.name, summary: view?.summary ?? site.summary }
 }
 
-// Cards use the same reviewed destination as the steps, so labels and URLs stay aligned.
-// Explicit choices override inferred intent, including "all" or an invalid route.
+export function routeMatchesAudience(route: GuideRoute, query: string) {
+  const text = normalizeSearch(query)
+  return !(route.excludedAudiences ?? []).some((audience) => text.includes(normalizeSearch(audience)))
+}
+
+// Explicit route choices preserve task intent, but cannot bypass an explicit audience conflict.
 export function resolveGuideRoute(guide: Guide, query = '', routeId: string | null = null): GuideRoute | undefined {
-  if (routeId !== null) return guide.routes?.find((route) => route.id === routeId)
-  const terms = queryTerms(query)
-  const text = terms.join(' ')
+  if (routeId !== null) {
+    const explicit = guide.routes?.find((route) => route.id === routeId)
+    if (!explicit || routeMatchesAudience(explicit, query)) return explicit
+  }
+  const text = queryTerms(query).join(' ')
   if (!text) return undefined
-  const routes = (guide.routes ?? []).filter((route) =>
+  const routes = (guide.routes ?? []).filter((route) => routeMatchesAudience(route, query) &&
     route.intentTerms.some((term) => text.includes(canonicalSearch(term))) &&
     !(route.excludedTerms ?? []).some((term) => text.includes(canonicalSearch(term))))
   return routes.length === 1 ? routes[0] : undefined
 }
 
-export function guideRouteView(guide: Guide, route?: GuideRoute): Guide {
-  return route ? { ...guide, summary: route.summary, steps: route.steps, materials: route.materials,
+const campuses = ['紫金港', '玉泉', '西溪', '华家池', '海宁', '舟山', '之江']
+function queryCampus(query: string) {
+  const found = campuses.filter((campus) => query.includes(campus))
+  return found.length === 1 ? found[0] : undefined
+}
+
+export function guideRouteView(guide: Guide, route?: GuideRoute, query = ''): Guide {
+  const campus = queryCampus(query)
+  const view = route ? { ...guide, summary: route.summary, steps: route.steps, materials: route.materials,
     stepActions: route.stepActions, troubleshooting: route.troubleshooting,
     completionNote: route.completionNote, serviceWindowIds: route.serviceWindowIds,
     references: guide.references.filter((reference) => route.stepActions.some((action) => 'url' in action && action.url === reference.url)) } : guide
+  if (!campus) return view
+  const excluded = new Set((view.stepActions ?? []).flatMap((action) =>
+    'url' in action && action.campus && action.campus !== campus ? [normalizedUrl(action.url)] : []))
+  return { ...view, stepActions: view.stepActions?.filter((action) => !('campus' in action) || !action.campus || action.campus === campus),
+    references: view.references.filter((ref) => !excluded.has(normalizedUrl(ref.url))) }
 }
 
 export function primaryGuideAction(guide: Guide, query = '') {
   const route = resolveGuideRoute(guide, query)
   if (guide.routes?.length && !route) return undefined
-  const actions = (route?.stepActions ?? guide.stepActions ?? []).filter((action): action is Extract<GuideStepAction, { url: string }> => 'url' in action)
-  return actions.find((action) => action.kind === 'service') ?? actions[0]
+  const actions = (guideRouteView(guide, route, query).stepActions ?? []).filter((action): action is Extract<GuideStepAction, { url: string }> => 'url' in action)
+  const campus = queryCampus(query)
+  return actions.find((action) => campus && action.campus === campus) ?? actions.find((action) => action.kind === 'service') ?? actions[0]
 }
 
 
@@ -289,9 +345,10 @@ export function guideSearchMatch(guide: Guide, query: string, windows: ServiceWi
       label: '地点与时间', anchor: 'guide-windows-heading',
     })),
   ]
-  const intents = new Set(['取消', '签到', '盖章', '密封', '打印', '时间'])
+  const intents = new Set(['取消', '退款', '签到', '盖章', '密封', '打印', '时间'])
   const ranked = candidates.map((item, index) => ({ ...item, index,
     score: terms.reduce((score, term) => score + (canonicalSearch(item.text).includes(term) ? (intents.has(term) ? 4 : 1) : 0), 0)
+      + (terms.includes('退款') && /退款状态|钱没退|原付款/.test(item.text) ? 3 : 0)
       + (terms.includes('取消') && /取消(?:功能|入口|操作)|(?:提前|选择|点击|完成)取消/.test(item.text) ? 2 : 0),
   })).filter((item) => item.score > 0).sort((a, b) => b.score - a.score || a.index - b.index)
   const best = ranked[0]

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { readFileSync, existsSync } from 'node:fs'
-import { filterGuides, filterAccounts, filterWebsites, findRelatedSources, sourceSearchUrl, suggestGuides, guideIdForWebsite, websiteSearchDetails, primaryGuideAction, guideSearchMatch, searchTextParts, resolveGuideRoute, guideRouteView } from '../src/lib/campusContent.ts'
+import { filterGuides, filterAccounts, filterWebsites, findRelatedSources, sourceSearchUrl, suggestGuides, guideIdForWebsite, websiteSearchDetails, primaryGuideAction, guideSearchMatch, searchTextParts, resolveGuideRoute, guideRouteView, searchGuides } from '../src/lib/campusContent.ts'
 const read = (name) => JSON.parse(readFileSync(new URL(`../src/data/${name}.json`, import.meta.url), 'utf8'))
 const guides = read('guides'), accounts = read('accounts'), websites = read('websites')
 
@@ -141,7 +141,7 @@ test('不同业务窗口独立关联，电话和人工时段可检索', () => {
 })
 
 test('网站导航包含新办理入口和完整摘要，学校与校外链接区分保留', () => {
-  assert.equal(websites.length, 86)
+  assert.equal(websites.length, 88)
   assert.equal(read('content-manifest').websiteCount, websites.length)
   assert.equal(read('content-manifest').serviceWindowCount, read('service-windows').length)
   for (const guide of guides)
@@ -337,3 +337,70 @@ test('选定路线的正文参考和搜索信息源不混入另一业务入口',
   assert.ok(spaceSources.websites.some((s) => s.url.includes('booking.lib')))
   assert.deepEqual(guideRouteView(library).references, library.references)
 })
+
+
+test('研究生和毕业身份在卡片、显式路线及网站目录中不被导向在校本科生业务', () => {
+  const guide = guides.find((g) => g.id === 'campus-097')
+  for (const q of ['研究生成绩单盖章', '研究生打印成绩单', '毕业研究生成绩单']) {
+    assert.equal(resolveGuideRoute(guide, q).id, 'graduate')
+    assert.equal(resolveGuideRoute(guide, q, 'seal').id, 'graduate')
+    assert.ok(!primaryGuideAction(guide, q).url.includes('id=2664'))
+    const sites = filterWebsites(websites, q, '', guides)
+    assert.ok(sites.some((s) => s.url.includes('polymer.zju.edu.cn')))
+    assert.ok(sites.every((s) => !s.url.includes('zdbk') && !s.url.includes('id=2664') && !s.url.includes('zje.zju')))
+    for (const site of sites) assert.equal(websiteSearchDetails(site, [guide], q).routeId, 'graduate')
+  }
+  assert.equal(resolveGuideRoute(guide, '毕业生打印成绩单').id, 'other')
+  assert.equal(primaryGuideAction(guide, '毕业生打印成绩单'), undefined)
+  assert.equal(resolveGuideRoute(guide, 'ZJE成绩单').id, 'zje')
+  assert.equal(resolveGuideRoute(guide, '本科生 研究生 成绩单盖章'), undefined)
+})
+
+test('自习座位与研讨空间在完整目录和相关网站中使用一致目的地', () => {
+  for (const q of ['自习座位', '我想预约一个自习座位', '自习座位取消']) {
+    const matched = filterGuides(guides, q)
+    assert.ok(matched.every((g) => g.id !== 'campus-084'))
+    const sites = filterWebsites(websites, q, '', guides)
+    assert.ok(sites.length > 0)
+    assert.ok(sites.every((s) => !s.url.includes('booking.lib') && !s.url.includes('bing.com')))
+    const related = findRelatedSources(websites, accounts, q, matched).websites
+    assert.deepEqual(related.map((s) => s.id).sort(), sites.map((s) => s.id).sort())
+    for (const site of sites) assert.equal(websiteSearchDetails(site, matched, q).routeId, 'seat')
+  }
+  assert.ok(filterWebsites(websites, '预约研讨室', '', guides).some((s) => s.url.includes('booking.lib')))
+})
+
+test('日常问题对应真实业务；金额夜间与退款条件明确保持未回答，未知条件不丢失', () => {
+  for (const [q,id] of [['宿舍没网','campus-015'],['校园卡没钱了','campus-047'],['预约篮球场','campus-011']]) {
+    assert.equal(searchGuides(guides,q).guides[0]?.id,id,q)
+  }
+  for (const q of ['校园卡补办多少钱','晚上可以补校园卡吗','预约取消后钱没退']) {
+    const result = searchGuides(guides,q)
+    assert.ok(result.guides.length > 0,q)
+    assert.ok(result.notice,q)
+  }
+  for (const q of ['校园卡 飞船999','校园卡补办多少钱 飞船999','费用']) assert.equal(searchGuides(guides,q).guides.length,0,q)
+  assert.equal(filterGuides(guides,'校园卡补办多少钱').length,0)
+})
+
+test('明确校区优先使用已核实校区参考，不向其他校区扩展海宁规则', () => {
+  const guide=guides.find((g)=>g.id==='campus-041')
+  assert.ok(primaryGuideAction(guide,'海宁访客').url.includes('visitor-center'))
+  assert.ok(!primaryGuideAction(guide,'紫金港访客').url.includes('visitor-center'))
+  assert.ok(filterWebsites(websites,'紫金港访客','',guides).every((s)=>!s.url.includes('visitor-center')))
+  assert.ok(guideRouteView(guide,undefined,'紫金港访客').references.every((r)=>!r.url.includes('visitor-center')))
+})
+
+
+
+test('窗口电话查询在指南和网站目录共用窗口数据，路线入口名称说明相同用途', () => {
+  const windows=read('service-windows')
+  const matched=searchGuides(guides,'88273001','',windows).guides
+  assert.equal(matched[0].id,'campus-015')
+  assert.ok(filterWebsites(websites,'88273001','',guides,windows).some((s)=>s.url.includes('itc.zju')))
+  const seat=filterGuides(guides,'自习座位')
+  const site=filterWebsites(websites,'自习座位','',guides)[0]
+  assert.equal(websiteSearchDetails(site,seat,'自习座位').name,primaryGuideAction(seat[0],'自习座位').label)
+})
+
+

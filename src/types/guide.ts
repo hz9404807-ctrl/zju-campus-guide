@@ -1,5 +1,5 @@
 export type GuideStepAction = { stepIndex: number } & (
-  | { kind: 'reference' | 'service'; label: string; url: string }
+  | { kind: 'reference' | 'service'; label: string; url: string; campus?: string }
   | { kind: 'windows'; label: string }
 )
 
@@ -13,6 +13,7 @@ export interface GuideRoute {
   label: string
   intentTerms: string[]
   excludedTerms?: string[]
+  excludedAudiences?: string[]
   summary: string
   materials: string[]
   steps: string[]

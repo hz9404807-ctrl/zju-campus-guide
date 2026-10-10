@@ -1452,5 +1452,35 @@
     ],
     "sourceRows": [],
     "verifiedAt": null
+  },
+  {
+    "id": "website-3bafa3d3db",
+    "name": "研究生成绩单办理说明",
+    "url": "https://polymer.zju.edu.cn/2024/0611/c81305a2931843/page.htm",
+    "category": "教务与学习",
+    "summary": "按本人身份和成绩单用途查看校方办理说明，核对材料后领取。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-097"
+    ],
+    "sourceRows": [
+      98
+    ],
+    "verifiedAt": "2026-10-10"
+  },
+  {
+    "id": "website-9f643f6b53",
+    "name": "ZJE成绩单办事说明",
+    "url": "https://zje.zju.edu.cn/bsqd/list.htm",
+    "category": "教务与学习",
+    "summary": "按本人身份和成绩单用途查看校方办理说明，核对材料后领取。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-097"
+    ],
+    "sourceRows": [
+      98
+    ],
+    "verifiedAt": "2026-10-10"
   }
 ]

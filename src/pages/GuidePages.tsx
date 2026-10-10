@@ -7,7 +7,7 @@ import ResultPager from '../components/ResultPager'
 import GuideStepActions from '../components/GuideStepActions'
 import GuideServiceWindows from '../components/GuideServiceWindows'
 import { useDebouncedValue } from '../hooks/useDebouncedValue'
-import { filterGuides, findRelatedSources, guideSearchMatch, guideRouteView, resolveGuideRoute, primaryGuideAction, sourceSearchUrl, suggestGuides, websiteSearchDetails } from '../lib/campusContent'
+import { searchGuides, routeMatchesAudience, findRelatedSources, guideSearchMatch, guideRouteView, resolveGuideRoute, primaryGuideAction, sourceSearchUrl, suggestGuides, websiteSearchDetails } from '../lib/campusContent'
 import guideData from '../data/guides.json'
 import accountData from '../data/accounts.json'
 import websiteData from '../data/websites.json'
@@ -26,7 +26,8 @@ export function GuidePage() {
   const query = params.get('q') ?? ''
   const category = params.get('category') ?? ''
   const debouncedQuery = useDebouncedValue(query, 200)
-  const results = filterGuides(guides, debouncedQuery, category, serviceWindows)
+  const search = searchGuides(guides, debouncedQuery, category, serviceWindows)
+  const results = search.guides
   const page = Math.min(Math.max(1, Number(params.get('page')) || 1), Math.max(1, Math.ceil(results.length / pageSize)))
   const updating = query !== debouncedQuery
   const sources = findRelatedSources(websiteData, accountData, debouncedQuery, results, category)
@@ -52,9 +53,10 @@ export function GuidePage() {
       <div className="guide-quick-search"><span>常见需求</span>{quickKeywords.map((keyword) => <button key={keyword} type="button" className="guide-keyword-button" onClick={() => update('q', keyword)}>{keyword}</button>)}</div>
     </section>
     <section aria-labelledby="guide-results-heading" aria-busy={updating}>
-      <div className="guide-results-heading"><h2 id="guide-results-heading">{query || category ? '查找结果' : '办事问题'}</h2><p role="status" aria-live="polite">{updating ? '正在更新结果…' : `找到 ${results.length} 条指南`}</p></div>
+      <div className="guide-results-heading"><h2 id="guide-results-heading">{query || category ? '查找结果' : '办事问题'}</h2><p role="status" aria-live="polite">{updating ? '正在更新结果…' : `找到 ${results.length} 条${search.notice ? '相关办理方法' : '指南'}`}</p></div>
+      {search.notice && <p className="guide-condition-note" role="note">{search.notice}</p>}
       {results.length ? <>
-        <ul className="guide-result-grid" role="list">{results.slice((page - 1) * pageSize, page * pageSize).map((guide) => { const route = resolveGuideRoute(guide, debouncedQuery); const view = guideRouteView(guide, route); const match = guideSearchMatch(view, debouncedQuery, serviceWindows); const action = primaryGuideAction(guide, debouncedQuery); const cardParams = new URLSearchParams(params); cardParams.delete('route'); if (route) cardParams.set('route', route.id); const cardSearch = cardParams.size ? `?${cardParams.toString()}` : ''; return <li key={guide.id}><article className="guide-result-card">
+        <ul className="guide-result-grid" role="list">{results.slice((page - 1) * pageSize, page * pageSize).map((guide) => { const route = resolveGuideRoute(guide, debouncedQuery); const view = guideRouteView(guide, route, debouncedQuery); const match = guideSearchMatch(view, debouncedQuery, serviceWindows); const action = primaryGuideAction(guide, debouncedQuery); const cardParams = new URLSearchParams(params); cardParams.delete('route'); if (route) cardParams.set('route', route.id); const cardSearch = cardParams.size ? `?${cardParams.toString()}` : ''; return <li key={guide.id}><article className="guide-result-card">
           <div className="guide-card-labels"><span className="guide-category">{guide.category}</span></div>
           <h3><Link to={`/guides/${guide.id}${cardSearch}`} className="guide-card-title">{guide.title}</Link></h3><p className="guide-card-summary">{view.summary}</p>
           {match && <Link className="guide-match-link" to={`/guides/${guide.id}${cardSearch}#${match.anchor}`}><span>{match.label}</span><SearchHighlight text={match.text} query={debouncedQuery} /><span className="guide-match-go">定位这段内容 <ArrowRight size={14} aria-hidden="true" /></span></Link>}
@@ -65,7 +67,7 @@ export function GuidePage() {
     </section>
     {debouncedQuery.trim() && (sources.websites.length > 0 || sources.accounts.length > 0) && <section className="guide-search-sources" aria-label="相关网站与公众号" aria-busy={updating}>
       <h2>相关网站与公众号</h2><p className="guide-source-hint">与问题匹配的信息源，以及前几条指南关联的入口。</p>
-      {sources.websites.length > 0 && <div className="guide-source-group"><h3>网站入口</h3><ul>{sources.websites.slice(0, 3).map((site) => <li key={site.id}><a href={site.url} target="_blank" rel="noopener noreferrer">{websiteSearchDetails(site, results).name}<ExternalLink size={15} aria-hidden="true" /></a><span>{site.scope}</span></li>)}</ul><Link to={sourceSearchUrl(query, 'websites')} className="guide-bottom-back">继续查网站 <ArrowRight size={16} aria-hidden="true" /></Link></div>}
+      {sources.websites.length > 0 && <div className="guide-source-group"><h3>网站入口</h3><ul>{sources.websites.slice(0, 3).map((site) => <li key={site.id}><a href={site.url} target="_blank" rel="noopener noreferrer">{websiteSearchDetails(site, results, debouncedQuery).name}<ExternalLink size={15} aria-hidden="true" /></a><span>{site.scope}</span></li>)}</ul><Link to={sourceSearchUrl(query, 'websites')} className="guide-bottom-back">继续查网站 <ArrowRight size={16} aria-hidden="true" /></Link></div>}
       {sources.accounts.length > 0 && <div className="guide-source-group"><h3>微信公众号</h3><ul>{sources.accounts.slice(0, 3).map((account) => <li key={account.id}><Link to={`/sources/${account.id}?q=${encodeURIComponent(query)}`}>{account.name}<ArrowRight size={15} aria-hidden="true" /></Link><span>{account.topic}</span></li>)}</ul><Link to={sourceSearchUrl(query, 'accounts')} className="guide-bottom-back">继续查公众号 <ArrowRight size={16} aria-hidden="true" /></Link></div>}
     </section>}
   </div>
@@ -87,8 +89,10 @@ export function GuideDetailPage() {
   const originalGuide = guides.find((item) => item.id === guideId || item.aliases?.includes(guideId ?? ''))
   const query = params.get('q') ?? ''
   const route = originalGuide ? resolveGuideRoute(originalGuide, query, params.get('route')) : undefined
-  const guide = originalGuide ? guideRouteView(originalGuide, route) : undefined
+  const guide = originalGuide ? guideRouteView(originalGuide, route, query) : undefined
   const match = guide ? guideSearchMatch(guide, query, serviceWindows) : undefined
+  const conditionNotice = guide ? searchGuides([guide], query, '', serviceWindows).notice : ''
+  const excludedAudience = originalGuide?.routes?.some((option) => !routeMatchesAudience(option, query))
   const highlight = (text: string, anchor: string) => match?.anchor === anchor ? <SearchHighlight text={text} query={query} /> : text
   const listParams = new URLSearchParams(params)
   listParams.delete('route')
@@ -109,7 +113,8 @@ export function GuideDetailPage() {
   return <div className="page module-page">
     <div className="page-heading"><Link to={backTo} className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回{params.get('q') ? '搜索结果' : '办事指南'}</Link><p className="eyebrow">校园办事 · {guide.category}</p><h1>{guide.title}</h1></div>
     <section className="guide-answer-panel" aria-labelledby="guide-answer-heading"><h2 id="guide-answer-heading">{['procedure', 'options'].includes(guide.kind) ? '整体流程' : '事项概览'}</h2><p>{guide.summary}</p></section>
-    {guide.routes && <section className="guide-route-panel" aria-labelledby="guide-route-heading"><h2 id="guide-route-heading">{guide.routeChoiceLabel}</h2><div className="guide-route-choices"><button type="button" aria-pressed={!route} onClick={() => chooseRoute('all')}>查看完整流程</button>{guide.routes.map((option) => <button key={option.id} type="button" aria-pressed={route?.id === option.id} onClick={() => chooseRoute(option.id)}>{option.label}</button>)}</div><p>{route ? `当前显示：${route.label}。可切换其他办理需求。` : '选择与你的需求相符的方式，查看对应的准备材料、操作和入口。'}</p></section>}
+    {conditionNotice && <p className="guide-condition-note" role="note">{conditionNotice}</p>}
+    {guide.routes && <section className="guide-route-panel" aria-labelledby="guide-route-heading"><h2 id="guide-route-heading">{guide.routeChoiceLabel}</h2><div className="guide-route-choices"><button type="button" aria-pressed={!route} onClick={() => chooseRoute('all')}>查看完整流程</button>{guide.routes.map((option) => <button key={option.id} type="button" aria-pressed={route?.id === option.id} disabled={!routeMatchesAudience(option, query)} onClick={() => chooseRoute(option.id)}>{option.label}</button>)}</div><p>{route ? `当前显示：${route.label}。${excludedAudience ? '与查询中身份冲突的路线暂不可选；身份有误时返回修改搜索。' : '可切换其他办理需求。'}` : '选择与你的需求相符的方式，查看对应的准备材料、操作和入口。'}</p></section>}
     {match && <p className="guide-search-location"><a href={`#${match.anchor}`}>定位与“{query}”匹配的段落 <ArrowRight size={15} aria-hidden="true" /></a></p>}
     <div className={`guide-detail-grid${hasServiceInfo ? ' has-service-info' : ''}`}><div className="guide-detail-main">
       {guide.materials.length > 0 && <section className="guide-detail-section"><h2>办理前准备</h2><ul className="guide-material-list">{guide.materials.map((material, i) => <li key={i} id={`guide-material-${i}`} tabIndex={-1}>{highlight(material, `guide-material-${i}`)}</li>)}</ul></section>}

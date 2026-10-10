@@ -4,14 +4,16 @@ import { ArrowLeft, ArrowRight, Copy, ExternalLink, Info, Search } from 'lucide-
 import SearchField from '../components/SearchField'
 import ResultPager from '../components/ResultPager'
 import { useDebouncedValue } from '../hooks/useDebouncedValue'
-import { filterAccounts, filterWebsites, filterGuides, websiteSearchDetails } from '../lib/campusContent'
+import { filterAccounts, filterWebsites, searchGuides, websiteSearchDetails } from '../lib/campusContent'
 import accountData from '../data/accounts.json'
 import websiteData from '../data/websites.json'
 import guideData from '../data/guides.json'
-import type { Guide } from '../types/guide'
+import serviceWindowData from '../data/service-windows.json'
+import type { Guide, ServiceWindow } from '../types/guide'
 import './sources.css'
 
 const guides = guideData as Guide[]
+const serviceWindows = serviceWindowData as ServiceWindow[]
 const pageSize = 12
 
 export function SourcesPage() {
@@ -22,9 +24,10 @@ export function SourcesPage() {
   const debounced = useDebouncedValue(query, 200)
   const data = websites ? websiteData : accountData
   const categories = [...new Set(data.map((item) => item.category))]
-  const matchingGuides = debounced.trim() ? filterGuides(guides, debounced) : []
+  const search = searchGuides(guides, debounced, '', serviceWindows)
+  const matchingGuides = debounced.trim() ? search.guides : []
   const accounts = filterAccounts(accountData, debounced, category)
-  const sites = filterWebsites(websiteData, debounced, category, guides)
+  const sites = filterWebsites(websiteData, debounced, category, guides, serviceWindows)
   const total = websites ? sites.length : accounts.length
   const page = Math.min(Math.max(1, Number(params.get('page')) || 1), Math.max(1, Math.ceil(total / pageSize)))
   function update(key: string, value: string) {
@@ -46,8 +49,9 @@ export function SourcesPage() {
     </section>
     <section aria-labelledby="source-results-heading" aria-busy={query !== debounced}>
       <div className="guide-results-heading"><h2 id="source-results-heading">{websites ? '服务与网站入口' : '微信公众号'}</h2><p role="status" aria-live="polite">{query !== debounced ? '正在更新结果…' : `找到 ${total} 个信息源`}</p></div>
+      {websites && search.notice && <p className="guide-condition-note" role="note">{search.notice}</p>}
       {total ? <>
-        {websites ? <ul className="website-grid">{sites.slice((page - 1) * pageSize, page * pageSize).map((site) => { const details = websiteSearchDetails(site, matchingGuides); return <li key={site.id} className="website-card"><div className="guide-card-labels"><span className="guide-category">{site.category}</span><span className="source-scope">{site.scope}</span></div><h3>{details.name}</h3><p>{details.summary}</p><a className="website-entry" href={site.url} target="_blank" rel="noopener noreferrer">打开网站 <ExternalLink size={16} aria-hidden="true" /></a><span className="website-address">{site.url}</span><Link className="website-guide-link" to={`/guides/${details.guideId}${detailSearch}`}>查看办理步骤 <ArrowRight size={15} aria-hidden="true" /></Link></li> })}</ul> :
+        {websites ? <ul className="website-grid">{sites.slice((page - 1) * pageSize, page * pageSize).map((site) => { const details = websiteSearchDetails(site, matchingGuides, debounced); const guideParams = new URLSearchParams(params); guideParams.delete('route'); if (details.routeId) guideParams.set('route', details.routeId); const guideSearch = guideParams.size ? `?${guideParams.toString()}` : ''; return <li key={site.id} className="website-card"><div className="guide-card-labels"><span className="guide-category">{site.category}</span><span className="source-scope">{site.scope}</span></div><h3>{details.name}</h3><p>{details.summary}</p><a className="website-entry" href={site.url} target="_blank" rel="noopener noreferrer">打开网站 <ExternalLink size={16} aria-hidden="true" /></a><span className="website-address">{site.url}</span><Link className="website-guide-link" to={`/guides/${details.guideId}${guideSearch}`}>查看办理步骤 <ArrowRight size={15} aria-hidden="true" /></Link></li> })}</ul> :
         <ul className="account-grid">{accounts.slice((page - 1) * pageSize, page * pageSize).map((account) => <li key={account.id}><Link to={`/sources/${account.id}${detailSearch}`} className="account-card"><div className="account-preview"><img src={account.image} alt={`${account.name}公众号的收集截图`} loading="lazy" /></div><div className="account-card-body"><div className="guide-card-labels"><span className="guide-category">{account.category}</span></div><h3>{account.name}</h3><span className="account-topic">{account.topic}</span>{account.organization && <p className="account-organization">截图机构：{account.organization}</p>}{account.summary && <p className="account-summary">{account.summary}</p>}<span className="account-details-link">查看截图与备注 <ArrowRight size={16} aria-hidden="true" /></span></div></Link></li>)}</ul>}
         <ResultPager page={page} total={total} pageSize={pageSize} onChange={(value) => update('page', String(value))} />
       </> : <div className="guide-empty-state"><Search size={27} aria-hidden="true" /><h3>没有找到相关信息源</h3><p>试试缩短关键词，或取消类别筛选。</p><button className="button-link" type="button" onClick={() => setParams(websites ? { kind: 'websites' } : {}, { replace: true })}>清除筛选，查看全部</button></div>}
