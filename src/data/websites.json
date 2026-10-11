@@ -497,10 +497,10 @@
   },
   {
     "id": "website-d131c92460",
-    "name": "浙江大学班车查询",
+    "name": "班车查询入口（原始链接，本轮未核验）",
     "url": "http://www.life.zju.edu.cn/_web/_apps/lightapp/busQuery/mobile/app/pub/index.html",
     "category": "校园生活",
-    "summary": "按出发校区、目的校区和日期查班次，核对上车点与乘车要求，再按时到站。",
+    "summary": "原问题资料收录的班车查询地址。本轮未能读取，不据此判断对所有用户是否可用；请优先按后勤交通服务页中的现行公众号或综合服务网路径查询。",
     "scope": "学校域名",
     "guideIds": [
       "campus-077"
@@ -1336,12 +1336,13 @@
   {
     "id": "website-a8ba8842ee",
     "name": "后勤交通服务",
-    "url": "https://zulg.zju.edu.cn/guide/traffic.htm",
+    "url": "https://zulg.zju.edu.cn/guide/transport.htm",
     "category": "校园生活",
-    "summary": "按出发校区、目的校区和日期查班次，核对上车点与乘车要求，再按时到站。",
+    "summary": "查询校区间班车流程及紫金港小白车查询入口、实时位置、线路、收费和咨询方式。",
     "scope": "学校域名",
     "guideIds": [
-      "campus-077"
+      "campus-077",
+      "campus-113"
     ],
     "sourceRows": [
       78
@@ -1603,6 +1604,58 @@
     "scope": "学校域名",
     "guideIds": [
       "campus-028"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-11"
+  },
+  {
+    "id": "website-campus-bus-faq",
+    "name": "校方班车答疑",
+    "url": "https://s2.zju.edu.cn/search/faq.do?words=%E7%8F%AD%E8%BD%A6",
+    "category": "校园交通",
+    "summary": "查看学校班车常见问题和服务联系方式。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-077"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-11"
+  },
+  {
+    "id": "website-haining-ops",
+    "name": "海宁校园运营中心",
+    "url": "https://coc.intl.zju.edu.cn/zh-hans/",
+    "category": "校园交通",
+    "summary": "进入海宁国际校区运营中心查看班车预约、权限申请及校园交通信息。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-077"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-11"
+  },
+  {
+    "id": "website-haining-table-page",
+    "name": "海宁班车时刻表页面",
+    "url": "https://coc.intl.zju.edu.cn/zh-hans/content/877687",
+    "category": "校园交通",
+    "summary": "查看海宁国际校区公开班车时刻表及官方PDF。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-077"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-11"
+  },
+  {
+    "id": "website-haining-timetable-pdf",
+    "name": "海宁跨校区与地铁接驳官方时刻表",
+    "url": "https://coc.intl.zju.edu.cn/sites/default/files/ueditor/152/upload/file/20260529/1780034024934789.pdf",
+    "category": "校园交通",
+    "summary": "查看海宁跨校区班车和周五/周日地铁接驳的官方两页时刻表。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-077"
     ],
     "sourceRows": [],
     "verifiedAt": "2026-10-11"

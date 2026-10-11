@@ -58,7 +58,7 @@ test('服务窗口电话与异常处理可被搜索，窗口关联不会落到�
   const windows = read('service-windows')
   const campusCards = guides.filter((guide) => guide.category === '校园卡')
   assert.equal(campusCards.length, 7)
-  assert.deepEqual(filterGuides(guides, '87572114', '', windows).map((guide) => guide.id).sort(), campusCards.map((guide) => guide.id).sort())
+  assert.deepEqual(filterGuides(guides, '87572114', '', windows).map((guide) => guide.id).sort(), [...campusCards.map((guide) => guide.id), 'campus-077'].sort())
   assert.ok(filterGuides(guides, '热水 校正', '校园卡', windows).some((guide) => guide.id === 'campus-card-replacement'))
   assert.equal(filterGuides(guides, '87572114', '交流与发展', windows).length, 0)
   for (const guide of campusCards) {
@@ -105,12 +105,12 @@ test('未知问题与互不相关的组合不会因问句清理误返回全部�
   const windows = read('service-windows')
   for (const query of ['你好', '怎么办', '？', '校园卡 奖学金', '图书馆 飞船999', '不存在的事务987'])
     assert.equal(filterGuides(guides, query, '', windows).length, 0, query)
-  assert.equal(filterGuides(guides, '').length, 97)
+  assert.equal(filterGuides(guides, '').length, 98)
   assert.equal(filterGuides(guides, '寝室灯坏了', '校园卡').length, 0)
 })
 
 test('其余指南均具有完整操作信息，原始问题保留，关联不悬空', () => {
-  assert.equal(guides.filter((guide) => guide.category !== '校园卡').length, 90)
+  assert.equal(guides.filter((guide) => guide.category !== '校园卡').length, 91)
   for (const guide of guides) {
     assert.ok(guide.steps.length >= 3, guide.id)
     assert.ok(guide.materials.length > 0, guide.id)
@@ -141,7 +141,7 @@ test('不同业务窗口独立关联，电话和人工时段可检索', () => {
 })
 
 test('网站导航包含新办理入口和完整摘要，学校与校外链接区分保留', () => {
-  assert.equal(websites.length, 96)
+  assert.equal(websites.length, 100)
   assert.equal(read('content-manifest').websiteCount, websites.length)
   assert.equal(read('content-manifest').serviceWindowCount, read('service-windows').length)
   for (const guide of guides)
@@ -179,8 +179,8 @@ test('近似建议与准确结果分开，并保持类别限制', () => {
 })
 
 
-test('全部97份指南提供对应步骤的真实参考或平台链接，不再提供App路径复制', () => {
-  assert.equal(guides.length, 97)
+test('全部98份指南提供对应步骤的真实参考或平台链接，不再提供App路径复制', () => {
+  assert.equal(guides.length, 98)
   const windows = read('service-windows')
   for (const guide of guides) {
     assert.ok(guide.stepActions.length > 0, guide.id)
@@ -305,7 +305,7 @@ test('卡片和正文使用同一路线，个人座位不误导到研讨空间�
 
 test('试点路线的入口、步骤索引与原始来源一致，不生成未经核实的业务入口', () => {
   const windows = read('service-windows')
-  assert.equal(guides.filter((g) => g.routes).length, 2)
+  assert.equal(guides.filter((g) => g.routes).length, 3)
   for (const guide of guides.filter((g) => g.routes)) {
     assert.equal(new Set(guide.routes.map((r) => r.id)).size, guide.routes.length)
     for (const route of guide.routes) {
@@ -471,4 +471,36 @@ test('财务新增指南可由关键词检索，SRTP关联并保留查询边界'
   assert.match(activity.materials.join(' '), /预决算表/); assert.match(activity.steps.join(' '), /获奖名单/); assert.match(activity.steps.join(' '), /合同或协议/)
   assert.ok(srtp.relatedGuideIds.includes('campus-111'))
   assert.ok(guides.find((guide) => guide.id === 'campus-029').relatedGuideIds.includes('campus-111'))
+})
+
+
+test('交通搜索进入正确情形，路线切换后材料、班表和参考不串线', () => {
+  const find = (q) => filterGuides(guides, q)[0]?.id
+  assert.equal(find('本科生班车预约'), 'campus-077')
+  assert.equal(find('海宁班车'), 'campus-077')
+  assert.equal(find('海宁地铁接驳'), 'campus-077')
+  assert.equal(find('小白车'), 'campus-113')
+  const shuttle = guides.find((guide) => guide.id === 'campus-077')
+  assert.equal(resolveGuideRoute(shuttle, '本科生班车预约')?.id, 'hangzhou-campus')
+  assert.equal(resolveGuideRoute(shuttle, '海宁班车')?.id, 'haining-intercampus')
+  assert.equal(resolveGuideRoute(shuttle, '海宁地铁接驳')?.id, 'haining-metro')
+  const city = guideRouteView(shuttle, resolveGuideRoute(shuttle, '', 'hangzhou-campus'))
+  const haining = guideRouteView(shuttle, resolveGuideRoute(shuttle, '', 'haining-intercampus'))
+  const metro = guideRouteView(shuttle, resolveGuideRoute(shuttle, '', 'haining-metro'))
+  assert.match(city.steps.join(' '), /领取预约码/); assert.match(city.troubleshooting.join(' '), /87951545/)
+  assert.match(haining.steps.join(' '), /AB10.*EB10/s); assert.match(haining.steps.join(' '), /周四22:00.*未满5人/s); assert.match(haining.troubleshooting.join(' '), /0571-87572114/)
+  assert.doesNotMatch(metro.steps.join(' '), /AB10|EB41|周末学生班车/)
+  assert.match(metro.steps[0], /惟学书院南侧/); assert.match(metro.steps[1], /地铁站A口/)
+  assert.match(metro.steps.join(' '), /周五/); assert.match(metro.steps.join(' '), /周日/)
+  assert.match(metro.steps.join(' '), /是否须预约、费用和乘车身份未核实/)
+  assert.ok(city.references.every((r) => !r.url.includes('haining')))
+  assert.ok(city.references.some((r) => r.url.includes('words=%E7%8F%AD%E8%BD%A6')))
+  assert.ok(haining.references.some((r) => r.url === 'https://coc.intl.zju.edu.cn/sites/default/files/ueditor/152/upload/file/20260529/1780034024934789.pdf'))
+  assert.ok(metro.references.some((r) => r.url.endsWith('.pdf')))
+  const legacyBus = websites.find((site) => site.id === 'website-d131c92460')
+  assert.equal(legacyBus.verifiedAt, null); assert.match(legacyBus.summary, /本轮未能读取.*不据此判断.*可用/)
+  const car = guides.find((guide) => guide.id === 'campus-113')
+  assert.match(car.steps.join(' '), /实时位置、线路和运行时刻表/)
+  assert.match(car.steps.join(' '), /1元\/人\/次/); assert.match(car.steps.join(' '), /88206142/)
+  assert.match(car.steps.join(' '), /不表示.*保证.*15分钟内到车/)
 })
