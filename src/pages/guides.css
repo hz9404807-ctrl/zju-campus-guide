@@ -185,7 +185,6 @@
 .guide-map-hint, .guide-preference-note { color: var(--muted); font-size: 12px !important; line-height: 1.8; margin-top: 10px; }
 .guide-window-unavailable { padding: 14px; border: 1px solid var(--line); border-radius: 10px; }
 .guide-window-unavailable p { font-size: 13px; line-height: 1.8; margin-bottom: 10px; }
-#guide-windows-heading { scroll-margin-top: 90px; }
 .guide-option-list > li > p { margin: 0; }
 
 /* Keep the whole guide card clickable while its reference link remains independent. */
@@ -217,3 +216,35 @@
 .guide-method-list h3 { margin: 0; font-size: 17px; }
 
 .guide-copy-fallback { user-select: text; overflow-wrap: anywhere; padding: 10px; border: 1px solid var(--line); border-radius: 8px; }
+
+/* Detail pages: readable instructions with a compact, content-driven contents list. */
+.guide-detail-page { max-width: 1024px; }
+.guide-contents { margin: 24px 0; padding: 14px 0; border-block: 1px solid var(--line); }
+.guide-contents > p { color: var(--muted); font-size: 13px; font-weight: 600; }
+.guide-contents ul { display: flex; flex-wrap: wrap; gap: 4px 24px; list-style: none; padding: 0; margin: 5px 0 0; }
+.guide-contents a { display: inline-flex; align-items: center; min-height: 44px; color: var(--blue); font-size: 15px; text-decoration: underline; text-underline-offset: 5px; }
+.guide-contents a:hover, .guide-contents a[aria-current="location"] { color: var(--blue-dark); text-decoration-thickness: 2px; }
+.guide-detail-page [id$="-heading"] { scroll-margin-top: 104px; }
+.guide-detail-page [id$="-heading"]:focus { outline: 2px solid var(--blue); outline-offset: 6px; }
+.guide-detail-page .guide-detail-grid:not(.has-service-info), .guide-detail-page .info-panel { max-width: 860px; }
+.guide-detail-page .guide-step-list p, .guide-detail-page .guide-option-list,
+.guide-detail-page .guide-explanation p, .guide-detail-page .guide-material-list,
+.guide-detail-page .guide-detail-section > p, .guide-detail-page .guide-method-list p { font-size: 16px; line-height: 1.9; color: #344761; }
+.guide-detail-page .guide-detail-section h2 { font-size: 20px; color: var(--ink); }
+.guide-detail-page .guide-step-list li { padding-left: 46px; }
+.guide-detail-page .guide-step-list li::before { width: 32px; height: 32px; font-size: 15px; }
+.guide-detail-page .guide-reference-list, .guide-detail-page .guide-window-details dd { font-size: 15px; }
+.guide-detail-page .guide-reference-list a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; overflow-wrap: anywhere; }
+@media (max-width: 560px) {
+  .guide-contents { margin: 20px 0; }
+  .guide-contents ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px; }
+  .guide-contents a { font-size: 14px; }
+  .guide-detail-page .guide-step-list li { padding-left: 38px; }
+  .guide-detail-page .guide-step-list li::before { width: 28px; height: 28px; font-size: 14px; }
+}
+
+@media (min-width: 900px) {
+  .guide-contents { position: sticky; top: 80px; z-index: 10; background: var(--bg); }
+  .guide-detail-page [id$="-heading"], .guide-detail-page [id^="guide-step-"],
+  .guide-detail-page [id^="guide-help-"], .guide-detail-page [id^="guide-material-"] { scroll-margin-top: 200px; }
+}
