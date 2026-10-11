@@ -105,12 +105,12 @@ test('未知问题与互不相关的组合不会因问句清理误返回全部�
   const windows = read('service-windows')
   for (const query of ['你好', '怎么办', '？', '校园卡 奖学金', '图书馆 飞船999', '不存在的事务987'])
     assert.equal(filterGuides(guides, query, '', windows).length, 0, query)
-  assert.equal(filterGuides(guides, '').length, 95)
+  assert.equal(filterGuides(guides, '').length, 97)
   assert.equal(filterGuides(guides, '寝室灯坏了', '校园卡').length, 0)
 })
 
 test('其余指南均具有完整操作信息，原始问题保留，关联不悬空', () => {
-  assert.equal(guides.filter((guide) => guide.category !== '校园卡').length, 88)
+  assert.equal(guides.filter((guide) => guide.category !== '校园卡').length, 90)
   for (const guide of guides) {
     assert.ok(guide.steps.length >= 3, guide.id)
     assert.ok(guide.materials.length > 0, guide.id)
@@ -141,7 +141,7 @@ test('不同业务窗口独立关联，电话和人工时段可检索', () => {
 })
 
 test('网站导航包含新办理入口和完整摘要，学校与校外链接区分保留', () => {
-  assert.equal(websites.length, 93)
+  assert.equal(websites.length, 96)
   assert.equal(read('content-manifest').websiteCount, websites.length)
   assert.equal(read('content-manifest').serviceWindowCount, read('service-windows').length)
   for (const guide of guides)
@@ -179,8 +179,8 @@ test('近似建议与准确结果分开，并保持类别限制', () => {
 })
 
 
-test('全部95份指南提供对应步骤的真实参考或平台链接，不再提供App路径复制', () => {
-  assert.equal(guides.length, 95)
+test('全部97份指南提供对应步骤的真实参考或平台链接，不再提供App路径复制', () => {
+  assert.equal(guides.length, 97)
   const windows = read('service-windows')
   for (const guide of guides) {
     assert.ok(guide.stepActions.length > 0, guide.id)
@@ -453,4 +453,22 @@ test('成绩单每一种身份均有适用范围和真实官方参考，毕业�
   assert.ok(alumni.stepActions.some((action) => action.kind === 'service'))
   assert.equal(resolveGuideRoute(guide, '国际联合学院成绩单'), undefined)
   assert.equal(resolveGuideRoute(guide, '浙大爱丁堡成绩单').id, 'zje')
+})
+
+
+test('财务新增指南可由关键词检索，SRTP关联并保留查询边界', () => {
+  const find = (q) => filterGuides(guides, q)[0]?.id
+  assert.equal(find('活动报销'), 'campus-112')
+  assert.equal(find('电子发票'), 'campus-111')
+  assert.ok(['campus-028','campus-029'].includes(find('SRTP报销')))
+  assert.equal(find('报销进度'), 'campus-111')
+  const general = guides.find((guide) => guide.id === 'campus-111')
+  const activity = guides.find((guide) => guide.id === 'campus-112')
+  const srtp = guides.find((guide) => guide.id === 'campus-028')
+  assert.match(general.summary, /经费/); assert.match(general.summary, /授权/)
+  assert.match(general.troubleshooting.join(' '), /历史报销单/); assert.match(general.troubleshooting.join(' '), /酬金明细/)
+  assert.match(general.steps.join(' '), /提交、审核通过、财务付款和银行到账是不同状态/)
+  assert.match(activity.materials.join(' '), /预决算表/); assert.match(activity.steps.join(' '), /获奖名单/); assert.match(activity.steps.join(' '), /合同或协议/)
+  assert.ok(srtp.relatedGuideIds.includes('campus-111'))
+  assert.ok(guides.find((guide) => guide.id === 'campus-029').relatedGuideIds.includes('campus-111'))
 })

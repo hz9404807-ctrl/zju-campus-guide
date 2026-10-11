@@ -1559,5 +1559,52 @@
       98
     ],
     "verifiedAt": "2026-10-10"
+  },
+  {
+    "id": "website-finance-guide-2025",
+    "name": "财务报销办事指南（2025年5月修订）",
+    "url": "https://mse.zju.edu.cn/_upload/article/files/6a/c7/0fd538b048c8991466e72887b27b/f3910904-d886-4280-bac1-5089c4458f27.pdf",
+    "category": "财务与经费",
+    "summary": "查询学校经费报销的票据要求、预约送审、活动支出附件和异常处理；具体项目资格及学院细则需另行确认。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-028",
+      "campus-029",
+      "campus-109",
+      "campus-110",
+      "campus-111",
+      "campus-112"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-11"
+  },
+  {
+    "id": "website-finance-platform",
+    "name": "综合财务管理平台",
+    "url": "https://cwcx.zju.edu.cn/",
+    "category": "财务与经费",
+    "summary": "按获批经费及实际业务办理网上预约报账、查询报销单；平台入口不代表个人支出均符合报销条件。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-109",
+      "campus-110",
+      "campus-111",
+      "campus-112"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-11"
+  },
+  {
+    "id": "website-srtp-faq",
+    "name": "SRTP常见问题（校方教务答疑）",
+    "url": "https://s2.zju.edu.cn/search/faq.do?words=srtp",
+    "category": "科研与活动",
+    "summary": "查询SRTP常见问题；项目经费和报销安排向各学院（系）本科教学科确认。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-028"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-11"
   }
 ]
