@@ -12,3 +12,4 @@ artifacts/
 outputs/*.tar.gz
 outputs/deployment-result.json
 outputs/*.bundle
+scratch/
