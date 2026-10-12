@@ -126,7 +126,7 @@ test('其余指南均具有完整操作信息，原始问题保留，关联不�
 
 test('不同业务窗口独立关联，电话和人工时段可检索', () => {
   const windows = read('service-windows')
-  assert.equal(windows.length, 27)
+  assert.equal(windows.length, 31)
   assert.equal(new Set(windows.map((window) => window.id)).size, windows.length)
   for (const guide of guides)
     assert.ok((guide.serviceWindowIds ?? []).every((id) => windows.some((window) => window.id === id)), guide.id)
@@ -141,7 +141,7 @@ test('不同业务窗口独立关联，电话和人工时段可检索', () => {
 })
 
 test('网站导航包含新办理入口和完整摘要，学校与校外链接区分保留', () => {
-  assert.equal(websites.length, 100)
+  assert.equal(websites.length, 101)
   assert.equal(read('content-manifest').websiteCount, websites.length)
   assert.equal(read('content-manifest').serviceWindowCount, read('service-windows').length)
   for (const guide of guides)
@@ -540,17 +540,60 @@ test('活动报销送审属于中间状态，完成条件要求核对处理与�
   assert.match(activity.troubleshooting.join(' '), /退回|補正|补正/)
 })
 
+test('财务指南窗口按校区分别展示，时间和号码来自印刷143–144页', () => {
+  const windows = read('service-windows')
+  const ids = ['finance-zjg-east', 'finance-zjg-west', 'finance-yuquan', 'finance-huajiachi']
+  for (const guideId of ['campus-111', 'campus-112'])
+    assert.deepEqual(guides.find((guide) => guide.id === guideId).serviceWindowIds, ids)
+  const expected = [
+    ['紫金港', '计财处紫金港分中心（东区）', '东六117-2', ['88208404', '88208564', '88208948', '88206165']],
+    ['紫金港', '计财处紫金港分中心（西区）', '成均苑8幢101、116', ['87077257', '88206563']],
+    ['玉泉', '计财处玉泉分中心', '玉泉校区外经贸楼1楼', ['87951097']],
+    ['华家池', '计财处华家池分中心', '华家池校区老图书馆101', ['86971241']],
+  ]
+  for (const [campus, name, location, phones] of expected) {
+    const window = windows.find((item) => item.name === name)
+    assert.equal(window.campus, campus)
+    assert.equal(window.location, location)
+    assert.deepEqual(window.contacts.map((contact) => contact.number), phones)
+    assert.match(window.openingHours, /周一至周四 8:30–11:30、13:30–16:30；周五 8:30–11:30/)
+    assert.doesNotMatch(window.openingHours, /11:30–12:00|16:30–17:30|业务学习|内部整理/)
+    assert.match(window.notice, /预约单或当前系统指定/)
+    assert.ok(window.references.some((reference) => reference.url.endsWith('.pdf')))
+  }
+  assert.ok(!windows.some((window) => ids.includes(window.id) && /海宁/.test(window.campus)))
+  for (const guideId of ['campus-111', 'campus-112']) {
+    const guide = guides.find((item) => item.id === guideId)
+    assert.match(guide.contact, /按预约单或当前财务系统指定/)
+    assert.match(guide.contact, /海宁校区及独立核算单位不在此表范围/)
+    assert.match(guide.contact, /计财处官网联系入口/)
+    assert.ok(guide.references.some((reference) => reference.url === 'http://cw.zju.edu.cn'))
+  }
+  const officeSite = websites.find((site) => site.id === 'website-finance-office')
+  assert.equal(officeSite.url, 'http://cw.zju.edu.cn/')
+  assert.equal(officeSite.verifiedAt, null)
+  assert.ok(['campus-028', 'campus-111', 'campus-112'].every((id) => officeSite.guideIds.includes(id)))
+  assert.ok(filterWebsites(websites, '计财处官网', '', guides).some((site) => site.id === officeSite.id))
+  assert.equal(websiteSearchDetails(officeSite, filterGuides(guides, '报销进度'), '报销进度').guideId, 'campus-111')
+})
+
 
 test('交通搜索进入正确情形，路线切换后材料、班表和参考不串线', () => {
   const find = (q) => filterGuides(guides, q)[0]?.id
   assert.equal(find('本科生班车预约'), 'campus-077')
   assert.equal(find('海宁班车'), 'campus-077')
   assert.equal(find('海宁地铁接驳'), 'campus-077')
+  assert.equal(find('海宁校区班车'), 'campus-077')
+  assert.equal(find('海宁校区地铁接驳'), 'campus-077')
+  assert.equal(find('本科生海宁班车'), 'campus-077')
   assert.equal(find('小白车'), 'campus-113')
   const shuttle = guides.find((guide) => guide.id === 'campus-077')
   assert.equal(resolveGuideRoute(shuttle, '本科生班车预约')?.id, 'hangzhou-campus')
   assert.equal(resolveGuideRoute(shuttle, '海宁班车')?.id, 'haining-intercampus')
   assert.equal(resolveGuideRoute(shuttle, '海宁地铁接驳')?.id, 'haining-metro')
+  assert.equal(resolveGuideRoute(shuttle, '海宁校区班车')?.id, 'haining-intercampus')
+  assert.equal(resolveGuideRoute(shuttle, '海宁校区地铁接驳')?.id, 'haining-metro')
+  assert.equal(resolveGuideRoute(shuttle, '本科生海宁班车')?.id, 'haining-intercampus')
   const city = guideRouteView(shuttle, resolveGuideRoute(shuttle, '', 'hangzhou-campus'))
   const haining = guideRouteView(shuttle, resolveGuideRoute(shuttle, '', 'haining-intercampus'))
   const metro = guideRouteView(shuttle, resolveGuideRoute(shuttle, '', 'haining-metro'))

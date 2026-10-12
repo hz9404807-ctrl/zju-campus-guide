@@ -1592,6 +1592,21 @@
     "verifiedAt": "2026-10-11"
   },
   {
+    "id": "website-finance-office",
+    "name": "计划财务处网站（财务指南列示）",
+    "url": "http://cw.zju.edu.cn/",
+    "category": "财务与经费",
+    "summary": "计财处网站入口；查询当前公告或业务联系方式，具体承办地点和时间以预约单或财务系统指定为准。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-028",
+      "campus-111",
+      "campus-112"
+    ],
+    "sourceRows": [],
+    "verifiedAt": null
+  },
+  {
     "id": "website-srtp-faq",
     "name": "SRTP常见问题（校方教务答疑）",
     "url": "https://s2.zju.edu.cn/search/faq.do?words=srtp",

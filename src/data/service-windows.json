@@ -569,5 +569,69 @@
         "url": "https://service.zju.edu.cn/_web/customized/serviceCenter/detailnew.html?_p=YXM9MiZ0PTUmZD0xNTcmcD0xJmY9MTA5Jm09TiY_&id=2664"
       }
     ]
+  },
+  {
+    "id": "finance-zjg-east",
+    "campus": "紫金港",
+    "name": "计财处紫金港分中心（东区）",
+    "location": "东六117-2",
+    "openingHours": "周一至周四 8:30–11:30、13:30–16:30；周五 8:30–11:30。",
+    "contacts": [
+      {"label": "业务咨询电话", "number": "88208404"},
+      {"label": "业务咨询电话", "number": "88208564"},
+      {"label": "业务咨询电话", "number": "88208948"},
+      {"label": "业务咨询电话", "number": "88206165"}
+    ],
+    "hoursStatus": "published",
+    "notice": "2025年5月财务指南列明该分中心职责包括财务报销、科研及教学收入分成、账务查询、科研项目决算审核等。指南写明周五下午业务学习、不对外服务。实际承办地点和时间以预约单或当前系统指定为准；临时调整以计财处公告为准。",
+    "references": [
+      {"label": "财务报销办事指南（2025年5月修订），印刷页143–144", "url": "https://mse.zju.edu.cn/_upload/article/files/6a/c7/0fd538b048c8991466e72887b27b/f3910904-d886-4280-bac1-5089c4458f27.pdf"}
+    ]
+  },
+  {
+    "id": "finance-zjg-west",
+    "campus": "紫金港",
+    "name": "计财处紫金港分中心（西区）",
+    "location": "成均苑8幢101、116",
+    "openingHours": "周一至周四 8:30–11:30、13:30–16:30；周五 8:30–11:30。",
+    "contacts": [
+      {"label": "业务咨询电话", "number": "87077257"},
+      {"label": "业务咨询电话", "number": "88206563"}
+    ],
+    "hoursStatus": "published",
+    "notice": "2025年5月财务指南列明该分中心职责包括财务报销、科研及教学收入分成、账务查询、科研项目决算审核等。指南写明周五下午业务学习、不对外服务。实际承办地点和时间以预约单或当前系统指定为准；临时调整以计财处公告为准。",
+    "references": [
+      {"label": "财务报销办事指南（2025年5月修订），印刷页143–144", "url": "https://mse.zju.edu.cn/_upload/article/files/6a/c7/0fd538b048c8991466e72887b27b/f3910904-d886-4280-bac1-5089c4458f27.pdf"}
+    ]
+  },
+  {
+    "id": "finance-yuquan",
+    "campus": "玉泉",
+    "name": "计财处玉泉分中心",
+    "location": "玉泉校区外经贸楼1楼",
+    "openingHours": "周一至周四 8:30–11:30、13:30–16:30；周五 8:30–11:30。",
+    "contacts": [
+      {"label": "业务咨询电话", "number": "87951097"}
+    ],
+    "hoursStatus": "published",
+    "notice": "2025年5月财务指南列明该分中心职责包括财务报销、科研及教学收入分成、账务查询、科研项目决算审核等。指南写明周五下午业务学习、不对外服务。实际承办地点和时间以预约单或当前系统指定为准；临时调整以计财处公告为准。",
+    "references": [
+      {"label": "财务报销办事指南（2025年5月修订），印刷页143–144", "url": "https://mse.zju.edu.cn/_upload/article/files/6a/c7/0fd538b048c8991466e72887b27b/f3910904-d886-4280-bac1-5089c4458f27.pdf"}
+    ]
+  },
+  {
+    "id": "finance-huajiachi",
+    "campus": "华家池",
+    "name": "计财处华家池分中心",
+    "location": "华家池校区老图书馆101",
+    "openingHours": "周一至周四 8:30–11:30、13:30–16:30；周五 8:30–11:30。",
+    "contacts": [
+      {"label": "业务咨询电话", "number": "86971241"}
+    ],
+    "hoursStatus": "published",
+    "notice": "2025年5月财务指南列明该分中心职责包括财务报销、科研及教学收入分成、账务查询、科研项目决算审核等。指南写明周五下午业务学习、不对外服务。实际承办地点和时间以预约单或当前系统指定为准；临时调整以计财处公告为准。",
+    "references": [
+      {"label": "财务报销办事指南（2025年5月修订），印刷页143–144", "url": "https://mse.zju.edu.cn/_upload/article/files/6a/c7/0fd538b048c8991466e72887b27b/f3910904-d886-4280-bac1-5089c4458f27.pdf"}
+    ]
   }
 ]
