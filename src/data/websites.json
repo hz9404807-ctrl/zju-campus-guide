@@ -1570,9 +1570,6 @@
     "scope": "学校域名",
     "guideIds": [
       "campus-028",
-      "campus-029",
-      "campus-109",
-      "campus-110",
       "campus-111",
       "campus-112"
     ],
@@ -1587,8 +1584,7 @@
     "summary": "按获批经费及实际业务办理网上预约报账、查询报销单；平台入口不代表个人支出均符合报销条件。",
     "scope": "学校域名",
     "guideIds": [
-      "campus-109",
-      "campus-110",
+      "campus-028",
       "campus-111",
       "campus-112"
     ],

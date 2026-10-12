@@ -305,7 +305,7 @@ test('卡片和正文使用同一路线，个人座位不误导到研讨空间�
 
 test('试点路线的入口、步骤索引与原始来源一致，不生成未经核实的业务入口', () => {
   const windows = read('service-windows')
-  assert.equal(guides.filter((g) => g.routes).length, 3)
+  assert.equal(guides.filter((g) => g.routes).length, 4)
   for (const guide of guides.filter((g) => g.routes)) {
     assert.equal(new Set(guide.routes.map((r) => r.id)).size, guide.routes.length)
     for (const route of guide.routes) {
@@ -460,7 +460,7 @@ test('财务新增指南可由关键词检索，SRTP关联并保留查询边界'
   const find = (q) => filterGuides(guides, q)[0]?.id
   assert.equal(find('活动报销'), 'campus-112')
   assert.equal(find('电子发票'), 'campus-111')
-  assert.ok(['campus-028','campus-029'].includes(find('SRTP报销')))
+  assert.equal(find('SRTP报销'), 'campus-028')
   assert.equal(find('报销进度'), 'campus-111')
   const general = guides.find((guide) => guide.id === 'campus-111')
   const activity = guides.find((guide) => guide.id === 'campus-112')
@@ -471,6 +471,73 @@ test('财务新增指南可由关键词检索，SRTP关联并保留查询边界'
   assert.match(activity.materials.join(' '), /预决算表/); assert.match(activity.steps.join(' '), /获奖名单/); assert.match(activity.steps.join(' '), /合同或协议/)
   assert.ok(srtp.relatedGuideIds.includes('campus-111'))
   assert.ok(guides.find((guide) => guide.id === 'campus-029').relatedGuideIds.includes('campus-111'))
+})
+
+test('财务网站只关联财务事项，Hugging Face查询不会串入报销卡片', () => {
+  const financeIds = new Set(['campus-028', 'campus-111', 'campus-112'])
+  const financeGuide = websites.find((site) => site.id === 'website-finance-guide-2025')
+  const financePlatform = websites.find((site) => site.id === 'website-finance-platform')
+  assert.deepEqual(new Set(financeGuide.guideIds), financeIds)
+  assert.deepEqual(new Set(financePlatform.guideIds), financeIds)
+  for (const id of ['campus-109', 'campus-110', 'campus-029']) {
+    assert.ok(!financeGuide.guideIds.includes(id), `finance guide: ${id}`)
+    assert.ok(!financePlatform.guideIds.includes(id), `finance platform: ${id}`)
+  }
+  const hfSites = filterWebsites(websites, 'Hugging Face', '', guides)
+  assert.ok(hfSites.some((site) => site.guideIds.includes('campus-110')))
+  assert.ok(hfSites.every((site) => !site.guideIds.some((id) => financeIds.has(id))))
+  const financeSites = filterWebsites(websites, '电子发票', '', guides)
+  for (const site of [financeGuide, financePlatform]) {
+    assert.ok(financeSites.some((item) => item.id === site.id))
+    const details = websiteSearchDetails(site, filterGuides(guides, '电子发票'), '电子发票')
+    assert.equal(details.guideId, 'campus-111')
+    assert.match(details.summary, /经费|票据|发票/)
+    assert.match(details.name, /财务|报销/)
+  }
+})
+
+test('SRTP报销默认进入独立报销路线，申请方式可手动切换且内容隔离', () => {
+  const guide = guides.find((item) => item.id === 'campus-028')
+  const query = 'SRTP报销'
+  assert.match(guide.title, /申请.*报销/)
+  assert.equal(filterGuides(guides, query)[0].id, guide.id)
+  const reimbursement = resolveGuideRoute(guide, query)
+  assert.equal(reimbursement?.id, 'srtp-reimbursement')
+  const reimbursementView = guideRouteView(guide, reimbursement, query)
+  assert.match(reimbursementView.summary, /经费支持/)
+  assert.match(reimbursementView.materials.join(' '), /发票|付款记录/)
+  assert.match(reimbursementView.steps.join(' '), /用途|授权/)
+  assert.match(reimbursementView.steps.join(' '), /预约单/)
+  assert.match(reimbursementView.steps.join(' '), /送审/)
+  assert.doesNotMatch(reimbursementView.steps.join(' ') + reimbursementView.completionNote, /找导师|组队|科研结题/)
+  assert.match(reimbursementView.completionNote, /财务处理结果/)
+  assert.ok(reimbursementView.stepActions.some((action) => action.url === 'https://cwcx.zju.edu.cn/'))
+  assert.ok(reimbursementView.references.some((reference) => reference.url.includes('finance-guide')) ||
+    reimbursementView.references.some((reference) => reference.url.endsWith('.pdf')))
+  const application = resolveGuideRoute(guide, '', 'project-application')
+  const applicationView = guideRouteView(guide, application)
+  assert.match(applicationView.steps.join(' '), /导师/)
+  assert.match(applicationView.steps.join(' '), /组队/)
+  assert.match(applicationView.completionNote, /立项|结题/)
+  const manual = guideDetailContext(guide, query, 'project-application')
+  assert.equal(manual.route.id, 'project-application')
+  const returnToSearch = new URLSearchParams('q=SRTP报销&category=科研与活动')
+  assert.equal(returnToSearch.get('q'), query)
+  assert.equal(returnToSearch.get('category'), '科研与活动')
+  const related = guides.find((item) => item.id === 'campus-029')
+  assert.ok(related.relatedGuideIds.includes(guide.id))
+  assert.doesNotMatch(related.troubleshooting.join(' '), /campus-028|避免复制/)
+  assert.match(related.troubleshooting.join(' '), /科研训练项目申请与SRTP经费报销/)
+})
+
+test('活动报销送审属于中间状态，完成条件要求核对处理与款项结果', () => {
+  const activity = guides.find((guide) => guide.id === 'campus-112')
+  assert.match(activity.completionNote, /送审.*不是办结|审核中.*不是办结/)
+  assert.match(activity.completionNote, /财务处理结果/)
+  assert.match(activity.completionNote, /款项或结算记录/)
+  assert.match(activity.completionNote, /酬金.*发放记录.*银行结果/)
+  assert.doesNotMatch(activity.completionNote, /\d+日内|\d+个工作日/)
+  assert.match(activity.troubleshooting.join(' '), /退回|補正|补正/)
 })
 
 
