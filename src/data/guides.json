@@ -1874,10 +1874,22 @@
       {
         "id": "project-application",
         "label": "科研项目申请",
-        "intentTerms": ["SRTP", "科研项目", "科研训练", "找导师", "申请"],
-        "excludedTerms": ["报销"],
+        "intentTerms": [
+          "SRTP",
+          "科研项目",
+          "科研训练",
+          "找导师",
+          "申请"
+        ],
+        "excludedTerms": [
+          "报销",
+          "经费",
+          "科研耗材"
+        ],
         "summary": "查看本年度项目通知，确认导师、团队和申报条件，提交研究计划并跟进立项结果。",
-        "materials": ["研究兴趣、可投入时间和简短个人介绍；研究计划、导师确认、团队信息及当年度通知要求的附件。"],
+        "materials": [
+          "研究兴趣、可投入时间和简短个人介绍；研究计划、导师确认、团队信息及当年度通知要求的附件。"
+        ],
         "steps": [
           "打开科研训练与学科竞赛平台，查看当前开放的科研训练项目通知，区分SRTP等项目类型。",
           "结合兴趣和已有基础联系相关教师，说明可投入时间、已有技能及想解决的问题，确认指导意愿。",
@@ -1885,8 +1897,18 @@
           "按通知规定的系统或渠道提交申请，查看学院审核和立项结果；获准后按立项计划执行、保留过程记录并按项目要求检查和结题。"
         ],
         "stepActions": [
-          {"stepIndex": 0, "kind": "reference", "label": "查看科研训练项目通知", "url": "http://kyjs.zju.edu.cn/preview"},
-          {"stepIndex": 0, "kind": "reference", "label": "查看SRTP咨询答疑", "url": "https://s2.zju.edu.cn/search/faq.do?words=srtp"}
+          {
+            "stepIndex": 0,
+            "kind": "reference",
+            "label": "查看科研训练项目通知",
+            "url": "http://kyjs.zju.edu.cn/preview"
+          },
+          {
+            "stepIndex": 0,
+            "kind": "reference",
+            "label": "查看SRTP咨询答疑",
+            "url": "https://s2.zju.edu.cn/search/faq.do?words=srtp"
+          }
         ],
         "troubleshooting": [
           "暂未确定课题时，可先咨询导师是否有适合本科生参与的方向，不要为填申请表而编造研究内容。",
@@ -1898,8 +1920,18 @@
       {
         "id": "srtp-reimbursement",
         "label": "已获经费支持的SRTP报销",
-        "intentTerms": ["SRTP", "报销", "科研耗材", "经费"],
-        "excludedTerms": ["申报", "申请"],
+        "intentTerms": [
+          "报销",
+          "科研耗材",
+          "经费"
+        ],
+        "excludedTerms": [
+          "项目申报",
+          "项目申请",
+          "申请项目",
+          "申报SRTP",
+          "SRTP申报"
+        ],
         "summary": "确认项目已获经费支持且支出符合项目用途和授权，再按财务要求准备票据、建立预约单、签章送审并核对处理结果。",
         "materials": [
           "项目负责人或学院确认的经费支持、可报销用途、经办授权及当前附件要求。",
@@ -1914,9 +1946,24 @@
           "在平台历史报销单中跟进处理；根据财务处理结果核对适用的款项或结算记录。若有酬金，另查收入查询中的酬金明细及银行结果。"
         ],
         "stepActions": [
-          {"stepIndex": 2, "kind": "service", "label": "打开综合财务管理平台", "url": "https://cwcx.zju.edu.cn/"},
-          {"stepIndex": 2, "kind": "reference", "label": "查看办理说明", "url": "https://mse.zju.edu.cn/_upload/article/files/6a/c7/0fd538b048c8991466e72887b27b/f3910904-d886-4280-bac1-5089c4458f27.pdf"},
-          {"stepIndex": 3, "kind": "reference", "label": "查看计财处官网联系入口", "url": "http://cw.zju.edu.cn"}
+          {
+            "stepIndex": 2,
+            "kind": "service",
+            "label": "打开综合财务管理平台",
+            "url": "https://cwcx.zju.edu.cn/"
+          },
+          {
+            "stepIndex": 2,
+            "kind": "reference",
+            "label": "查看办理说明",
+            "url": "https://mse.zju.edu.cn/_upload/article/files/6a/c7/0fd538b048c8991466e72887b27b/f3910904-d886-4280-bac1-5089c4458f27.pdf"
+          },
+          {
+            "stepIndex": 3,
+            "kind": "reference",
+            "label": "查看计财处官网联系入口",
+            "url": "http://cw.zju.edu.cn"
+          }
         ],
         "troubleshooting": [
           "项目经费或支出用途不明确时先向学院（系）本科教学科或经费负责人确认；不要把项目立项当作费用自动获批。",
@@ -4522,7 +4569,9 @@
           "本科生",
           "杭州"
         ],
-        "excludedTerms": ["海宁"],
+        "excludedTerms": [
+          "海宁"
+        ],
         "summary": "按官方服务入口查方向和日期，核对适用身份；本科生经院系码预约成功后持有效乘车码乘车。",
         "materials": [
           "出发和目的校区、出行日期、本人身份；本科生还需院系下发的预约码。"
@@ -6841,7 +6890,12 @@
     "notes": [],
     "verificationScope": "按所列校方公开指南核对通用流程；经费资格、授权、业务附件及登录后平台菜单须按项目/学院和当前系统要求确认。",
     "relatedSourceIds": [],
-    "serviceWindowIds": ["finance-zjg-east", "finance-zjg-west", "finance-yuquan", "finance-huajiachi"],
+    "serviceWindowIds": [
+      "finance-zjg-east",
+      "finance-zjg-west",
+      "finance-yuquan",
+      "finance-huajiachi"
+    ],
     "completionNote": "平台显示处理完成，并按款项类型核对报销记录或银行流水。",
     "troubleshooting": [
       "普通报销款查“网上预约报账”-“历史报销单”，不要用酬金明细代替。",
@@ -6926,7 +6980,12 @@
     "notes": [],
     "verificationScope": "按所列校方公开指南核对通用流程；经费资格、授权、业务附件及登录后平台菜单须按项目/学院和当前系统要求确认。",
     "relatedSourceIds": [],
-    "serviceWindowIds": ["finance-zjg-east", "finance-zjg-west", "finance-yuquan", "finance-huajiachi"],
+    "serviceWindowIds": [
+      "finance-zjg-east",
+      "finance-zjg-west",
+      "finance-yuquan",
+      "finance-huajiachi"
+    ],
     "completionNote": "送审、审核中、退回补正均不是办结。普通报销按财务处理结果核对适用的款项或结算记录；酬金另核对发放记录及银行结果。不同业务处理时间不同。",
     "troubleshooting": [
       "活动附件依据财务指南82–85页收录的2017年规定；当前是否适用、额度和审批材料先向学院确认，不表示所有活动都有经费。",

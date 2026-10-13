@@ -614,3 +614,16 @@ test('交通搜索进入正确情形，路线切换后材料、班表和参考�
   assert.match(car.steps.join(' '), /1元\/人\/次/); assert.match(car.steps.join(' '), /88206142/)
   assert.match(car.steps.join(' '), /不表示.*保证.*15分钟内到车/)
 })
+
+
+test('SRTP报销申请的申请动作不会被误判为项目申请', () => {
+  const guide = guides.find((g) => g.id === 'campus-028')
+  for (const query of ['SRTP报销申请', '申请SRTP报销', '申请SRTP经费报销', 'SRTP经费', '科研耗材报销']) {
+    assert.equal(filterGuides(guides, query)[0]?.id, guide.id)
+    assert.equal(resolveGuideRoute(guide, query)?.id, 'srtp-reimbursement', query)
+    assert.equal(primaryGuideAction(guide, query)?.url, 'https://cwcx.zju.edu.cn/')
+  }
+  for (const query of ['申请SRTP', 'SRTP项目申请', 'SRTP申报']) {
+    assert.equal(resolveGuideRoute(guide, query)?.id, 'project-application', query)
+  }
+})
