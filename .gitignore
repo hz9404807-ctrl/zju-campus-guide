@@ -14,3 +14,4 @@ outputs/deployment-result.json
 outputs/*.bundle
 scratch/
 outputs/guide-timetable-preview.jpg
+outputs/food-email-preview.jpg

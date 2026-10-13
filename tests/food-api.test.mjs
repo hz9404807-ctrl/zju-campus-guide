@@ -40,6 +40,9 @@ function makeClient(options = {}) {
   const calls = { getSession: 0, signInAnonymously: 0, queries: [], inserts: [], uploads: [], publicUrls: [], rpc: [] }
   const client = {
     auth: {
+      async getUser() {
+        return response(options.getUser, { data: { user: { id: USER_ID, email: 'fixture@zju.edu.cn', email_confirmed_at: '2026-10-13T00:00:00Z', is_anonymous: false } }, error: null })
+      },
       async getSession() {
         calls.getSession += 1
         const session = Object.hasOwn(options, 'session') ? options.session : SESSION
@@ -429,4 +432,71 @@ test('图片已上传但发布事务失败时仍报告发布失败', async () =>
   await expectServiceError(api.publishFood(PUBLISH_INPUT, image), 'PUBLISH_FAILED')
   assert.equal(calls.uploads.length, 1)
   assert.equal(calls.rpc.length, 1)
+})
+
+
+test('未验证学校邮箱的用户发布与管理均被拒绝，不能触发上传或RPC', async () => {
+  for (const user of [null, { id: USER_ID, is_anonymous: true }, { id: USER_ID, email: 'x@other.edu.cn', is_anonymous: false, email_confirmed_at: 'now' }, { id: USER_ID, email: 'x@zju.edu.cn', is_anonymous: false }]) {
+    const { api, calls } = makeClient({ getUser: { data: { user }, error: null } })
+    await expectServiceError(api.publishFood(PUBLISH_INPUT, null), 'LOGIN_REQUIRED')
+    await expectServiceError(api.myFoods(), 'LOGIN_REQUIRED')
+    await expectServiceError(api.setFoodDeleted(FOOD_ID, '2026-10-13T00:00:00Z', true), 'LOGIN_REQUIRED')
+    assert.equal(calls.rpc.length, 0)
+    assert.equal(calls.uploads.length, 0)
+  }
+})
+
+test('作者编辑传送并发版本，不携带创建者或评分字段', async () => {
+  const row = { ...FOOD_ROW, created_by: USER_ID, updated_at: '2026-10-13T00:00:00.123456Z', deleted_at: null }
+  const { api, calls } = makeClient({ foodResponse: { data: row, error: null } })
+  await api.updateFood(FOOD_ID, row.updated_at, PUBLISH_INPUT, null, false)
+  const call = calls.rpc.at(-1)
+  assert.equal(call.name, 'update_own_food')
+  assert.equal(call.parameters.p_expected_updated_at, row.updated_at)
+  assert.equal('p_rating' in call.parameters, false)
+  assert.equal('created_by' in call.parameters, false)
+  assert.equal(call.parameters.p_name, PUBLISH_INPUT.name)
+})
+
+test('他人发布及已删除发布不允许编辑；管理迁移未部署时有明确提示', async () => {
+  for (const row of [{ ...FOOD_ROW, created_by: 'other' }, { ...FOOD_ROW, created_by: USER_ID, deleted_at: '2026-10-13T00:00:00Z' }]) {
+    const { api, calls } = makeClient({ foodResponse: { data: row, error: null } })
+    await expectServiceError(api.updateFood(FOOD_ID, 'now', PUBLISH_INPUT, null, false), 'NOT_OWNER')
+    assert.equal(calls.rpc.length, 0)
+  }
+  const { api } = makeClient()
+  await expectServiceError(api.updateFood(FOOD_ID, '', PUBLISH_INPUT, null, false), 'NOT_READY')
+})
+
+test('删除和恢复使用同一权限接口，版本冲突不伪装成功', async () => {
+  for (const deleted of [true, false]) {
+    const { api, calls } = makeClient()
+    await api.setFoodDeleted(FOOD_ID, 'original-version', deleted)
+    assert.deepEqual(calls.rpc, [{ name: 'set_own_food_deleted', parameters: { p_food_id: FOOD_ID, p_expected_updated_at: 'original-version', p_deleted: deleted } }])
+  }
+  const { api } = makeClient({ rpcResponse: { data: null, error: { code: '40001' } } })
+  await expectServiceError(api.setFoodDeleted(FOOD_ID, 'old-version', true), 'EDIT_CONFLICT')
+})
+
+test('公共列表排除自己的已删除记录，我的发布查询限定当前作者', async () => {
+  const row = { ...FOOD_ROW, created_by: USER_ID, deleted_at: '2026-10-13T00:00:00Z' }
+  const { api, calls } = makeClient({ listResponse: { data: [row], error: null } })
+  assert.deepEqual(await api.listFoods(), [])
+  assert.equal((await api.myFoods()).length, 1)
+  assert.deepEqual(calls.queries.at(-1).filters, [['created_by', USER_ID]])
+})
+
+test('编辑替换图片先上传到本人新路径，原图片不被覆盖', async () => {
+  const { api, calls } = makeClient({ foodResponse: { data: { ...FOOD_ROW, created_by: USER_ID, updated_at: 'version' }, error: null } })
+  await api.updateFood(FOOD_ID, 'version', PUBLISH_INPUT, new File(['image'],'replace.png',{ type: 'image/png' }), false)
+  assert.equal(calls.uploads.length, 1)
+  assert.ok(calls.uploads[0].path.startsWith(USER_ID + '/'))
+  assert.equal(calls.uploads[0].options.upsert, false)
+  assert.ok(calls.rpc.at(-1).parameters.p_image_url.endsWith(calls.uploads[0].path))
+})
+
+test('验证登录的网络错误不被误报为成功或继续发布', async () => {
+  const { api, calls } = makeClient({ getUser: { data: { user: null }, error: { message: 'network failure' } } })
+  await expectServiceError(api.publishFood(PUBLISH_INPUT, null), 'AUTH_FAILED')
+  assert.equal(calls.rpc.length, 0)
 })

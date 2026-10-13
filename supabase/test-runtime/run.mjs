@@ -8,6 +8,7 @@ try {
     create role anon nologin;
     create role authenticated nologin;
     create role service_role nologin bypassrls;
+    create role supabase_auth_admin nologin;
     create schema auth;
     create schema storage;
     grant usage on schema public, auth, storage to anon, authenticated, service_role;
@@ -16,9 +17,14 @@ try {
       aud text,
       role text,
       is_anonymous boolean,
+      email text,
+      email_change text,
+      email_confirmed_at timestamptz,
       created_at timestamptz,
       updated_at timestamptz
     );
+    grant usage on schema auth to supabase_auth_admin;
+    grant select,insert,update on auth.users to supabase_auth_admin;
     create function auth.jwt() returns jsonb language sql stable as
       $$ select coalesce(nullif(current_setting('request.jwt.claims', true), ''), '{}')::jsonb $$;
     create function auth.uid() returns uuid language sql stable as
@@ -49,6 +55,11 @@ try {
   await db.exec(migration)
   const results = await db.exec(checks)
   const result = results.flatMap((item) => item.rows ?? []).find((row) => typeof row.result === 'string')
+  await db.exec(await readFile(new URL('../migrations/202610130001_food_email_management.sql', import.meta.url), 'utf8'))
+  const emailChecks = await readFile(new URL('../email-management.tests.sql', import.meta.url), 'utf8')
+  const emailResults = await db.exec(emailChecks)
+  console.log(emailResults.flatMap((r) => r.rows ?? []).find((r) => r.result)?.result ?? 'Email management checks passed.')
+  console.log(`Email assertions: ${(emailChecks.match(/select pg_temp\.(?:check_it|expect_state)\(/g) ?? []).length}`)
   const leftover = await db.query('select (select count(*) from public.foods)::int as foods, (select count(*) from public.ratings)::int as ratings, (select count(*) from auth.users)::int as users')
   if (Object.values(leftover.rows[0]).some((count) => count !== 0)) {
     throw new Error('SQL tests did not roll back all their fixtures')

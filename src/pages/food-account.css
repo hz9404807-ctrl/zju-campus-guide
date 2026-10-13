@@ -1,0 +1,21 @@
+.food-account-bar { margin: 0 0 20px; padding: 14px 18px; background: #f3f7fd; border: 1px solid var(--line); border-radius: 10px; font-size: 14px; }
+.food-account-bar > div, .food-account-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 18px; }
+.food-account-bar a, .food-account-bar button, .food-account-actions button { color: var(--blue); min-height: 44px; background: transparent; border: 0; font: inherit; text-decoration: underline; text-underline-offset: 4px; }
+.food-account-bar p { margin-top: 8px; }
+.food-login-page { max-width: 780px; }
+.food-login-panel { padding: 28px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; }
+.food-login-panel form { display: grid; gap: 12px; }
+.food-login-panel input:not([type="radio"]) { width: 100%; min-height: 48px; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font: inherit; }
+.food-login-panel .button-link { width: fit-content; min-height: 44px; }
+.food-login-modes { border: 0; padding: 0; display: grid; gap: 8px; margin-top: 6px; }
+.food-login-modes label { display: flex; align-items: center; gap: 8px; min-height: 44px; }
+.food-account-notice { padding: 14px; background: var(--warm-soft); margin-bottom: 18px; border-radius: 8px; }
+.food-account-hint { color: var(--muted); font-size: 14px; line-height: 1.8; margin-top: 16px; }
+.food-account-feedback { margin-top: 16px; font-size: 15px; overflow-wrap: anywhere; }
+.food-owner-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.food-delete-confirm { margin-top: 14px; padding: 16px; background: var(--warm-soft); border-radius: 9px; }
+.food-delete-confirm .food-account-actions { margin-top: 12px; }
+.food-account-actions .food-delete-button { color: #a32626; }
+.food-login-panel button:disabled { opacity: .55; cursor: not-allowed; }
+.food-login-panel input:focus-visible, .food-login-panel button:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+@media(max-width: 600px) { .food-login-panel { padding: 18px; } }

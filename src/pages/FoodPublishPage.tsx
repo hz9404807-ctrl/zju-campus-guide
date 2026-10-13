@@ -1,13 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router'
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router'
 import { ArrowLeft, ArrowRight, Check, ImagePlus, Info, LoaderCircle, MapPin, X } from 'lucide-react'
 import StarRating from '../components/StarRating'
-import { isFoodBackendConfigured, listFoods, publishFood } from '../lib/foodService'
+import { isFoodBackendConfigured, getFood, listFoods, publishFood, updateFood } from '../lib/foodService'
 import { FOOD_CATEGORIES, findSimilarFoods, toFoodPublishInput, validateFoodImage, validateFoodPublishDraft } from '../lib/foodValidation'
 import type { FoodPublishDraft, FoodPublishErrors, FoodPublishField } from '../lib/foodValidation'
 import type { Food } from '../types/food'
 import './food-publish.css'
+import { useFoodAuth } from '../hooks/useFoodAuth'
+import FoodAccountBar from '../components/FoodAccountBar'
 
 const fieldOrder: FoodPublishField[] = ['name', 'location', 'area', 'category', 'price', 'image', 'description', 'tags', 'rating']
 
@@ -16,6 +18,13 @@ function FieldError({ field, errors }: { field: FoodPublishField; errors: FoodPu
 }
 
 export function FoodPublishPage() {
+  const auth = useFoodAuth()
+  const { foodId } = useParams()
+  const editing = !!foodId
+  const [original, setOriginal] = useState<Food | null>(null)
+  const [editLoading, setEditLoading] = useState(editing)
+  const [editError, setEditError] = useState('')
+  const [removeOriginalImage, setRemoveOriginalImage] = useState(false)
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   const [draft, setDraft] = useState<FoodPublishDraft>(() => ({ name: searchParams.get('q') ?? '', location: '', area: searchParams.get('area') === 'off_campus' ? 'off_campus' : 'campus', category: '', price: '', description: '', tags: '', rating: 0 }))
@@ -33,7 +42,7 @@ export function FoodPublishPage() {
   const mounted = useRef(true)
   const returnQuery = searchParams.toString()
   const returnUrl = `/food${returnQuery ? `?${returnQuery}` : ''}`
-  const similarFoods = useMemo(() => findSimilarFoods(foods.filter((food) => food.area === draft.area), draft.name, draft.location), [foods, draft.area, draft.name, draft.location])
+  const similarFoods = useMemo(() => findSimilarFoods(foods.filter((food) => food.id !== foodId && food.area === draft.area), draft.name, draft.location), [foods, foodId, draft.area, draft.name, draft.location])
   const similarKey = `${draft.area}\n${draft.name.trim()}\n${draft.location.trim()}`
   const showSimilar = similarFoods.length > 0 && dismissedSimilarKey !== similarKey
 
@@ -43,6 +52,22 @@ export function FoodPublishPage() {
     listFoods().then((items) => { if (active) setFoods(items) }).catch(() => { if (active) setSimilarLoadFailed(true) })
     return () => { active = false; mounted.current = false }
   }, [])
+
+  useEffect(() => {
+    if (!foodId || auth.loading) return
+    let active = true
+    if (!auth.user?.verifiedCampus) { setEditLoading(false); return }
+    setOriginal(null); setEditLoading(true); setEditError('')
+    getFood(foodId).then((food) => {
+      if (!active) return
+      if (!food || food.created_by !== auth.user?.id) throw new Error('这条发布不存在，或不属于当前登录账号。')
+      if (!food.updated_at) throw new Error('发布管理暂未开放，请稍后再试。')
+      setOriginal(food)
+      setDraft({ name: food.name, location: food.location, area: food.area, category: food.category, price: food.price === null ? '' : String(food.price), description: food.description, tags: food.tags.join('，'), rating: 1 })
+      setEditLoading(false)
+    }).catch((error) => { if (active) { setEditError(error instanceof Error ? error.message : '加载失败，请重试。'); setEditLoading(false) } })
+    return () => { active = false }
+  }, [foodId, auth.loading, auth.user?.id, auth.user?.verifiedCampus])
 
   useEffect(() => {
     if (!image || validateFoodImage(image)) { setPreviewUrl(''); return }
@@ -72,7 +97,9 @@ export function FoodPublishPage() {
     event.preventDefault()
     if (submissionLock.current) return
     setFeedback('')
-    const nextErrors = validateFoodPublishDraft(draft, image)
+    if (!auth.user?.verifiedCampus) { setFeedback('请先使用浙大邮箱登录。'); return }
+    if (editing && (!original || editError || editLoading)) return
+    const nextErrors = validateFoodPublishDraft({ ...draft, rating: editing ? 1 : draft.rating }, image)
     setErrors(nextErrors)
     const firstInvalid = fieldOrder.find((field) => nextErrors[field])
     if (firstInvalid) {
@@ -89,11 +116,13 @@ export function FoodPublishPage() {
     setBusy(true)
     try {
       const input = toFoodPublishInput(draft)
-      const foodId = await publishFood(input, image)
+      let savedId: string
+      if (editing && original) { await updateFood(original.id, original.updated_at!, input, image, removeOriginalImage); savedId = original.id }
+      else savedId = await publishFood(input, image)
       if (!mounted.current) return
       const nextQuery = new URLSearchParams(searchParams)
       nextQuery.set('area', input.area)
-      navigate(`/food/${encodeURIComponent(foodId)}?${nextQuery.toString()}`)
+      navigate(`/food/${encodeURIComponent(savedId)}?${nextQuery.toString()}`)
     } catch (error) {
       if (mounted.current) setFeedback(error instanceof Error ? error.message : '菜品发布失败，请稍后重试。你的填写仍然保留。')
     } finally {
@@ -107,12 +136,15 @@ export function FoodPublishPage() {
       <div className="page-heading">
         <Link className="breadcrumb" to={returnUrl}><ArrowLeft size={16} aria-hidden="true" /> 返回美食列表</Link>
         <p className="eyebrow">把吃过的好味道分享给同学</p>
-        <h1>发布一道菜</h1>
-        <p className="page-description">填好菜品和地点，再留下你的第一次评分。</p>
+        <h1>{editing ? '编辑美食发布' : '发布一道菜'}</h1>
+        <p className="page-description">{editing ? '修改菜品信息，已有评分会保留。若换成另一道菜或另一家店，请新建发布。' : '填好菜品和地点，再留下你的第一次评分。'}</p>
       </div>
+      <FoodAccountBar auth={auth} />
+      {!auth.loading && !auth.user?.verifiedCampus && <p className="food-account-notice">请先<Link to={`/food/login?returnTo=${encodeURIComponent(editing ? `/food/${foodId}/edit` : `/food/new${returnQuery ? `?${returnQuery}` : ''}`)}`}>使用浙大邮箱登录</Link>，再{editing ? '编辑自己的发布' : '发布美食'}。</p>}
+      {editLoading && <p role="status">正在加载原发布…</p>}{editError && <p role="alert">{editError}<Link to="/food/mine">返回我的发布</Link></p>}
       {!isFoodBackendConfigured && <div className="food-publish-offline"><Info size={20} aria-hidden="true" /><p><strong>共享功能尚未连接</strong><span>你可以体验填写、图片预览和校验。当前提交不会发布任何内容。</span></p></div>}
       <form className="food-publish-form" onSubmit={handleSubmit} noValidate aria-busy={busy}>
-        <fieldset className="food-publish-fields" disabled={busy}>
+        <fieldset className="food-publish-fields" disabled={busy || auth.loading || !auth.user?.verifiedCampus || editLoading || !!editError}>
           <div className="food-publish-form-heading"><h2>菜品信息</h2><span>标为“必填”的项目请填写</span></div>
           <div className="food-publish-grid">
             <div className="food-publish-field"><label htmlFor="publish-name">菜品名称 <span>必填</span></label><input id="publish-name" value={draft.name} maxLength={80} placeholder="例如：番茄鸡蛋饭" aria-required="true" aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? 'publish-name-error' : undefined} onChange={(event) => updateDraft('name', event.target.value)} /><FieldError field="name" errors={errors} /></div>
@@ -128,11 +160,16 @@ export function FoodPublishPage() {
           <div className="food-publish-field food-publish-image-field"><label htmlFor="publish-image">菜品图片 <span>选填，最多 1 张</span></label><div className={`food-publish-image-control${errors.image ? ' is-invalid' : ''}`}><span><ImagePlus size={22} aria-hidden="true" /><span>选择一张图片</span></span><input ref={imageInput} id="publish-image" type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" aria-invalid={Boolean(errors.image)} aria-describedby={errors.image ? 'publish-image-error' : 'publish-image-hint'} onChange={(event) => { const file = event.target.files?.[0] ?? null; setImage(file); setErrors((current) => ({ ...current, image: validateFoodImage(file) })); setFeedback('') }} /></div><p className="food-publish-field-hint" id="publish-image-hint">支持 JPG、PNG、WEBP，图片不超过 5 MB。</p><FieldError field="image" errors={errors} />{image && <div className="food-publish-image-preview">{previewUrl && <img src={previewUrl} alt="尚未发布的菜品图片预览" />}<div><p>{image.name}</p><span>{previewUrl ? '仅本地预览，尚未上传' : '这张图片暂不可使用'}</span><button type="button" disabled={busy} onClick={removeImage}><X size={15} aria-hidden="true" />移除所选图片</button></div></div>}</div>
           <div className="food-publish-field"><label htmlFor="publish-description">菜品介绍 <span>选填</span></label><textarea id="publish-description" rows={4} maxLength={200} value={draft.description} placeholder="可以写写口味、分量，或值得留意的地方。" aria-invalid={Boolean(errors.description)} aria-describedby={errors.description ? 'publish-description-error' : 'publish-description-hint'} onChange={(event) => updateDraft('description', event.target.value)} /><p className="food-publish-field-hint food-publish-character-count" id="publish-description-hint">{Array.from(draft.description).length} / 200 字</p><FieldError field="description" errors={errors} /></div>
           <div className="food-publish-field"><label htmlFor="publish-tags">短评标签 <span>选填</span></label><input id="publish-tags" value={draft.tags} placeholder="例如：分量充足，汤底清淡" aria-invalid={Boolean(errors.tags)} aria-describedby={errors.tags ? 'publish-tags-error' : 'publish-tags-hint'} onChange={(event) => updateDraft('tags', event.target.value)} /><p className="food-publish-field-hint" id="publish-tags-hint">用逗号分隔，最多 5 个，每个不超过 12 个字。</p><FieldError field="tags" errors={errors} /></div>
-          <div className="food-publish-rating"><StarRating id="publish-rating" label="你的第一次评分" value={draft.rating} onChange={(rating) => updateDraft('rating', rating)} disabled={busy} required error={errors.rating} /><p className="food-publish-rating-note">发布者也参与评分。这次评分会计入平均分，提交后不能修改。</p></div>
+          {editing && original?.image_url && !removeOriginalImage && !image && <div className="food-publish-image-preview"><img src={original.image_url} alt="当前菜品图片" /><button type="button" disabled={busy} onClick={() => setRemoveOriginalImage(true)}>移除当前图片</button></div>}
+          {editing && removeOriginalImage && <button type="button" disabled={busy} onClick={() => setRemoveOriginalImage(false)}>保留原图片</button>}
+          {!editing && <div className="food-publish-rating"><StarRating id="publish-rating" label="你的第一次评分" value={draft.rating} onChange={(rating) => updateDraft('rating', rating)} disabled={busy} required error={errors.rating} /><p className="food-publish-rating-note">发布者也参与评分。这次评分会计入平均分，提交后不能修改。</p></div>}
         </fieldset>
         {feedback && <div ref={feedbackElement} className="food-publish-feedback" role="alert" tabIndex={-1}><Info size={20} aria-hidden="true" /><p>{feedback}</p></div>}
-        <div className="food-publish-actions"><Link to={returnUrl} className="food-publish-cancel">返回列表</Link><button className="food-publish-submit" type="submit" disabled={busy}>{busy ? <><LoaderCircle size={18} className="food-publish-spinner" aria-hidden="true" />{image ? '上传图片并发布中…' : '发布中…'}</> : <>发布菜品 <ArrowRight size={18} aria-hidden="true" /></>}</button></div>
-        {!isFoodBackendConfigured && <p className="food-publish-submit-note">当前提交只检查填写内容，不会发布到共享列表。</p>}
+        <div className="food-publish-actions"><Link to={returnUrl} className="food-publish-cancel">返回列表</Link><button className="food-publish-submit" type="submit" disabled={busy || auth.loading || !auth.user?.verifiedCampus || editLoading || !!editError}>{busy ? <><LoaderCircle size={18} className="food-publish-spinner" aria-hidden="true" />{editing ? '保存中…' : image ? '上传图片并发布中…' : '发布中…'}</> : <>{editing ? '保存修改' : '发布菜品'} <ArrowRight size={18} aria-hidden="true" /></>}</button></div>
+        <FoodAccountBar auth={auth} />
+      {!auth.loading && !auth.user?.verifiedCampus && <p className="food-account-notice">请先<Link to={`/food/login?returnTo=${encodeURIComponent(editing ? `/food/${foodId}/edit` : `/food/new${returnQuery ? `?${returnQuery}` : ''}`)}`}>使用浙大邮箱登录</Link>，再{editing ? '编辑自己的发布' : '发布美食'}。</p>}
+      {editLoading && <p role="status">正在加载原发布…</p>}{editError && <p role="alert">{editError}<Link to="/food/mine">返回我的发布</Link></p>}
+      {!isFoodBackendConfigured && <p className="food-publish-submit-note">当前提交只检查填写内容，不会发布到共享列表。</p>}
       </form>
     </div>
   )

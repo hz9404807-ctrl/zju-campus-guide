@@ -14,6 +14,8 @@ import {
 import { GuideDetailPage, GuidePage } from './pages/GuidePages'
 import { FoodDetailPage, FoodPage } from './pages/FoodPages'
 import { FoodPublishPage } from './pages/FoodPublishPage'
+import { FoodLoginPage } from './pages/FoodLoginPage'
+import { FoodMinePage } from './pages/FoodMinePage'
 import { SourcesPage, SourceDetailPage } from './pages/SourcePages'
 import contentManifest from './data/content-manifest.json'
 import { initializeFoodIdentity } from './lib/foodService'
@@ -30,6 +32,8 @@ const pageTitles: Record<string, string> = {
   '/guides': '校园办事指南',
   '/food': '浙大美食点评',
   '/food/new': '发布美食',
+  '/food/login': '浙大邮箱登录',
+  '/food/mine': '我的发布',
   '/sources': '校园信息源导航',
   '/about': '关于项目',
 }
@@ -199,7 +203,10 @@ export default function App() {
           <Route path="/guides" element={<GuidePage />} />
           <Route path="/guides/:guideId" element={<GuideDetailPage />} />
           <Route path="/food" element={<FoodPage />} />
-          <Route path="/food/new" element={<FoodPublishPage />} />
+          <Route path="/food/login" element={<FoodLoginPage />} />
+          <Route path="/food/mine" element={<FoodMinePage />} />
+          <Route path="/food/:foodId/edit" element={<FoodPublishPage key={location.pathname} />} />
+          <Route path="/food/new" element={<FoodPublishPage key={location.pathname} />} />
           <Route path="/food/:foodId" element={<FoodDetailPage />} />
           <Route path="/sources" element={<SourcesPage />} />
           <Route path="/sources/:sourceId" element={<SourceDetailPage />} />

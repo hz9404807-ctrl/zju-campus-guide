@@ -8,6 +8,8 @@ import { getFood, isFoodBackendConfigured, isFoodExampleMode, listFoods } from '
 import { FoodRatingPanel } from '../components/FoodRatingPanel'
 import type { Food, FoodArea } from '../types/food'
 import './food.css'
+import FoodAccountBar from '../components/FoodAccountBar'
+import { useFoodAuth } from '../hooks/useFoodAuth'
 
 function FoodImage({ food, large = false }: { food: Food; large?: boolean }) {
   const [failed, setFailed] = useState(false)
@@ -67,6 +69,7 @@ function FoodCard({ food, query }: { food: Food; query: string }) {
 }
 
 export function FoodPage() {
+  const auth = useFoodAuth()
   const [searchParams, setSearchParams] = useSearchParams()
   const area: FoodArea = searchParams.get('area') === 'off_campus' ? 'off_campus' : 'campus'
   const query = searchParams.get('q') ?? ''
@@ -111,6 +114,7 @@ export function FoodPage() {
 
   return (
     <div className="page module-page food-page">
+      <FoodAccountBar auth={auth} />
       <div className="page-heading">
         <Link to="/" className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回首页</Link>
         <p className="eyebrow">从今天想吃的开始</p>
@@ -141,12 +145,13 @@ export function FoodPage() {
           <Link className="food-publish-entry" to={`/food/new${searchParams.size ? `?${searchParams}` : ''}`}><Plus size={18} aria-hidden="true" />发布这道美食</Link>
         </section>
       )}
-      <section className="food-sharing-note" aria-labelledby="food-sharing-title"><Utensils size={22} aria-hidden="true" /><div><h2 id="food-sharing-title">一起分享吃过的菜</h2><p>{isFoodBackendConfigured ? '可以发布菜品，并对每道菜评分一次。发布后不支持修改或删除，请检查菜名和地点。' : '可以体验发布表单和星级选择。共享服务尚未连接，填写内容和选择的星级不会保存到美食墙。'}</p></div></section>
+      <section className="food-sharing-note" aria-labelledby="food-sharing-title"><Utensils size={22} aria-hidden="true" /><div><h2 id="food-sharing-title">一起分享吃过的菜</h2><p>{isFoodBackendConfigured ? '可以发布菜品，并对每道菜评分一次。使用浙大邮箱登录后，可在“我的发布”中编辑或删除自己的菜品。' : '可以体验发布表单和星级选择。共享服务尚未连接，填写内容和选择的星级不会保存到美食墙。'}</p></div></section>
     </div>
   )
 }
 
 export function FoodDetailPage() {
+  const auth = useFoodAuth()
   const { foodId } = useParams()
   const [searchParams] = useSearchParams()
   const loadFood = useCallback(() => getFood(foodId ?? ''), [foodId])
@@ -170,12 +175,14 @@ export function FoodDetailPage() {
   return (
     <div className="page module-page food-page food-detail-page">
       <Link to={returnUrl} className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回美食列表</Link>
+      <FoodAccountBar auth={auth} />
       {food.isExample && <ExampleNotice />}
       <article className="food-detail-card">
         <FoodImage food={food} large />
         <div className="food-detail-content">
           <div className="food-card-topline">{food.isExample && <span className="food-example-badge">示例数据</span>}<span className="food-category">{food.area === 'campus' ? '校内食堂' : '校外美食'} · {food.category}</span></div>
           <h1>{food.name}</h1>
+          {auth.user?.verifiedCampus && food.created_by === auth.user.id && food.updated_at && <div className="food-owner-actions"><Link className="button-link" to={`/food/${food.id}/edit${returnQuery ? `?${returnQuery}` : ''}`}>编辑这条发布</Link><Link className="button-link" to="/food/mine">管理或删除</Link></div>}
           <p className="food-location"><MapPin size={17} aria-hidden="true" /><span>{food.location}</span></p>
           {food.price !== null && <p className="food-detail-price">¥{food.price.toFixed(2)}<span>参考价格{food.isExample ? ' · 示例' : ''}</span></p>}
           <div className="food-detail-rating"><RatingSummary food={food} />{food.isExample && <p>平均分和评分人数为展示用示例。</p>}</div>
@@ -183,7 +190,7 @@ export function FoodDetailPage() {
           {food.tags.length > 0 && <section className="food-detail-tags"><h2>短评标签 {food.isExample && <span>示例</span>}</h2><div className="food-tags">{food.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></section>}
         </div>
       </article>
-      <FoodRatingPanel food={food} onRated={resource.refresh} />
+      <FoodRatingPanel key={`${food.id}:${auth.user?.id ?? 'guest'}`} food={food} onRated={resource.refresh} />
       {resource.loading && <p role="status">正在更新平均分和评分人数…</p>}
       {resource.error && <FoodFailure message={`评分已提交，但统计暂时无法更新。${resource.error}`} retry={resource.refresh} />}
     </div>
