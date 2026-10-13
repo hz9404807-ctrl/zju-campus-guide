@@ -6,6 +6,8 @@ import SearchHighlight from '../components/SearchHighlight'
 import ResultPager from '../components/ResultPager'
 import GuideStepActions from '../components/GuideStepActions'
 import GuideServiceWindows from '../components/GuideServiceWindows'
+import GuideTimetable from '../components/GuideTimetable'
+import { clearTimetableParams } from '../lib/guideTimetable'
 import { guideSections } from '../lib/guideSections'
 import { useDebouncedValue } from '../hooks/useDebouncedValue'
 import { searchGuides, guideDetailContext, findRelatedSources, guideSearchMatch, guideRouteView, resolveGuideRoute, primaryGuideAction, sourceSearchUrl, suggestGuides, websiteSearchDetails } from '../lib/campusContent'
@@ -40,7 +42,7 @@ export function GuidePage() {
     if (key !== 'page') next.delete('page')
     setParams(next, { replace: true })
   }
-  const resultParams = new URLSearchParams(params)
+  const resultParams = clearTimetableParams(params)
   if (debouncedQuery) resultParams.set('q', debouncedQuery)
   else resultParams.delete('q')
   const detailSearch = resultParams.size ? `?${resultParams.toString()}` : ''
@@ -98,12 +100,12 @@ export function GuideDetailPage() {
   const match = guide && !overview ? guideSearchMatch(guide, contentQuery, serviceWindows) : undefined
   const conditionNotice = guide && !overview ? searchGuides([guide], contentQuery, '', serviceWindows).notice : ''
   const highlight = (text: string, anchor: string) => match?.anchor === anchor ? <SearchHighlight text={text} query={contentQuery} /> : text
-  const listParams = new URLSearchParams(params)
+  const listParams = clearTimetableParams(params)
   listParams.delete('route')
   const listSearch = listParams.size ? `?${listParams.toString()}` : ''
   const backTo = `/guides${listSearch}`
   function chooseRoute(id: string) {
-    const next = new URLSearchParams(params)
+    const next = clearTimetableParams(params)
     next.set('route', id)
     // Drop a passage anchor because each route has its own step sequence.
     setParams(next)
@@ -125,6 +127,7 @@ export function GuideDetailPage() {
     {overview && <section className="guide-detail-section" aria-labelledby="guide-methods-heading"><h2 id="guide-methods-heading" tabIndex={-1}>全部办理方式</h2><ul className="guide-method-list">{guide.routes?.map((option) => <li key={option.id}><h3>{option.label}</h3>{option.audienceNote && <p>适用范围：{option.audienceNote}</p>}<p>{option.summary}</p><button type="button" className="guide-action-button" onClick={() => chooseRoute(option.id)}>查看{option.label}流程 <ArrowRight size={16} aria-hidden="true" /></button></li>)}</ul></section>}
     {!overview && <div className={`guide-detail-grid${hasServiceInfo ? ' has-service-info' : ''}`}><div className="guide-detail-main">
       {guide.materials.length > 0 && <section className="guide-detail-section"><h2 id="guide-materials-heading" tabIndex={-1}>办理前准备</h2><ul className="guide-material-list">{guide.materials.map((material, i) => <li key={i} id={`guide-material-${i}`} tabIndex={-1}>{highlight(material, `guide-material-${i}`)}</li>)}</ul></section>}
+      {guide.timetable && <GuideTimetable table={guide.timetable} />}
       <section className="guide-detail-section"><h2 id="guide-steps-heading" tabIndex={-1}>{mainHeading}</h2>{guide.kind === 'procedure' ? <ol className="guide-step-list">{guide.steps.map((step, i) => <li key={i} id={`guide-step-${i}`} tabIndex={-1}><p>{highlight(step, `guide-step-${i}`)}</p><GuideStepActions actions={(guide.stepActions ?? []).filter((action) => action.stepIndex === i)} /></li>)}</ol> : guide.kind === 'options' ? <ul className="guide-option-list">{guide.steps.map((step, i) => <li key={i} id={`guide-step-${i}`} tabIndex={-1}><p>{highlight(step, `guide-step-${i}`)}</p><GuideStepActions actions={(guide.stepActions ?? []).filter((action) => action.stepIndex === i)} /></li>)}</ul> : <div className="guide-explanation">{guide.steps.map((step, i) => <div key={i} id={`guide-step-${i}`} tabIndex={-1}><p>{highlight(step, `guide-step-${i}`)}</p><GuideStepActions actions={(guide.stepActions ?? []).filter((action) => action.stepIndex === i)} /></div>)}</div>}{guide.completionNote && <p className="guide-completion-note">{guide.completionNote}</p>}</section>
       {guide.troubleshooting && guide.troubleshooting.length > 0 && <section className="guide-detail-section guide-notes"><h2 id="guide-help-heading" tabIndex={-1}>遇到问题怎么办</h2><ul className="guide-material-list">{guide.troubleshooting.map((note, i) => <li key={i} id={`guide-help-${i}`} tabIndex={-1}>{highlight(note, `guide-help-${i}`)}</li>)}</ul></section>}
       {guide.notes.length > 0 && <section className="guide-detail-section guide-notes"><h2 id="guide-notes-heading" tabIndex={-1}>办理前留意</h2><ul className="guide-material-list">{guide.notes.map((note, i) => <li key={i}>{note}</li>)}</ul></section>}

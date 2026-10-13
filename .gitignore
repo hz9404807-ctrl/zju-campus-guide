@@ -13,3 +13,4 @@ outputs/*.tar.gz
 outputs/deployment-result.json
 outputs/*.bundle
 scratch/
+outputs/guide-timetable-preview.jpg

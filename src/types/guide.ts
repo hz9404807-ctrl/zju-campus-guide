@@ -8,6 +8,19 @@ export interface GuideReference {
   url: string
 }
 
+export interface GuideTimetable {
+  directions: { id: string; label: string }[]
+  source: GuideReference
+  notices: string[]
+  trips: {
+    id: string
+    label: string
+    direction: string
+    day: string | null
+    stops: { name: string; time: string | null }[]
+  }[]
+}
+
 export interface GuideRoute {
   id: string
   label: string
@@ -22,6 +35,7 @@ export interface GuideRoute {
   troubleshooting: string[]
   completionNote: string
   serviceWindowIds: string[]
+  timetable?: GuideTimetable
 }
 
 export interface Guide {
@@ -54,6 +68,7 @@ export interface Guide {
   aliases?: string[]
   routes?: GuideRoute[]
   routeChoiceLabel?: string
+  timetable?: GuideTimetable
 }
 
 export interface ServiceWindow {

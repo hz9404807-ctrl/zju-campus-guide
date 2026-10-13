@@ -5,6 +5,7 @@ export function guideSections(guide: Guide, overview: boolean, hasServiceInfo: b
   if (overview) sections.push({ id: 'guide-methods-heading', label: '全部办理方式' })
   else {
     if (guide.materials.length) sections.push({ id: 'guide-materials-heading', label: '办理前准备' })
+    if (guide.timetable) sections.push({ id: 'guide-timetable-heading', label: '班次与站点' })
     if (guide.steps.length) sections.push({ id: 'guide-steps-heading', label: stepsHeading })
     if (hasServiceInfo) sections.push({ id: 'guide-windows-heading', label: '地点与时间' })
     if (guide.troubleshooting?.length || guide.notes.length) sections.push({

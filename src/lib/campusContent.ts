@@ -1,4 +1,4 @@
-import type { Guide, GuideRoute, GuideStepAction, ServiceWindow } from '../types/guide'
+import type { Guide, GuideRoute, GuideStepAction, GuideTimetable, ServiceWindow } from '../types/guide'
 
 export function normalizeSearch(value: string) {
   return value.normalize('NFKC').toLocaleLowerCase().trim()
@@ -95,13 +95,17 @@ function queryTerms(query: string) {
   return [...new Set(terms)]
 }
 
+function timetableSearchFields(table?: GuideTimetable) {
+  return table?.trips.map((trip) => `${trip.label} ${trip.day ?? '未注明星期'} ${trip.stops.map((stop) => `${stop.name} ${stop.time ?? '时间未公布'}`).join(' → ')}`) ?? []
+}
+
 function guideSearchFields(guide: Guide, windows: ServiceWindow[]) {
   return [
     guide.title, guide.category, guide.summary, ...guide.keywords, ...guide.steps,
-    ...guide.materials, ...guide.notes, ...(guide.troubleshooting ?? []), guide.completionNote,
+    ...timetableSearchFields(guide.timetable), ...guide.materials, ...guide.notes, ...(guide.troubleshooting ?? []), guide.completionNote,
     guide.location, guide.openingHours, guide.contact, ...guide.sourceQuestions,
     ...(guide.routes ?? []).flatMap((route) => [route.label, route.summary, ...route.intentTerms,
-      ...route.steps, ...route.materials, ...route.troubleshooting, route.completionNote]),
+      ...timetableSearchFields(route.timetable), ...route.steps, ...route.materials, ...route.troubleshooting, route.completionNote]),
     ...windows.filter((window) => guide.serviceWindowIds?.includes(window.id)).flatMap((window) => [
       window.campus, window.name, window.location, window.openingHours, window.notice,
       ...window.contacts.map((contact) => contact.number),
@@ -301,7 +305,7 @@ export function guideRouteView(guide: Guide, route?: GuideRoute, query = ''): Gu
   const campus = queryCampus(query)
   const view = route ? { ...guide, summary: route.summary, steps: route.steps, materials: route.materials,
     stepActions: route.stepActions, troubleshooting: route.troubleshooting,
-    completionNote: route.completionNote, serviceWindowIds: route.serviceWindowIds,
+    completionNote: route.completionNote, serviceWindowIds: route.serviceWindowIds, timetable: route.timetable,
     references: guide.references.filter((reference) => route.stepActions.some((action) => 'url' in action && action.url === reference.url)) } : guide
   if (!campus) return view
   const excluded = new Set((view.stepActions ?? []).flatMap((action) =>
@@ -344,6 +348,7 @@ export function guideSearchMatch(guide: Guide, query: string, windows: ServiceWi
   const terms = queryTerms(query)
   if (!terms.length) return undefined
   const candidates = [
+    ...timetableSearchFields(guide.timetable).map((text) => ({ text, label: '班次与站点', anchor: 'guide-timetable-heading' })),
     ...guide.steps.map((text, i) => ({ text, label: '相关操作', anchor: `guide-step-${i}` })),
     ...(guide.troubleshooting ?? []).map((text, i) => ({ text, label: '遇到问题', anchor: `guide-help-${i}` })),
     ...guide.materials.map((text, i) => ({ text, label: '准备材料', anchor: `guide-material-${i}` })),
