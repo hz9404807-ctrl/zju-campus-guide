@@ -248,3 +248,7 @@
   .guide-detail-page [id$="-heading"], .guide-detail-page [id^="guide-step-"],
   .guide-detail-page [id^="guide-help-"], .guide-detail-page [id^="guide-material-"] { scroll-margin-top: 200px; }
 }
+
+.guide-campus-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+.guide-campus-buttons button { min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: #f6f8fc; color: var(--blue); font: inherit; }
+.guide-campus-buttons button[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: white; }

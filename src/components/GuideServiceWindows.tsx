@@ -10,7 +10,8 @@ function browserStorage() {
 
 export default function GuideServiceWindows({ windows, allCampuses }: { windows: ServiceWindow[]; allCampuses: string[] }) {
   const campuses = [...new Set(allCampuses)]
-  const [campus, setCampus] = useState(() => readCampusPreference(browserStorage(), [...new Set(windows.map((window) => window.campus))], windows[0]?.campus ?? ''))
+  const multipleCampuses = new Set(windows.map((window) => window.campus)).size > 1
+  const [campus, setCampus] = useState(() => readCampusPreference(browserStorage(), [...new Set(windows.map((window) => window.campus))], windows[0]?.campus ?? '') || windows[0]?.campus || '')
   const [preferenceError, setPreferenceError] = useState(false)
   function chooseCampus(value: string) {
     setCampus(value)
@@ -20,17 +21,14 @@ export default function GuideServiceWindows({ windows, allCampuses }: { windows:
   const references = [...new Map(visible.flatMap((window) => window.references ?? []).map((reference) => [reference.url, reference])).values()]
   return <aside className="guide-detail-section guide-windows" aria-labelledby="guide-windows-heading">
     <h2 id="guide-windows-heading" tabIndex={-1}>办理地点与时间</h2>
-    <div className="guide-window-filter">
-      <label htmlFor="guide-service-campus">选择办理校区</label>
-      <select id="guide-service-campus" value={campus} onChange={(event) => chooseCampus(event.target.value)}>
-        <option value="">全部校区</option>
-        {campuses.map((item) => <option key={item} value={item}>{item}{windows.some((window) => window.campus === item) ? '' : '（此事项暂无窗口）'}</option>)}
-      </select>
-    </div>
-    <p className="guide-preference-note">校区选择保存在当前浏览器，可随时切换。</p>
+    {multipleCampuses && <div className="guide-window-filter">
+      <span>选择办理校区</span>
+      <div className="guide-campus-buttons" role="group" aria-label="办理校区">{campuses.map((item) => <button key={item} type="button" aria-pressed={campus === item} onClick={() => chooseCampus(item)}>{item}</button>)}</div>
+    </div>}
+    {multipleCampuses && <p className="guide-preference-note">校区选择保存在当前浏览器，可随时切换。</p>}
     {preferenceError && <p className="guide-window-notice" role="status">本次切换已生效，但浏览器未能保存；下次可能需要重新选择。</p>}
     <p className="guide-window-count" role="status" aria-live="polite">显示{visible.length}个服务点</p>
-    {visible.length === 0 && <div className="guide-window-unavailable"><p>当前事项未收录{campus}的服务窗口。请选择其他校区，或查看全部服务点。</p><button type="button" className="guide-action-button" onClick={() => chooseCampus('')}>查看全部服务点</button></div>}
+    {visible.length === 0 && <div className="guide-window-unavailable"><p>当前事项未收录{campus}的服务窗口。请选择其他校区，或查看已收录校区。</p><button type="button" className="guide-action-button" onClick={() => chooseCampus(windows[0]?.campus ?? '')}>查看已收录校区</button></div>}
     <div className="guide-window-list">
       {visible.map((window) => <article key={window.id} className="guide-window-card" aria-label={`${window.campus} ${window.name}`}>
         <p className="guide-window-campus">{window.campus}</p>
