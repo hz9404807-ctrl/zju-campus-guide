@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { campusEmail, foodUser, safeFoodReturn, createFoodAuth } from '../src/lib/foodAuth.ts'
+import { campusEmail, foodUser, safeFoodReturn, createFoodAuth, FoodCodeDeliveryUnknown } from '../src/lib/foodAuth.ts'
 const guest = { id: 'guest-id', is_anonymous: true }
 const member = { id: 'guest-id', email: 'fixture@zju.edu.cn', is_anonymous: false, email_confirmed_at: '2026-10-13T00:00:00Z' }
 function setup(user = guest, errors = {}) {
@@ -59,4 +59,29 @@ test('退出仅清除当前设备会话，服务错误可见', async () => {
   await auth.signOut()
   assert.deepEqual(calls, [['logout', { scope: 'local' }]])
   await assert.rejects(setup(member, { logout: { message: 'offline' } }).auth.signOut(), /退出失败/)
+})
+
+test('service timeout preserves correct verification type without claiming email delivery', async () => {
+  for (const [mode, errors, type] of [
+    ['bind', { bind: { status: 504, code: 'request_timeout', message: 'context deadline exceeded' } }, 'email_change'],
+    ['login', { login: { name: 'AuthRetryableFetchError', message: 'TimeoutError: signal timed out' } }, 'email'],
+  ]) {
+    const { auth } = setup(guest, errors)
+    await assert.rejects(auth.sendCode(member.email, mode), (error) => {
+      assert.ok(error instanceof FoodCodeDeliveryUnknown)
+      assert.equal(error.type, type); assert.match(error.message, /尚未确认/)
+      return true
+    })
+    assert.equal((await auth.currentUser()).verifiedCampus, false)
+  }
+})
+test('rate limit and rejected sender do not masquerade as an uncertain timeout', async () => {
+  for (const [error, pattern] of [
+    [{ status: 429, code: 'over_email_send_rate_limit', message: 'limited' }, /过于频繁/],
+    [{ status: 500, message: 'Error sending confirmation email' }, /邮件发送服务暂时失败/],
+  ]) {
+    await assert.rejects(setup(guest, { bind: error }).auth.sendCode(member.email, 'bind'), (value) => {
+      assert.equal(value instanceof FoodCodeDeliveryUnknown, false); assert.match(value.message, pattern); return true
+    })
+  }
 })

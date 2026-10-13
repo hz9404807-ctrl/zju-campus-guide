@@ -16,6 +16,27 @@ Supabase公开Auth邮件实现使用gomail.NewDialer；该库默认仅端口465�
 
 依据：[学校邮箱参数](https://itc.zju.edu.cn/90691/list.htm)、[客户端专用密码](https://imap.zju.edu.cn/coremail/help/2fa_zh_CN.html)、[Supabase邮件实现](https://github.com/supabase/auth/blob/master/internal/mailer/mailmeclient/mailmeclient.go)、[gomail端口及STARTTLS实现](https://github.com/go-gomail/gomail/blob/master/smtp.go)。
 
+### 994发信Hook候选（代码已验证，尚未部署/启用）
+
+用户确认收件箱及垃圾邮件无验证码。Auth日志里的504/request_timeout与随后200属于同一request_id；504历时10.0036秒，200历时10.0270秒，不能解读成另一次成功投递。当前25路径未证实送达，真正阻塞环节尚需云端探测，前端增大等待时间不能解决该服务端超时。
+
+候选源码是 functions/food-auth-email/index.ts 及 handler.ts，专门服务校园指南邮箱OTP。使用npm官方注册表核实并锁定nodemailer 10.1.0与standardwebhooks 1.1.1。明示994直接TLS、校验证书和TLSv1.2以上；底层SMTPConnection可取消正在发送的连接，4秒截止，在HTTP Hook的5秒限制前返回。只在所有收件地址获SMTP接受后返回200；这仍不等于收件箱送达，不异步排队伪报成功。
+
+先校验Standard Webhooks的HMAC/时间戳再发信，限制64KiB正文、精确学校邮箱、六位Auth原生Token；日志仅含阶段与预设结果码，不写邮箱、验证码、密码或原始异常。匿名绑定发唯一Token到new_email；双确认变更按Auth约定把token发旧邮箱、token_new发新邮箱，不降低安全邮箱变更要求。现有signup/magiclink/email/reauthentication及账号安全通知支持；当前原型无密码找回和邀请入口，recovery/invite明确返回失败。若未来启用这些流程，必须先扩展对应模板/验证入口并测试；Hook替代项目全部Auth邮件而非只影响当前页面。
+
+云端切换审阅范围：
+
+1. 部署这两个源码文件组成的 food-auth-email Edge Function，继续保留数据库权限、邮箱确认及既有用户数据。
+2. 新增Edge服务端Secret：FOOD_SMTP_USER、FOOD_SMTP_PASSWORD（复用已授权学校客户端专用密码）及FOOD_EMAIL_HOOK_SECRET（由后台生成/配置）。Secret由Supabase保管，属于项目Edge运行环境，不进入VITE/Git/明文文件；当前没有保存这项新Secret。
+3. 仅该函数关闭平台用户JWT检查，因为Auth调用携带的是Webhook签名；函数内部签名校验继续开启。先确认无签名请求401、无发信，之后配置Auth的Send Email Hook。不可设置一个无签名的公共邮件接口。
+4. 先验证云端实际连通及SMTP认证、日志没有凭据，再让用户本地发送一次注册/绑定OTP、亲自收信并验证。若云端连接或5秒期限不适合，停止切换，保留错误证据，改选兼容的发信服务，不降低TLS或邮箱验证保护。
+
+回退：关闭Send Email Hook即可恢复原Custom SMTP配置；该旧路径本轮也未完成送达验收，回退并不等于邮箱恢复可用。失败时关闭本地READY、重新构建，暂时保留已验证账号的管理入口。先禁用Hook，再撤下候选函数/移除不再使用的Edge Secret；不可在Hook启用时先删除依赖。没有执行数据清空、账号合并、密码重置或新的SQL迁移。
+
+已完成：纯逻辑与前端Auth回归、真实库有效/篡改/缺失/过期签名检查、UTF-8 MIME、本机无认证TLS+EHLO、类型检查；真实SMTP认证、云端Deno运行和邮件投递尚未完成。学校994路径在本机约146ms完成TLS+EHLO，不能当作云端结果。
+
+依据：[学校邮箱参数](https://itc.zju.edu.cn/90691/list.htm)、[Nodemailer SMTPConnection](https://nodemailer.com/extras/smtp-connection)、[Send Email Hook及邮箱变更映射](https://supabase.com/docs/guides/auth/auth-hooks/send-email-hook)、[Hook错误与超时](https://supabase.com/docs/guides/auth/auth-hooks/hook-errors)、[Edge网络限制](https://supabase.com/docs/guides/functions/limits)。Edge限制25/587不代表Auth SMTP本身必然同样被限制，本轮不作该推断。
+
 ### 2. 在Supabase配置认证及模板
 
 - 在Authentication设置里配置Custom SMTP及发件人；测试发送到可收信的浙大邮箱，检查收件箱、垃圾箱、延迟、重发与供应商发送限制。

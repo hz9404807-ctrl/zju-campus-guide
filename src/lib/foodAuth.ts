@@ -1,5 +1,19 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 
+export class FoodCodeDeliveryUnknown extends Error {
+  readonly type: 'email_change' | 'email'
+  constructor(type: 'email_change' | 'email') {
+    super('发送请求超时，尚未确认邮件是否发出。如收到验证码，可在这里继续验证；未收到请等待倒计时结束后重发。')
+    this.name = 'FoodCodeDeliveryUnknown'
+    this.type = type
+  }
+}
+function deliveryError(error: { status?: number; code?: string; name?: string; message: string }, type: 'email_change' | 'email') {
+  if (error.status === 504 || error.code === 'request_timeout' || error.name === 'AbortError' || error.name === 'TimeoutError' || /timeout|timed out|deadline exceeded/i.test(error.message)) return new FoodCodeDeliveryUnknown(type)
+  if (error.code === 'over_email_send_rate_limit' || error.status === 429) return new Error('发送过于频繁，请等待一分钟后再试。')
+  if (/already|registered|exists/i.test(error.message)) return new Error('该邮箱已有账号，请选择“已有邮箱账号登录”。旧匿名发布不会自动转移。')
+  return new Error('邮件发送服务暂时失败，未确认验证码发出。请稍后重试；若持续失败，请联系项目维护者。')
+}
 export interface FoodUser { id: string; email: string; verifiedCampus: boolean; anonymous: boolean }
 export function campusEmail(value: string) {
   const email = value.trim().toLowerCase()
@@ -31,11 +45,11 @@ export function createFoodAuth(client: SupabaseClient) {
     const user = await currentUser()
     if (mode === 'bind' && user?.anonymous) {
       const { error } = await client.auth.updateUser({ email })
-      if (error) throw new Error(/already|registered|exists/i.test(error.message) ? '该邮箱已有账号，请选择“已有邮箱账号登录”。旧匿名发布不会自动转移。' : '绑定邮件未能发送，请稍后重试；若持续失败，请联系项目维护者。')
+      if (error) throw deliveryError(error, 'email_change')
       return 'email_change'
     }
     const { error } = await client.auth.signInWithOtp({ email, options: { shouldCreateUser: mode !== 'login' } })
-    if (error) throw new Error(error.code === 'over_email_send_rate_limit' ? '发送过于频繁，请稍后再试。' : '验证码未能发送，请检查邮箱是否已注册，或稍后重试。')
+    if (error) throw deliveryError(error, 'email')
     return 'email'
   }
   async function verifyCode(value: string, token: string, type: 'email_change' | 'email') {
