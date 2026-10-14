@@ -4,7 +4,7 @@ This is the ZJU campus guide course prototype. Follow the final rules in `docs/p
 
 ## Current local content work
 
-The user approved integrating the seven reviewed campus-card guides on 2026-10-09. Work in the local repository with Git commits and browser checks. Do not push to the classmate repository or publish the hosted site during this phase; later explicit user instructions take precedence over the historical synchronization rules below.
+The user approved integrating the seven reviewed campus-card guides on 2026-10-09. On 2026-10-13 the user restored GitHub synchronization after the collaborator invitation: review and test local changes, preserve teammate commits, and push to the configured origin. This supersedes the earlier local-only restriction. Publishing the hosted website still requires a separate request; Git synchronization does not imply website deployment. Email and profile cloud changes must follow their separately authorized rollout and verification steps.
 
 ## GitHub collaboration
 
