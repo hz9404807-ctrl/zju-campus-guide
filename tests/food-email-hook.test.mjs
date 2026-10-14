@@ -67,3 +67,9 @@ test('oversized body is rejected before verification and SMTP', async () => {
   assert.equal((await s.handler(request('POST', 'x'.repeat(65537)))).status, 413)
   assert.equal(s.calls.length, 0)
 })
+
+
+test('accepts backend eight-digit OTP and rejects short or oversized codes', () => {
+  assert.equal(mailTargets({ ...payload, email_data: { email_action_type: 'signup', token: '12345678' } })[0].token, '12345678')
+  for (const token of ['12345', '12345678901', '1234567x']) assert.throws(() => mailTargets({ ...payload, email_data: { email_action_type: 'signup', token } }), /INVALID_PAYLOAD/)
+})

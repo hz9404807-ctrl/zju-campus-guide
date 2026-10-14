@@ -20,7 +20,7 @@ function address(value: unknown) {
   return email
 }
 function code(value: unknown) {
-  if (typeof value !== 'string' || !/^\d{6}$/.test(value)) throw new Error('INVALID_PAYLOAD')
+  if (typeof value !== 'string' || !/^\d{6,10}$/.test(value)) throw new Error('INVALID_PAYLOAD')
   return value
 }
 export type EmailSmtpOptions = ReturnType<typeof smtpOptions>
@@ -98,7 +98,7 @@ export function createEmailHandler(deps: Dependencies, deadlineMs = 4000) {
         const result = await transport.sendMail({
           from: { name: '浙大校园指南课程项目', address: sender }, to,
           subject: token ? '浙大校园指南邮箱验证码' : '浙大校园指南账号安全通知',
-          text: token ? `你的验证码：${token}\n请回到刚才的校园指南网页，输入这六位验证码完成验证。\n如果不是你本人操作，请忽略此邮件。请勿向他人提供验证码。\n本服务为课程项目，非学校官方平台。`
+          text: token ? `你的验证码：${token}\n请回到刚才的校园指南网页，输入邮件中的完整验证码完成验证。\n如果不是你本人操作，请忽略此邮件。请勿向他人提供验证码。\n本服务为课程项目，非学校官方平台。`
             : `${notice}。如果不是你本人操作，请检查登录账号并联系项目维护者。\n本服务为课程项目，非学校官方平台。`,
         })
         if (!result.accepted?.some((value) => typeof value === 'string' && value.toLowerCase() === to) || result.rejected?.length) throw new Error('SMTP_REJECTED')

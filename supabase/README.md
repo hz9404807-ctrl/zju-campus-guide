@@ -16,13 +16,13 @@ Supabase公开Auth邮件实现使用gomail.NewDialer；该库默认仅端口465�
 
 依据：[学校邮箱参数](https://itc.zju.edu.cn/90691/list.htm)、[客户端专用密码](https://imap.zju.edu.cn/coremail/help/2fa_zh_CN.html)、[Supabase邮件实现](https://github.com/supabase/auth/blob/master/internal/mailer/mailmeclient/mailmeclient.go)、[gomail端口及STARTTLS实现](https://github.com/go-gomail/gomail/blob/master/smtp.go)。
 
-### 994发信Hook候选（代码已验证，尚未部署/启用）
+### 994发信Hook候选（已部署，真实投递未通过验收）
 
 用户确认收件箱及垃圾邮件无验证码。Auth日志里的504/request_timeout与随后200属于同一request_id；504历时10.0036秒，200历时10.0270秒，不能解读成另一次成功投递。当前25路径未证实送达，真正阻塞环节尚需云端探测，前端增大等待时间不能解决该服务端超时。
 
 候选源码是 functions/food-auth-email/index.ts 及 handler.ts，专门服务校园指南邮箱OTP。使用npm官方注册表核实并锁定nodemailer 10.1.0与standardwebhooks 1.1.1。明示994直接TLS、校验证书和TLSv1.2以上；底层SMTPConnection可取消正在发送的连接，4秒截止，在HTTP Hook的5秒限制前返回。只在所有收件地址获SMTP接受后返回200；这仍不等于收件箱送达，不异步排队伪报成功。
 
-先校验Standard Webhooks的HMAC/时间戳再发信，限制64KiB正文、精确学校邮箱、六位Auth原生Token；日志仅含阶段与预设结果码，不写邮箱、验证码、密码或原始异常。匿名绑定发唯一Token到new_email；双确认变更按Auth约定把token发旧邮箱、token_new发新邮箱，不降低安全邮箱变更要求。现有signup/magiclink/email/reauthentication及账号安全通知支持；当前原型无密码找回和邀请入口，recovery/invite明确返回失败。若未来启用这些流程，必须先扩展对应模板/验证入口并测试；Hook替代项目全部Auth邮件而非只影响当前页面。
+先校验Standard Webhooks的HMAC/时间戳再发信，限制64KiB正文、精确学校邮箱、6至10位Auth原生Token；日志仅含阶段与预设结果码，不写邮箱、验证码、密码或原始异常。匿名绑定发唯一Token到new_email；双确认变更按Auth约定把token发旧邮箱、token_new发新邮箱，不降低安全邮箱变更要求。现有signup/magiclink/email/reauthentication及账号安全通知支持；当前原型无密码找回和邀请入口，recovery/invite明确返回失败。若未来启用这些流程，必须先扩展对应模板/验证入口并测试；Hook替代项目全部Auth邮件而非只影响当前页面。
 
 云端切换审阅范围：
 
@@ -32,6 +32,8 @@ Supabase公开Auth邮件实现使用gomail.NewDialer；该库默认仅端口465�
 4. 先验证云端实际连通及SMTP认证、日志没有凭据，再让用户本地发送一次注册/绑定OTP、亲自收信并验证。若云端连接或5秒期限不适合，停止切换，保留错误证据，改选兼容的发信服务，不降低TLS或邮箱验证保护。
 
 回退：关闭Send Email Hook即可恢复原Custom SMTP配置；该旧路径本轮也未完成送达验收，回退并不等于邮箱恢复可用。失败时关闭本地READY、重新构建，暂时保留已验证账号的管理入口。先禁用Hook，再撤下候选函数/移除不再使用的Edge Secret；不可在Hook启用时先删除依赖。没有执行数据清空、账号合并、密码重置或新的SQL迁移。
+
+2026-10-14最新实测：food-auth-email已部署并通过无签名POST的401拒绝检查；后台实际OTP为8位，已修复前后端旧6位限制并重新部署。真实Auth请求进入SMTP后返回服务不可用，日志SMTP_TIMEOUT；邮箱尚未开通，不能把部署成功当送达成功。本地READY关闭，Hook已回退并核实Disabled。以下为此前部署记录。
 
 部署进展：用户已明确确认部署/Edge保存现有专用密码/签名鉴权切换及实测。Auth Hook已保存为HTTPS且DISABLED，函数源码与名称已在编辑器准备。自动审批曾超时约7分钟；随后工具提交仍无成功或错误反馈，函数公开地址404，后台反复出现认证锁警告。尚未证明警告就是部署失败根因，已请用户手动提交确认。2026-10-14三项Edge Secret已逐项保存并按名称验证，保存后正常刷新/部署仍未出现成功；未启用Hook或宣称投递成功。剪贴板及密钥页截图方式因风险被自动审批拒绝，未绕过；改用直接表单及脱敏名称/状态验证，临时签名值已清除。
 

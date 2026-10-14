@@ -85,3 +85,13 @@ test('rate limit and rejected sender do not masquerade as an uncertain timeout',
     })
   }
 })
+
+
+test('eight-digit code reaches Auth unchanged; short and oversized codes never reach Auth', async () => {
+  const { auth, calls } = setup()
+  await auth.verifyCode(member.email, '12345678', 'email')
+  assert.equal(calls[0][1].token, '12345678')
+  const invalid = setup()
+  for (const token of ['12345', '12345678901', '1234567x']) await assert.rejects(invalid.auth.verifyCode(member.email, token, 'email'))
+  assert.equal(invalid.calls.length, 0)
+})

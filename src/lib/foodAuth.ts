@@ -54,7 +54,7 @@ export function createFoodAuth(client: SupabaseClient) {
   }
   async function verifyCode(value: string, token: string, type: 'email_change' | 'email') {
     const email = campusEmail(value)
-    if (!email || !/^\d{6}$/.test(token.trim())) throw new Error('请填写浙大邮箱和邮件中的6位验证码。')
+    if (!email || !/^\d{6,10}$/.test(token.trim())) throw new Error('请填写浙大邮箱和邮件中的完整验证码（6至10位数字）。')
     const { error } = await client.auth.verifyOtp({ email, token: token.trim(), type })
     if (error) throw new Error('验证码不正确或已过期，请检查后重试，或重新发送。')
     const user = await currentUser()

@@ -1,3 +1,11 @@
+## 2026-10-14 云端邮件函数部署与真实投递检查（未开通）
+
+- 用户截图的 dynamic-service 已创建，但 Code 页核实为 Supabase 默认示例；保留原示例，不删除。重新使用仓库实际源码部署 food-auth-email 成功。
+- 仅 food-auth-email 关闭平台 legacy JWT 检查，函数内部 Standard Webhooks HMAC 保留；公开无签名 POST 返回 401 Invalid webhook signature，实际云端启动与拒绝检查通过。已有 Hook 编辑页核实目标 URL 正确，短时启用后进行真实 Auth OTP 请求。
+- 首次请求 HTTP 500 Invalid payload sent to hook。后台 Email OTP length 实际为 8，旧实现限制 6：修复服务端与前端校验支持 6至10位数字、输入框上限10、邮件提示完整验证码，不降低后台8位配置；增加发信与前端Auth回归。263项Node测试、TypeScript与生产构建通过；已知大分块告警保留。
+- 修复重新部署后真实请求 HTTP 500 Service currently unavailable due to hook，函数日志 SMTP_TIMEOUT。签名和载荷通过，但4秒发送期限内未完成SMTP接受，未证实云端994投递、未证明密码错误。本地邮箱READY关闭，Hook已保存并确认Disabled；邮箱功能未开通。五档案仍未执行云端迁移，用户无需反复注册。
+- 后续优先定位云端TLS/认证/发送阶段或采用可用HTTPS邮件服务，不通过延长到超过Auth Hook期限、跳过TLS/签名或异步伪报成功解决。没有公开部署网站或清空既有数据。
+
 # 开发进度与验收清单
 
 ## 2026-10-14 五档案实现及GitHub恢复同步（代码完成，云端待开通）
