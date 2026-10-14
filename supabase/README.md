@@ -27,13 +27,13 @@ Supabase公开Auth邮件实现使用gomail.NewDialer；该库默认仅端口465�
 云端切换审阅范围：
 
 1. 部署这两个源码文件组成的 food-auth-email Edge Function，继续保留数据库权限、邮箱确认及既有用户数据。
-2. 新增Edge服务端Secret：FOOD_SMTP_USER、FOOD_SMTP_PASSWORD（复用已授权学校客户端专用密码）及FOOD_EMAIL_HOOK_SECRET（由后台生成/配置）。Secret由Supabase保管，属于项目Edge运行环境，不进入VITE/Git/明文文件；目前只在Auth后台生成并保存Hook签名配置，保持DISABLED；尚未保存Edge Secret。
+2. 新增Edge服务端Secret：FOOD_SMTP_USER、FOOD_SMTP_PASSWORD（复用已授权学校客户端专用密码）及FOOD_EMAIL_HOOK_SECRET（由后台生成/配置）。Secret由Supabase保管，属于项目Edge运行环境，不进入VITE/Git/明文文件；Auth后台签名配置保持DISABLED。2026-10-14已在授权表单逐项保存三项Edge Secret，Custom secrets表确认三个名称存在；凭据值不在本地文件/仓库中。
 3. 仅该函数关闭平台用户JWT检查，因为Auth调用携带的是Webhook签名；函数内部签名校验继续开启。先确认无签名请求401、无发信，之后配置Auth的Send Email Hook。不可设置一个无签名的公共邮件接口。
 4. 先验证云端实际连通及SMTP认证、日志没有凭据，再让用户本地发送一次注册/绑定OTP、亲自收信并验证。若云端连接或5秒期限不适合，停止切换，保留错误证据，改选兼容的发信服务，不降低TLS或邮箱验证保护。
 
 回退：关闭Send Email Hook即可恢复原Custom SMTP配置；该旧路径本轮也未完成送达验收，回退并不等于邮箱恢复可用。失败时关闭本地READY、重新构建，暂时保留已验证账号的管理入口。先禁用Hook，再撤下候选函数/移除不再使用的Edge Secret；不可在Hook启用时先删除依赖。没有执行数据清空、账号合并、密码重置或新的SQL迁移。
 
-部署进展：用户已明确确认部署/Edge保存现有专用密码/签名鉴权切换及实测。Auth Hook已保存为HTTPS且DISABLED，函数源码与名称已在编辑器准备。自动审批曾超时约7分钟；随后工具提交仍无成功或错误反馈，函数公开地址404，后台反复出现认证锁警告。尚未证明警告就是部署失败根因，已请用户手动提交确认。未启用Hook、保存Edge Secret或宣称投递成功。
+部署进展：用户已明确确认部署/Edge保存现有专用密码/签名鉴权切换及实测。Auth Hook已保存为HTTPS且DISABLED，函数源码与名称已在编辑器准备。自动审批曾超时约7分钟；随后工具提交仍无成功或错误反馈，函数公开地址404，后台反复出现认证锁警告。尚未证明警告就是部署失败根因，已请用户手动提交确认。2026-10-14三项Edge Secret已逐项保存并按名称验证，保存后正常刷新/部署仍未出现成功；未启用Hook或宣称投递成功。剪贴板及密钥页截图方式因风险被自动审批拒绝，未绕过；改用直接表单及脱敏名称/状态验证，临时签名值已清除。
 
 已完成：纯逻辑与前端Auth回归、真实库有效/篡改/缺失/过期签名检查、UTF-8 MIME、本机无认证TLS+EHLO、类型检查；真实SMTP认证、云端Deno运行和邮件投递尚未完成。学校994路径在本机约146ms完成TLS+EHLO，不能当作云端结果。
 
