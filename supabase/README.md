@@ -27,15 +27,34 @@ Supabase公开Auth邮件实现使用gomail.NewDialer；该库默认仅端口465�
 云端切换审阅范围：
 
 1. 部署这两个源码文件组成的 food-auth-email Edge Function，继续保留数据库权限、邮箱确认及既有用户数据。
-2. 新增Edge服务端Secret：FOOD_SMTP_USER、FOOD_SMTP_PASSWORD（复用已授权学校客户端专用密码）及FOOD_EMAIL_HOOK_SECRET（由后台生成/配置）。Secret由Supabase保管，属于项目Edge运行环境，不进入VITE/Git/明文文件；当前没有保存这项新Secret。
+2. 新增Edge服务端Secret：FOOD_SMTP_USER、FOOD_SMTP_PASSWORD（复用已授权学校客户端专用密码）及FOOD_EMAIL_HOOK_SECRET（由后台生成/配置）。Secret由Supabase保管，属于项目Edge运行环境，不进入VITE/Git/明文文件；目前只在Auth后台生成并保存Hook签名配置，保持DISABLED；尚未保存Edge Secret。
 3. 仅该函数关闭平台用户JWT检查，因为Auth调用携带的是Webhook签名；函数内部签名校验继续开启。先确认无签名请求401、无发信，之后配置Auth的Send Email Hook。不可设置一个无签名的公共邮件接口。
 4. 先验证云端实际连通及SMTP认证、日志没有凭据，再让用户本地发送一次注册/绑定OTP、亲自收信并验证。若云端连接或5秒期限不适合，停止切换，保留错误证据，改选兼容的发信服务，不降低TLS或邮箱验证保护。
 
 回退：关闭Send Email Hook即可恢复原Custom SMTP配置；该旧路径本轮也未完成送达验收，回退并不等于邮箱恢复可用。失败时关闭本地READY、重新构建，暂时保留已验证账号的管理入口。先禁用Hook，再撤下候选函数/移除不再使用的Edge Secret；不可在Hook启用时先删除依赖。没有执行数据清空、账号合并、密码重置或新的SQL迁移。
 
+部署进展：用户已明确确认部署/Edge保存现有专用密码/签名鉴权切换及实测。Auth Hook已保存为HTTPS且DISABLED，函数源码与名称已在编辑器准备。自动审批曾超时约7分钟；随后工具提交仍无成功或错误反馈，函数公开地址404，后台反复出现认证锁警告。尚未证明警告就是部署失败根因，已请用户手动提交确认。未启用Hook、保存Edge Secret或宣称投递成功。
+
 已完成：纯逻辑与前端Auth回归、真实库有效/篡改/缺失/过期签名检查、UTF-8 MIME、本机无认证TLS+EHLO、类型检查；真实SMTP认证、云端Deno运行和邮件投递尚未完成。学校994路径在本机约146ms完成TLS+EHLO，不能当作云端结果。
 
 依据：[学校邮箱参数](https://itc.zju.edu.cn/90691/list.htm)、[Nodemailer SMTPConnection](https://nodemailer.com/extras/smtp-connection)、[Send Email Hook及邮箱变更映射](https://supabase.com/docs/guides/auth/auth-hooks/send-email-hook)、[Hook错误与超时](https://supabase.com/docs/guides/auth/auth-hooks/hook-errors)、[Edge网络限制](https://supabase.com/docs/guides/functions/limits)。Edge限制25/587不代表Auth SMTP本身必然同样被限制，本轮不作该推断。
+
+### 五个独立发布档案（本地实现，云端未迁移）
+
+2026-10-14按用户选择，实现一个已验证邮箱下默认档案加四个自定义档案，合计最多五个。只有一个真实Auth账号；每个档案独立发布及管理，评分仍以该Auth用户ID计算，不可通过档案重复评分。
+
+迁移为 migrations/202610130002_food_profiles.sql。它添加拥有者/名称/槽位/最多5个约束的food_profiles，foods追加profile_id及复合拥有者外键，统计视图末尾追加字段。默认档案在首次读取时为当前已验证账号初始化，把本人旧发布及旧版接口产生的记录分配到默认档案；不修改作者、创建/更新时间、评分或他人旧发布。锁定同一auth.users行串行初始化与创建，并以唯一槽位及范围约束限制容量。
+
+普通客户端只能读取本人档案，不能直接新增、修改、删除档案。创建、编辑、撤下/恢复接口验证真实邮箱身份和档案归属；创建还校验预期登录ID，避免进行中换账号时写入另一邮箱；将原编辑实现移到campus_private后显式撤销普通角色调用权限，公共旧接口仍用于默认档案及未分配旧记录，不能绕过管理其它档案。新RPC仍复用原版本冲突/图片归属校验。浏览公开菜品不要求档案，名称不对其他邮箱或访客公开。
+
+开通顺序：
+
+1. 先完成邮件发送、验证码绑定与既有作者管理真实验收。备份既有数据库结构/数据；review这份增量迁移，云端只执行一次，不重复initial。本轮没有执行该迁移。
+2. 在本地应用后设置VITE_FOOD_PROFILES_READY=true并重构建；默认.env.example为false。验证首次加载默认档案、创建4个其它档案、拒绝第6个、重复/非法名称反馈。
+3. 各档案发布测试菜品，切换后“我的发布”只显示对应记录；编辑从详情打开时自动选择该发布所属档案，编辑期间锁定切换并提供返回入口。测试撤下、恢复、原评分保留；尝试同一邮箱切换档案再次评分仍被拒绝。
+4. 另一邮箱不能获取档案名称或管理发布；不允许直接表写入和私有实现调用。重登/换设备后仍取得同一组档案；本机只储存按Auth用户ID分开的选择记忆，无法把任意UUID变成有效身份。并发创建需在真实多会话环境确认，本地单会话夹具不冒称完成该项验收。
+
+五档案尚未产生实际云端数据前，可保持开关false或revert前端功能提交，现有邮箱流程继续工作。产生其它档案发布后，不可简单回退为旧客户端再声称所有档案均可管理；先保留可读和管理的接口/前端、停止推广并修复，不能删除档案或清空发布来回退。本轮迁移只存在本地，未保存新私密凭据、创建真实邮箱/档案或更改投票规则。
 
 ### 2. 在Supabase配置认证及模板
 

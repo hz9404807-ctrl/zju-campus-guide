@@ -1,3 +1,4 @@
+import FoodAccountProvider from './components/FoodAccountProvider'
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router'
 import {
@@ -202,12 +203,14 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/guides" element={<GuidePage />} />
           <Route path="/guides/:guideId" element={<GuideDetailPage />} />
-          <Route path="/food" element={<FoodPage />} />
-          <Route path="/food/login" element={<FoodLoginPage />} />
-          <Route path="/food/mine" element={<FoodMinePage />} />
-          <Route path="/food/:foodId/edit" element={<FoodPublishPage key={location.pathname} />} />
-          <Route path="/food/new" element={<FoodPublishPage key={location.pathname} />} />
-          <Route path="/food/:foodId" element={<FoodDetailPage />} />
+          <Route element={<FoodAccountProvider />}>
+            <Route path="/food" element={<FoodPage />} />
+            <Route path="/food/login" element={<FoodLoginPage />} />
+            <Route path="/food/mine" element={<FoodMinePage />} />
+            <Route path="/food/:foodId/edit" element={<FoodPublishPage key={location.pathname} />} />
+            <Route path="/food/new" element={<FoodPublishPage key={location.pathname} />} />
+            <Route path="/food/:foodId" element={<FoodDetailPage />} />
+          </Route>
           <Route path="/sources" element={<SourcesPage />} />
           <Route path="/sources/:sourceId" element={<SourceDetailPage />} />
           <Route path="/about" element={<AboutPage />} />

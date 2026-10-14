@@ -96,7 +96,7 @@ function makeClient(options = {}) {
       return response(options.rpcResponse, { data: FOOD_ID, error: null }, call)
     },
   }
-  return { api: createFoodApi(client), calls }
+  return { api: createFoodApi(client, { profilesEnabled: !!options.profilesEnabled }), calls }
 }
 
 async function expectServiceError(promise, code) {
@@ -499,4 +499,30 @@ test('验证登录的网络错误不被误报为成功或继续发布', async ()
   const { api, calls } = makeClient({ getUser: { data: { user: null }, error: { message: 'network failure' } } })
   await expectServiceError(api.publishFood(PUBLISH_INPUT, null), 'AUTH_FAILED')
   assert.equal(calls.rpc.length, 0)
+})
+
+const PROFILE_ID = '35d432de-59a5-4bbe-9d0f-71e0d7195367'
+test('profile publication and mine queries carry the chosen backend profile', async () => {
+  const { api, calls } = makeClient({ profilesEnabled: true })
+  await api.publishFood(PUBLISH_INPUT, null, PROFILE_ID)
+  assert.equal(calls.rpc[0].name, 'create_food_in_profile')
+  assert.equal(calls.rpc[0].parameters.p_profile_id, PROFILE_ID)
+  await api.myFoods(PROFILE_ID)
+  assert.deepEqual(calls.queries[0].filters, [['created_by', USER_ID], ['profile_id', PROFILE_ID]])
+})
+test('profile must load before publishing; missing selection does not upload or mutate', async () => {
+  const { api, calls } = makeClient({ profilesEnabled: true })
+  await assert.rejects(api.publishFood(PUBLISH_INPUT, new File(['image'], 'fixture.jpg', { type: 'image/jpeg' })), (error) => error.code === 'PROFILE_REQUIRED')
+  assert.equal(calls.uploads.length, 0); assert.equal(calls.rpc.length, 0)
+})
+test('wrong profile cannot edit or upload; correct profile uses guarded management RPCs', async () => {
+  const row = { ...FOOD_ROW, created_by: USER_ID, profile_id: PROFILE_ID, updated_at: '2026-10-13T00:00:00Z' }
+  const { api, calls } = makeClient({ profilesEnabled: true, foodResponse: { data: row, error: null } })
+  await assert.rejects(api.updateFood(FOOD_ID, row.updated_at, PUBLISH_INPUT, null, false, USER_ID), (error) => error.code === 'PROFILE_MISMATCH')
+  assert.equal(calls.uploads.length, 0); assert.equal(calls.rpc.length, 0)
+  await api.updateFood(FOOD_ID, row.updated_at, PUBLISH_INPUT, null, false, PROFILE_ID)
+  await api.setFoodDeleted(FOOD_ID, row.updated_at, true, PROFILE_ID)
+  assert.equal(calls.rpc[0].name, 'update_profile_food')
+  assert.equal(calls.rpc[1].name, 'set_profile_food_deleted')
+  assert.equal(calls.rpc[1].parameters.p_profile_id, PROFILE_ID)
 })

@@ -60,13 +60,18 @@ try {
   const emailResults = await db.exec(emailChecks)
   console.log(emailResults.flatMap((r) => r.rows ?? []).find((r) => r.result)?.result ?? 'Email management checks passed.')
   console.log(`Email assertions: ${(emailChecks.match(/select pg_temp\.(?:check_it|expect_state)\(/g) ?? []).length}`)
-  const leftover = await db.query('select (select count(*) from public.foods)::int as foods, (select count(*) from public.ratings)::int as ratings, (select count(*) from auth.users)::int as users')
+  await db.exec(await readFile(new URL('../migrations/202610130002_food_profiles.sql', import.meta.url), 'utf8'))
+  const profileChecks = await readFile(new URL('../food-profiles.tests.sql', import.meta.url), 'utf8')
+  const profileResults = await db.exec(profileChecks)
+  console.log(profileResults.flatMap((r) => r.rows ?? []).find((r) => r.result)?.result ?? 'Profile checks passed.')
+  console.log('Profile assertions: ' + (profileChecks.match(/select pg_temp\.(?:check_profile|expect_profile)\(/g) ?? []).length)
+  const leftover = await db.query('select (select count(*) from public.foods)::int as foods, (select count(*) from public.ratings)::int as ratings, (select count(*) from auth.users)::int as users, (select count(*) from public.food_profiles)::int as profiles')
   if (Object.values(leftover.rows[0]).some((count) => count !== 0)) {
     throw new Error('SQL tests did not roll back all their fixtures')
   }
   console.log(result?.result ?? 'SQL checks passed.')
   console.log(`Assertions: ${(checks.match(/select pg_temp\.(?:assert_true|expect_sqlstate)\(/g) ?? []).length}`)
-  console.log('Rollback verified: no food, rating or user test fixtures remain.')
+  console.log('Rollback verified: no food, rating, user or profile test fixtures remain.')
   console.log('Scope: embedded PostgreSQL plus minimal Auth/Storage schema fixtures; no live Supabase service was contacted.')
 } catch (error) {
   console.error('SQL checks failed:', error.message)

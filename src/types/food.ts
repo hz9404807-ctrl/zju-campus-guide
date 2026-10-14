@@ -12,6 +12,7 @@ export interface Food {
   tags: string[]
   average_rating: number | null
   rating_count: number
+  profile_id?: string | null
   created_by?: string
   updated_at?: string
   deleted_at?: string | null

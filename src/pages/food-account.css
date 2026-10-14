@@ -19,3 +19,12 @@
 .food-login-panel button:disabled { opacity: .55; cursor: not-allowed; }
 .food-login-panel input:focus-visible, .food-login-panel button:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
 @media(max-width: 600px) { .food-login-panel { padding: 18px; } }
+
+.food-profile-picker { width: 100%; margin-top: 12px; border-top: 1px solid var(--line); padding-top: 12px; }
+.food-profile-row { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; }
+.food-profile-row select, .food-profile-create input { min-height: 44px; max-width: 100%; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; font: inherit; background: var(--card); color: var(--ink); }
+.food-profile-row select { width: min(240px, 100%); }
+.food-profile-create { display: grid; gap: 8px; max-width: 420px; margin-top: 12px; }
+.food-profile-create button { text-align: left; }
+.food-profile-picker .food-account-hint { margin-top: 6px; }
+.food-profile-picker :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
