@@ -29,13 +29,19 @@ Supabase公开Auth邮件实现使用gomail.NewDialer；该库默认仅端口465�
 
 依据：[学校邮箱参数](https://itc.zju.edu.cn/90691/list.htm)、[客户端专用密码](https://imap.zju.edu.cn/coremail/help/2fa_zh_CN.html)、[Supabase邮件实现](https://github.com/supabase/auth/blob/master/internal/mailer/mailmeclient/mailmeclient.go)、[gomail端口及STARTTLS实现](https://github.com/go-gomail/gomail/blob/master/smtp.go)。
 
-### 本机SMTP认证诊断（不发送邮件）
+### 本机单次发信检查（Nodemailer，2026-10-15）
 
-用户已明确确认授权码生成、替换并保存，不能反复索要授权或重做配置。最近云端请求仍是QQ535。可运行 `node supabase/tools/smtp-diagnostic.mjs <Python可执行文件路径>`，在输出的127.0.0.1地址由用户本人输入现有授权码，脚本仅向smtp.qq.com:465执行TLS/EHLO/AUTH PLAIN，不执行MAIL/DATA，不保存授权码或修改Supabase。2026-10-15真实本机PLAIN也返回535；可在命令末尾追加 `LOGIN` 作一次认证方式对照。该参数仅允许PLAIN或LOGIN，不自动回退或反复尝试；LOGIN若同样535，停止程序重试。`CHECK_LIMIT` 表示该临时服务已用满次数或正在检查，不是QQ响应。 后续LOGIN真实检查返回通用CHECK_FAILED，尚无235/535结论。诊断现已区分挑战编码、输入编码及SMTP协议异常；离线测试通过不代表真实登录通过。不要据此更改授权码或继续密集重试。
+当前工具：`node supabase/tools/smtp-diagnostic.mjs`，无需Python参数。由用户本人在输出的127.0.0.1页面输入现有QQ授权码，接受分组空格，认证成功后才发送一封测试邮件。固定smtp.qq.com:465、AUTH LOGIN、TLS证书校验；固定发件zhx20070808@qq.com、收件3250103966@zju.edu.cn，不能通过前端改变收发地址。
 
-服务仅绑定loopback；Host、Origin和随机页面nonce校验，禁止嵌入、禁用缓存，单次运行最多2次认证，20分钟后关闭；子进程12秒截止。授权码通过私有stdin管道传递，不在进程参数/环境变量/文件/日志/状态接口中。测试使用虚构凭据和模拟认证，不能当作真实认证成功。
+实现使用固定版本Nodemailer。每次临时服务仅允许一次有效检查，不自动换认证方式或重试；输入格式错误不占次数。实际发信在隔离子进程中运行，内部期限30秒、外部31秒兜底终止进程；超时中断连接并将投递状态标为未知，禁止自动重复发送。连接/认证/发送错误只显示安全分类和SMTP状态码，不暴露服务器原文或凭据。SMTP接受不等于收件箱收到，更不等于网站登录开通。
 
-本机235说明这次在本机输入的账号信息可被QQ接受，仍需比较Supabase实际配置与云端风控/环境，不能直接证明云端密码相同或必然是地区封锁。本机535说明同组凭据在本机也被拒绝；本机网络错误需单独定位。确认诊断结果前不重复发送验证码，不擅自关闭邮箱确认。
+服务仅loopback，Host、Origin、随机nonce、CSP和no-store保护；20分钟后关闭。授权码仅在本机进程内临时使用，不记录日志、文件、进程参数或环境变量，不修改Supabase。旧Python工具保留为历史诊断，不再作为当前入口。离线模拟服务器验证535前不发送MAIL、成功仅发一封固定收件邮件、并发单次限制和超时关闭；不是实际QQ成功证据。
+
+真实历史：PLAIN本机与Supabase均535；旧LOGIN诊断发生CHECK_FAILED；2026-10-15成熟Nodemailer执行一次AUTH LOGIN，真实返回EAUTH/535，停止且未进入发送。接下来只有本机真实发信成功且用户确认收件后才测Supabase OTP；535则停止程序重试并定位QQ认证，不能要求反复保存授权码，也不关闭邮箱确认冒充可用。
+
+依据：[Nodemailer SMTP官方文档](https://nodemailer.com/smtp)。
+
+用户确认已有个人Gmail，可评估直接使用Supabase原生Custom SMTP：smtp.gmail.com:465、SSL、完整Gmail用户名和相同From、Google应用专用密码。先由持有人开启两步验证并确认应用专用密码可用；不使用普通Google密码、不要求学生拥有Google账号、不买域名或Workspace。实际Supabase发信和浙大邮箱收件尚未验证，不保证跨境投递或长期批量可用。个人Gmail官方日发送上限不是验证码送达SLA；以低频课程试点验收。依据：[Google应用专用密码](https://support.google.com/accounts/answer/185833?hl=zh-Hans)、[Gmail发送限制](https://support.google.com/mail/answer/22839?hl=zh-Hans)、[Supabase SMTP](https://supabase.com/docs/guides/auth/auth-smtp)。
 
 ### 零付费多人邮箱登录候选（SMTP2GO HTTPS，待云端验收）
 
