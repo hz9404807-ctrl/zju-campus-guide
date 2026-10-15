@@ -1,6 +1,8 @@
 # Supabase 数据库与图片配置
 
-## 当前路线：QQ邮箱原生SMTP465（2026-10-15，待授权码及云端实测）
+## 当前路线：QQ邮箱原生SMTP465（2026-10-15，云端认证535待解决）
+
+最新实测：配置已保存，云端Auth请求约3.4秒返回500；同一request_id日志确认QQ 535 Login fail。后台Host/Port/Username/From四项已逐项核对。可能是服务未开启、授权码与账号不符或QQ风控等，不能仅凭535断言密码错误。用户开启服务后，必须将新生成的授权码覆盖Supabase Password并再次Save changes；仅开启开关不会更新旧密码。未完成真实投递验收前保持邮箱READY=false，不自动重试刷请求。
 
 用户实测SMTP2GO注册返回Error code 6 - Service unavailable；不能以官方免费规则推定账号可用，也未证明此错误由地区或学校域名引起。用户选择使用已有QQ邮箱作为项目发件人。学生登录和收件邮箱继续精确限定@zju.edu.cn，五档案实现保持不变。
 

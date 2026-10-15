@@ -1,3 +1,9 @@
+## 2026-10-15 QQ SMTP真实请求：云端535认证拒绝（未开通）
+
+- 用户反馈已保存QQ配置并开启SMTP后，实测Auth POST /otp仍HTTP500，约3.4秒；本次request_id=01a13dfb-2f87-7e87-a110-4e26a16441ce。通过Supabase日志Explorer的官方只读SELECT核对同一请求，错误为QQ返回535 Login fail，可能包括未开启服务、授权码/账号不符、登录风控或服务忙；不能断定具体哪一项。
+- 通过后台截图核对已保存smtp.qq.com、465、Username与发件地址均为用户指定QQ邮箱、60秒间隔，Password隐藏且Save changes禁用。未读取/回显授权码，未修改配置。云端已到达SMTP认证阶段，不再以994网络超时解释本次失败。
+- 用户曾明确尚未开启QQ SMTP，随后反馈已更改；正在请用户确认开启后新生成的授权码是否覆盖了Supabase旧Password并保存。未收到确认前不重复发送、不反复注册新平台或改认证方案。入口READY保持false，未宣称投递/注册成功，五档案云端迁移与真人验收仍待完成。
+
 ## 2026-10-15 发信路线改为QQ原生SMTP465（尚未开通）
 
 - 用户SMTP2GO注册截图返回Error code 6 - Service unavailable，停止将该候选视作可部署完成。免费服务文档不等于用户注册/发信可用，错误根因未证实。已有HTTPS适配保存在Git，未启用。
