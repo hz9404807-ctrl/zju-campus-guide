@@ -16,6 +16,34 @@ Supabase公开Auth邮件实现使用gomail.NewDialer；该库默认仅端口465�
 
 依据：[学校邮箱参数](https://itc.zju.edu.cn/90691/list.htm)、[客户端专用密码](https://imap.zju.edu.cn/coremail/help/2fa_zh_CN.html)、[Supabase邮件实现](https://github.com/supabase/auth/blob/master/internal/mailer/mailmeclient/mailmeclient.go)、[gomail端口及STARTTLS实现](https://github.com/go-gomail/gomail/blob/master/smtp.go)。
 
+### 零付费多人邮箱登录候选（SMTP2GO HTTPS，待云端验收）
+
+2026-10-15目标：所有持有浙大邮箱的同学均可验证登录；每个已验证Auth用户最多五个发布档案，各自管理发布，评分仍按邮箱用户限制。五档案不是五个不同邮箱Auth账号，沿用用户先前明确选择的方案。
+
+调研以官方资料为准：
+
+| 路线 | 是否买域名 | 多人收件 | 当前结论 |
+| --- | --- | --- | --- |
+| Supabase默认邮件 | 无需 | 仅项目团队授权邮箱 | 不符合学生自主注册目标 |
+| Resend测试域名 | 无需 | 仅Resend账号自身邮箱 | 已撤换未提交的单人适配，不能作为正式目标 |
+| 浙大SMTP994 | 无需 | 理论支持 | 云端实测SMTP_TIMEOUT，保留旧源码回退但不继续盲目重试 |
+| SMTP2GO Free 单邮箱发件人+HTTPS | 无需 | 支持不同收件邮箱 | 新候选，必须完成真实账号及投递验收 |
+
+免费边界：1,000封/月、200封/天、未验证域名时25封/小时；无免费试用到期，但免费额度不是无限量，达到额度可能排队或拒绝。排队可能使验证码过期；不自动购买额度或升级。单发件邮箱无需管理学校DNS，但服务商规定若发件域名存在限制性DMARC策略，则不能用单邮箱验证。一次本机DNS查询未发现学校DMARC记录不能保证服务商审核通过。必须以后台实际Verified状态为准。
+
+部署步骤：
+
+1. 维护者在SMTP2GO创建Free账号并完成账号验证；同学只登录我们的网页，不注册SMTP2GO。Sending → Verified Senders → Single sender emails 添加维护者发信邮箱，由邮箱本人点击确认链接。不付费、不改学校DNS。
+2. Sending → API Keys 创建仅允许 email/send 的密钥，设置不高于25封/小时的限制，禁用Open/Click Tracking、BCC审计及Sandbox。密钥只保存到Supabase Edge Secret，不发送聊天、不进入VITE/Git。
+3. 保持邮箱Hook Disabled。部署同一 food-auth-email 的 index.ts、handler.ts、smtp2go.ts；配置 FOOD_EMAIL_PROVIDER=smtp2go、FOOD_EMAIL_FROM=已验证浙大邮箱、FOOD_SMTP2GO_API_KEY=服务端密钥，保留既有FOOD_EMAIL_HOOK_SECRET。该方案不需要学校邮箱专用密码。
+4. 保留函数内HMAC签名校验和该函数现有JWT设置。验证无签名请求401，再经Auth发送到两个不同的真实浙大邮箱；签名载荷中的收件人不能被前端任意指定。必须实际收到验证码、输入8位验证码成功，不能把模拟测试或HTTP200当收件成功。
+5. 五档案 migration 202610130002_food_profiles.sql 已有本地数据库测试，尚未执行云端。上线前检查数据库现状、保留现有食品/评分、执行该迁移，核对API与跨用户隔离，再打开VITE_FOOD_PROFILES_READY。验证第六档案被后端拒绝、切换各自发布、另一邮箱看不到私有档案；最后开启邮箱入口。
+6. 若请求失败：先禁用Hook、关闭本地/部署邮箱READY，保留真实数据。不要删除用户、清空内容或自动回退到已知超时SMTP。HTTPS适配没有自建验证码，继续由Supabase生成并验证OTP，支持匿名绑定与安全双邮箱确认。
+
+HTTP适配固定请求 https://api.smtp2go.com/v3/email/send；仅在succeeded=1、failed=0、failures为空且存在email_id时认为服务商已接受。HTTP200错误体、限额、部分失败、异常及超时都返回失败。总截止4秒并取消HTTP请求；不异步伪报成功，不启用fastaccept，不捏造服务商幂等保证。服务商接受不保证收件箱送达。
+
+权威依据：[Supabase SMTP](https://supabase.com/docs/guides/auth/auth-smtp)、[SMTP2GO Free](https://support.smtp2go.com/hc/en-gb/articles/223087947-Free-Plan)、[Verified Senders及DMARC例外](https://support.smtp2go.com/hc/en-gb/articles/115004408567-Verified-Senders)、[API设置](https://developers.smtp2go.com/docs/getting-started)、[发送请求与响应](https://developers.smtp2go.com/docs/send-an-email)、[Resend测试限制](https://resend.com/docs/knowledge-base/403-error-resend-dev-domain)。价格与规则核对日期2026-10-15。
+
 ### 994发信Hook候选（已部署，真实投递未通过验收）
 
 用户确认收件箱及垃圾邮件无验证码。Auth日志里的504/request_timeout与随后200属于同一request_id；504历时10.0036秒，200历时10.0270秒，不能解读成另一次成功投递。当前25路径未证实送达，真正阻塞环节尚需云端探测，前端增大等待时间不能解决该服务端超时。

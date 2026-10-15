@@ -1,6 +1,7 @@
 import SMTPConnection from 'npm:nodemailer@10.1.0/lib/smtp-connection'
 import MailComposer from 'npm:nodemailer@10.1.0/lib/mail-composer'
 import { Webhook } from 'npm:standardwebhooks@1.1.1'
+import { smtp2goTransport } from './smtp2go.ts'
 import { createEmailHandler, type EmailTransport, type EmailMail, type EmailSmtpOptions } from './handler.ts'
 
 function transport(options: EmailSmtpOptions): EmailTransport {
@@ -42,5 +43,6 @@ Deno.serve(createEmailHandler({
   env: (name) => Deno.env.get(name),
   verify: (body, headers, secret) => new Webhook(secret).verify(body, headers),
   transport,
+  httpTransport: smtp2goTransport,
   log: (event) => console.log(JSON.stringify(event)),
 }))

@@ -4,6 +4,7 @@ type Dependencies = {
   env(name: string): string | undefined
   verify(body: string, headers: Record<string, string>, secret: string): unknown
   transport(options: ReturnType<typeof smtpOptions>): EmailTransport
+  httpTransport?(options: { apiKey: string; sender: string }): EmailTransport
   log?(event: { stage: string; code: string }): void
 }
 type Payload = { user?: { email?: unknown; new_email?: unknown }; email_data?: Record<string, unknown> }
@@ -59,9 +60,11 @@ export function createEmailHandler(deps: Dependencies, deadlineMs = 4000) {
   return async (request: Request): Promise<Response> => {
     if (request.method !== 'POST') return errorResponse(405, 'Method not allowed')
     const hookSecret = deps.env('FOOD_EMAIL_HOOK_SECRET')
-    const sender = deps.env('FOOD_SMTP_USER')
-    const password = deps.env('FOOD_SMTP_PASSWORD')
-    if (!hookSecret || !sender || !password) return errorResponse(503, 'Email sender is not configured')
+    const provider = deps.env('FOOD_EMAIL_PROVIDER') || 'smtp'
+    const https = provider === 'smtp2go'
+    const sender = https ? deps.env('FOOD_EMAIL_FROM') : deps.env('FOOD_SMTP_USER')
+    const password = https ? deps.env('FOOD_SMTP2GO_API_KEY') : deps.env('FOOD_SMTP_PASSWORD')
+    if (!['smtp', 'smtp2go'].includes(provider) || !hookSecret || !sender || !password) return errorResponse(503, 'Email sender is not configured')
     const reader = request.body?.getReader()
     if (!reader) return errorResponse(400, 'Missing payload')
     const chunks: Uint8Array[] = []
@@ -85,11 +88,15 @@ export function createEmailHandler(deps: Dependencies, deadlineMs = 4000) {
       payload = deps.verify(body, Object.fromEntries(request.headers), hookSecret.replace(/^v1,whsec_/, ''))
     } catch { return errorResponse(401, 'Invalid webhook signature') }
     let targets: ReturnType<typeof mailTargets>
-    let options: ReturnType<typeof smtpOptions>
-    try { targets = mailTargets(payload as Payload); options = smtpOptions(sender, password) }
+    try { targets = mailTargets(payload as Payload); address(sender) }
     catch { return errorResponse(400, 'Unsupported email action or invalid payload') }
     let transport: EmailTransport
-    try { transport = deps.transport(options) }
+    try {
+      if (https) {
+        if (!deps.httpTransport) throw new Error('SMTP2GO_CONFIG')
+        transport = deps.httpTransport({ apiKey: password, sender })
+      } else transport = deps.transport(smtpOptions(sender, password))
+    }
     catch { return errorResponse(503, 'Email sender is not configured') }
     let timer: ReturnType<typeof setTimeout> | undefined
     try {
@@ -104,15 +111,15 @@ export function createEmailHandler(deps: Dependencies, deadlineMs = 4000) {
         if (!result.accepted?.some((value) => typeof value === 'string' && value.toLowerCase() === to) || result.rejected?.length) throw new Error('SMTP_REJECTED')
       }))
       const timeout = new Promise<never>((_, reject) => {
-        timer = setTimeout(() => { transport.close(); reject(new Error('SMTP_TIMEOUT')) }, deadlineMs)
+        timer = setTimeout(() => { transport.close(); reject(new Error(https ? 'EMAIL_HTTP_TIMEOUT' : 'SMTP_TIMEOUT')) }, deadlineMs)
       })
       await Promise.race([sending, timeout])
-      deps.log?.({ stage: 'smtp', code: 'ACCEPTED' })
+      deps.log?.({ stage: https ? 'smtp2go' : 'smtp', code: 'ACCEPTED' })
       return Response.json({}, { headers: { 'Cache-Control': 'no-store' } })
     } catch (error) {
       const rawCode = error instanceof Error ? ('code' in error ? String(error.code) : error.message) : ''
-      const safeCode = ['EAUTH', 'ECONNECTION', 'ETIMEDOUT', 'ESOCKET', 'SMTP_TIMEOUT', 'SMTP_REJECTED'].includes(rawCode) ? rawCode : 'SMTP_ERROR'
-      deps.log?.({ stage: 'smtp', code: safeCode })
+      const safeCode = ['EAUTH', 'ECONNECTION', 'ETIMEDOUT', 'ESOCKET', 'SMTP_TIMEOUT', 'SMTP_REJECTED', 'EMAIL_HTTP_TIMEOUT', 'SMTP2GO_RATE_LIMIT', 'SMTP2GO_UNAVAILABLE', 'SMTP2GO_REJECTED', 'SMTP2GO_RESPONSE'].includes(rawCode) ? rawCode : 'SMTP_ERROR'
+      deps.log?.({ stage: https ? 'smtp2go' : 'smtp', code: safeCode })
       return errorResponse(503, 'Email sender failed; please retry later')
     } finally { clearTimeout(timer); transport.close() }
   }
