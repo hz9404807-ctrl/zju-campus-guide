@@ -1,3 +1,12 @@
+## 2026-10-15 公开站点更新成功（Sites版本4）
+
+- 用户明确要求将本机最新版本更新到公开网站，授权本次发布。保留原project_id和public访问范围，未创建新站点、未更改SMTP或Supabase数据。
+- 公开地址：https://zju-campus-guide.sangnuo0808.chatgpt.site 。Sites deploy返回succeeded，版本4，部署ID appgdep_6ad0e0da5ffc8191b2d170c8d4b84110；保存版本 appgprj_6ac777dac25081918658b4a2e55dcdea~appgver_7cb5bfbe2abc8191906eecd73485e3e5。
+- 功能源码基线为GitHub a3732fc；独立Sites源码仓库提交5a7e1553e6b66aca53a9c01f4abf5966a0d6f6c8。官方助手完成源码同步和归档，归档检查确认现有站点标识、静态SPA、最新验证码续接界面，无环境文件、管理凭据或未跟踪图片。归档位于outputs/zju-campus-guide-site.tar.gz（Git忽略）。
+- 282项Node测试和包含TypeScript检查的生产构建通过；仅既有分包体积告警。构建只使用公开Supabase客户端参数，邮箱入口true、档案入口false。个人中心、注销及五档案云端开通不在此次发布范围。
+- 本次源码代理失败由Git全局失效代理引起，已仅对发布进程直连；npm脚本和GNU tar盘符问题以scratch内临时运行配置修复，未更改系统设置或网站代码。源码暂存仍在scratch/site-publish。
+- 版本3作为前一版本保留：appgprj_6ac777dac25081918658b4a2e55dcdea~appgver_bc4a05317f008191b40e17a2fdbdf54e。需要回退时部署该已保存版本，不删除用户或业务数据。官方成功部署响应是当前上线证据；未再次发送真实验证码或宣称已完成公开站点跨设备登录验收。
+
 ## 2026-10-15 本机服务恢复与关闭登录页后的验证续接
 
 - 用户反馈曾实际收到网站验证码，说明Gmail发信已至少一次送达；尚未确认本人验证码验证成功。当前截图是4175 ERR_CONNECTION_REFUSED，端口检查无监听，不能再归因SMTP。已恢复独立隐藏后台Vite preview进程，确认127.0.0.1:4175监听。

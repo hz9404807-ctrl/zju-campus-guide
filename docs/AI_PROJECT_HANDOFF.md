@@ -8,7 +8,7 @@
 - **本地工程目录**：`D:\个人关键文件夹转移\Codex\zju-campus-guide`
 - **源码仓库**：<https://github.com/hz9404807-ctrl/zju-campus-guide>
 - **协作基线**：2026-10-15已核对远程main包含 `166796d`（本机服务恢复与验证码续接）。组长工作分支为 `feat/food-email-profiles`；协作者应从最新origin/main开始，个人中心工作放独立功能分支。开始前必须运行 `git branch --show-current` 和 `git status --short`，以实际结果为准，并保留其他人的未提交改动。
-- **公开站点**：<https://zju-campus-guide.sangnuo0808.chatgpt.site>。它是一次已成功的公开部署，但本文未记录其部署时间、提交或分支；它可能与本地工作树不同，**不能作为本地改动的验收依据**。GitHub源码同步已按AGENTS.md授权；协作者建议推送自己的功能分支并通过PR交接，避免直接合并main。托管网站发布和云端迁移仍需单独授权。
+- **公开站点**：<https://zju-campus-guide.sangnuo0808.chatgpt.site>。已于2026-10-15发布Sites第4版，功能基线为GitHub a3732fc（Sites源码提交5a7e1553e6b66aca53a9c01f4abf5966a0d6f6c8）。后续个人中心分支的改动不在该版本中；线上版本不能代替新分支的验收。GitHub源码同步已按AGENTS.md授权；协作者建议推送自己的功能分支并通过PR交接，避免直接合并main。托管网站发布和云端迁移仍需单独授权。
 - **当前内容规模**（见 `src/data/content-manifest.json`）：98 份办事指南、101 个网站入口、48 个公众号、31 个服务点。
 
 ## 2. 快速访问与运行
