@@ -1,5 +1,5 @@
 """Read credentials from a private pipe, authenticate to QQ only, never send mail."""
-import json, smtplib, ssl, sys
+import binascii, json, smtplib, ssl, sys
 client = None
 result = {"stage": "connect", "ok": False}
 try:
@@ -28,8 +28,14 @@ except ssl.SSLCertVerificationError:
     result.update(code="CERTIFICATE_ERROR")
 except (TimeoutError, OSError):
     result.update(code="NETWORK_ERROR")
-except Exception:
-    result.update(code="CHECK_FAILED")
+except binascii.Error:
+    result.update(code="AUTH_CHALLENGE_ERROR")
+except UnicodeError:
+    result.update(code="INPUT_ENCODING_ERROR")
+except smtplib.SMTPException:
+    result.update(code="SMTP_PROTOCOL_ERROR")
+except Exception as error:
+    result.update(code="CHECK_FAILED", error_type=type(error).__name__ if type(error).__name__ in ("ValueError", "TypeError", "AttributeError", "KeyError") else "UnexpectedError")
 finally:
     if client is not None:
         client.close()

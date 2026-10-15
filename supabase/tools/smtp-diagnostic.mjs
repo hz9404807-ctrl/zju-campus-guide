@@ -33,7 +33,7 @@ function runCheck(python,input) {
     let output='';const timer=setTimeout(()=>{child.kill();reject(Error('TIMEOUT'))},12000)
     child.stdout.on('data',part=>{output+=part;if(output.length>2048)child.kill()})
     child.on('error',()=>{clearTimeout(timer);reject(Error('PROCESS_ERROR'))})
-    child.on('close',()=>{clearTimeout(timer);try{const raw=JSON.parse(output);resolveResult({ok:raw.ok===true,stage:raw.stage,code:raw.code,tls:raw.tls,method:raw.method})}catch{reject(Error('RESULT_ERROR'))}})
+    child.on('close',()=>{clearTimeout(timer);try{const raw=JSON.parse(output);resolveResult({ok:raw.ok===true,stage:raw.stage,code:raw.code,tls:raw.tls,method:raw.method,error_type:raw.error_type})}catch{reject(Error('RESULT_ERROR'))}})
     child.stdin.on('error',()=>{});child.stdin.end(JSON.stringify(input))
   })
 }
