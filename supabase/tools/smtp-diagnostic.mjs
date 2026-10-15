@@ -39,6 +39,7 @@ function runCheck(python,input) {
 }
 if(process.argv[1] && fileURLToPath(import.meta.url)===resolve(process.argv[1])){
  const python=process.argv[2];if(!python)throw Error('Python runtime path required')
- const server=createDiagnostic(python);server.listen(0,'127.0.0.1',()=>console.log('DIAGNOSTIC_URL=http://127.0.0.1:'+server.address().port))
+ const method=process.argv[3]||'PLAIN';if(!['PLAIN','LOGIN'].includes(method))throw Error('Unsupported auth method')
+ const server=createDiagnostic(python,(runtime,input)=>runCheck(runtime,{...input,method}));server.listen(0,'127.0.0.1',()=>console.log('DIAGNOSTIC_URL=http://127.0.0.1:'+server.address().port))
  setTimeout(()=>server.close(),20*60*1000).unref()
 }

@@ -31,7 +31,7 @@ Supabase公开Auth邮件实现使用gomail.NewDialer；该库默认仅端口465�
 
 ### 本机SMTP认证诊断（不发送邮件）
 
-用户已明确确认授权码生成、替换并保存，不能反复索要授权或重做配置。最近云端请求仍是QQ535。可运行 `node supabase/tools/smtp-diagnostic.mjs <Python可执行文件路径>`，在输出的127.0.0.1地址由用户本人输入现有授权码，脚本仅向smtp.qq.com:465执行TLS/EHLO/AUTH PLAIN，不执行MAIL/DATA，不保存授权码或修改Supabase。
+用户已明确确认授权码生成、替换并保存，不能反复索要授权或重做配置。最近云端请求仍是QQ535。可运行 `node supabase/tools/smtp-diagnostic.mjs <Python可执行文件路径>`，在输出的127.0.0.1地址由用户本人输入现有授权码，脚本仅向smtp.qq.com:465执行TLS/EHLO/AUTH PLAIN，不执行MAIL/DATA，不保存授权码或修改Supabase。2026-10-15真实本机PLAIN也返回535；可在命令末尾追加 `LOGIN` 作一次认证方式对照。该参数仅允许PLAIN或LOGIN，不自动回退或反复尝试；LOGIN若同样535，停止程序重试。`CHECK_LIMIT` 表示该临时服务已用满次数或正在检查，不是QQ响应。
 
 服务仅绑定loopback；Host、Origin和随机页面nonce校验，禁止嵌入、禁用缓存，单次运行最多2次认证，20分钟后关闭；子进程12秒截止。授权码通过私有stdin管道传递，不在进程参数/环境变量/文件/日志/状态接口中。测试使用虚构凭据和模拟认证，不能当作真实认证成功。
 
