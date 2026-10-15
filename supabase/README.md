@@ -1,5 +1,16 @@
 # Supabase 数据库与图片配置
 
+## 当前路线：QQ邮箱原生SMTP465（2026-10-15，待授权码及云端实测）
+
+用户实测SMTP2GO注册返回Error code 6 - Service unavailable；不能以官方免费规则推定账号可用，也未证明此错误由地区或学校域名引起。用户选择使用已有QQ邮箱作为项目发件人。学生登录和收件邮箱继续精确限定@zju.edu.cn，五档案实现保持不变。
+
+本机未认证TLS探测smtp.qq.com:465成功：证书验证通过、TLS1.3约176ms，SMTP220问候约231ms；这不是云端SMTP认证或投递证明。使用Supabase原生Custom SMTP，保持Send Email Hook Disabled，不依赖未开通的SMTP2GO或Resend、不购域名。参数：Host=smtp.qq.com；Port=465；Sender email address和Username均为用户指定QQ邮箱；Sender name=浙大校园指南课程项目；Minimum interval per user=60。Password仅填QQ邮箱生成的SMTP授权码，不是QQ登录密码或学校专用密码，不进源码、聊天、日志或Git。
+
+维护者本人在QQ邮箱设置中开启第三方SMTP并生成授权码，最终只在Supabase后台Password栏输入、保存。保存代表Supabase获得该QQ邮箱的SMTP发信能力。先以一次Auth原生OTP实测服务端返回及学校邮箱真实收件；通过后再开启本地入口、完成第二个学生邮箱收件及五档案云端迁移验收。此前271项代码测试和85项数据库断言不能代替这些真实检查。当前入口READY仍false，未开通。QQ个人邮箱存在风控/频率限制，不宣称免费无限量或适合大规模商业群发。
+
+官方配置依据：[腾讯Email连接器/授权码](https://cloud.tencent.com/document/product/1270/55456)、[腾讯邮箱登录SMTP配置](https://intl.cloud.tencent.com/zh/document/product/1266/71700)、[Supabase Custom SMTP](https://supabase.com/docs/guides/auth/auth-smtp)。以下保留此前方案调查记录，非当前已开通配置。
+
+
 ## 2026-10-13 浙大邮箱登录与作者管理：配置及开通步骤
 
 2026-10-13用户进一步授权彻底开通。Custom SMTP已保存（学校服务器25 STARTTLS候选路径），Confirm sign up、Magic link or OTP、Change email address三类验证码邮件模板已保存；作者管理迁移已在用户审阅警告并确认后应用。5道菜/7条评分原字段逐项保留，时间按微秒精度一致，未登录管理接口401/42501拒绝访问。Allow manual linking经用户确认后已保存。真实邮件送达、账号绑定和完整作者管理仍待验收；用户选择亲自快速注册验收，本地READY已开启供试点，尚不宣称正式开通。
