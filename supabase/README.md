@@ -29,6 +29,14 @@ Supabase公开Auth邮件实现使用gomail.NewDialer；该库默认仅端口465�
 
 依据：[学校邮箱参数](https://itc.zju.edu.cn/90691/list.htm)、[客户端专用密码](https://imap.zju.edu.cn/coremail/help/2fa_zh_CN.html)、[Supabase邮件实现](https://github.com/supabase/auth/blob/master/internal/mailer/mailmeclient/mailmeclient.go)、[gomail端口及STARTTLS实现](https://github.com/go-gomail/gomail/blob/master/smtp.go)。
 
+### 本机SMTP认证诊断（不发送邮件）
+
+用户已明确确认授权码生成、替换并保存，不能反复索要授权或重做配置。最近云端请求仍是QQ535。可运行 `node supabase/tools/smtp-diagnostic.mjs <Python可执行文件路径>`，在输出的127.0.0.1地址由用户本人输入现有授权码，脚本仅向smtp.qq.com:465执行TLS/EHLO/AUTH PLAIN，不执行MAIL/DATA，不保存授权码或修改Supabase。
+
+服务仅绑定loopback；Host、Origin和随机页面nonce校验，禁止嵌入、禁用缓存，单次运行最多2次认证，20分钟后关闭；子进程12秒截止。授权码通过私有stdin管道传递，不在进程参数/环境变量/文件/日志/状态接口中。测试使用虚构凭据和模拟认证，不能当作真实认证成功。
+
+本机235说明这次在本机输入的账号信息可被QQ接受，仍需比较Supabase实际配置与云端风控/环境，不能直接证明云端密码相同或必然是地区封锁。本机535说明同组凭据在本机也被拒绝；本机网络错误需单独定位。确认诊断结果前不重复发送验证码，不擅自关闭邮箱确认。
+
 ### 零付费多人邮箱登录候选（SMTP2GO HTTPS，待云端验收）
 
 2026-10-15目标：所有持有浙大邮箱的同学均可验证登录；每个已验证Auth用户最多五个发布档案，各自管理发布，评分仍按邮箱用户限制。五档案不是五个不同邮箱Auth账号，沿用用户先前明确选择的方案。
