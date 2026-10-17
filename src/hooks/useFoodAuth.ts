@@ -7,12 +7,19 @@ export function useFoodAuthState(): FoodAuthState {
   const [state, setState] = useState<{ user: FoodUser | null; loading: boolean; error: string }>({ user: null, loading: true, error: '' })
   const [attempt, setAttempt] = useState(0)
   const requestVersion = useRef(0)
-  const retry = useCallback(() => {
+  const checkUser = useCallback((event?: string, sessionUserId?: string | null) => {
     // Invalidate immediately: an auth event may arrive before React cleans up the old effect.
     requestVersion.current += 1
-    setState({ user: null, loading: true, error: '' })
+    setState((current) => {
+      // Refreshing an already verified account must not discard its unsaved forms.
+      // The event ID only permits keeping existing state; getUser still verifies it.
+      const sameVerifiedUser = (event === 'TOKEN_REFRESHED' || event === 'SIGNED_IN')
+        && !current.loading && !current.error && current.user?.verifiedCampus && current.user.id === sessionUserId
+      return sameVerifiedUser ? current : { user: null, loading: true, error: '' }
+    })
     setAttempt((n) => n + 1)
   }, [])
+  const retry = useCallback(() => checkUser(), [checkUser])
   useEffect(() => {
     let active = true
     const version = requestVersion.current
@@ -20,7 +27,7 @@ export function useFoodAuthState(): FoodAuthState {
       .catch((error) => { if (active && requestVersion.current === version) setState({ user: null, loading: false, error: error instanceof Error ? error.message : '账号加载失败，请重试。' }) })
     return () => { active = false }
   }, [attempt])
-  useEffect(() => watchFoodUser(retry), [retry])
+  useEffect(() => watchFoodUser(checkUser), [checkUser])
   return { ...state, retry }
 }
 export function useFoodAuth(): FoodAuthState {

@@ -158,6 +158,18 @@ async (page) => {
   await useSession('a')
   await page.locator('#my-posts a').filter({ hasText: '编辑' }).first().click()
   await page.locator('#publish-name').fill('A的未保存私人草稿')
+  await page.locator('#publish-image').setInputFiles('scratch/personal-center-desktop.png')
+  for (const event of ['TOKEN_REFRESHED', 'SIGNED_IN']) {
+    const confirmation = page.waitForResponse((response) => response.url() === service + '/auth/v1/user')
+    await page.evaluate(({ key, value, event }) => {
+      const channel = new BroadcastChannel(key)
+      channel.postMessage({ event, session: value })
+      channel.close()
+    }, { key: storageKey, value: session('a'), event })
+    await confirmation
+    await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))))
+    assert(await page.locator('#publish-name').inputValue() === 'A的未保存私人草稿' && await page.locator('#publish-image').evaluate((input) => input.files.length) === 1, `same-account ${event} retains unsaved text and local image after server verification`)
+  }
   await page.getByRole('button', { name: '退出登录', exact: true }).click()
   await page.getByRole('link', { name: '使用浙大邮箱登录', exact: true }).waitFor()
   assert(await page.locator('#publish-name').count() === 0 && !await hasText('A的未保存私人草稿'), 'logout unmounts author editor and clears unsaved private fields')

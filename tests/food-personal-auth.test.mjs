@@ -67,7 +67,7 @@ function createHookFixture() {
       }
       effects.clear()
     },
-    authChanged() { for (const listener of listeners) listener() },
+    authChanged(event, userId) { for (const listener of listeners) listener(event, userId) },
     unmount() { for (const slot of slots) slot?.cleanup?.() },
   }
   fixture.render(); fixture.flushEffects()
@@ -135,4 +135,114 @@ test('过时失败不会覆盖当前加载状态；当前失败允许重试且�
   fixture.requests[2].resolve(member('late-owner'))
   await settle()
   assert.equal(fixture.render().user, null)
+})
+
+test('同一已验证账号刷新或重复登录保留当前身份，并继续向服务端复核', async () => {
+  for (const event of ['TOKEN_REFRESHED', 'SIGNED_IN']) {
+    const fixture = createHookFixture()
+    const confirmedUser = member('same-owner')
+    fixture.requests[0].resolve(confirmedUser)
+    await settle()
+    fixture.render()
+    fixture.authChanged(event, confirmedUser.id)
+    let state = fixture.render()
+    assert.equal(state.user, confirmedUser); assert.equal(state.loading, false); assert.equal(state.error, '')
+    fixture.flushEffects()
+    assert.equal(fixture.requests.length, 2, 'keeping the form never skips server verification')
+    fixture.requests[1].resolve({ ...confirmedUser, email: 'server-confirmed@zju.edu.cn' })
+    await settle()
+    state = fixture.render()
+    assert.equal(state.user.email, 'server-confirmed@zju.edu.cn'); assert.equal(state.loading, false)
+    fixture.unmount()
+  }
+})
+
+test('同账号后台复核失败或不再验证时清空身份，不使用事件内容继续授权', async () => {
+  for (const outcome of ['error', 'signed-out', 'unverified']) {
+    const fixture = createHookFixture()
+    fixture.requests[0].resolve(member('owner'))
+    await settle(); fixture.render()
+    fixture.authChanged('TOKEN_REFRESHED', 'owner')
+    fixture.render(); fixture.flushEffects()
+    if (outcome === 'error') fixture.requests[1].reject(new Error('server verification failed'))
+    else fixture.requests[1].resolve(outcome === 'signed-out' ? null : { ...member('owner'), verifiedCampus: false })
+    await settle()
+    const state = fixture.render()
+    assert.equal(Boolean(state.user?.verifiedCampus), false); assert.equal(state.loading, false)
+    if (outcome === 'error') { assert.equal(state.user, null); assert.equal(state.error, 'server verification failed') }
+    fixture.unmount()
+  }
+})
+
+test('不同账号、登出、未知事件及手动重试立即清空，不沿用同账号刷新例外', async () => {
+  for (const change of [
+    (fixture) => fixture.authChanged('SIGNED_IN', 'other-owner'),
+    (fixture) => fixture.authChanged('TOKEN_REFRESHED', 'other-owner'),
+    (fixture) => fixture.authChanged('SIGNED_OUT', 'owner'),
+    (fixture) => fixture.authChanged('USER_UPDATED', 'owner'),
+    (fixture) => fixture.authChanged('INITIAL_SESSION', 'owner'),
+    (fixture) => fixture.authChanged('SIGNED_IN', null),
+    (fixture) => fixture.render().retry(),
+  ]) {
+    const fixture = createHookFixture()
+    fixture.requests[0].resolve(member('owner'))
+    await settle(); fixture.render()
+    change(fixture)
+    const state = fixture.render()
+    assert.equal(state.user, null); assert.equal(state.loading, true)
+    fixture.unmount()
+  }
+})
+
+test('事件中的同一ID不能把匿名或未确认账号提升为已验证身份', async () => {
+  for (const initialUser of [null, { ...member('owner'), anonymous: true, verifiedCampus: false }]) {
+    const fixture = createHookFixture()
+    fixture.requests[0].resolve(initialUser)
+    await settle(); fixture.render()
+    fixture.authChanged('SIGNED_IN', 'owner')
+    const state = fixture.render()
+    assert.equal(state.user, null); assert.equal(state.loading, true)
+    fixture.unmount()
+  }
+})
+
+test('后台旧成功和失败不能覆盖其后的登出或换账号，effect清理前也失效', async () => {
+  for (const staleOutcome of ['success', 'failure']) {
+    const fixture = createHookFixture()
+    fixture.requests[0].resolve(member('old-owner'))
+    await settle(); fixture.render()
+    fixture.authChanged('TOKEN_REFRESHED', 'old-owner')
+    fixture.render(); fixture.flushEffects()
+    fixture.authChanged(staleOutcome === 'success' ? 'SIGNED_OUT' : 'SIGNED_IN', staleOutcome === 'success' ? null : 'new-owner')
+    if (staleOutcome === 'success') fixture.requests[1].resolve(member('old-owner'))
+    else fixture.requests[1].reject(new Error('outdated background failure'))
+    await settle()
+    let state = fixture.render()
+    assert.equal(state.user, null); assert.equal(state.loading, true); assert.equal(state.error, '')
+    fixture.flushEffects()
+    fixture.requests[2].resolve(staleOutcome === 'success' ? null : member('new-owner'))
+    await settle()
+    state = fixture.render()
+    assert.equal(state.user?.id ?? null, staleOutcome === 'success' ? null : 'new-owner')
+    fixture.unmount()
+  }
+})
+
+test('新同账号后台请求取代旧请求，旧失败不能清空已保留的身份', async () => {
+  const fixture = createHookFixture()
+  fixture.requests[0].resolve(member('owner'))
+  await settle(); fixture.render()
+  fixture.authChanged('TOKEN_REFRESHED', 'owner')
+  fixture.render(); fixture.flushEffects()
+  fixture.authChanged('SIGNED_IN', 'owner')
+  fixture.requests[1].reject(new Error('stale background error'))
+  await settle()
+  let state = fixture.render()
+  assert.equal(state.user.id, 'owner'); assert.equal(state.loading, false); assert.equal(state.error, '')
+  fixture.flushEffects()
+  fixture.requests[2].resolve(member('owner'))
+  await settle()
+  state = fixture.render()
+  assert.equal(state.user.id, 'owner'); assert.equal(state.error, '')
+  fixture.unmount()
 })
