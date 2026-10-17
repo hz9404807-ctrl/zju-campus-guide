@@ -29,3 +29,11 @@ export interface FoodPublishInput {
   tags: string[]
   rating: number
 }
+
+export interface FoodRating {
+  food_id: string
+  rating: number
+  created_at: string
+  // Removed foods retain the caller's rating history without exposing their content.
+  food: Pick<Food, 'id' | 'name' | 'location' | 'image_url'> | null
+}

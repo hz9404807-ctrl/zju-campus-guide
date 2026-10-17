@@ -23,7 +23,8 @@ export function safeFoodReturn(value: string | null) {
   if (!value?.startsWith('/') || value.startsWith('//')) return '/food'
   try {
     const url = new URL(value, 'https://local.invalid')
-    return url.origin === 'https://local.invalid' && (url.pathname === '/food' || url.pathname.startsWith('/food/')) && !url.pathname.startsWith('/food/login') ? url.pathname + url.search + url.hash : '/food'
+    const allowedPage = url.pathname === '/account' || url.pathname === '/food' || url.pathname.startsWith('/food/')
+    return url.origin === 'https://local.invalid' && allowedPage && !url.pathname.startsWith('/food/login') ? url.pathname + url.search + url.hash : '/food'
   } catch { return '/food' }
 }
 export function foodUser(user: { id: string; email?: string; email_confirmed_at?: string; is_anonymous?: boolean }): FoodUser {

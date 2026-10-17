@@ -1,5 +1,5 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
-import type { Food, FoodPublishInput } from '../types/food'
+import type { Food, FoodPublishInput, FoodRating } from '../types/food'
 import { foodUser } from './foodAuth.ts'
 
 export class FoodServiceError extends Error {
@@ -143,10 +143,18 @@ export function createFoodApi(client: SupabaseClient, { profilesEnabled = false 
   }
 
   async function requireCampusUser() {
-    const { data, error } = await client.auth.getUser()
-    if (error) fail('AUTH_FAILED', '暂时无法验证登录状态，请重新检查账号后重试。你的填写仍然保留。')
-    if (!data.user || !foodUser(data.user).verifiedCampus) fail('LOGIN_REQUIRED', '请先使用浙大邮箱登录，再发布或管理美食。')
-    return data.user.id
+    try {
+      const { data, error } = await client.auth.getUser()
+      if (error) fail('AUTH_FAILED', '暂时无法验证登录状态，请重新检查账号后重试。你的填写仍然保留。')
+      if (!data.user || !foodUser(data.user).verifiedCampus) fail('LOGIN_REQUIRED', '请先使用浙大邮箱登录，再查看个人内容或管理美食。')
+      return data.user.id
+    } catch (error) {
+      if (error instanceof FoodServiceError) throw error
+      fail('AUTH_FAILED', '暂时无法验证登录状态，请检查网络后重试。')
+    }
+  }
+  async function confirmCampusUser(expectedUser: string) {
+    if (await requireCampusUser() !== expectedUser) fail('IDENTITY_CHANGED', '登录账号已变化，请重新加载当前账号的个人内容。')
   }
   function requireProfile(profileId?: string) {
     if (!profilesEnabled) return null
@@ -156,11 +164,49 @@ export function createFoodApi(client: SupabaseClient, { profilesEnabled = false 
   async function myFoods(profileId?: string): Promise<Food[]> {
     const userId = await requireCampusUser()
     const profile = requireProfile(profileId)
-    let query = client.from('food_summaries').select('*').eq('created_by', userId)
-    if (profile) query = query.eq('profile_id', profile)
-    const { data, error } = await query.order('created_at', { ascending: false })
-    if (error || !data) fail('LOAD_FAILED', '我的发布加载失败，请重试。')
-    return data.map((row) => toFood(row))
+    try {
+      let query = client.from('food_summaries').select('*').eq('created_by', userId)
+      if (profile) query = query.eq('profile_id', profile)
+      const { data, error } = await query.order('created_at', { ascending: false })
+      if (error || !data) fail('LOAD_FAILED', '我的发布加载失败，请重试。')
+      const foods = data.map((row) => toFood(row))
+      await confirmCampusUser(userId)
+      return foods
+    } catch (error) {
+      if (error instanceof FoodServiceError) throw error
+      fail('LOAD_FAILED', '我的发布加载失败，请检查网络后重试。')
+    }
+  }
+  async function myRatings(): Promise<FoodRating[]> {
+    const userId = await requireCampusUser()
+    try {
+      // The RPC uses auth.uid(), never a client-supplied user ID. Existing public
+      // ratings SELECT policies intentionally remain unchanged for food summaries.
+      const { data, error } = await client.rpc('list_my_food_ratings')
+      if (error?.code === 'PGRST202' || error?.code === '42883') fail('NOT_READY', '我的评分尚待共享服务接入，请联系项目维护者完成增量迁移。')
+      if (error?.code === '42501') fail('LOGIN_REQUIRED', '请先使用已验证的浙大邮箱登录，再查看我的评分。')
+      if (error || !Array.isArray(data)) fail('LOAD_FAILED', '我的评分加载失败，请重试。')
+      const ratings: FoodRating[] = data.map((row: Record<string, unknown>) => {
+        if (!row || typeof row.food_id !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(row.food_id)
+          || !Number.isInteger(row.rating) || Number(row.rating) < 1 || Number(row.rating) > 5
+          || typeof row.created_at !== 'string' || !Number.isFinite(Date.parse(row.created_at))
+          || !((row.food_name === null && row.food_location === null && row.food_image_url === null)
+            || (typeof row.food_name === 'string' && row.food_name.trim() && typeof row.food_location === 'string' && row.food_location.trim()
+              && (row.food_image_url === null || typeof row.food_image_url === 'string')))) {
+          fail('LOAD_FAILED', '我的评分数据异常，请重试。')
+        }
+        return {
+          food_id: row.food_id, rating: Number(row.rating), created_at: row.created_at,
+          food: row.food_name === null ? null : { id: row.food_id, name: row.food_name as string, location: row.food_location as string, image_url: row.food_image_url as string | null },
+        }
+      })
+      if (new Set(ratings.map((rating) => rating.food_id)).size !== ratings.length) fail('LOAD_FAILED', '我的评分数据异常，请重试。')
+      await confirmCampusUser(userId)
+      return ratings
+    } catch (error) {
+      if (error instanceof FoodServiceError) throw error
+      fail('LOAD_FAILED', '我的评分加载失败，请检查网络后重试。')
+    }
   }
   function mutationError(error: { code?: string } | null) {
     if (error?.code === '40001') fail('EDIT_CONFLICT', '这条发布已在其他页面更新，请重新打开后再操作。')
@@ -195,6 +241,6 @@ export function createFoodApi(client: SupabaseClient, { profilesEnabled = false 
     const { error } = await client.rpc(profile ? 'set_profile_food_deleted' : 'set_own_food_deleted', { ...(profile ? { p_profile_id: profile } : {}), p_food_id: id, p_expected_updated_at: updatedAt, p_deleted: deleted })
     mutationError(error)
   }
-  return { ensureIdentity, listFoods, getFood, getMyRating, rateFood, publishFood, myFoods, updateFood, setFoodDeleted }
+  return { ensureIdentity, listFoods, getFood, getMyRating, rateFood, publishFood, myFoods, myRatings, updateFood, setFoodDeleted }
 
 }

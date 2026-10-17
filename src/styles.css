@@ -109,6 +109,7 @@ button:focus-visible, a:focus-visible {
 }
 .menu-toggle svg { width: 22px; height: 22px; }
 .mobile-nav { display: none; }
+.mobile-account-entry { display: none; }
 .main-content { flex: 1; padding-block: 58px 64px; }
 .main-content:focus { outline: none; }
 .page { animation: page-enter .3s ease both; }
@@ -243,6 +244,9 @@ button:focus-visible, a:focus-visible {
   .nav-link { padding-inline: 13px; }
   .desktop-nav, .about-link { display: none; }
   .menu-toggle { display: flex; }
+  .mobile-account-entry { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; flex-shrink: 0; margin-left: auto; color: var(--blue); border-radius: 10px; }
+  .mobile-account-entry.active { background: var(--blue-soft); }
+  .mobile-account-entry + .menu-toggle { margin-left: 0; }
   .mobile-nav { display: flex; flex-direction: column; gap: 4px; padding: 8px 24px 16px; border-top: 1px solid var(--line); background: white; }
   .mobile-nav .nav-link { padding-inline: 16px; }
   .module-card { padding: 26px; }
@@ -268,6 +272,7 @@ button:focus-visible, a:focus-visible {
 @media (max-width: 560px) {
   .header-inner, .main-content, .footer-inner { width: calc(100% - 36px); }
   .header-inner { min-height: 68px; }
+  .header-inner { gap: 6px; }
   .brand { gap: 10px; }
   .brand-mark { width: 39px; height: 39px; border-radius: 11px; }
   .brand-mark svg { width: 23px; height: 23px; }

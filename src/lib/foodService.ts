@@ -86,6 +86,7 @@ export async function sendFoodCode(email: string, mode: 'bind' | 'login') {
 export async function verifyFoodCode(email: string, token: string, type: 'email_change' | 'email') { getApi(); return auth!.verifyCode(email, token, type) }
 export async function signOutFood() { getApi(); return auth!.signOut() }
 export async function myFoods(profileId?: string) { return getApi().myFoods(profileId) }
+export async function myRatings() { return getApi().myRatings() }
 export async function updateFood(id: string, updatedAt: string, input: FoodPublishInput, image: File | null, removeImage: boolean, profileId?: string) { return getApi().updateFood(id, updatedAt, input, image, removeImage, profileId) }
 export async function setFoodDeleted(id: string, updatedAt: string, deleted: boolean, profileId?: string) { return getApi().setFoodDeleted(id, updatedAt, deleted, profileId) }
 

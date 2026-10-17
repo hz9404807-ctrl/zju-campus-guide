@@ -60,11 +60,22 @@ try {
   const emailResults = await db.exec(emailChecks)
   console.log(emailResults.flatMap((r) => r.rows ?? []).find((r) => r.result)?.result ?? 'Email management checks passed.')
   console.log(`Email assertions: ${(emailChecks.match(/select pg_temp\.(?:check_it|expect_state)\(/g) ?? []).length}`)
+  // The personal-center migration must work on the deployed email-only schema;
+  // it must not depend on opening the still-deferred profile rollout.
+  await db.exec(await readFile(new URL('../migrations/202610170001_personal_center_ratings.sql', import.meta.url), 'utf8'))
+  const personalChecks = await readFile(new URL('../personal-center.tests.sql', import.meta.url), 'utf8')
+  async function checkPersonalHistory(stage) {
+    const personalResults = await db.exec(personalChecks)
+    console.log(personalResults.flatMap((r) => r.rows ?? []).find((r) => r.result)?.result ?? 'Personal-center checks passed.')
+    console.log(`Personal-center assertions (${stage}): ${(personalChecks.match(/select pg_temp\.(?:check_personal|expect_personal)\(/g) ?? []).length}`)
+  }
+  await checkPersonalHistory('email-only schema')
   await db.exec(await readFile(new URL('../migrations/202610130002_food_profiles.sql', import.meta.url), 'utf8'))
   const profileChecks = await readFile(new URL('../food-profiles.tests.sql', import.meta.url), 'utf8')
   const profileResults = await db.exec(profileChecks)
   console.log(profileResults.flatMap((r) => r.rows ?? []).find((r) => r.result)?.result ?? 'Profile checks passed.')
   console.log('Profile assertions: ' + (profileChecks.match(/select pg_temp\.(?:check_profile|expect_profile)\(/g) ?? []).length)
+  await checkPersonalHistory('profile-compatible schema')
   const leftover = await db.query('select (select count(*) from public.foods)::int as foods, (select count(*) from public.ratings)::int as ratings, (select count(*) from auth.users)::int as users, (select count(*) from public.food_profiles)::int as profiles')
   if (Object.values(leftover.rows[0]).some((count) => count !== 0)) {
     throw new Error('SQL tests did not roll back all their fixtures')
