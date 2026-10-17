@@ -10,6 +10,7 @@ import {
   Info,
   Menu,
   Utensils,
+  UserRound,
   X,
 } from 'lucide-react'
 import { GuideDetailPage, GuidePage } from './pages/GuidePages'
@@ -17,6 +18,7 @@ import { FoodDetailPage, FoodPage } from './pages/FoodPages'
 import { FoodPublishPage } from './pages/FoodPublishPage'
 import { FoodLoginPage } from './pages/FoodLoginPage'
 import { FoodMinePage } from './pages/FoodMinePage'
+import { PersonalCenterPage } from './pages/PersonalCenterPage'
 import { SourcesPage, SourceDetailPage } from './pages/SourcePages'
 import contentManifest from './data/content-manifest.json'
 import { initializeFoodIdentity } from './lib/foodService'
@@ -26,6 +28,7 @@ const navigation = [
   { to: '/guides', label: '校园办事' },
   { to: '/food', label: '美食点评' },
   { to: '/sources', label: '信息源导航' },
+  { to: '/account', label: '个人中心' },
 ]
 
 const pageTitles: Record<string, string> = {
@@ -35,6 +38,7 @@ const pageTitles: Record<string, string> = {
   '/food/new': '发布美食',
   '/food/login': '浙大邮箱登录',
   '/food/mine': '我的发布',
+  '/account': '个人中心',
   '/sources': '校园信息源导航',
   '/about': '关于项目',
 }
@@ -77,6 +81,7 @@ function Header() {
         </Link>
         <nav className="desktop-nav" aria-label="主导航">{links}</nav>
         <NavLink to="/about" className="about-link">关于项目</NavLink>
+        <NavLink to="/account" className="mobile-account-entry" aria-label="个人中心" title="个人中心"><UserRound size={21} aria-hidden="true" /></NavLink>
         <button
           ref={menuButton}
           className="menu-toggle"
@@ -204,6 +209,7 @@ export default function App() {
           <Route path="/guides" element={<GuidePage />} />
           <Route path="/guides/:guideId" element={<GuideDetailPage />} />
           <Route element={<FoodAccountProvider />}>
+            <Route path="/account" element={<PersonalCenterPage />} />
             <Route path="/food" element={<FoodPage />} />
             <Route path="/food/login" element={<FoodLoginPage />} />
             <Route path="/food/mine" element={<FoodMinePage />} />

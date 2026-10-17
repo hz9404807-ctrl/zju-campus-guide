@@ -9,6 +9,7 @@ dist/
 .DS_Store
 Thumbs.db
 artifacts/
+.playwright-cli/
 outputs/*.tar.gz
 outputs/deployment-result.json
 outputs/*.bundle

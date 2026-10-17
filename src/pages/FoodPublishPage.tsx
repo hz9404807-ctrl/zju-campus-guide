@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
-import { Link, useNavigate, useParams, useSearchParams } from 'react-router'
+import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router'
 import { ArrowLeft, ArrowRight, Check, ImagePlus, Info, LoaderCircle, MapPin, X } from 'lucide-react'
 import StarRating from '../components/StarRating'
 import { isFoodBackendConfigured, getFood, listFoods, publishFood, updateFood } from '../lib/foodService'
@@ -19,6 +19,19 @@ function FieldError({ field, errors }: { field: FoodPublishField; errors: FoodPu
 }
 
 export function FoodPublishPage() {
+  const auth = useFoodAuth()
+  const location = useLocation()
+  const { foodId } = useParams()
+  if (!auth.loading && !auth.error && auth.user?.verifiedCampus) return <FoodPublishForm key={auth.user.id} />
+  return <div className="page module-page food-publish-page">
+    <Link className="breadcrumb" to="/account">返回个人中心</Link>
+    <div className="page-heading"><h1>{foodId ? '编辑美食发布' : '发布一道菜'}</h1></div>
+    <FoodAccountBar auth={auth} />
+    {!auth.loading && !auth.error && <p className="food-account-notice">请先<Link to={`/food/login?returnTo=${encodeURIComponent(location.pathname + location.search + location.hash)}`}>使用浙大邮箱登录</Link>，再{foodId ? '编辑自己的发布' : '发布美食'}。</p>}
+  </div>
+}
+
+function FoodPublishForm() {
   const auth = useFoodAuth()
   const profiles = useFoodProfiles()
   const profileId = profiles.active?.id

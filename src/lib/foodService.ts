@@ -71,11 +71,11 @@ export async function publishFood(input: FoodPublishInput, image: File | null, p
 }
 
 export async function currentFoodUser() { if (!isFoodBackendConfigured) return null; getApi(); return auth!.currentUser() }
-export function watchFoodUser(onChange: () => void) {
+export function watchFoodUser(onChange: (event: string, userId: string | null) => void) {
   if (!isFoodBackendConfigured) return () => {}
   try {
     getApi()
-    const { data } = clientInstance!.auth.onAuthStateChange(() => onChange())
+    const { data } = clientInstance!.auth.onAuthStateChange((event, session) => onChange(event, session?.user.id ?? null))
     return () => data.subscription.unsubscribe()
   } catch { return () => {} }
 }
@@ -86,6 +86,7 @@ export async function sendFoodCode(email: string, mode: 'bind' | 'login') {
 export async function verifyFoodCode(email: string, token: string, type: 'email_change' | 'email') { getApi(); return auth!.verifyCode(email, token, type) }
 export async function signOutFood() { getApi(); return auth!.signOut() }
 export async function myFoods(profileId?: string) { return getApi().myFoods(profileId) }
+export async function myRatings() { return getApi().myRatings() }
 export async function updateFood(id: string, updatedAt: string, input: FoodPublishInput, image: File | null, removeImage: boolean, profileId?: string) { return getApi().updateFood(id, updatedAt, input, image, removeImage, profileId) }
 export async function setFoodDeleted(id: string, updatedAt: string, deleted: boolean, profileId?: string) { return getApi().setFoodDeleted(id, updatedAt, deleted, profileId) }
 

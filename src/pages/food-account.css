@@ -28,3 +28,42 @@
 .food-profile-create button { text-align: left; }
 .food-profile-picker .food-account-hint { margin-top: 6px; }
 .food-profile-picker :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+.personal-center-page { max-width: 980px; margin-inline: auto; }
+.account-guest, .account-overview { padding: 28px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; }
+.account-guest { display: grid; justify-items: start; gap: 18px; }
+.account-guest > svg { color: var(--blue); }
+.account-guest h2, .account-overview h2, .account-section h2 { font-size: 22px; line-height: 1.5; }
+.account-guest > p { max-width: 600px; color: var(--muted); line-height: 1.9; }
+.account-overview-heading, .account-section-heading, .account-item-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+.account-verified { display: inline-flex; align-items: center; gap: 7px; color: var(--blue); font-size: 14px; }
+.account-overview dl { margin: 24px 0 0; }
+.account-overview dt { margin-bottom: 8px; color: var(--muted); font-size: 14px; }
+.account-overview dd { margin: 0; overflow-wrap: anywhere; font-size: 19px; line-height: 1.6; font-weight: 600; }
+.account-sign-out { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; min-height: 44px; background: transparent; border: 1px solid var(--line); border-radius: 9px; padding: 8px 14px; color: var(--ink); }
+.account-section-nav { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-block: 24px; border-bottom: 1px solid var(--line); }
+.account-section-nav a { padding-block: 12px; min-height: 44px; color: var(--blue); font-weight: 600; }
+.account-section { margin-top: 32px; scroll-margin-top: 100px; }
+.account-section-heading { margin-bottom: 16px; }
+.account-section-heading p { color: var(--muted); font-size: 14px; line-height: 1.8; margin-top: 6px; }
+.account-state, .account-empty { padding: 24px; border: 1px solid var(--line); background: var(--card); border-radius: 12px; line-height: 1.8; }
+.account-state .button-link, .account-empty .button-link { margin-top: 16px; }
+.account-empty p { color: var(--muted); font-size: 14px; margin-top: 8px; }
+.account-item-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.account-post, .account-rating { min-width: 0; padding: 22px 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); overflow-wrap: anywhere; }
+.account-item-heading h3 { font-size: 18px; line-height: 1.6; }
+.account-item-heading a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.account-item-status { font-size: 13px; color: var(--blue); }
+.account-item-status.withdrawn { color: var(--muted); }
+.account-item-meta { color: var(--muted); line-height: 1.8; margin-top: 6px; font-size: 14px; }
+.account-item-list .food-account-actions { margin-top: 12px; }
+.account-item-list .food-account-actions a { color: var(--blue); min-height: 44px; display: inline-flex; align-items: center; text-decoration: underline; text-underline-offset: 4px; }
+.account-rating-score { display: inline-flex; align-items: center; gap: 6px; color: var(--warm-dark); font-size: 15px; }
+.account-detail-link { display: inline-flex; align-items: center; gap: 6px; color: var(--blue); min-height: 44px; margin-top: 8px; }
+.account-text-button { min-height: 44px; background: transparent; border: 0; color: var(--blue); text-decoration: underline; }
+@media (max-width: 600px) {
+  .account-guest, .account-overview, .account-state, .account-empty { padding: 20px; }
+  .account-post, .account-rating { padding: 18px; }
+  .account-overview dd { font-size: 17px; }
+  .account-section-heading { align-items: flex-start; }
+}
