@@ -47,11 +47,12 @@
 @media (max-width: 900px) { .account-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 660px) { .account-grid, .website-grid, .source-detail-grid { grid-template-columns: 1fr; } .account-preview { height: 170px; } .source-detail-copy { padding: 22px; } .source-tabs button { padding-inline: 12px; font-size: 13px; } }
 
-/* Directory cards put names and provenance before the original screenshot. */
+/* Original collection screenshots make each account recognizable. */
 .account-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-.account-card { position: relative; display: grid; grid-template-columns: 56px minmax(0, 1fr); align-items: start; gap: 18px; padding: 24px; border-radius: 12px; box-shadow: none; }
-.account-monogram { display: grid; place-items: center; width: 56px; height: 56px; background: #edf3fb; color: var(--blue); border: 1px solid #dce6f3; border-radius: 14px; font-size: 18px; font-weight: 650; letter-spacing: .06em; }
-.account-card-body { min-width: 0; padding: 0; }
+.account-card { position: relative; display: flex; flex-direction: column; gap: 0; padding: 0; border-radius: 16px; box-shadow: none; }
+.account-card .account-preview { height: 174px; padding: 16px 20px; background: #f8fafc; border-bottom: 1px solid #e6ecf3; }
+.account-card .account-preview img { border-radius: 5px; }
+.account-card-body { min-width: 0; padding: 22px 24px; }
 .account-card .guide-card-labels { margin-bottom: 8px; }
 .account-card h3 { font-size: 19px; }
 .account-summary { margin-bottom: 12px; }
@@ -62,8 +63,8 @@
 .source-tabs button[aria-pressed="true"] { background: white; color: var(--blue); box-shadow: 0 2px 6px #173f7510; font-weight: 650; }
 @media(max-width: 700px) {
   .account-grid { grid-template-columns: 1fr; }
-  .account-card { padding: 20px; gap: 14px; grid-template-columns: 44px minmax(0, 1fr); }
-  .account-monogram { width: 44px; height: 44px; font-size: 15px; border-radius: 11px; }
+  .account-card-body { padding: 18px 20px; }
+  .account-card .account-preview { height: auto; aspect-ratio: 2.8; padding: 12px 16px; }
   .account-card h3 { font-size: 18px; }
   .source-tabs { width: 100%; }
   .source-tabs button { flex: 1; justify-content: center; padding-inline: 8px; gap: 6px; font-size: 13px; }

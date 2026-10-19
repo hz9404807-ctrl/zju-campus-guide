@@ -132,7 +132,7 @@ async (page) => {
   assert(true, 'existing withdraw and restore RPC flow works from personal center')
   assert((await post.getByRole('link', { name: '编辑', exact: true }).getAttribute('href')) === `/food/${foodA}/edit`, 'edit reuses existing author editor')
   await page.locator('#my-ratings').getByRole('link', { name: '查看美食详情' }).click()
-  await page.getByRole('heading', { name: 'A的测试菜品', exact: true }).waitFor()
+  await page.getByRole('heading', { name: 'A的测试菜品', exact: true, level: 1 }).waitFor()
   await page.goBack()
   await visible('账号概览')
   assert(true, 'rating opens corresponding food detail and returns')

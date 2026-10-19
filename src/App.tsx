@@ -108,7 +108,7 @@ function Header() {
 function HomePage() {
   return (
     <div className="page home-page">
-      <section className="hero" aria-labelledby="home-title">
+      <section className="hero" aria-labelledby="home-title"><div className="hero-edition" aria-hidden="true"><span>ZJU / CAMPUS COMPANION</span><span>学习 · 生活 · 在浙里</span></div>
         <div className="hero-copy"><p className="eyebrow">在浙里 · 过好校园每一天</p>
           <h1 id="home-title">校园大小事，<br /><span>都有好去处。</span></h1>
           <p className="hero-description">找清楚的办事指引，也找一顿喜欢的饭。<br />你的校园生活，从这里出发。</p>
@@ -122,7 +122,7 @@ function HomePage() {
         <Link to="/guides" className="module-card guide-card">
           <div className="card-top">
             <span className="module-icon blue"><ClipboardList size={29} aria-hidden="true" /></span>
-            <span className="module-category">办事有章可循</span>
+            <span className="module-category"><b aria-hidden="true">01</b> 办事有章可循</span>
           </div>
           <h2>校园办事指南</h2>
           <p>遇到问题，从这里找答案。<br />办理步骤、材料和地点，清楚地放在一起。</p>
@@ -133,7 +133,7 @@ function HomePage() {
         <Link to="/food" className="module-card food-card">
           <div className="card-top">
             <span className="module-icon warm"><Utensils size={29} aria-hidden="true" /></span>
-            <span className="module-category">认真吃饭，好好生活</span>
+            <span className="module-category"><b aria-hidden="true">02</b> 认真吃饭，好好生活</span>
           </div>
           <FoodArtwork /><h2>浙大美食点评</h2>
           <p>今天吃什么，看看同学怎么说。<br />校园内外的菜品、地点和评分，一起了解。</p>
@@ -205,7 +205,7 @@ export default function App() {
   }, [location.pathname])
 
   return (
-    <div className={`app-shell ${location.pathname.startsWith('/food') ? 'theme-food' : 'theme-information'}`}>
+    <div className={`app-shell ${location.pathname.startsWith('/food') && location.pathname !== '/food/login' ? 'theme-food' : 'theme-information'}`}>
       <a className="skip-link" href="#main-content">跳转到主要内容</a>
       <Header />
       <main className="main-content" id="main-content" ref={mainContent} tabIndex={-1}>

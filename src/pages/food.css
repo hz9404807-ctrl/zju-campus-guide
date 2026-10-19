@@ -153,7 +153,7 @@
   .food-item-card:hover { transform: none; box-shadow: var(--shadow); }
 }
 
-/* A warmer food journal, using the shared blue for navigation and actions. */
+/* A warmer food journal, with honey-yellow actions and dark, readable labels. */
 .food-list-page .food-welcome { position: relative; padding: 24px 30px; background: #fff2dd; border: 1px solid #efdfc6; border-radius: 24px; overflow: hidden; margin-bottom: 14px; }
 .food-list-page .food-welcome .breadcrumb { margin: 0 0 5px; min-height: 44px; font-size: 12px; color: #80694e; }
 .food-list-page .food-welcome .eyebrow { color: #99612a; font-size: 12px; letter-spacing: .12em; margin-bottom: 4px; }
@@ -220,3 +220,19 @@
   .food-list-page .food-heading-actions > .food-artwork { width: 110px; right: -25px; bottom: 3px; }
   .food-list-page .food-heading-actions h1 { font-size: 24px; }
 }
+
+/* Yellow belongs to food actions; global navigation retains the campus blue. */
+.theme-food { --food-accent: #f6c453; --food-accent-hover: #edb638; --food-action-ink: #49310d; }
+.theme-food .main-content .button-link,
+.theme-food .food-publish-entry,
+.food-list-page .food-area-tab.active { background: var(--food-accent); border-color: #eaba50; color: var(--food-action-ink); box-shadow: 0 3px 8px #b17b1710; }
+.theme-food .main-content .button-link:hover,
+.theme-food .food-publish-entry:hover,
+.food-list-page .food-area-tab.active:hover { background: var(--food-accent-hover); color: #382507; }
+.food-list-page .food-area-tabs { background: #fff8e8; border-color: #efdfb9; }
+.food-list-page .food-area-tab { color: #806947; }
+.theme-food .food-account-bar a, .theme-food .food-account-bar button,
+.theme-food .food-card-link, .theme-food .food-clear-filters { color: #8a570c; }
+.food-list-page .food-select-field select { border-color: #e5d8be; background-color: #fffefa; }
+.theme-food .food-account-bar { background-color: #fff8e7; }
+.food-list-page > .food-account-bar { background: transparent; }
