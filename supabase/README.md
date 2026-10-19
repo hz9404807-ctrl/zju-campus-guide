@@ -1,3 +1,9 @@
+## 2026-10-19 个人中心及邮箱写入限制
+
+原项目已应用 `202610170001_personal_center_ratings.sql` 与 `202610180001_food_verified_writes.sql`。前者开放按当前账号查询评分历史，后者使 `require_email=true` 并在评分 INSERT 策略中验证真实校园邮箱。旧菜品、评分、公开读取、SMTP 均保留；五档案尚未开通。
+
+新环境按 initial → food_email_management → personal_center_ratings → food_verified_writes 部署；不要在已有项目重跑旧迁移。验收可使用 `verify-personal-center.sql`，仅检查权限和现有数据，无写入测试数据。下方为历次配置记录，较早的“本轮未执行”不代表当前状态。
+
 # Supabase 数据库与图片配置
 
 ## 当前路线：QQ邮箱原生SMTP465（2026-10-15，云端认证535待解决）

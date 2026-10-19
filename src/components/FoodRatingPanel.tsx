@@ -1,5 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
+import { Link, useLocation } from 'react-router'
+import { useFoodAuth } from '../hooks/useFoodAuth'
 import { Check, Info, LoaderCircle, RefreshCw, Star } from 'lucide-react'
 import { FoodServiceError } from '../lib/foodApi'
 import { getMyRating, isFoodBackendConfigured, rateFood } from '../lib/foodService'
@@ -134,11 +136,11 @@ function FoodRatingPanelContent({ food, onRated }: FoodRatingPanelProps) {
   }
 
   return (
-    <section className="food-rating-panel food-rating-panel-interactive" aria-labelledby={`${panelId}-title`} aria-busy={busy || status === 'checking' || readingPreviousRating}>
+    <section id="food-rating" className="food-rating-panel food-rating-panel-interactive" aria-labelledby={`${panelId}-title`} aria-busy={busy || status === 'checking' || readingPreviousRating}>
       <div className="food-rating-panel-icon"><Star size={24} aria-hidden="true" /></div>
       <div className="food-rating-panel-body">
         <h2 id={`${panelId}-title`}>给这道菜评分</h2>
-        <p className="food-rating-rule">每个匿名身份对同一道菜只能评分一次，提交后不支持修改。</p>
+        <p className="food-rating-rule">每个已验证的浙大邮箱账号对同一道菜只能评分一次，提交后不支持修改。</p>
 
         {status === 'checking' && <div className="food-rating-checking" role="status"><LoaderCircle size={18} className="food-rating-spinner" aria-hidden="true" /><span>正在检查你的评分记录…</span></div>}
 
@@ -164,6 +166,23 @@ function FoodRatingPanelContent({ food, onRated }: FoodRatingPanelProps) {
 }
 
 export function FoodRatingPanel({ food, onRated }: FoodRatingPanelProps) {
+  const auth = useFoodAuth()
+  const location = useLocation()
   const mode = !food.isExample && isFoodBackendConfigured ? 'live' : 'example'
-  return <FoodRatingPanelContent key={`${food.id}-${mode}`} food={food} onRated={onRated} />
+  // Do not mount the private rating lookup or submission form until the account
+  // has been verified. Public food information remains visible above this panel.
+  if (mode === 'live' && (auth.loading || auth.error || !auth.user?.verifiedCampus)) {
+    const returnTo = location.pathname + location.search + (location.hash || '#food-rating')
+    return <section id="food-rating" className="food-rating-panel" aria-labelledby="food-rating-login-title">
+      <div className="food-rating-panel-icon"><Star size={24} aria-hidden="true" /></div>
+      <div className="food-rating-panel-body">
+        <h2 id="food-rating-login-title">给这道菜评分</h2>
+        {auth.loading ? <p role="status">正在确认登录状态…</p> : auth.error ? <><p role="alert">{auth.error}</p><button type="button" className="food-rating-retry" onClick={auth.retry}>重新检查账号</button></> : <>
+          <p className="food-rating-rule">浏览无需登录。使用浙大邮箱登录后，可为这道菜评分，每个账号限一次。</p>
+          <Link className="button-link" to={`/food/login?returnTo=${encodeURIComponent(returnTo)}`}>登录后评分</Link>
+        </>}
+      </div>
+    </section>
+  }
+  return <FoodRatingPanelContent key={`${food.id}-${mode}-${auth.user?.id ?? 'guest'}`} food={food} onRated={onRated} />
 }

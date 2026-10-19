@@ -98,7 +98,7 @@ export function createFoodApi(client: SupabaseClient, { profilesEnabled = false 
 
   async function rateFood(foodId: string, rating: number): Promise<void> {
     if (!Number.isInteger(rating) || rating < 1 || rating > 5) fail('INVALID_RATING', '请选择 1～5 星评分。')
-    const userId = await ensureIdentity()
+    const userId = await requireCampusUser()
     try {
       const { error } = await client.from('ratings').insert({ food_id: foodId, user_id: userId, rating })
       if (error?.code === '23505') fail('ALREADY_RATED', '你已经评分过该菜品。')
@@ -146,7 +146,7 @@ export function createFoodApi(client: SupabaseClient, { profilesEnabled = false 
     try {
       const { data, error } = await client.auth.getUser()
       if (error) fail('AUTH_FAILED', '暂时无法验证登录状态，请重新检查账号后重试。你的填写仍然保留。')
-      if (!data.user || !foodUser(data.user).verifiedCampus) fail('LOGIN_REQUIRED', '请先使用浙大邮箱登录，再查看个人内容或管理美食。')
+      if (!data.user || !foodUser(data.user).verifiedCampus) fail('LOGIN_REQUIRED', '请先使用浙大邮箱登录，再评分、查看个人内容或管理美食。')
       return data.user.id
     } catch (error) {
       if (error instanceof FoodServiceError) throw error

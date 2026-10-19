@@ -37,10 +37,11 @@ function response(configured, fallback, argument) {
 }
 
 function makeClient(options = {}) {
-  const calls = { getSession: 0, signInAnonymously: 0, queries: [], inserts: [], uploads: [], publicUrls: [], rpc: [] }
+  const calls = { getUser: 0, getSession: 0, signInAnonymously: 0, queries: [], inserts: [], uploads: [], publicUrls: [], rpc: [] }
   const client = {
     auth: {
       async getUser() {
+        calls.getUser += 1
         return response(options.getUser, { data: { user: { id: USER_ID, email: 'fixture@zju.edu.cn', email_confirmed_at: '2026-10-13T00:00:00Z', is_anonymous: false } }, error: null })
       },
       async getSession() {
@@ -300,6 +301,9 @@ for (const rating of [1, 2, 3, 4, 5]) {
   test(`提交 ${rating} 星评分时使用当前用户的身份`, async () => {
     const { api, calls } = makeClient()
     await api.rateFood(FOOD_ID, rating)
+    assert.equal(calls.getUser, 1)
+    assert.equal(calls.getSession, 0)
+    assert.equal(calls.signInAnonymously, 0)
     assert.deepEqual(calls.inserts, [{ table: 'ratings', payload: { food_id: FOOD_ID, user_id: USER_ID, rating } }])
   })
 }
@@ -525,4 +529,31 @@ test('wrong profile cannot edit or upload; correct profile uses guarded manageme
   assert.equal(calls.rpc[0].name, 'update_profile_food')
   assert.equal(calls.rpc[1].name, 'set_profile_food_deleted')
   assert.equal(calls.rpc[1].parameters.p_profile_id, PROFILE_ID)
+})
+
+for (const [label, user] of [
+  ['无会话', null],
+  ['匿名用户', { id: USER_ID, is_anonymous: true }],
+  ['伪造匿名邮箱验证字段', { id: USER_ID, is_anonymous: true, email: 'fixture@zju.edu.cn', email_confirmed_at: '2026-10-18T00:00:00Z' }],
+  ['未验证邮箱', { id: USER_ID, is_anonymous: false, email: 'fixture@zju.edu.cn' }],
+  ['非浙大邮箱', { id: USER_ID, is_anonymous: false, email: 'fixture@example.invalid', email_confirmed_at: '2026-10-18T00:00:00Z' }],
+]) {
+  test(`评分拒绝${label}，不创建匿名身份或写入记录`, async () => {
+    const { api, calls } = makeClient({ getUser: { data: { user }, error: null } })
+    await expectServiceError(api.rateFood(FOOD_ID, 4), 'LOGIN_REQUIRED')
+    assert.equal(calls.getUser, 1)
+    assert.equal(calls.signInAnonymously, 0)
+    assert.equal(calls.queries.length, 0)
+    assert.equal(calls.inserts.length, 0)
+  })
+}
+
+test('评分必须等服务端身份验证成功；网络失败不能写入', async () => {
+  const gate = Promise.withResolvers()
+  const { api, calls } = makeClient({ getUser: () => gate.promise })
+  const pending = api.rateFood(FOOD_ID, 5)
+  assert.equal(calls.inserts.length, 0)
+  gate.reject(new Error('offline'))
+  await expectServiceError(pending, 'AUTH_FAILED')
+  assert.equal(calls.inserts.length, 0)
 })

@@ -145,7 +145,7 @@ export function FoodPage() {
           <Link className="food-publish-entry" to={`/food/new${searchParams.size ? `?${searchParams}` : ''}`}><Plus size={18} aria-hidden="true" />发布这道美食</Link>
         </section>
       )}
-      <section className="food-sharing-note" aria-labelledby="food-sharing-title"><Utensils size={22} aria-hidden="true" /><div><h2 id="food-sharing-title">一起分享吃过的菜</h2><p>{isFoodBackendConfigured ? '可以发布菜品，并对每道菜评分一次。使用浙大邮箱登录后，可在“我的发布”中编辑或删除自己的菜品。' : '可以体验发布表单和星级选择。共享服务尚未连接，填写内容和选择的星级不会保存到美食墙。'}</p></div></section>
+      <section className="food-sharing-note" aria-labelledby="food-sharing-title"><Utensils size={22} aria-hidden="true" /><div><h2 id="food-sharing-title">一起分享吃过的菜</h2><p>{isFoodBackendConfigured ? '使用浙大邮箱登录后，可以发布菜品，并对每道菜评分一次；在“个人中心”中查看自己的评分，编辑、撤下或恢复自己的发布。' : '可以体验发布表单和星级选择。共享服务尚未连接，填写内容和选择的星级不会保存到美食墙。'}</p></div></section>
     </div>
   )
 }

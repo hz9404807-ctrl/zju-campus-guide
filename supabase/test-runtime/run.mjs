@@ -69,13 +69,22 @@ try {
     console.log(personalResults.flatMap((r) => r.rows ?? []).find((r) => r.result)?.result ?? 'Personal-center checks passed.')
     console.log(`Personal-center assertions (${stage}): ${(personalChecks.match(/select pg_temp\.(?:check_personal|expect_personal)\(/g) ?? []).length}`)
   }
+  async function checkVerifiedWrites(stage) {
+    const verifiedMigration = await readFile(new URL('../migrations/202610180001_food_verified_writes.sql', import.meta.url), 'utf8')
+    const verifiedChecks = await readFile(new URL('../verified-writes.tests.sql', import.meta.url), 'utf8')
+    // Roll back the new policy and fixtures so legacy migration suites retain their original scope.
+    await db.exec('begin;\n' + verifiedMigration.replace(/^begin;|^commit;/gm, '') + '\n' + verifiedChecks + '\nrollback;')
+    console.log(`Verified write assertions (${stage}): ${(verifiedChecks.match(/select pg_temp\.(?:check_write|expect_write)\(/g) ?? []).length}`)
+  }
   await checkPersonalHistory('email-only schema')
+  await checkVerifiedWrites('email-only schema')
   await db.exec(await readFile(new URL('../migrations/202610130002_food_profiles.sql', import.meta.url), 'utf8'))
   const profileChecks = await readFile(new URL('../food-profiles.tests.sql', import.meta.url), 'utf8')
   const profileResults = await db.exec(profileChecks)
   console.log(profileResults.flatMap((r) => r.rows ?? []).find((r) => r.result)?.result ?? 'Profile checks passed.')
   console.log('Profile assertions: ' + (profileChecks.match(/select pg_temp\.(?:check_profile|expect_profile)\(/g) ?? []).length)
   await checkPersonalHistory('profile-compatible schema')
+  await checkVerifiedWrites('profile-compatible schema')
   const leftover = await db.query('select (select count(*) from public.foods)::int as foods, (select count(*) from public.ratings)::int as ratings, (select count(*) from auth.users)::int as users, (select count(*) from public.food_profiles)::int as profiles')
   if (Object.values(leftover.rows[0]).some((count) => count !== 0)) {
     throw new Error('SQL tests did not roll back all their fixtures')
