@@ -5,13 +5,13 @@
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  --blue: #1f5aa6;
-  --blue-dark: #174780;
+  --blue: #245c9f;
+  --blue-dark: #163f75;
   --blue-soft: #edf3fc;
   --warm: #f59e0b;
   --warm-dark: #9a5d00;
   --warm-soft: #fff6e5;
-  --bg: #f7f8fa;
+  --bg: #f5f7fb;
   --card: #fff;
   --ink: #1d2b3f;
   --muted: #59677a;
@@ -110,7 +110,7 @@ button:focus-visible, a:focus-visible {
 .menu-toggle svg { width: 22px; height: 22px; }
 .mobile-nav { display: none; }
 .mobile-account-entry { display: none; }
-.main-content { flex: 1; padding-block: 58px 64px; }
+.main-content { flex: 1; padding-block: 36px 64px; }
 .main-content:focus { outline: none; }
 .page { animation: page-enter .3s ease both; }
 
@@ -328,4 +328,81 @@ button:focus-visible, a:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* Campus visual identity: blue ink, quiet information surfaces, illustrated home. */
+.app-shell { background: var(--bg); }
+.theme-food { background: #fffbf5; --line: #e7dfd3; --warm-soft: #fff1dc; }
+.site-header { background: rgb(255 255 255 / 94%); }
+.brand-mark { border-radius: 12px 12px 12px 3px; box-shadow: none; }
+.brand-copy strong { font-weight: 750; }
+.nav-link.active { background: transparent; box-shadow: inset 0 -2px var(--blue); border-radius: 0; }
+.page-heading h1 { font-weight: 750; letter-spacing: -.04em; }
+.theme-information .module-page > .page-heading { padding-bottom: 24px; border-bottom: 1px solid #d8e2ee; }
+.theme-information .page-heading .eyebrow { letter-spacing: .12em; }
+.theme-information .page-heading .breadcrumb { margin-bottom: 14px; }
+.home-page .hero { max-width: none; display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; min-height: 375px; overflow: hidden; position: relative; margin-bottom: 36px; padding: 42px 48px; color: #fff; background: #173f75; border-radius: 24px 24px 72px 24px; }
+.hero-copy { position: relative; z-index: 1; }
+.home-page .hero .eyebrow { padding: 0; color: #c1d8f4; border: 0; background: none; font-size: 13px; letter-spacing: .17em; margin-bottom: 20px; }
+.home-page .hero h1 { font-family: "STSong", "SimSun", serif; font-size: clamp(36px, 4.5vw, 56px); line-height: 1.35; font-weight: 600; letter-spacing: .025em; }
+.home-page .hero h1 span { color: #dfedff; }
+.home-page .hero-description { color: #c4d7ee; font-size: 15px; margin-top: 20px; line-height: 1.9; }
+.hero-action { display: inline-flex; align-items: center; gap: 22px; background: #fff; color: #173f75; min-height: 46px; padding: 12px 18px; border-radius: 9px; margin-top: 25px; font-size: 14px; font-weight: 650; }
+.hero-action:hover { background: #dfedff; }
+.hero-action:focus-visible { outline-color: #fbd392; }
+.hero-art { min-width: 0; text-align: center; }
+.campus-artwork { display: block; width: 100%; height: auto; }
+.hero-art-caption { color: #b8d0ef; font-size: 12px; letter-spacing: .25em; }
+.home-section-heading { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 18px; }
+.home-section-heading h2 { font-size: 20px; letter-spacing: -.02em; }
+.home-section-heading > span { font-size: 12px; color: var(--muted); }
+.home-page .module-card { min-height: 286px; padding: 28px; border-radius: 18px; box-shadow: none; overflow: hidden; }
+.home-page .guide-card { background: #fff; border-top: 3px solid var(--blue); }
+.home-page .food-card { background: #fff8ed; border-color: #eddfc9; }
+.home-page .card-top { margin-bottom: 18px; }
+.module-category { color: var(--muted); font-size: 12px; }
+.home-page .food-card .module-category { color: #8c6137; }
+.home-page .module-card h2 { font-size: 25px; position: relative; }
+.home-page .module-card > p { font-size: 14px; max-width: 330px; position: relative; }
+.home-page .food-card > p { max-width: 72%; }
+.home-page .card-tags { margin-block: 16px; }
+.home-page .card-tags span { background: transparent; border: 1px solid #e0e6ee; }
+.home-page .food-card .card-tags span { border-color: #ecddc7; background: #fffaf3; }
+.food-artwork { display: block; width: 220px; height: auto; flex-shrink: 0; }
+.home-page .food-card > .food-artwork { position: absolute; width: 164px; right: -7px; bottom: 18px; opacity: .95; }
+.home-page .source-banner { background: white; border-radius: 16px; padding: 24px 28px; border-color: #dbe3ee; }
+.home-page .source-banner h2 { font-size: 18px; }
+.home-page .source-status { background: transparent; border: 0; color: var(--blue); }
+.theme-information .guide-search-panel { border-radius: 12px; box-shadow: none; border-top: 3px solid var(--blue); }
+.theme-information .guide-result-card { box-shadow: none; border-radius: 12px; }
+.theme-information .guide-result-card:hover { border-color: #94b4da; background: #fbfdff; box-shadow: 0 6px 20px #173f7508; }
+.theme-information .guide-category { border-radius: 4px; }
+.theme-information .guide-detail-section { box-shadow: none; border-radius: 12px; }
+.theme-information .guide-detail-section h2 { border-left: 3px solid var(--blue); padding-left: 12px; }
+.theme-information .guide-answer-panel { border-radius: 12px; background: #edf3fa; }
+.theme-information .guide-result-card h3 { font-size: 19px; }
+@media (max-width: 760px) {
+  .home-page .hero { grid-template-columns: 1.2fr 1fr; padding: 30px; min-height: 330px; }
+  .home-page .hero h1 { font-size: 38px; }
+  .home-page .hero-description { font-size: 14px; }
+  .home-page .module-card { padding: 22px; }
+  .home-page .food-card > .food-artwork { width: 125px; bottom: 12px; }
+}
+@media (max-width: 560px) {
+  .main-content { padding-block: 20px 36px; }
+  .home-page .hero { display: block; padding: 30px 24px; min-height: 0; border-radius: 18px 18px 44px 18px; margin-bottom: 28px; }
+  .home-page .hero h1 { font-size: 34px; }
+  .home-page .hero .eyebrow { font-size: 11px; margin-bottom: 16px; }
+  .home-page .hero-description { font-size: 13px; }
+  .hero-art { position: absolute; width: 170px; right: -36px; bottom: -17px; opacity: .32; pointer-events: none; }
+  .hero-art-caption { display: none; }
+  .hero-action { margin-top: 22px; }
+  .home-section-heading { align-items: flex-start; }
+  .home-section-heading h2 { font-size: 18px; }
+  .home-section-heading > span { display: none; }
+  .home-page .module-card { min-height: 265px; }
+  .home-page .module-card h2 { font-size: 23px; }
+  .home-page .source-banner { padding: 20px; }
+  .home-page .source-status { padding: 0; margin-left: 50px; font-size: 11px; white-space: normal; }
+  .theme-information .module-page > .page-heading { padding-bottom: 20px; }
 }

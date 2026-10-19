@@ -152,3 +152,71 @@
 @media (hover: none) {
   .food-item-card:hover { transform: none; box-shadow: var(--shadow); }
 }
+
+/* A warmer food journal, using the shared blue for navigation and actions. */
+.food-list-page .food-welcome { position: relative; padding: 24px 30px; background: #fff2dd; border: 1px solid #efdfc6; border-radius: 24px; overflow: hidden; margin-bottom: 14px; }
+.food-list-page .food-welcome .breadcrumb { margin: 0 0 5px; min-height: 44px; font-size: 12px; color: #80694e; }
+.food-list-page .food-welcome .eyebrow { color: #99612a; font-size: 12px; letter-spacing: .12em; margin-bottom: 4px; }
+.food-list-page .food-heading-actions { align-items: center; gap: 20px; }
+.food-list-page .food-heading-actions > .food-artwork { width: 180px; }
+.food-list-page .food-heading-actions h1 { font-size: clamp(27px, 3vw, 38px); letter-spacing: -.035em; color: #343428; line-height: 1.4; }
+.food-list-page .food-heading-actions .page-description { font-size: 14px; color: #79664e; margin-top: 9px; }
+.food-list-page .food-heading-actions .food-publish-entry { margin-top: 16px; padding: 9px 16px; min-height: 44px; border-radius: 100px; }
+.food-list-page > .food-account-bar { padding: 4px 12px; border: 0; border-radius: 0; background: transparent; margin-bottom: 12px; font-size: 12px; color: #6c6255; }
+.food-list-page > .food-account-bar > div { gap: 0 12px; }
+.food-list-page .food-search-panel { padding: 20px; border-color: #eadfce; border-radius: 20px; box-shadow: 0 5px 20px #a1783d06; }
+.food-list-page .food-area-tabs { background: #f4f6fa; border-color: #e2e7ef; border-radius: 100px; }
+.food-list-page .food-area-tab { border-radius: 100px; }
+.food-list-page .food-area-tab.active { background: var(--blue); color: white; box-shadow: none; }
+.food-list-page .search-control { border-radius: 100px; border-color: #e0d9cc; background: #fffcf7; box-shadow: none; }
+.food-list-page .food-results-heading { margin: 24px 0 14px; }
+.food-list-page .food-results-heading h2 { font-size: 20px; }
+.food-list-page .food-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.food-list-page .food-item-card { display: grid; grid-template-columns: 128px minmax(0, 1fr); align-items: start; gap: 18px; padding: 18px; border: 1px solid #e8dece; border-radius: 20px; background: #fffefa; box-shadow: 0 4px 16px #8f6c3c05; }
+.food-list-page .food-item-card:hover { border-color: #c5a777; transform: translateY(-2px); box-shadow: 0 8px 22px #8f6c3c0d; }
+.food-list-page .food-item-card .food-image { aspect-ratio: 1; border: 0; border-radius: 50% 50% 42% 50%; background: #f4eadc; }
+.food-list-page .food-card-content { min-width: 0; padding: 0; }
+.food-list-page .food-card-topline { margin-bottom: 5px; }
+.food-list-page .food-category { color: #896c49; font-size: 12px; }
+.food-list-page .food-card-content h2 { font-size: 19px; line-height: 1.5; overflow-wrap: anywhere; }
+.food-list-page .food-card-content .food-location { font-size: 12px; margin-top: 7px; }
+.food-list-page .food-card-numbers { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 9px; }
+.food-list-page .food-price { color: #b45925; font-size: 17px; }
+.food-list-page .food-rating-count { font-size: 12px; margin-left: 3px; }
+.food-list-page .food-tags { gap: 5px; margin-top: 10px; }
+.food-list-page .food-tags > span { font-size: 12px; background: #f8f0e3; color: #83613b; border: 1px solid #eee0cc; border-radius: 100px; padding: 3px 9px; }
+.food-list-page .food-card-link { margin-top: 12px; font-size: 12px; }
+.theme-food .food-detail-card { border-color: #e9dcc9; box-shadow: none; border-radius: 22px; }
+.theme-food .food-detail-price { color: #b45925; }
+.theme-food .food-detail-rating { border-color: #ede1d0; }
+.theme-food .food-sharing-note { background: #f5f0e8; border-color: #e9dfd1; }
+.theme-food .food-rating-panel, .theme-food .food-publish-panel { border-radius: 20px; }
+@media (max-width: 940px) {
+  .food-list-page .food-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 680px) {
+  .food-list-page .food-welcome { padding: 16px 20px 20px; border-radius: 20px; }
+  .food-list-page .food-heading-actions { flex-direction: row; align-items: flex-end; gap: 0; }
+  .food-list-page .food-heading-actions > div { position: relative; z-index: 1; }
+  .food-list-page .food-heading-actions h1 { font-size: 26px; max-width: 240px; }
+  .food-list-page .food-heading-actions .page-description { font-size: 12px; max-width: 205px; }
+  .food-list-page .food-heading-actions .food-publish-entry { width: auto; font-size: 12px; margin-top: 12px; }
+  .food-list-page .food-heading-actions > .food-artwork { position: absolute; width: 135px; right: -16px; bottom: 10px; opacity: .85; }
+  .food-list-page > .food-account-bar { padding: 0 4px; font-size: 12px; }
+  .food-list-page > .food-account-bar > div { column-gap: 8px; }
+  .food-list-page .food-search-panel { padding: 15px; }
+  .food-list-page .food-area-tabs { display: flex; width: 100%; margin-bottom: 14px; }
+  .food-list-page .food-area-tab { flex: 1; min-width: 0; }
+  .food-list-page .food-select-field { flex-basis: 110px; }
+  .food-list-page .food-filters { gap: 10px; }
+  .food-list-page .food-item-card { grid-template-columns: 92px minmax(0, 1fr); gap: 13px; padding: 14px; border-radius: 18px; }
+  .food-list-page .food-card-content h2 { font-size: 17px; }
+  .food-list-page .food-card-content .food-location { font-size: 12px; line-height: 1.65; }
+  .food-list-page .food-card-numbers { gap: 5px 9px; }
+  .food-list-page .food-card-link { margin-top: 10px; }
+}
+@media (max-width: 350px) {
+  .food-list-page .food-item-card { grid-template-columns: 72px minmax(0, 1fr); gap: 10px; padding: 12px; }
+  .food-list-page .food-heading-actions > .food-artwork { width: 110px; right: -25px; bottom: 3px; }
+  .food-list-page .food-heading-actions h1 { font-size: 24px; }
+}

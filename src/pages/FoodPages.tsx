@@ -1,3 +1,4 @@
+import { FoodArtwork } from '../components/CampusArtwork'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router'
 import { ArrowLeft, ArrowRight, Info, MapPin, Plus, Search, Star, Utensils } from 'lucide-react'
@@ -113,13 +114,13 @@ export function FoodPage() {
   const detailQuery = returnQuery ? `?${returnQuery}` : ''
 
   return (
-    <div className="page module-page food-page">
-      <FoodAccountBar auth={auth} />
-      <div className="page-heading">
+    <div className="page module-page food-page food-list-page">
+      <div className="page-heading food-welcome">
         <Link to="/" className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回首页</Link>
-        <p className="eyebrow">从今天想吃的开始</p>
-        <div className="food-heading-actions"><div><h1>浙大美食点评</h1><p className="page-description">找一道菜，看看地点、价格和评价。</p></div><Link className="food-publish-entry" to={`/food/new${searchParams.size ? `?${searchParams}` : ''}`}><Plus size={18} aria-hidden="true" />发布美食</Link></div>
+        <p className="eyebrow">校园里的烟火气</p>
+        <div className="food-heading-actions"><div><h1>今天，吃点好的。</h1><p className="page-description">浙大美食点评 · 找到你喜欢的那一口。</p><Link className="food-publish-entry" to={`/food/new${searchParams.size ? `?${searchParams}` : ''}`}><Plus size={18} aria-hidden="true" />发布美食</Link></div><FoodArtwork /></div>
       </div>
+      <FoodAccountBar auth={auth} />
       {isFoodExampleMode && <ExampleNotice />}
       <section className="food-search-panel" aria-label="搜索和筛选美食">
         <div className="food-area-tabs" role="group" aria-label="选择美食范围">

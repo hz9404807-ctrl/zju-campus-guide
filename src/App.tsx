@@ -1,3 +1,4 @@
+import { CampusArtwork, FoodArtwork } from './components/CampusArtwork'
 import FoodAccountProvider from './components/FoodAccountProvider'
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router'
@@ -108,16 +109,20 @@ function HomePage() {
   return (
     <div className="page home-page">
       <section className="hero" aria-labelledby="home-title">
-        <p className="eyebrow"><span className="status-dot" />让校园生活更简单一点</p>
-        <h1 id="home-title">浙大校园信息，<br /><span>一处找到。</span></h1>
-        <p className="hero-description">办事少走弯路，吃饭少点纠结。<br />把分散的校园信息，整理成你需要的答案。</p>
+        <div className="hero-copy"><p className="eyebrow">在浙里 · 过好校园每一天</p>
+          <h1 id="home-title">校园大小事，<br /><span>都有好去处。</span></h1>
+          <p className="hero-description">找清楚的办事指引，也找一顿喜欢的饭。<br />你的校园生活，从这里出发。</p>
+          <Link className="hero-action" to="/guides">查找办事指南 <ArrowRight size={18} aria-hidden="true" /></Link>
+        </div>
+        <div className="hero-art"><CampusArtwork /><span className="hero-art-caption">求知 · 办事 · 好好生活</span></div>
       </section>
+      <div className="home-section-heading"><h2>今天，从哪件事开始？</h2><span>校园生活的三个入口</span></div>
 
       <section className="module-grid" aria-label="选择你需要的服务">
         <Link to="/guides" className="module-card guide-card">
           <div className="card-top">
             <span className="module-icon blue"><ClipboardList size={29} aria-hidden="true" /></span>
-            <span className="card-number" aria-hidden="true">01</span>
+            <span className="module-category">办事有章可循</span>
           </div>
           <h2>校园办事指南</h2>
           <p>遇到问题，从这里找答案。<br />办理步骤、材料和地点，清楚地放在一起。</p>
@@ -128,9 +133,9 @@ function HomePage() {
         <Link to="/food" className="module-card food-card">
           <div className="card-top">
             <span className="module-icon warm"><Utensils size={29} aria-hidden="true" /></span>
-            <span className="card-number" aria-hidden="true">02</span>
+            <span className="module-category">认真吃饭，好好生活</span>
           </div>
-          <h2>浙大美食点评</h2>
+          <FoodArtwork /><h2>浙大美食点评</h2>
           <p>今天吃什么，看看同学怎么说。<br />校园内外的菜品、地点和评分，一起了解。</p>
           <div className="card-tags"><span>校内食堂</span><span>校外美食</span></div>
           <span className="card-link">进入美食点评 <ArrowRight size={20} aria-hidden="true" /></span>
@@ -200,7 +205,7 @@ export default function App() {
   }, [location.pathname])
 
   return (
-    <div className="app-shell">
+    <div className={`app-shell ${location.pathname.startsWith('/food') ? 'theme-food' : 'theme-information'}`}>
       <a className="skip-link" href="#main-content">跳转到主要内容</a>
       <Header />
       <main className="main-content" id="main-content" ref={mainContent} tabIndex={-1}>
