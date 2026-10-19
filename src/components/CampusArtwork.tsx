@@ -1,20 +1,43 @@
+import { useId } from 'react'
+
+/** Original book-and-arch illustration; not a university building or official emblem. */
 export function CampusArtwork() {
+  const id = useId()
+  const paint = (name: string) => `url(#${id}-${name})`
   return <svg className="campus-artwork" viewBox="0 0 460 330" fill="none" aria-hidden="true">
-    <circle cx="252" cy="159" r="126" stroke="#729bdd" strokeWidth="1" opacity=".45" />
-    <circle cx="252" cy="159" r="99" stroke="#729bdd" strokeDasharray="3 9" opacity=".35" />
-    <path d="M26 264C108 232 129 300 215 261S344 220 430 248" stroke="#a5caee" strokeWidth="22" opacity=".16" />
-    <path d="M47 267L144 220L210 244L336 177L421 209" stroke="#d5e8ff" strokeWidth="2" strokeDasharray="5 7" />
-    <path d="M147 203V111L251 68L355 111V203L251 249Z" fill="#245395" stroke="#9abdeb" strokeWidth="2" />
-    <path d="M147 111L251 153L355 111M251 153V249" stroke="#9abdeb" strokeWidth="2" />
-    <path d="M168 127V190L231 216V153M274 163V216L331 188V140" stroke="#e3efff" strokeWidth="5" />
-    <path d="M178 145L220 162M178 164L220 181M287 167L319 153M287 186L319 172" stroke="#8ab3e6" strokeWidth="5" />
-    <path d="M197 104L251 81L308 104L251 128Z" fill="#eaf3ff" />
-    <path d="M226 105L251 95L276 105L251 116Z" fill="#6d9fd8" />
-    <circle cx="97" cy="172" r="29" fill="#eff6ff" /><path d="M83 172H111M97 158V186" stroke="#235aa0" strokeWidth="3" />
-    <circle cx="366" cy="72" r="26" fill="#f9dba4" /><path d="M355 75Q366 88 377 75M358 65V69M374 65V69" stroke="#875426" strokeWidth="3" strokeLinecap="round" />
-    <circle cx="352" cy="254" r="23" fill="#e6f0ff" /><path d="M342 247H362V261H342ZM347 243V247M357 243V247" stroke="#235aa0" strokeWidth="2" />
-    <path d="M70 79H105M88 62V96M399 142H415M407 134V150" stroke="#b8d5f7" strokeWidth="2" strokeLinecap="round" />
-    <circle cx="115" cy="287" r="4" fill="#f9dba4" /><circle cx="387" cy="298" r="3" fill="#a9c9ee" />
+    <defs>
+      <linearGradient id={`${id}-paper`} x1="120" y1="170" x2="255" y2="277" gradientUnits="userSpaceOnUse"><stop stopColor="#fff" /><stop offset="1" stopColor="#bfd8f0" /></linearGradient>
+      <linearGradient id={`${id}-page`} x1="320" y1="174" x2="229" y2="258" gradientUnits="userSpaceOnUse"><stop stopColor="#edf7ff" /><stop offset="1" stopColor="#86aed5" /></linearGradient>
+      <linearGradient id={`${id}-arch`} x1="180" y1="88" x2="288" y2="221" gradientUnits="userSpaceOnUse"><stop stopColor="#f0f8ff" /><stop offset=".48" stopColor="#abcce9" /><stop offset="1" stopColor="#6a9bc8" /></linearGradient>
+      <linearGradient id={`${id}-glass`} x1="207" y1="121" x2="270" y2="221" gradientUnits="userSpaceOnUse"><stop stopColor="#8bb7df" stopOpacity=".22" /><stop offset="1" stopColor="#aacff0" stopOpacity=".04" /></linearGradient>
+      <radialGradient id={`${id}-shadow`}><stop stopColor="#0a2345" stopOpacity=".35" /><stop offset="1" stopColor="#0a2345" stopOpacity="0" /></radialGradient>
+    </defs>
+    {/* Architectural drawing lines give the illustration room to breathe. */}
+    <path d="M91 191V157a139 139 0 0 1 278 0v34" stroke="#a5c8e9" strokeOpacity=".2" strokeWidth=".8" />
+    <path d="M111 183v-26a119 119 0 0 1 238 0v26" stroke="#a5c8e9" strokeOpacity=".1" strokeWidth=".8" />
+    <path d="M54 241H406M230 31V55" stroke="#afcdec" strokeOpacity=".18" strokeWidth=".8" />
+    <ellipse cx="232" cy="282" rx="163" ry="24" fill={paint('shadow')} />
+    {/* The cover and staggered paper edges form a single open-book silhouette. */}
+    <path d="M64 202C122 182 178 203 230 233C282 203 338 182 396 202V235C337 218 281 238 230 272C178 238 122 218 64 235Z" fill="#32638f" stroke="#92b8db" strokeWidth="1.2" strokeLinejoin="round" />
+    <path d="M72 200C127 184 181 205 230 235C279 205 333 184 388 200V229C334 214 279 234 230 265C181 234 126 214 72 229Z" fill="#9cbede" />
+    <path d="M72 219C130 206 180 226 230 256C280 226 330 206 388 219M72 224C130 211 180 231 230 261C280 231 330 211 388 224" stroke="#456f9b" strokeOpacity=".55" strokeWidth=".8" />
+    <path d="M78 190C129 175 178 191 230 225V252C180 221 130 202 78 215Z" fill={paint('paper')} />
+    <path d="M230 225C282 191 331 175 382 190V215C330 202 280 221 230 252Z" fill={paint('page')} />
+    <path d="M78 190C129 175 178 191 230 225C282 191 331 175 382 190" stroke="#fff" strokeOpacity=".8" strokeWidth="1.2" />
+    <path d="M230 225V252" stroke="#547fa9" strokeWidth="1" />
+    {/* An abstract campus arch rises from the pages, with an inset glass opening. */}
+    <path d="M181 207V130a51 51 0 0 1 102 0v77L271 215V132a39 39 0 0 0-78 0v83Z" fill="#517fa9" />
+    <path d="M190 214V131a51 51 0 0 1 102 0v72L271 215V132a30 30 0 0 0-60 0v91Z" fill={paint('arch')} fillRule="evenodd" />
+    <path d="M211 223V132a30 30 0 0 1 60 0v83L230 239Z" fill={paint('glass')} />
+    <path d="M190 214V131a51 51 0 0 1 102 0v72M211 223V132a30 30 0 0 1 60 0v83" stroke="#f3f9ff" strokeOpacity=".75" strokeWidth="1" strokeLinecap="round" />
+    <path d="M224 127V166M230 121V149" stroke="#bfdcf5" strokeOpacity=".25" strokeWidth=".8" />
+    <path d="M215 220L241 206L267 212M224 230L250 216" stroke="#bdd7ed" strokeOpacity=".5" strokeWidth=".8" />
+    {/* Fine page rules and one brass bookmark keep the palette restrained. */}
+    <path d="M99 194C125 190 150 196 172 205M99 201C128 197 154 205 178 215M298 205C323 195 345 191 363 194M292 215C318 204 343 199 363 201" stroke="#507ba6" strokeOpacity=".32" strokeWidth="1" strokeLinecap="round" />
+    <path d="M303 194L317 190V229L310 224L303 233Z" fill="#e8c58e" />
+    <path d="M305 195L315 192" stroke="#fff3d8" strokeWidth=".8" />
+    <circle cx="348" cy="108" r="4" fill="#e8c58e" />
+    <path d="M323 108H338" stroke="#e8c58e" strokeOpacity=".6" strokeWidth=".8" />
   </svg>
 }
 
