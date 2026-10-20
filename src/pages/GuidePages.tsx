@@ -8,10 +8,11 @@ import GuideStepActions from '../components/GuideStepActions'
 import GuideServiceWindows from '../components/GuideServiceWindows'
 import GuideTimetable from '../components/GuideTimetable'
 import { clearTimetableParams } from '../lib/guideTimetable'
-import { safeHomeReturn } from '../lib/unifiedSearch'
 import FavoriteButton from '../components/FavoriteButton'
 import { guideFavoriteContext } from '../lib/favoriteTargets'
 import { guideSections } from '../lib/guideSections'
+import { guideNavigation } from '../lib/browseNavigation'
+import { parseResultPage } from '../lib/resultPagination'
 import { useDebouncedValue } from '../hooks/useDebouncedValue'
 import { searchGuides, guideDetailContext, findRelatedSources, guideSearchMatch, guideRouteView, resolveGuideRoute, primaryGuideAction, sourceSearchUrl, suggestGuides, websiteSearchDetails } from '../lib/campusContent'
 import guideData from '../data/guides.json'
@@ -34,7 +35,7 @@ export function GuidePage() {
   const debouncedQuery = useDebouncedValue(query, 200)
   const search = searchGuides(guides, debouncedQuery, category, serviceWindows)
   const results = search.guides
-  const page = Math.min(Math.max(1, Number(params.get('page')) || 1), Math.max(1, Math.ceil(results.length / pageSize)))
+  const page = parseResultPage(params.get('page'), results.length, pageSize)
   const updating = query !== debouncedQuery
   const sources = findRelatedSources(websiteData, accountData, debouncedQuery, results, category)
   const suggestions = !results.length ? suggestGuides(guides, debouncedQuery, category) : []
@@ -62,7 +63,7 @@ export function GuidePage() {
       <div className="guide-quick-search"><span>常见需求</span>{quickKeywords.map((keyword) => <button key={keyword} type="button" className="guide-keyword-button" onClick={() => update('q', keyword)}>{keyword}</button>)}</div>
     </section>
     <section aria-labelledby="guide-results-heading" aria-busy={updating}>
-      <div className="guide-results-heading"><h2 id="guide-results-heading">{query || category ? '查找结果' : '办事问题'}</h2><p role="status" aria-live="polite">{updating ? '正在更新结果…' : `找到 ${results.length} 条${search.notice ? '相关办理方法' : '指南'}`}</p></div>
+      <div className="guide-results-heading"><h2 id="guide-results-heading" tabIndex={-1}>{query || category ? '查找结果' : '办事问题'}</h2><p role="status" aria-live="polite">{updating ? '正在更新结果…' : `找到 ${results.length} 条${search.notice ? '相关办理方法' : '指南'}`}</p></div>
       {search.notice && <p className="guide-condition-note" role="note">{search.notice}</p>}
       {results.length ? <>
         <ul className="guide-result-grid" role="list">{results.slice((page - 1) * pageSize, page * pageSize).map((guide) => { const route = resolveGuideRoute(guide, debouncedQuery); const view = guideRouteView(guide, route, debouncedQuery); const match = guideSearchMatch(view, debouncedQuery, serviceWindows); const action = primaryGuideAction(guide, debouncedQuery); const cardParams = new URLSearchParams(resultParams); cardParams.delete('route'); if (route) cardParams.set('route', route.id); const cardSearch = cardParams.size ? `?${cardParams.toString()}` : ''; return <li key={guide.id}><article className="guide-result-card">
@@ -71,7 +72,7 @@ export function GuidePage() {
           {match && <Link className="guide-match-link" to={`/guides/${guide.id}${cardSearch}#${match.anchor}`}><span>{match.label}</span><SearchHighlight text={match.text} query={debouncedQuery} /><span className="guide-match-go">定位这段内容 <ArrowRight size={14} aria-hidden="true" /></span></Link>}
           <div className="guide-card-footer"><Link to={`/guides/${guide.id}${cardSearch}`} className="guide-card-action">{guide.routes?.length && !route ? guide.routeChoiceLabel : '查看办理方法'} <ArrowRight size={17} aria-hidden="true" /></Link>{action && <a href={action.url} target="_blank" rel="noopener noreferrer" className="guide-card-reference">{action.label} <ExternalLink size={14} aria-hidden="true" /></a>}</div>
         </article></li> })}</ul>
-        <ResultPager page={page} total={results.length} pageSize={pageSize} onChange={(value) => update('page', String(value))} />
+        <ResultPager page={page} total={results.length} pageSize={pageSize} resultHeadingId="guide-results-heading" onChange={(value) => update('page', String(value))} />
       </> : <div className="guide-empty-state"><Search size={27} aria-hidden="true" /><h3>没有找到相关指南</h3><p>可以换一种说法，或带着当前问题继续查找网站和公众号。</p>{category && <button type="button" className="button-link" onClick={() => update('category', '')}>仅取消类别筛选</button>}{suggestions.length > 0 && <div className="guide-suggestions"><p>可能相关的事项（并非准确匹配）：</p>{suggestions.map((guide) => <Link key={guide.id} to={`/guides/${guide.id}${detailSearch}`}>{guide.title}<ArrowRight size={15} aria-hidden="true" /></Link>)}</div>}<div className="guide-entry-links"><Link to={sourceSearchUrl(debouncedQuery, 'websites')}>继续查网站 <ArrowRight size={16} aria-hidden="true" /></Link><Link to={sourceSearchUrl(debouncedQuery, 'accounts')}>继续查公众号 <ArrowRight size={16} aria-hidden="true" /></Link></div><button type="button" className="guide-reset-button" onClick={() => setParams({}, { replace: true })}>清除筛选，查看全部指南</button></div>}
     </section>
     {debouncedQuery.trim() && (sources.websites.length > 0 || sources.accounts.length > 0) && <section className="guide-search-sources" aria-label="相关网站与公众号" aria-busy={updating}>
@@ -99,16 +100,12 @@ export function GuideDetailPage() {
   const savedContext = originalGuide ? guideFavoriteContext(originalGuide, params, serviceWindows) : {}
   const query = params.get('q') ?? savedContext.campus ?? ''
   const { route, contentQuery } = originalGuide ? guideDetailContext(originalGuide, query, params.get('route')) : { route: undefined, contentQuery: query }
-  const guide = originalGuide ? guideRouteView(originalGuide, route, contentQuery) : undefined
+  const guide = originalGuide ? guideRouteView(originalGuide, route, savedContext.campus ?? contentQuery) : undefined
   const overview = Boolean(guide?.routes?.length && !route)
   const match = guide && !overview ? guideSearchMatch(guide, contentQuery, serviceWindows) : undefined
   const conditionNotice = guide && !overview ? searchGuides([guide], contentQuery, '', serviceWindows).notice : ''
   const highlight = (text: string, anchor: string) => match?.anchor === anchor ? <SearchHighlight text={text} query={contentQuery} /> : text
-  const listParams = clearTimetableParams(params)
-  listParams.delete('route')
-  const listSearch = listParams.size ? `?${listParams.toString()}` : ''
-  const homeReturn = safeHomeReturn(params.get('returnTo'))
-  const backTo = homeReturn ?? `/guides${listSearch}`
+  const { backTo, backLabel, relatedSearch: listSearch } = guideNavigation(params)
   function chooseRoute(id: string) {
     const next = clearTimetableParams(params)
     next.set('route', id)
@@ -120,7 +117,7 @@ export function GuideDetailPage() {
     next.set('campus', campus)
     setParams(next, { replace: true })
   }
-  if (!guide) return <div className="page module-page"><Link to={backTo} className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回办事指南</Link><div className="guide-empty-state"><ClipboardList size={29} aria-hidden="true" /><h1>这份指南没有找到</h1><p>返回列表继续搜索其他问题。</p><Link to={backTo} className="button-link">返回办事指南</Link></div></div>
+  if (!guide) return <div className="page module-page"><Link to={backTo} className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回{backLabel}</Link><div className="guide-empty-state"><ClipboardList size={29} aria-hidden="true" /><h1>这份指南没有找到</h1><p>返回列表继续搜索其他问题。</p><Link to={backTo} className="button-link">返回{backLabel}</Link></div></div>
   const related = accountData.filter((account) => guide.relatedSourceIds.includes(account.id))
   const relatedGuides = guides.filter((item) => guide.relatedGuideIds?.includes(item.id))
   const windows = serviceWindows.filter((window) => guide.serviceWindowIds?.includes(window.id))
@@ -128,7 +125,7 @@ export function GuideDetailPage() {
   const mainHeading = guide.kind === 'options' ? '选择一种充值方式' : guide.kind === 'procedure' ? '具体操作' : guide.kind === 'resource' ? '如何使用这个入口' : '具体说明'
   const sections = guideSections(guide, overview, hasServiceInfo, mainHeading)
   return <div className="page module-page guide-detail-page">
-    <div className="page-heading"><Link to={backTo} className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回{homeReturn ? '首页搜索' : params.get('q') ? '搜索结果' : '办事指南'}</Link><p className="eyebrow">校园办事 · {guide.category}</p><h1>{guide.title}</h1></div>
+    <div className="page-heading"><Link to={backTo} className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回{backLabel}</Link><p className="eyebrow">校园办事 · {guide.category}</p><h1>{guide.title}</h1></div>
     <section className="guide-answer-panel" aria-labelledby="guide-answer-heading"><h2 id="guide-answer-heading">{['procedure', 'options'].includes(guide.kind) ? '整体流程' : '事项概览'}</h2><p>{guide.summary}</p></section>
     <FavoriteButton kind="guide" id={originalGuide!.id} context={savedContext} />
     {conditionNotice && <p className="guide-condition-note" role="note">{conditionNotice}</p>}
@@ -150,6 +147,6 @@ export function GuideDetailPage() {
     </div>}
     {guide.references.length > 0 && <section className="info-panel"><h2 id="guide-references-heading" tabIndex={-1}>{guide.category === '校园卡' ? '官方办事参考' : '办事入口与参考'}</h2><ul className="guide-reference-list">{guide.references.map((reference, i) => <li key={i}><a href={reference.url} target="_blank" rel="noopener noreferrer">{reference.label}</a></li>)}</ul></section>}
     {related.length > 0 && <section className="info-panel"><h2>相关公众号</h2><p>可从这些信息源继续查看通知。</p><div className="guide-related-accounts">{related.map((account) => <Link key={account.id} to={`/sources/${account.id}`}>{account.name}<ArrowRight size={16} aria-hidden="true" /></Link>)}</div></section>}
-    <Link to={backTo} className="guide-bottom-back"><ArrowLeft size={16} aria-hidden="true" /> 返回{params.get('q') ? '搜索结果' : '办事指南'}</Link>
+    <Link to={backTo} className="guide-bottom-back"><ArrowLeft size={16} aria-hidden="true" /> 返回{backLabel}</Link>
   </div>
 }

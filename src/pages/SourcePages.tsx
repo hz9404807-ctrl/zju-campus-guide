@@ -6,6 +6,8 @@ import ResultPager from '../components/ResultPager'
 import { useDebouncedValue } from '../hooks/useDebouncedValue'
 import { safeHomeReturn } from '../lib/unifiedSearch'
 import FavoriteButton from '../components/FavoriteButton'
+import { sourceGuideUrl } from '../lib/browseNavigation'
+import { parseResultPage } from '../lib/resultPagination'
 import { filterAccounts, filterWebsites, searchGuides, websiteSearchDetails } from '../lib/campusContent'
 import accountData from '../data/accounts.json'
 import previewDimensions from '../data/source-previews.json'
@@ -32,7 +34,7 @@ export function SourcesPage() {
   const accounts = filterAccounts(accountData, debounced, category)
   const sites = filterWebsites(websiteData, debounced, category, guides, serviceWindows)
   const total = websites ? sites.length : accounts.length
-  const page = Math.min(Math.max(1, Number(params.get('page')) || 1), Math.max(1, Math.ceil(total / pageSize)))
+  const page = parseResultPage(params.get('page'), total, pageSize)
   function update(key: string, value: string) {
     const next = new URLSearchParams(params)
     if (value) next.set(key, value)
@@ -51,12 +53,12 @@ export function SourcesPage() {
       <div className="content-filter-row"><label htmlFor="source-category">按类别查找</label><select id="source-category" value={category} onChange={(event) => update('category', event.target.value)}><option value="">全部类别</option>{categories.map((item) => <option key={item} value={item}>{item}（{data.filter((entry) => entry.category === item).length}）</option>)}</select></div>
     </section>
     <section aria-labelledby="source-results-heading" aria-busy={query !== debounced}>
-      <div className="guide-results-heading"><h2 id="source-results-heading">{websites ? '服务与网站入口' : '微信公众号'}</h2><p role="status" aria-live="polite">{query !== debounced ? '正在更新结果…' : `找到 ${total} 个信息源`}</p></div>
+      <div className="guide-results-heading"><h2 id="source-results-heading" tabIndex={-1}>{websites ? '服务与网站入口' : '微信公众号'}</h2><p role="status" aria-live="polite">{query !== debounced ? '正在更新结果…' : `找到 ${total} 个信息源`}</p></div>
       {websites && search.notice && <p className="guide-condition-note" role="note">{search.notice}</p>}
       {total ? <>
-        {websites ? <ul className="website-grid">{sites.slice((page - 1) * pageSize, page * pageSize).map((site) => { const details = websiteSearchDetails(site, matchingGuides, debounced); const guideParams = new URLSearchParams(params); if (debounced) guideParams.set('q', debounced); else guideParams.delete('q'); guideParams.delete('route'); if (details.routeId) guideParams.set('route', details.routeId); const guideSearch = guideParams.size ? `?${guideParams.toString()}` : ''; return <li key={site.id} className="website-card"><div className="guide-card-labels"><span className="guide-category">{site.category}</span><span className="source-scope">{site.scope}</span></div><h3>{details.name}</h3><p>{details.summary}</p><a className="website-entry" href={site.url} target="_blank" rel="noopener noreferrer">打开网站 <ExternalLink size={16} aria-hidden="true" /></a><span className="website-address">{site.url}</span>{site.scope === '学校域名' && <FavoriteButton kind="website" id={site.id} />}<Link className="website-guide-link" to={`/guides/${details.guideId}${guideSearch}`}>查看办理步骤 <ArrowRight size={15} aria-hidden="true" /></Link></li> })}</ul> :
+        {websites ? <ul className="website-grid">{sites.slice((page - 1) * pageSize, page * pageSize).map((site) => { const details = websiteSearchDetails(site, matchingGuides, debounced); return <li key={site.id} className="website-card"><div className="guide-card-labels"><span className="guide-category">{site.category}</span><span className="source-scope">{site.scope}</span></div><h3>{details.name}</h3><p>{details.summary}</p><a className="website-entry" href={site.url} target="_blank" rel="noopener noreferrer">打开网站 <ExternalLink size={16} aria-hidden="true" /></a><span className="website-address">{site.url}</span>{site.scope === '学校域名' && <FavoriteButton kind="website" id={site.id} />}<Link className="website-guide-link" to={sourceGuideUrl(details.guideId, params, debounced, details.routeId)}>查看办理步骤 <ArrowRight size={15} aria-hidden="true" /></Link></li> })}</ul> :
         <ul className="account-grid">{accounts.slice((page - 1) * pageSize, page * pageSize).map((account) => <li key={account.id}><Link to={`/sources/${account.id}${detailSearch}`} className="account-card"><div className="account-preview"><img src={`/source-previews/${account.id}.webp`} width={640} height={(previewDimensions as Record<string,{height:number}>)[account.id]?.height} alt={`${account.name}公众号的收集截图预览`} loading="lazy" decoding="async" /></div><div className="account-card-body"><div className="guide-card-labels"><span className="guide-category">{account.category}</span></div><h3>{account.name}</h3><span className="account-topic">{account.topic}</span>{account.organization && <p className="account-organization">截图机构：{account.organization}</p>}{account.summary && <p className="account-summary">{account.summary}</p>}<span className="account-details-link">查看截图与备注 <ArrowRight size={16} aria-hidden="true" /></span></div></Link></li>)}</ul>}
-        <ResultPager page={page} total={total} pageSize={pageSize} onChange={(value) => update('page', String(value))} />
+        <ResultPager page={page} total={total} pageSize={pageSize} resultHeadingId="source-results-heading" onChange={(value) => update('page', String(value))} />
       </> : <div className="guide-empty-state"><Search size={27} aria-hidden="true" /><h3>没有找到相关信息源</h3><p>试试缩短关键词，或取消类别筛选。</p><button className="button-link" type="button" onClick={() => setParams(websites ? { kind: 'websites' } : {}, { replace: true })}>清除筛选，查看全部</button></div>}
     </section>
   </div>
