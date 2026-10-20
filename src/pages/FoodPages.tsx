@@ -1,6 +1,6 @@
 import { FoodArtwork } from '../components/CampusArtwork'
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import { Link, useParams, useSearchParams } from 'react-router'
+import { useCallback, useEffect, useMemo, useState, useRef } from 'react'
+import { Link, useParams, useSearchParams, useLocation, useNavigationType } from 'react-router'
 import { ArrowLeft, ArrowRight, Info, MapPin, Plus, Search, Star, Utensils } from 'lucide-react'
 import SearchField from '../components/SearchField'
 import { useDebouncedValue } from '../hooks/useDebouncedValue'
@@ -50,9 +50,11 @@ function RatingSummary({ food }: { food: Food }) {
   )
 }
 
+let listReturn: { query: string; y: number } | null = null
+
 function FoodCard({ food, query }: { food: Food; query: string }) {
   return (
-    <Link className="food-item-card" to={`/food/${food.id}${query}`}>
+    <Link onClick={() => { listReturn = { query, y: window.scrollY } }} className="food-item-card" to={`/food/${food.id}${query}`}>
       <FoodImage food={food} />
       <div className="food-card-content">
         <div className="food-card-topline">{food.isExample && <span className="food-example-badge">示例数据</span>}<span className="food-category">{food.category}</span></div>
@@ -77,11 +79,11 @@ export function FoodPage() {
   const category = searchParams.get('category') ?? ''
   const location = area === 'campus' ? searchParams.get('location') ?? '' : ''
   const debouncedQuery = useDebouncedValue(query, 250)
-  const resource = useFoodResource(listFoods, isFoodBackendConfigured ? debouncedQuery : '')
+  const resource = useFoodResource(listFoods)
   const foods = resource.data ?? []
   const areaFoods = foods.filter((food) => food.area === area)
-  const categories = [...new Set(areaFoods.map((food) => food.category))]
-  const locations = [...new Set(areaFoods.map((food) => food.location))]
+  const categories = [...new Set([...areaFoods.map((food) => food.category), category].filter(Boolean))]
+  const locations = [...new Set([...areaFoods.map((food) => food.location), location].filter(Boolean))]
   const filteredFoods = useMemo(() => {
     const keywords = debouncedQuery.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean)
     return foods.filter((food) => {
@@ -112,30 +114,42 @@ export function FoodPage() {
 
   const returnQuery = searchParams.toString()
   const detailQuery = returnQuery ? `?${returnQuery}` : ''
+  const navigation = useNavigationType()
+  const routeLocation = useLocation()
+  const restore = useRef(listReturn && listReturn.query === detailQuery && (navigation === 'POP' || routeLocation.state?.foodReturn) ? listReturn.y : null)
+  useEffect(() => {
+    if (!resource.data || restore.current === null) return
+    const y = restore.current
+    restore.current = null
+    listReturn = null
+    const frame = requestAnimationFrame(() => window.scrollTo({ top: y, behavior: 'instant' }))
+    return () => cancelAnimationFrame(frame)
+  }, [resource.data])
 
   return (
     <div className="page module-page food-page food-list-page">
       <div className="page-heading food-welcome">
         <Link to="/" className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回首页</Link>
-        <p className="eyebrow">校园里的烟火气</p>
-        <div className="food-heading-actions"><div><h1>今天，吃点好的。</h1><p className="page-description">浙大美食点评 · 找到你喜欢的那一口。</p><Link className="food-publish-entry" to={`/food/new${searchParams.size ? `?${searchParams}` : ''}`}><Plus size={18} aria-hidden="true" />发布美食</Link></div><FoodArtwork /></div>
+        
+        <div className="food-heading-actions"><div><h1>今天，吃点好的。</h1><Link className="food-publish-entry" to={`/food/new${searchParams.size ? `?${searchParams}` : ''}`}><Plus size={18} aria-hidden="true" />发布美食</Link></div><FoodArtwork /></div>
       </div>
-      <FoodAccountBar auth={auth} />
+      <FoodAccountBar auth={auth} compact />
       {isFoodExampleMode && <ExampleNotice />}
       <section className="food-search-panel" aria-label="搜索和筛选美食">
         <div className="food-area-tabs" role="group" aria-label="选择美食范围">
           <button type="button" className={`food-area-tab${area === 'campus' ? ' active' : ''}`} aria-pressed={area === 'campus'} onClick={() => changeArea('campus')}>校内食堂</button>
           <button type="button" className={`food-area-tab${area === 'off_campus' ? ' active' : ''}`} aria-pressed={area === 'off_campus'} onClick={() => changeArea('off_campus')}>校外美食</button>
         </div>
-        <SearchField id="food-search" label="想吃什么？" placeholder="搜索菜品、食堂、店铺或品类" value={query} onChange={(value) => updateFilter('q', value)} hint="输入后自动查找，也可以试试“饭类”“面”或“店铺”。" />
+        <SearchField id="food-search" label="想吃什么？" placeholder="搜索菜品、食堂、店铺或品类" value={query} onChange={(value) => updateFilter('q', value)} />
         <div className="food-filters">
           <label className="food-select-field" htmlFor="food-category"><span>菜品分类</span><select id="food-category" value={category} onChange={(event) => updateFilter('category', event.target.value)}><option value="">全部分类</option>{categories.map((item) => <option value={item} key={item}>{item}</option>)}</select></label>
           {area === 'campus' && <label className="food-select-field" htmlFor="food-location"><span>食堂 / 窗口</span><select id="food-location" value={location} onChange={(event) => updateFilter('location', event.target.value)}><option value="">全部地点</option>{locations.map((item) => <option value={item} key={item}>{item}</option>)}</select></label>}
           {(query || category || location) && <button className="food-clear-filters" type="button" onClick={clearFilters}>清除筛选</button>}
         </div>
       </section>
-      <div className="food-results-heading" aria-live="polite" aria-atomic="true"><h2>{area === 'campus' ? '校内食堂' : '校外美食'}</h2><span>{resource.loading ? '正在加载…' : resource.error ? '暂时无法显示菜品' : `${filteredFoods.length} 道${isFoodExampleMode ? '示例' : ''}菜品`}{query !== debouncedQuery ? ' · 正在查找…' : ''}</span>{isFoodBackendConfigured && <button type="button" className="food-clear-filters" onClick={resource.reload} disabled={resource.loading}>刷新列表</button>}</div>
-      {resource.loading ? <FoodLoading /> : resource.error ? <FoodFailure message={resource.error} retry={resource.reload} /> : filteredFoods.length > 0 ? (
+      <div className="food-results-heading" aria-live="polite" aria-atomic="true"><h2>{area === 'campus' ? '校内食堂' : '校外美食'}</h2><span>{resource.loading ? (resource.data ? '正在更新，保留现有结果…' : '正在加载…') : resource.error ? '暂时无法显示菜品' : `${filteredFoods.length} 道${isFoodExampleMode ? '示例' : ''}菜品`}{query !== debouncedQuery ? ' · 正在查找…' : ''}</span>{isFoodBackendConfigured && <button type="button" className="food-clear-filters" onClick={resource.refresh} disabled={resource.loading}>刷新列表</button>}</div>
+      {resource.error && <FoodFailure message={resource.error} retry={resource.refresh} />}
+      {resource.loading && !resource.data ? <FoodLoading /> : !resource.data && resource.error ? null : filteredFoods.length > 0 ? (
         <div className="food-grid">{filteredFoods.map((food) => <FoodCard food={food} query={detailQuery} key={food.id} />)}</div>
       ) : (
         <section className="food-no-results" aria-labelledby="food-no-results-title">

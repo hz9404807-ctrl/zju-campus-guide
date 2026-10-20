@@ -236,3 +236,23 @@
 .food-list-page .food-select-field select { border-color: #e5d8be; background-color: #fffefa; }
 .theme-food .food-account-bar { background-color: #fff8e7; }
 .food-list-page > .food-account-bar { background: transparent; }
+
+/* Browsing starts with food; keep all controls legible and reachable. */
+.food-list-page .food-welcome { padding: 12px 22px; margin-bottom: 6px; }
+.food-list-page .food-heading-actions > div { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 22px; }
+.food-list-page .food-heading-actions h1 { font-size: 28px; }
+.food-list-page .food-heading-actions .food-publish-entry { margin: 0; }
+.food-list-page .food-heading-actions > .food-artwork { width: 90px; }
+.food-list-page .food-welcome .breadcrumb { margin: 0; }
+.food-list-page > .food-account-bar { margin-bottom: 8px; }
+@media(max-width:680px) {
+ .food-list-page .food-welcome { padding: 8px 16px 14px; }
+ .food-list-page .food-heading-actions > .food-artwork { display: none; }
+ .food-list-page .food-heading-actions > div { width:100%; justify-content: space-between; gap: 8px; }
+ .food-list-page .food-heading-actions h1 { font-size:24px; max-width:none; }
+ .food-list-page .food-heading-actions .food-publish-entry { margin:0; font-size:13px; padding-inline:12px; }
+ .food-list-page .food-search-panel { padding:12px; }
+ .food-list-page .food-area-tabs { margin-bottom:8px; }
+ .food-list-page .food-filters { margin-top:12px; }
+ .food-list-page .food-results-heading { margin-top:16px; }
+}
