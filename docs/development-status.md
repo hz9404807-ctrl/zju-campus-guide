@@ -1,3 +1,9 @@
+## 2026-10-20 视觉与浏览体验合并上线（Sites第6版）
+
+- 合并视觉与首屏提交87edd07及同学fix/browse-experience的4aee5e3，合并提交238fa45已同步GitHub main。仅开发记录冲突，双方记录保留；原工作区未提交的结构化地点与草稿代码保留，不在本次发布范围。
+- 343项Node测试和生产构建（含类型检查）通过。保留约932KB分块提示；本次未新增浏览器或真实手机验收，先前各自浏览器记录不能替代合并版线上端到端验证。
+- 原站第6版部署成功，URL：https://zju-campus-guide.sangnuo0808.chatgpt.site 。version_id：appgprj_6ac777dac25081918658b4a2e55dcdea~appgver_256b043ccfd48191adeae4f716f7a7dc；deployment_id：appgdep_6ad74c8c18b88191a91592e28a507ff7；Sites源码0670b01d8ab1e5ae4b1bead20c7e83ca0dac3a7e。保持public和原站身份。
+- 发布归档检查无环境文件、凭据、scratch或node_modules；未迁移数据库。需要回退网站时重新部署已保存的第5版；Git用聚焦revert保留后续工作。后续五项功能的未完部分继续以实际验收为准。
 ## 2026-10-20 五项功能优化（进行中）
 
 基线：本机adbc4bb，直连fetch核对origin/main为a33896e；Sites get_site确认原公开站点为第5版、public，视觉提交未上线。保留用户未跟踪图片及分析报告。
@@ -542,4 +548,5 @@ Chrome 或 Edge 的设备预览可以设置为 390 × 844，并补查 320、780 
 | 8 | 启动、测试、迁移及交接说明已准备 | 跨浏览器、同学访问、第二台 Windows 与部署 |
 
 组长账号及项目创建先保留，开发者继续完成可以独立验证的工作。之后按 [README 中的创建步骤](../README.md#组长创建-supabase-的步骤) 建立新项目、启用匿名登录、执行初始化迁移并填写项目 URL 与 publishable key；再按 Supabase 文档完成真实服务验收。现在不需要填写这些变量即可运行只读示例模式。
+
 
