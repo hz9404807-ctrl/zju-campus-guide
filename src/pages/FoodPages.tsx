@@ -76,7 +76,7 @@ export function FoodPage() {
   const category = searchParams.get('category') ?? ''
   const location = area === 'campus' ? searchParams.get('location') ?? '' : ''
   const debouncedQuery = useDebouncedValue(query, 250)
-  const resource = useFoodResource(listFoods, isFoodBackendConfigured ? debouncedQuery : '')
+  const resource = useFoodResource(listFoods)
   const foods = resource.data ?? []
   const areaFoods = foods.filter((food) => food.area === area)
   const categories = [...new Set(areaFoods.map((food) => food.category))]
