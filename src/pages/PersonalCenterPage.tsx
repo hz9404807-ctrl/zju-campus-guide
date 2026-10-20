@@ -5,6 +5,7 @@ import { useFoodAuth } from '../hooks/useFoodAuth'
 import { useFoodResource } from '../hooks/useFoodResource'
 import { isFoodEmailAuthReady, myRatings, signOutFood } from '../lib/foodService'
 import { OwnedFoodList } from '../components/OwnedFoodList'
+import MyFavorites from '../components/MyFavorites'
 import './food.css'
 import './food-account.css'
 
@@ -46,7 +47,7 @@ export function PersonalCenterPage() {
 
   return <div className="page module-page personal-center-page">
     <Link className="breadcrumb" to="/"><ArrowLeft size={16} aria-hidden="true" />返回首页</Link>
-    <div className="page-heading"><p className="eyebrow">你的校园生活记录</p><h1>个人中心</h1><p className="page-description">查看账号信息，管理发布，回看自己的评分。</p></div>
+    <div className="page-heading"><p className="eyebrow">你的校园生活记录</p><h1>个人中心</h1><p className="page-description">重访收藏的校园信息，管理发布，回看自己的评分。</p></div>
     {signOutError && <p className="food-account-notice" role="alert">{signOutError} 当前账号状态以页面重新检查结果为准。</p>}
     {(auth.loading || signingOut) ? <div className="food-load-state" role="status"><span className="food-loading-dot" /><p>{signingOut ? '正在退出，已收起个人内容…' : '正在确认登录状态…'}</p></div> : auth.error ? <div className="food-load-state" role="alert"><h2>暂时无法确认账号</h2><p>{auth.error}</p><button className="button-link" type="button" onClick={auth.retry}>重试账号检查</button></div> : !verified ? <section className="account-guest" aria-labelledby="account-login-title">
       <div className="account-guest-story">
@@ -72,8 +73,9 @@ export function PersonalCenterPage() {
         <p className="food-account-hint">邮箱仅在你自己的账号页面显示，不会出现在公开发布或评分中。一个邮箱对应一个登录账号。</p>
         <button type="button" className="account-sign-out" onClick={signOut}><LogOut size={17} aria-hidden="true" />退出登录</button></div>
       </section>
-      <nav className="account-section-nav" aria-label="个人内容"><a href="#my-posts"><PenLine size={17} aria-hidden="true" />我的发布</a><a href="#my-ratings"><Star size={17} aria-hidden="true" />我的评分</a></nav>
+      <nav className="account-section-nav" aria-label="个人内容"><a href="#my-favorites">我的收藏</a><a href="#my-posts"><PenLine size={17} aria-hidden="true" />我的发布</a><a href="#my-ratings"><Star size={17} aria-hidden="true" />我的评分</a></nav>
       <div key={auth.user!.id}>
+        <section className="account-section" id="my-favorites" aria-labelledby="my-favorites-title"><div className="account-section-heading"><div><h2 id="my-favorites-title">我的收藏</h2><p>在不同设备上重访常用指南、官方入口和美食。</p></div></div><MyFavorites /></section>
         <section className="account-section" id="my-posts" aria-labelledby="my-posts-title"><div className="account-section-heading"><div><h2 id="my-posts-title">我的发布</h2><p>编辑、撤下或恢复你分享过的美食。</p></div><Link className="button-link" to="/food/new">发布一道菜</Link></div><OwnedFoodList onChanged={() => setRevision((value) => value + 1)} /></section>
         <section className="account-section" id="my-ratings" aria-labelledby="my-ratings-title"><div className="account-section-heading"><div><h2 id="my-ratings-title">我的评分</h2><p>按当前账号汇总你实际提交过的评分。</p></div></div><MyRatings revision={revision} /></section>
       </div>

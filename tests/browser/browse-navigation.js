@@ -13,6 +13,7 @@ async (page) => {
   const intercept = async (route) => {
     const address = route.request().url()
     if (address.startsWith(base + '/')) return route.continue()
+    if (address === service + '/auth/v1/user') return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({id:'33333333-3333-4333-8333-333333333333',aud:'authenticated',role:'authenticated',is_anonymous:true})})
     unexpected.push(address)
     return route.abort('blockedbyclient')
   }

@@ -62,6 +62,15 @@ test('返回地址只接受本站信息源列表，拒绝外站、协议相对�
   }
 })
 
+test('首页联合搜索返回在相关指南中保持且不嵌套其他参数',()=>{
+  const params=new URLSearchParams({q:'成绩单',category:'不属于指南的分类',returnTo:'/?q=成绩单&token=private&returnTo=https://evil.invalid'})
+  const navigation=guideNavigation(params)
+  assert.equal(navigation.backTo,'/?q=%E6%88%90%E7%BB%A9%E5%8D%95#home-search')
+  assert.equal(navigation.backLabel,'首页搜索')
+  assert.equal(guideNavigation(new URLSearchParams(navigation.relatedSearch)).backTo,navigation.backTo)
+  assert.equal(navigation.relatedSearch.includes('private'),false)
+})
+
 test('返回地址不嵌套增长，相关指南继续保留原来源列表', () => {
   const params = new URLSearchParams({ q: '班车', returnTo: '/sources?kind=websites&category=校园交通&returnTo=https://outside.invalid#source-results-heading' })
   const first = guideNavigation(params)

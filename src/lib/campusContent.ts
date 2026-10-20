@@ -137,6 +137,12 @@ export function filterGuides(guides: Guide[], query: string, category = '', wind
     .map((result) => result.guide)
 }
 
+// Keep body-only mentions distinct from a guide whose actual subject answers
+// this question, while sharing the same alias and natural-language parser.
+export function guideIntentMatches(guide: Guide, query: string) {
+  return matches(query,[guide.title,...guide.keywords,guide.summary,...(guide.routes??[]).flatMap(route=>[route.label,route.summary,...route.intentTerms])])
+}
+
 export interface CampusAccount {
   id: string
   name: string

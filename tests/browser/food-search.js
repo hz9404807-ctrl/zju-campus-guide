@@ -118,11 +118,12 @@ async (page) => {
     failReads = true
     await page.getByRole('button', { name: '刷新列表', exact: true }).click()
     await startedPromise
-    await page.getByRole('heading', { name: '正在加载美食…', exact: true }).waitFor()
+    await page.waitForFunction(()=>document.querySelector('.food-results-heading button')?.disabled)
+    assert(await cards.count() === 3, 'pending refresh preserves the loaded list')
     assert(reads === baseline + 1 && await page.getByRole('button', { name: '刷新列表', exact: true }).isDisabled(), 'manual refresh performs one new fetch and disables repeat refresh while pending')
     releaseHeldRead()
     await page.getByRole('alert').filter({ hasText: '暂时无法加载' }).waitFor()
-    assert(await cards.count() === 0, 'failed refresh is shown as a real load failure')
+    assert(await cards.count() === 3, 'failed refresh preserves previous data alongside the real failure')
     // The SDK may retry 503 responses itself; keep the fixture unavailable
     // until its request settles, then prove the explicit UI retry recovers.
     const failedReads = reads

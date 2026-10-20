@@ -1,3 +1,4 @@
+import { safeHomeReturn } from './unifiedSearch.ts'
 const sourceListKeys = ['kind', 'q', 'category', 'page'] as const
 const guideListKeys = ['q', 'category', 'page'] as const
 const localOrigin = 'https://campus-guide.invalid'
@@ -45,15 +46,17 @@ export function sourceGuideUrl(guideId: string, sourceParams: URLSearchParams, q
 }
 
 export function guideNavigation(params: URLSearchParams) {
+  const homeReturn = safeHomeReturn(params.get('returnTo'))
   // Support links made by the previous website directory as well as new links.
   const sourceReturn = safeSourceReturn(params.get('returnTo'))
     ?? (params.get('kind') === 'websites' ? sourceListUrl(params) : null)
-  const listParams = pickParams(params, sourceReturn ? ['q'] : guideListKeys)
+  const listParams = pickParams(params, sourceReturn || homeReturn ? ['q'] : guideListKeys)
   const relatedParams = new URLSearchParams(listParams)
   if (sourceReturn) relatedParams.set('returnTo', sourceReturn)
+  else if (homeReturn) relatedParams.set('returnTo', homeReturn)
   return {
-    backTo: sourceReturn ?? `/guides${searchSuffix(listParams)}`,
-    backLabel: sourceReturn ? '信息源列表' : params.get('q') ? '搜索结果' : '办事指南',
+    backTo: sourceReturn ?? homeReturn ?? `/guides${searchSuffix(listParams)}`,
+    backLabel: sourceReturn ? '信息源列表' : homeReturn ? '首页搜索' : params.get('q') ? '搜索结果' : '办事指南',
     relatedSearch: searchSuffix(relatedParams),
   }
 }

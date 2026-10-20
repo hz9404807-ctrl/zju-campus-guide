@@ -29,6 +29,24 @@ test('返回地址保留办事上下文且不允许站外跳转', () => {
   assert.equal(safeFoodReturn('/food/abc/edit?area=campus'), '/food/abc/edit?area=campus')
   for (const url of ['https://evil.invalid','//evil.invalid','/food/../../about','/about','/foodish','/food/login?returnTo=evil']) assert.equal(safeFoodReturn(url), '/food')
 })
+test('收藏登录可回到指南、公众号目录和官方入口，保留筛选和锚点', () => {
+  for (const address of [
+    '/guides?category=campus&q=card',
+    '/guides/campus-card-replacement?route=offline&campus=%E7%B4%AB%E9%87%91%E6%B8%AF#guide-windows-heading',
+    '/sources?kind=websites&q=card&page=2',
+    '/sources/account-123?q=card',
+    '/sites/website-123',
+  ]) assert.equal(safeFoodReturn(address), address)
+})
+test('跨模块返回只接受真实路由格式，拒绝控制字符、反斜杠、编码绕过与登录环路', () => {
+  for (const address of [
+    '/guides-other', '/guides/a/extra', '/sources/a/edit', '/sites', '/sites/a/extra',
+    '/guides/../sources', '/guides/%2e%2e/sources', '/guides/%252e%252e/sources',
+    '/sources/..%2fsites/a', '/guides/a%5cevil', '/guides\\evil', '/guides/a\n', '/sources/a?x=%00',
+    '/food/login', '/food/login/edit', '/food/login?returnTo=/guides/a', '/food/%6cogin',
+    '/\\evil.invalid/guides/a', '//evil.invalid/guides/a', 'https://evil.invalid/guides/a',
+  ]) assert.equal(safeFoodReturn(address), '/food', address)
+})
 test('绑定匿名身份使用邮箱变更验证，保留原身份，不另外创建账号', async () => {
   const { auth, calls } = setup()
   assert.equal(await auth.sendCode(member.email,'bind'), 'email_change')

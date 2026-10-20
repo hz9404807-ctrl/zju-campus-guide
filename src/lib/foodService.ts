@@ -4,6 +4,8 @@ import type { Food, FoodPublishInput } from '../types/food'
 import { createFoodApi, FoodServiceError } from './foodApi'
 import { createFoodProfilesApi } from './foodProfiles'
 import { createFoodAuth } from './foodAuth'
+import { createFavoritesApi } from './favoritesApi'
+import type { FavoriteContext, FavoriteKind } from '../types/favorite'
 
 const projectUrl = (import.meta.env.VITE_SUPABASE_URL ?? '').trim()
 const publishableKey = (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? '').trim()
@@ -20,6 +22,7 @@ export const isFoodEmailAuthReady = import.meta.env.VITE_FOOD_EMAIL_AUTH_READY =
 let api: ReturnType<typeof createFoodApi> | null = null
 let auth: ReturnType<typeof createFoodAuth> | null = null
 let clientInstance: SupabaseClient | null = null
+let favorites: ReturnType<typeof createFavoritesApi> | null = null
 
 function getApi() {
   if (!isFoodBackendConfigured) throw configurationError()
@@ -87,6 +90,14 @@ export async function verifyFoodCode(email: string, token: string, type: 'email_
 export async function signOutFood() { getApi(); return auth!.signOut() }
 export async function myFoods(profileId?: string) { return getApi().myFoods(profileId) }
 export async function myRatings() { return getApi().myRatings() }
+function getFavoritesApi() {
+  getApi()
+  if (!favorites) favorites = createFavoritesApi(clientInstance!)
+  return favorites
+}
+export async function listFavorites() { return getFavoritesApi().listFavorites() }
+export async function saveFavorite(kind: FavoriteKind, id: string, context: FavoriteContext = {}) { return getFavoritesApi().saveFavorite(kind, id, context) }
+export async function removeFavorite(kind: FavoriteKind, id: string) { return getFavoritesApi().removeFavorite(kind, id) }
 export async function updateFood(id: string, updatedAt: string, input: FoodPublishInput, image: File | null, removeImage: boolean, profileId?: string) { return getApi().updateFood(id, updatedAt, input, image, removeImage, profileId) }
 export async function setFoodDeleted(id: string, updatedAt: string, deleted: boolean, profileId?: string) { return getApi().setFoodDeleted(id, updatedAt, deleted, profileId) }
 

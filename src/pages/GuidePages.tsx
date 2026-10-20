@@ -8,6 +8,8 @@ import GuideStepActions from '../components/GuideStepActions'
 import GuideServiceWindows from '../components/GuideServiceWindows'
 import GuideTimetable from '../components/GuideTimetable'
 import { clearTimetableParams } from '../lib/guideTimetable'
+import FavoriteButton from '../components/FavoriteButton'
+import { guideFavoriteContext } from '../lib/favoriteTargets'
 import { guideSections } from '../lib/guideSections'
 import { guideNavigation } from '../lib/browseNavigation'
 import { parseResultPage } from '../lib/resultPagination'
@@ -95,9 +97,10 @@ export function GuideDetailPage() {
   }, [location.pathname, location.search, location.hash])
   const [params, setParams] = useSearchParams()
   const originalGuide = guides.find((item) => item.id === guideId || item.aliases?.includes(guideId ?? ''))
-  const query = params.get('q') ?? ''
+  const savedContext = originalGuide ? guideFavoriteContext(originalGuide, params, serviceWindows) : {}
+  const query = params.get('q') ?? savedContext.campus ?? ''
   const { route, contentQuery } = originalGuide ? guideDetailContext(originalGuide, query, params.get('route')) : { route: undefined, contentQuery: query }
-  const guide = originalGuide ? guideRouteView(originalGuide, route, contentQuery) : undefined
+  const guide = originalGuide ? guideRouteView(originalGuide, route, savedContext.campus ?? contentQuery) : undefined
   const overview = Boolean(guide?.routes?.length && !route)
   const match = guide && !overview ? guideSearchMatch(guide, contentQuery, serviceWindows) : undefined
   const conditionNotice = guide && !overview ? searchGuides([guide], contentQuery, '', serviceWindows).notice : ''
@@ -109,6 +112,11 @@ export function GuideDetailPage() {
     // Drop a passage anchor because each route has its own step sequence.
     setParams(next)
   }
+  function chooseCampus(campus: string) {
+    const next = new URLSearchParams(params)
+    next.set('campus', campus)
+    setParams(next, { replace: true })
+  }
   if (!guide) return <div className="page module-page"><Link to={backTo} className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回{backLabel}</Link><div className="guide-empty-state"><ClipboardList size={29} aria-hidden="true" /><h1>这份指南没有找到</h1><p>返回列表继续搜索其他问题。</p><Link to={backTo} className="button-link">返回{backLabel}</Link></div></div>
   const related = accountData.filter((account) => guide.relatedSourceIds.includes(account.id))
   const relatedGuides = guides.filter((item) => guide.relatedGuideIds?.includes(item.id))
@@ -119,6 +127,7 @@ export function GuideDetailPage() {
   return <div className="page module-page guide-detail-page">
     <div className="page-heading"><Link to={backTo} className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回{backLabel}</Link><p className="eyebrow">校园办事 · {guide.category}</p><h1>{guide.title}</h1></div>
     <section className="guide-answer-panel" aria-labelledby="guide-answer-heading"><h2 id="guide-answer-heading">{['procedure', 'options'].includes(guide.kind) ? '整体流程' : '事项概览'}</h2><p>{guide.summary}</p></section>
+    <FavoriteButton kind="guide" id={originalGuide!.id} context={savedContext} />
     {conditionNotice && <p className="guide-condition-note" role="note">{conditionNotice}</p>}
     {guide.routes && <section className="guide-route-panel" aria-labelledby="guide-route-heading"><h2 id="guide-route-heading">{guide.routeChoiceLabel}</h2><div className="guide-route-choices"><button type="button" aria-pressed={!route} onClick={() => chooseRoute('all')}>查看全部办理方式</button>{guide.routes.map((option) => <button key={option.id} type="button" aria-pressed={route?.id === option.id} onClick={() => chooseRoute(option.id)}>{option.label}</button>)}</div><p role="status" aria-live="polite">{route ? `当前显示：${route.label}。可随时切换，搜索词不会限制选择。` : '选择与你的需求相符的方式，查看对应的准备材料、操作和入口。'}</p>{route?.audienceNote && <p className="guide-route-scope">适用范围：{route.audienceNote}</p>}</section>}
     {match && <p className="guide-search-location"><a href={`#${match.anchor}`}>定位与“{contentQuery}”匹配的段落 <ArrowRight size={15} aria-hidden="true" /></a></p>}
@@ -132,7 +141,7 @@ export function GuideDetailPage() {
       {guide.notes.length > 0 && <section className="guide-detail-section guide-notes"><h2 id="guide-notes-heading" tabIndex={-1}>办理前留意</h2><ul className="guide-material-list">{guide.notes.map((note, i) => <li key={i}>{note}</li>)}</ul></section>}
       {relatedGuides.length > 0 && <section className="guide-detail-section"><h2>相关办理</h2><div className="guide-related-accounts">{relatedGuides.map((item) => <Link key={item.id} to={`/guides/${item.id}${listSearch}`}>{item.title}<ArrowRight size={16} aria-hidden="true" /></Link>)}</div></section>}
     </div>
-      {windows.length > 0 ? <GuideServiceWindows key={`${guide.id}:${route?.id ?? 'all'}`} windows={windows} allCampuses={serviceWindows.map((window) => window.campus)} /> : hasServiceInfo && <aside className="guide-detail-section"><h2 id="guide-windows-heading" tabIndex={-1}>办理地点与时间</h2><dl className="guide-meta-list">
+      {windows.length > 0 ? <GuideServiceWindows key={`${guide.id}:${route?.id ?? 'all'}`} windows={windows} selectedCampus={params.get('campus') ?? savedContext.campus ?? null} onCampusChange={chooseCampus} /> : hasServiceInfo && <aside className="guide-detail-section"><h2 id="guide-windows-heading" tabIndex={-1}>办理地点与时间</h2><dl className="guide-meta-list">
         {guide.location && <div><dt>办理地点</dt><dd>{guide.location}</dd></div>}{guide.openingHours && <div><dt>开放时间</dt><dd>{guide.openingHours}</dd></div>}{guide.contact && <div><dt>联系方式</dt><dd>{guide.contact}</dd></div>}
       </dl></aside>}
     </div>}

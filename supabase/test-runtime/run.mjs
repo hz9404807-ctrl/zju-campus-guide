@@ -76,8 +76,15 @@ try {
     await db.exec('begin;\n' + verifiedMigration.replace(/^begin;|^commit;/gm, '') + '\n' + verifiedChecks + '\nrollback;')
     console.log(`Verified write assertions (${stage}): ${(verifiedChecks.match(/select pg_temp\.(?:check_write|expect_write)\(/g) ?? []).length}`)
   }
+  async function checkFavorites(stage) {
+    const favoriteMigration = await readFile(new URL('../migrations/20261020200000_campus_favorites.sql', import.meta.url), 'utf8')
+    const favoriteChecks = await readFile(new URL('../favorites.tests.sql', import.meta.url), 'utf8')
+    await db.exec('begin;\n' + favoriteMigration.replace(/^begin;|^commit;/gm, '') + '\n' + favoriteChecks + '\nrollback;')
+    console.log(`Favorite assertions (${stage}): ${(favoriteChecks.match(/select pg_temp\.(?:check_favorite|expect_favorite)\(/g) ?? []).length}`)
+  }
   await checkPersonalHistory('email-only schema')
   await checkVerifiedWrites('email-only schema')
+  await checkFavorites('email-only schema')
   await db.exec(await readFile(new URL('../migrations/202610130002_food_profiles.sql', import.meta.url), 'utf8'))
   const profileChecks = await readFile(new URL('../food-profiles.tests.sql', import.meta.url), 'utf8')
   const profileResults = await db.exec(profileChecks)
@@ -85,6 +92,7 @@ try {
   console.log('Profile assertions: ' + (profileChecks.match(/select pg_temp\.(?:check_profile|expect_profile)\(/g) ?? []).length)
   await checkPersonalHistory('profile-compatible schema')
   await checkVerifiedWrites('profile-compatible schema')
+  await checkFavorites('profile-compatible schema')
   const leftover = await db.query('select (select count(*) from public.foods)::int as foods, (select count(*) from public.ratings)::int as ratings, (select count(*) from auth.users)::int as users, (select count(*) from public.food_profiles)::int as profiles')
   if (Object.values(leftover.rows[0]).some((count) => count !== 0)) {
     throw new Error('SQL tests did not roll back all their fixtures')

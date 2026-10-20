@@ -65,6 +65,7 @@ async (page) => {
       return reply(postsMode === 'empty' && owner ? [] : id ? found[0] ?? null : found)
     }
     if (url.pathname === '/rest/v1/ratings') return reply(null)
+    if (url.pathname === '/rest/v1/rpc/list_my_campus_favorites') return reply([])
     if (url.pathname === '/rest/v1/rpc/list_my_food_ratings') {
       if (delayRatings) { delayRatings = false; delayedStarted(); await new Promise((resolve) => { delayedRelease = resolve }) }
       if (ratingsMode === 'missing') return reply({ code: 'PGRST202', message: 'fixture RPC missing' }, 404)

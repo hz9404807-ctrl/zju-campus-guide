@@ -1,20 +1,29 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ExternalLink, Phone } from 'lucide-react'
 import CopyTextButton from './CopyTextButton'
-import { readCampusPreference, saveCampusPreference } from '../lib/campusPreference'
+import { readCampusPreference, resolveGuideCampus, saveCampusPreference } from '../lib/campusPreference'
 import type { ServiceWindow } from '../types/guide'
 
 function browserStorage() {
   try { return window.localStorage } catch { return null }
 }
 
-export default function GuideServiceWindows({ windows, allCampuses }: { windows: ServiceWindow[]; allCampuses: string[] }) {
-  const campuses = [...new Set(allCampuses)]
-  const multipleCampuses = new Set(windows.map((window) => window.campus)).size > 1
-  const [campus, setCampus] = useState(() => readCampusPreference(browserStorage(), [...new Set(windows.map((window) => window.campus))], windows[0]?.campus ?? '') || windows[0]?.campus || '')
+// allCampuses remains accepted for callers on the preceding main revision.
+export default function GuideServiceWindows({ windows, selectedCampus = null, onCampusChange = () => {} }: { windows: ServiceWindow[]; selectedCampus?: string | null; onCampusChange?(campus: string): void; allCampuses?: string[] }) {
+  const campuses = [...new Set(windows.map((window) => window.campus))]
+  const multipleCampuses = campuses.length > 1
+  const [preferredCampus, setPreferredCampus] = useState(() => readCampusPreference(browserStorage(), campuses, windows[0]?.campus ?? ''))
+  const campus = resolveGuideCampus(selectedCampus, campuses, preferredCampus)
   const [preferenceError, setPreferenceError] = useState(false)
+  useEffect(() => {
+    // Canonicalize missing/stale parameters so the bookmark records exactly the
+    // currently displayed campus, including on another device or browser back.
+    if (campus && selectedCampus !== campus) onCampusChange(campus)
+  }, [campus, selectedCampus, onCampusChange])
   function chooseCampus(value: string) {
-    setCampus(value)
+    if (!campuses.includes(value)) return
+    setPreferredCampus(value)
+    onCampusChange(value)
     setPreferenceError(!saveCampusPreference(browserStorage(), value))
   }
   const visible = windows.filter((window) => !campus || window.campus === campus)
@@ -25,7 +34,7 @@ export default function GuideServiceWindows({ windows, allCampuses }: { windows:
       <span>选择办理校区</span>
       <div className="guide-campus-buttons" role="group" aria-label="办理校区">{campuses.map((item) => <button key={item} type="button" aria-pressed={campus === item} onClick={() => chooseCampus(item)}>{item}</button>)}</div>
     </div>}
-    {multipleCampuses && <p className="guide-preference-note">校区选择保存在当前浏览器，可随时切换。</p>}
+    {multipleCampuses && <p className="guide-preference-note">校区选择会保留在当前链接中，也会作为当前浏览器的偏好。</p>}
     {preferenceError && <p className="guide-window-notice" role="status">本次切换已生效，但浏览器未能保存；下次可能需要重新选择。</p>}
     <p className="guide-window-count" role="status" aria-live="polite">显示{visible.length}个服务点</p>
     {visible.length === 0 && <div className="guide-window-unavailable"><p>当前事项未收录{campus}的服务窗口。请选择其他校区，或查看已收录校区。</p><button type="button" className="guide-action-button" onClick={() => chooseCampus(windows[0]?.campus ?? '')}>查看已收录校区</button></div>}
