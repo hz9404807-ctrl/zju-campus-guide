@@ -1,6 +1,5 @@
 import { CampusArtwork, FoodArtwork } from './components/CampusArtwork'
-import FoodAccountProvider from './components/FoodAccountProvider'
-import { useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router'
 import {
   ArrowLeft,
@@ -14,15 +13,22 @@ import {
   UserRound,
   X,
 } from 'lucide-react'
-import { GuideDetailPage, GuidePage } from './pages/GuidePages'
-import { FoodDetailPage, FoodPage } from './pages/FoodPages'
-import { FoodPublishPage } from './pages/FoodPublishPage'
-import { FoodLoginPage } from './pages/FoodLoginPage'
-import { FoodMinePage } from './pages/FoodMinePage'
-import { PersonalCenterPage } from './pages/PersonalCenterPage'
-import { SourcesPage, SourceDetailPage } from './pages/SourcePages'
 import contentManifest from './data/content-manifest.json'
-import { initializeFoodIdentity } from './lib/foodService'
+import HomeSearch from './components/HomeSearch'
+import RouteLoadBoundary from './components/RouteLoadBoundary'
+
+const FoodAccountProvider=lazy(()=>import('./components/FoodAccountProvider'))
+const GuidePage=lazy(()=>import('./pages/GuidePages').then(m=>({default:m.GuidePage})))
+const GuideDetailPage=lazy(()=>import('./pages/GuidePages').then(m=>({default:m.GuideDetailPage})))
+const SourcesPage=lazy(()=>import('./pages/SourcePages').then(m=>({default:m.SourcesPage})))
+const SourceDetailPage=lazy(()=>import('./pages/SourcePages').then(m=>({default:m.SourceDetailPage})))
+const FoodPage=lazy(()=>import('./pages/FoodPages').then(m=>({default:m.FoodPage})))
+const FoodDetailPage=lazy(()=>import('./pages/FoodPages').then(m=>({default:m.FoodDetailPage})))
+const FoodPublishPage=lazy(()=>import('./pages/FoodPublishPage').then(m=>({default:m.FoodPublishPage})))
+const FoodLoginPage=lazy(()=>import('./pages/FoodLoginPage').then(m=>({default:m.FoodLoginPage})))
+const FoodMinePage=lazy(()=>import('./pages/FoodMinePage').then(m=>({default:m.FoodMinePage})))
+const PersonalCenterPage=lazy(()=>import('./pages/PersonalCenterPage').then(m=>({default:m.PersonalCenterPage})))
+const WebsitePage=lazy(()=>import('./pages/WebsitePage'))
 
 const navigation = [
   { to: '/', label: '首页' },
@@ -116,6 +122,7 @@ function HomePage() {
         </div>
         <div className="hero-art"><CampusArtwork /><span className="hero-art-caption">求知 · 办事 · 好好生活</span></div>
       </section>
+      <HomeSearch />
       <div className="home-section-heading"><h2>今天，从哪件事开始？</h2><span>校园生活的三个入口</span></div>
 
       <section className="module-grid" aria-label="选择你需要的服务">
@@ -191,10 +198,6 @@ export default function App() {
   const mainContent = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    initializeFoodIdentity().catch(() => { /* 美食页面会显示连接失败并提供重试。 */ })
-  }, [])
-
-  useEffect(() => {
     const title = pageTitles[location.pathname] ?? (location.pathname.startsWith('/guides/') ? '办事指南详情' : location.pathname.startsWith('/sources/') ? '公众号信息' : location.pathname.startsWith('/food/') ? '美食详情' : '页面未找到')
     document.title = `${title} · 浙大校园指南`
     if (previousPath.current !== location.pathname) {
@@ -209,11 +212,14 @@ export default function App() {
       <a className="skip-link" href="#main-content">跳转到主要内容</a>
       <Header />
       <main className="main-content" id="main-content" ref={mainContent} tabIndex={-1}>
-        <Routes>
+        <RouteLoadBoundary path={location.pathname}><Suspense fallback={<div className="page module-page" role="status" aria-live="polite">正在加载页面…</div>}><Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/guides" element={<GuidePage />} />
-          <Route path="/guides/:guideId" element={<GuideDetailPage />} />
           <Route element={<FoodAccountProvider />}>
+            <Route path="/guides" element={<GuidePage />} />
+            <Route path="/guides/:guideId" element={<GuideDetailPage />} />
+            <Route path="/sources" element={<SourcesPage />} />
+            <Route path="/sources/:sourceId" element={<SourceDetailPage />} />
+            <Route path="/sites/:websiteId" element={<WebsitePage />} />
             <Route path="/account" element={<PersonalCenterPage />} />
             <Route path="/food" element={<FoodPage />} />
             <Route path="/food/login" element={<FoodLoginPage />} />
@@ -222,11 +228,9 @@ export default function App() {
             <Route path="/food/new" element={<FoodPublishPage key={location.pathname} />} />
             <Route path="/food/:foodId" element={<FoodDetailPage />} />
           </Route>
-          <Route path="/sources" element={<SourcesPage />} />
-          <Route path="/sources/:sourceId" element={<SourceDetailPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        </Routes></Suspense></RouteLoadBoundary>
       </main>
       <footer className="site-footer">
         <div className="footer-inner"><span>浙大校园指南</span><p className="footer-project">《人类工效学》课程项目 · 非学校官方平台</p></div>
