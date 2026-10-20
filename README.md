@@ -1,5 +1,13 @@
 # 浙大校园指南
 
+## 本轮功能分支：统一搜索、收藏与维护检查（2026-10-20，待合并）
+
+`feat/campus-discovery` 新增首页联合搜索、个人中心“我的收藏”、预算/价格/均分排序、来源维护检查及路由按需加载。浏览继续公开，收藏要求已验证的浙大邮箱。
+
+收藏需要组长审阅后在原项目**仅执行** `supabase/migrations/20261020200000_campus_favorites.sql`；没有新环境变量，不重跑初始化、不启用五档案。未部署会显示待接入，不会假装保存成功。此分支未发布到生产站点。
+
+启动：`npm ci` → `npm run dev`；检查：`npm test`、`npm run typecheck`、`npm run build`、`npm run test:db`。维护报告：`npm run check:sources -- --max-requests=12`，固定写入被忽略的 `outputs/source-health.json` 与 `.md`。迁移、协作依赖、实际测量及逐步验收见[最新开发记录](docs/development-status.md)。
+
 ## 个人中心与邮箱权限（2026-10-19）
 
 `/account` 提供账号概览、我的发布、我的评分和退出登录；我的发布支持编辑、撤下与恢复，评分条目可返回仍在展示的菜品详情。校园办事、信息源和美食浏览公开，发布与评分要求已验证的浙大邮箱。

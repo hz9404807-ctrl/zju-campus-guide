@@ -271,3 +271,16 @@ npm run test:db
 - [存储桶配置](https://supabase.com/docs/guides/storage/buckets/creating-buckets)
 - [Storage 数据表应如何使用](https://supabase.com/docs/guides/storage/schema/design)
 - [PGlite 本地内存数据库](https://pglite.dev/docs/)
+## 收藏增量接入（2026-10-20，待组长执行）
+
+本轮只新增 `migrations/20261020200000_campus_favorites.sql`，不重新执行初始化、邮箱管理、评分历史或五档案迁移。执行前核对原项目已包含 `202610130001_food_email_management.sql`，当前正式规则还包含已部署的评分历史与 verified writes。新迁移不改真实菜品、评分、作者归属或认证配置，也没有新功能开关。
+
+组长在原 Supabase 项目的 **SQL Editor → New query** 中审阅并执行该文件全文，然后确认 `campus_favorites`、RLS 与三个收藏 RPC 已建立。若迁移历史已显示这一个版本，勿重复运行；本分支历史旧名 `202610200001_favorites.sql` 已替换，不能另行执行。只有新增收藏结构需要云端权限，日常开发不需要管理密钥。
+
+`list_my_campus_favorites(p_expected_user_id)` 返回 owner_id 和当前用户收藏；`save_my_campus_favorite(p_expected_user_id,p_target_kind,p_target_id,p_context)`、`remove_my_campus_favorite(p_expected_user_id,p_target_kind,p_target_id)` 返回真实用户 UUID。expected 参数是身份一致性守卫；归属始终取 `auth.uid()`，不允许客户端指定其他 owner。普通客户端只有本人 SELECT/DELETE，不能直接 INSERT/UPDATE，函数守卫已验证学校邮箱、上下文白名单与唯一键。美食新增收藏必须仍然公开。
+
+本地 `npm run test:db` 在内存数据库验证，不连接真实项目；不能代替线上 HTTP 鉴权、真实两账号和跨设备验收。前端遇缺迁移明确提示“收藏功能尚待接入”。
+
+迁移后由使用者各自登录自己的学校账号：收藏三类内容→个人中心查看→同账号另一设备读取→另一账号看不到→取消后刷新仍消失→失效目标无详情且可移除。账号、验证码和会话不共享，不向同学索要组长登录。
+
+回退先回退前端或对应功能提交，保留收藏表和用户记录；不要为回退删除收藏表、用户、菜品或原有迁移。生产托管部署仍由组长审阅后单独操作。

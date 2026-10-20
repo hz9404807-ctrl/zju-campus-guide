@@ -1,4 +1,17 @@
-## 当前协作状态（2026-10-19）
+## 当前功能分支交接（2026-10-20）
+
+本轮 `feat/campus-discovery` 从 87edd07 开始，随后安全合入组长最新 main 25f2e69（含 PR #2 的来源返回、分页焦点与美食请求修复）。个人中心仍是同一个 Auth 账号与 Provider，新增收藏通过现有 foodService 的 listFavorites/saveFavorite/removeFavorite 接入；不要复制 Supabase 客户端或身份状态。
+
+- 收藏唯一待部署迁移：`20261020200000_campus_favorites.sql`。本分支历史中的旧迁移名已重命名，不要执行历史版本。原邮箱与评分历史迁移已部署，不重复执行；五档案仍不启用。
+- 三个收藏 RPC 的 `p_expected_user_id` 只用于与服务端真实 `auth.uid()` 比较，绝不能将它用作指定访问其他账号的 owner。列表额外返回 owner_id，写入与删除返回真实 owner UUID；客户端检查响应身份，处理快速 A→B→A 换号竞态。
+- 收藏上下文只存真实目标 ID 与有效 route/campus，不存 q、returnTo、邮箱、URL、验证码、token 或内容快照。静态目标取当前目录；美食只取当前公开视图，撤下只留失效记录可移除。
+- 同一个 Provider 持续覆盖食物/账号和指南/来源页面，主页不初始化身份；路由 lazy 声明在模块顶层。不要按 pathname 给 Provider 加 key，避免同账号编辑草稿被重建。
+- 美食只新增 minPrice/maxPrice/sort 参数，组合现有 area/category/location；保留未识别参数。组长结构化校区食堂、草稿、纠错和准备清单在本次核对的 main 尚未合入，不重复实现。后续以组长实际分支的地点接口为准，在同一个 URL 状态上衔接预算与排序。
+- 源链接工具只读项目配置来源，报告固定 outputs/source-health.{json,md}；年度及共用热线差异仅为人工候选，不更新 verifiedAt。
+
+完整验证、截图路径、性能数据、回退与组长点击清单见 development-status.md 最上方。本分支没有执行云端迁移、SMTP 修改、生产发布或真实账号批量测试。
+
+## 上轮协作状态（2026-10-19）
 
 个人中心代码已由组长合并，原 Supabase 已部署评分历史 RPC 与邮箱发布/评分限制。一个邮箱一个 Auth 账号，五档案关闭；账号注销未实现。后续 AI 请从最新 main 开始，勿重复执行已部署迁移或重新配置 SMTP。当前部署版本与验收边界见 `docs/development-status.md` 最上方记录，下方较早的交接任务作为历史背景。
 
