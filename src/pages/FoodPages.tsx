@@ -10,6 +10,7 @@ import { FoodRatingPanel } from '../components/FoodRatingPanel'
 import type { Food, FoodArea } from '../types/food'
 import './food.css'
 import FoodAccountBar from '../components/FoodAccountBar'
+import FavoriteButton from '../components/FavoriteButton'
 import { useFoodAuth } from '../hooks/useFoodAuth'
 import { compareFoods, foodSortDescription, hasFoodPrice, hasFoodRating, parseFoodBudget, parseFoodSort } from '../lib/foodComparison'
 
@@ -223,6 +224,7 @@ export function FoodDetailPage() {
         <div className="food-detail-content">
           <div className="food-card-topline">{food.isExample && <span className="food-example-badge">示例数据</span>}<span className="food-category">{food.area === 'campus' ? '校内食堂' : '校外美食'} · {food.category}</span></div>
           <h1>{food.name}</h1>
+          {!food.isExample && <FavoriteButton kind="food" id={food.id} />}
           {auth.user?.verifiedCampus && food.created_by === auth.user.id && food.updated_at && <div className="food-owner-actions"><Link className="button-link" to={`/food/${food.id}/edit${returnQuery ? `?${returnQuery}` : ''}`}>编辑这条发布</Link><Link className="button-link" to="/food/mine">管理或删除</Link></div>}
           <p className="food-location"><MapPin size={17} aria-hidden="true" /><span>{food.location}</span></p>
           {hasFoodPrice(food) ? <p className="food-detail-price">¥{food.price.toFixed(2)}<span>参考价格{food.isExample ? ' · 示例' : ''}</span></p> : <p className="food-detail-price food-price-unknown">价格待补充</p>}

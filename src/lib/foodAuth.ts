@@ -20,10 +20,17 @@ export function campusEmail(value: string) {
   return /^[^\s@]+@zju\.edu\.cn$/.test(email) ? email : null
 }
 export function safeFoodReturn(value: string | null) {
-  if (!value?.startsWith('/') || value.startsWith('//')) return '/food'
+  if (!value?.startsWith('/') || value.startsWith('//') || /[\\\u0000-\u001f\u007f]/.test(value) || /%(?:5c|0[0-9a-f]|1[0-9a-f]|7f)/i.test(value)) return '/food'
   try {
+    // Reject path traversal before URL normalizes dot segments. Route IDs have
+    // no encoded separators; query strings and hashes retain browsing context.
+    const rawPath = decodeURIComponent(value.split(/[?#]/, 1)[0])
+    if (/(?:^|\/)\.{1,2}(?:\/|$)/.test(rawPath) || /[\\\u0000-\u001f\u007f]/.test(rawPath)) return '/food'
     const url = new URL(value, 'https://local.invalid')
-    const allowedPage = url.pathname === '/account' || url.pathname === '/food' || url.pathname.startsWith('/food/')
+    const allowedPage = url.pathname === '/account' || url.pathname === '/food'
+      || /^\/food\/[A-Za-z0-9_-]+(?:\/edit)?$/.test(url.pathname)
+      || /^\/(?:guides|sources)(?:\/[A-Za-z0-9_-]+)?$/.test(url.pathname)
+      || /^\/sites\/[A-Za-z0-9_-]+$/.test(url.pathname)
     return url.origin === 'https://local.invalid' && allowedPage && !url.pathname.startsWith('/food/login') ? url.pathname + url.search + url.hash : '/food'
   } catch { return '/food' }
 }

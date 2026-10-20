@@ -4,6 +4,7 @@ import { FoodAuthContext, useFoodAuthState } from '../hooks/useFoodAuth'
 import { FoodProfilesContext } from '../hooks/useFoodProfiles'
 import { createFoodProfile, isFoodProfilesReady, loadFoodProfiles } from '../lib/foodService'
 import { preferredProfile, profileStorageKey } from '../lib/foodProfiles'
+import { FavoritesProvider } from './FavoritesProvider'
 import type { FoodProfile } from '../lib/foodProfiles'
 function storedProfile(userId: string) {
   try { return localStorage.getItem(profileStorageKey(userId)) } catch { return null }
@@ -64,5 +65,5 @@ export default function FoodAccountProvider() {
     },
     reload,
   }
-  return <FoodAuthContext.Provider value={auth}><FoodProfilesContext.Provider value={profiles}><Outlet /></FoodProfilesContext.Provider></FoodAuthContext.Provider>
+  return <FoodAuthContext.Provider value={auth}><FoodProfilesContext.Provider value={profiles}><FavoritesProvider><Outlet /></FavoritesProvider></FoodProfilesContext.Provider></FoodAuthContext.Provider>
 }

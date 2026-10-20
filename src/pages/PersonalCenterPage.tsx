@@ -5,6 +5,7 @@ import { useFoodAuth } from '../hooks/useFoodAuth'
 import { useFoodResource } from '../hooks/useFoodResource'
 import { isFoodEmailAuthReady, myRatings, signOutFood } from '../lib/foodService'
 import { OwnedFoodList } from '../components/OwnedFoodList'
+import MyFavorites from '../components/MyFavorites'
 import './food.css'
 import './food-account.css'
 
@@ -72,8 +73,9 @@ export function PersonalCenterPage() {
         <p className="food-account-hint">邮箱仅在你自己的账号页面显示，不会出现在公开发布或评分中。一个邮箱对应一个登录账号。</p>
         <button type="button" className="account-sign-out" onClick={signOut}><LogOut size={17} aria-hidden="true" />退出登录</button></div>
       </section>
-      <nav className="account-section-nav" aria-label="个人内容"><a href="#my-posts"><PenLine size={17} aria-hidden="true" />我的发布</a><a href="#my-ratings"><Star size={17} aria-hidden="true" />我的评分</a></nav>
+      <nav className="account-section-nav" aria-label="个人内容"><a href="#my-favorites">我的收藏</a><a href="#my-posts"><PenLine size={17} aria-hidden="true" />我的发布</a><a href="#my-ratings"><Star size={17} aria-hidden="true" />我的评分</a></nav>
       <div key={auth.user!.id}>
+        <section className="account-section" id="my-favorites" aria-labelledby="my-favorites-title"><div className="account-section-heading"><div><h2 id="my-favorites-title">我的收藏</h2><p>在不同设备上重访常用指南、官方入口和美食。</p></div></div><MyFavorites /></section>
         <section className="account-section" id="my-posts" aria-labelledby="my-posts-title"><div className="account-section-heading"><div><h2 id="my-posts-title">我的发布</h2><p>编辑、撤下或恢复你分享过的美食。</p></div><Link className="button-link" to="/food/new">发布一道菜</Link></div><OwnedFoodList onChanged={() => setRevision((value) => value + 1)} /></section>
         <section className="account-section" id="my-ratings" aria-labelledby="my-ratings-title"><div className="account-section-heading"><div><h2 id="my-ratings-title">我的评分</h2><p>按当前账号汇总你实际提交过的评分。</p></div></div><MyRatings revision={revision} /></section>
       </div>
