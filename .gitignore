@@ -14,6 +14,8 @@ outputs/*.tar.gz
 outputs/deployment-result.json
 outputs/*.bundle
 scratch/
+outputs/source-health.json
+outputs/source-health.md
 outputs/guide-timetable-preview.jpg
 outputs/food-email-preview.jpg
 
