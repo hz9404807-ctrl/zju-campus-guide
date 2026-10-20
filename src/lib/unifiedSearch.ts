@@ -1,4 +1,4 @@
-import { findRelatedSources, normalizeSearch, resolveGuideRoute, searchGuides, suggestGuides, websiteSearchDetails } from './campusContent.ts'
+import { findRelatedSources, guideIntentMatches, normalizeSearch, resolveGuideRoute, searchGuides, suggestGuides, websiteSearchDetails } from './campusContent.ts'
 import type { CampusAccount, CampusWebsite } from './campusContent.ts'
 import type { Guide, ServiceWindow } from '../types/guide.ts'
 
@@ -13,10 +13,11 @@ export function safeHomeReturn(value: string | null) {
 }
 export function unifiedSearch(query: string, data: { guides: Guide[]; websites: CampusWebsite[]; accounts: CampusAccount[]; windows: ServiceWindow[] }) {
   const q = normalizeSearch(query).slice(0,200)
-  if (!q) return { guides: [], websites: [], accounts: [], suggestions: [], notice: '' }
+  if (!q) return { guides: [], primaryGuideIds: [] as string[], websites: [], accounts: [], suggestions: [], notice: '' }
   const found = searchGuides(data.guides, q, '', data.windows)
   const guides = [...new Map(found.guides.map(g => [g.id,g])).values()]
-  const related = findRelatedSources(data.websites,data.accounts,q,guides)
+  const primary=guides.filter(guide=>guideIntentMatches(guide,found.taskQuery))
+  const related = findRelatedSources(data.websites,data.accounts,q,primary.length?primary:guides)
   const seen = new Set<string>()
   const websites = related.websites.filter(site => {
     // Official is a provenance claim: keep external directories in the source module.
@@ -26,7 +27,7 @@ export function unifiedSearch(query: string, data: { guides: Guide[]; websites: 
     seen.add(key); return true
   }).map(site=>({ ...site, details: websiteSearchDetails(site,guides,q), associated: ![site.name,site.summary].some(text=>normalizeSearch(text).includes(q)) }))
   const accounts = [...new Map(related.accounts.map(account=>[`${normalizeSearch(account.name)}|${normalizeSearch(account.organization??'')}`,account])).values()]
-  return {guides,websites,accounts,suggestions: guides.length ? [] : suggestGuides(data.guides,q),notice:found.notice}
+  return {guides,primaryGuideIds:primary.map(g=>g.id),websites,accounts,suggestions: guides.length ? [] : suggestGuides(data.guides,q),notice:found.notice}
 }
 export function unifiedGuideUrl(guide: Guide, query: string) {
   const params=new URLSearchParams({q:query,returnTo:homeSearchReturn(query)})

@@ -7,6 +7,8 @@ const data={guides:read('guides'),websites:read('websites'),accounts:read('accou
 test('成绩单优先实际指南且官方关联入口保留办理说明',()=>{
   const result=unifiedSearch('成绩单',data)
   assert.ok(result.guides[0].title.includes('成绩单'))
+  assert.deepEqual(result.primaryGuideIds,['campus-097'])
+  assert.ok(result.websites.every(site=>site.guideIds.includes('campus-097') || site.name.includes('成绩单') || site.summary.includes('成绩单')))
   assert.ok(result.websites.length)
   assert.ok(result.websites.every(s=>s.scope==='学校域名' && s.details.summary))
   const url=new URL(unifiedGuideUrl(result.guides[0],'成绩单'),'https://local.invalid')
@@ -29,4 +31,13 @@ test('空关键词不遍历展示全部，未知条件不伪装准确匹配',()=
 test('首页返回仅保留首页搜索词，拒绝任意跳转与凭据',()=>{
   for(const v of ['https://evil.invalid','//evil.invalid','/\\evil.invalid','/food?returnTo=/','javascript:alert(1)'])assert.equal(safeHomeReturn(v),null)
   assert.equal(safeHomeReturn('/?q=a&token=secret&returnTo=https://evil.invalid'),'/?q=a#home-search')
+})
+test('保留前端路由片段，不把不同SPA办理入口合并',()=>{
+  assert.notEqual(canonicalDestination('https://site.zju.edu.cn/#/a'),canonicalDestination('https://site.zju.edu.cn/#/b'))
+  assert.equal(canonicalDestination('https://site.zju.edu.cn/path/#section'),canonicalDestination('https://site.zju.edu.cn/path'))
+})
+test('同一公众号即使使用不同导入ID也按名称与主体去重',()=>{
+  const account=data.accounts[0]
+  const result=unifiedSearch(account.name,{...data,accounts:[account,{...account,id:'duplicate-import'}]})
+  assert.equal(result.accounts.length,1)
 })

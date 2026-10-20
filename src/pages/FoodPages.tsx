@@ -161,9 +161,9 @@ export function FoodPage() {
           <fieldset className="food-budget-fields" aria-describedby={budget.error ? 'food-budget-error food-comparison-help' : 'food-comparison-help'}>
             <legend>每道菜预算（元）</legend>
             <div className="food-budget-range">
-              <label><span className="sr-only">最低预算</span><input aria-label="最低预算（元）" aria-invalid={budget.minError || undefined} type="text" inputMode="decimal" autoComplete="off" maxLength={12} placeholder="不限" value={minPrice} onChange={(event) => updateFilter('minPrice', event.target.value)} /></label>
+              <label><span className="sr-only">最低预算</span><input aria-label="最低预算（元）" aria-invalid={budget.minError || undefined} type="text" inputMode="decimal" autoComplete="off" maxLength={12} placeholder="最低不限" value={minPrice} onChange={(event) => updateFilter('minPrice', event.target.value)} /></label>
               <span aria-hidden="true">—</span>
-              <label><span className="sr-only">最高预算</span><input aria-label="最高预算（元）" aria-invalid={budget.maxError || undefined} type="text" inputMode="decimal" autoComplete="off" maxLength={12} placeholder="不限" value={maxPrice} onChange={(event) => updateFilter('maxPrice', event.target.value)} /></label>
+              <label><span className="sr-only">最高预算</span><input aria-label="最高预算（元）" aria-invalid={budget.maxError || undefined} type="text" inputMode="decimal" autoComplete="off" maxLength={12} placeholder="最高不限" value={maxPrice} onChange={(event) => updateFilter('maxPrice', event.target.value)} /></label>
             </div>
           </fieldset>
           <label className="food-select-field food-sort-field" htmlFor="food-sort"><span>排列方式</span><select id="food-sort" value={sort} onChange={(event) => updateFilter('sort', event.target.value === 'latest' ? '' : event.target.value)}><option value="latest">最新发布</option><option value="price-asc">价格从低到高</option><option value="price-desc">价格从高到低</option><option value="rating-desc">平均评分从高到低</option></select></label>

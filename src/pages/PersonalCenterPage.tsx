@@ -47,7 +47,7 @@ export function PersonalCenterPage() {
 
   return <div className="page module-page personal-center-page">
     <Link className="breadcrumb" to="/"><ArrowLeft size={16} aria-hidden="true" />返回首页</Link>
-    <div className="page-heading"><p className="eyebrow">你的校园生活记录</p><h1>个人中心</h1><p className="page-description">查看账号信息，管理发布，回看自己的评分。</p></div>
+    <div className="page-heading"><p className="eyebrow">你的校园生活记录</p><h1>个人中心</h1><p className="page-description">重访收藏的校园信息，管理发布，回看自己的评分。</p></div>
     {signOutError && <p className="food-account-notice" role="alert">{signOutError} 当前账号状态以页面重新检查结果为准。</p>}
     {(auth.loading || signingOut) ? <div className="food-load-state" role="status"><span className="food-loading-dot" /><p>{signingOut ? '正在退出，已收起个人内容…' : '正在确认登录状态…'}</p></div> : auth.error ? <div className="food-load-state" role="alert"><h2>暂时无法确认账号</h2><p>{auth.error}</p><button className="button-link" type="button" onClick={auth.retry}>重试账号检查</button></div> : !verified ? <section className="account-guest" aria-labelledby="account-login-title">
       <div className="account-guest-story">

@@ -65,8 +65,9 @@ async (page) => {
     if (pathname === '/rest/v1/ratings') return reply(null)
     if (pathname === '/rest/v1/rpc/list_my_food_ratings') return reply([])
     if (pathname.startsWith('/rest/v1/rpc/')) rpcCalls.push({ pathname, who, input })
+    if (/\/(?:list_my_campus_favorites|save_my_campus_favorite|remove_my_campus_favorite)$/.test(pathname) && input.p_expected_user_id !== ids[who]) return reply({code:'40001',message:'fixture identity changed'},400)
     if (pathname === '/rest/v1/rpc/list_my_campus_favorites') {
-      const snapshot = [...favorites[who].values()].map(item => ({ ...item, context: { ...item.context } }))
+      const snapshot = [...favorites[who].values()].map(item => ({ ...item, owner_id:ids[who], context: { ...item.context } }))
       if (who === delayListOwner) { delayListOwner = ''; delayedStarted(); await new Promise(resolve => { delayedRelease = resolve }) }
       if (listMode === 'missing') return reply({ code: 'PGRST202', message: 'fixture RPC not deployed' }, 404)
       if (listMode === 'failure') return reply({ code: 'XX000', message: 'fixture read failure' }, 400)
@@ -79,13 +80,13 @@ async (page) => {
       if (who === 'guest') return reply({ code: '42501' }, 403)
       if (input.p_target_kind === 'food' && !foods.some(food => food.id === input.p_target_id && !food.deleted_at)) return reply({ code: 'P0002' }, 400)
       favorites[who].set(key(input.p_target_kind, input.p_target_id), favorite(input.p_target_kind, input.p_target_id, input.p_context))
-      return reply(null)
+      return reply(ids[who])
     }
     if (pathname === '/rest/v1/rpc/remove_my_campus_favorite') {
       removeCalls += 1
       if (who === 'guest') return reply({ code: '42501' }, 403)
       favorites[who].delete(key(input.p_target_kind, input.p_target_id))
-      return reply(null)
+      return reply(ids[who])
     }
     unexpected.push(pathname)
     return reply({ message: 'Unexpected fixture endpoint' }, 400)
@@ -127,7 +128,7 @@ async (page) => {
     assert((await firstGuide.getAttribute('href')).startsWith('/guides/campus-097?'), '成绩单 prioritizes the transcript guide')
     await firstGuide.click()
     await page.getByRole('heading', { name: '成绩单怎样打印、盖章或密封？', exact: true, level: 1 }).waitFor()
-    await page.getByRole('link', { name: '返回首页搜索', exact: true }).click()
+    await page.getByRole('link', { name: '返回首页搜索', exact: true }).first().click()
     await search.waitFor()
     assert(await search.inputValue() === '成绩单' && page.url().includes('q=') && page.url().endsWith('#home-search'), 'guide returns to original home search and anchor')
     await page.getByRole('button', { name: '清空搜索', exact: true }).click()
@@ -231,6 +232,44 @@ async (page) => {
     await page.getByRole('button', { name: '收藏', exact: true }).waitFor()
     assert(favorites.a.size === 0 && removeCalls === 1, 'cancel favorite removes the service record and updates the button')
 
+    for (const [kind, id, path] of [['food', foodIds.normal, '/food/' + foodIds.normal], ['website', 'website-0fc11a295f', '/sites/website-0fc11a295f']]) {
+      await useSession('a', path)
+      await page.getByRole('button', { name: '收藏', exact: true }).waitFor()
+      await page.waitForFunction(() => !document.querySelector('.favorite-button').disabled)
+      await favoriteButton().click()
+      await page.getByRole('button', { name: '已收藏，点击取消', exact: true }).waitFor()
+      assert(favorites.a.has(key(kind, id)), `${kind} detail saves the real target ID through the existing service`)
+      await favoriteButton().click()
+      await page.getByRole('button', { name: '收藏', exact: true }).waitFor()
+      assert(!favorites.a.has(key(kind, id)), `${kind} detail can cancel its saved favorite`)
+    }
+    await useSession('a', '/food/' + foodIds.unknown)
+    await page.getByRole('heading', { name: '测试未标价菜品', exact: true, level: 1 }).waitFor()
+    assert((await text()).includes('价格待补充') && !(await text()).includes('¥0.00'), 'unknown food detail price is explicitly unknown, never zero')
+
+    await useSession('a', '/guides/campus-card-replacement?campus=invalid-campus')
+    const campusGroup = page.getByRole('group', { name: '办理校区', exact: true })
+    await campusGroup.waitFor()
+    await page.waitForFunction(() => new URLSearchParams(location.search).get('campus') === '紫金港')
+    await page.waitForFunction(() => Array.from(document.querySelectorAll('.guide-window-campus')).every(element => element.textContent === '紫金港'))
+    assert(await campusGroup.getByRole('button', { name: '紫金港', exact: true }).getAttribute('aria-pressed') === 'true', 'invalid guide campus falls back to a real window and canonical URL selection')
+    await campusGroup.getByRole('button', { name: '玉泉', exact: true }).click()
+    await page.waitForFunction(() => new URLSearchParams(location.search).get('campus') === '玉泉')
+    await page.waitForFunction(() => document.querySelectorAll('.guide-window-campus').length === 1 && document.querySelector('.guide-window-campus').textContent === '玉泉')
+    await page.waitForFunction(() => !document.querySelector('.favorite-button').disabled)
+    await favoriteButton().click()
+    await page.getByRole('button', { name: '已收藏，点击取消', exact: true }).waitFor()
+    assert(favorites.a.get(key('guide', 'campus-card-replacement')).context.campus === '玉泉', 'selecting a displayed guide window campus saves that exact valid campus')
+    await page.goto(base + '/account#my-favorites')
+    const savedCampus = page.locator('#my-favorites .favorite-list > li').filter({ hasText: '校园卡丢了，怎么挂失和补办' })
+    await savedCampus.getByRole('link', { name: '打开收藏内容', exact: true }).waitFor()
+    assert(decodeURIComponent(await savedCampus.getByRole('link', { name: '打开收藏内容', exact: true }).getAttribute('href')).endsWith('campus=玉泉'), 'saved campus is present in the cross-device revisit URL')
+    await savedCampus.getByRole('link', { name: '打开收藏内容', exact: true }).click()
+    await page.waitForFunction(() => document.querySelectorAll('.guide-window-campus').length === 1 && document.querySelector('.guide-window-campus').textContent === '玉泉')
+    assert(await campusGroup.getByRole('button', { name: '玉泉', exact: true }).getAttribute('aria-pressed') === 'true', 'opening saved campus restores both selected campus and displayed windows')
+    await page.getByRole('button', { name: '已收藏，点击取消', exact: true }).click()
+    await page.getByRole('button', { name: '收藏', exact: true }).waitFor()
+
     favorites.a.set(key('guide', 'campus-097'), favorite('guide', 'campus-097', { route: 'retired-route', campus: '不存在校区' }))
     favorites.a.set(key('food', foodIds.normal), favorite('food', foodIds.normal))
     favorites.a.set(key('food', foodIds.hidden), favorite('food', foodIds.hidden))
@@ -252,8 +291,11 @@ async (page) => {
     await page.goto(base + '/account#my-favorites')
     await page.locator('#my-favorites .favorite-list > li').filter({ hasText: '测试十元边界菜品' }).waitFor()
     for (const width of [320, 375, 390, 1440]) await capture('account', width)
-    assert(rpcCalls.filter(call => call.pathname.endsWith('/list_my_campus_favorites')).every(call => Object.keys(call.input).length === 0), 'favorite listing RPC has no caller-supplied owner argument')
-    assert(rpcCalls.filter(call => /(?:save|remove)_my_campus_favorite$/.test(call.pathname)).every(call => !Object.keys(call.input).some(name => /owner|user/.test(name))), 'favorite writes send only target/context and no owner argument')
+    await unavailable.last().getByRole('button', { name: '移除收藏', exact: true }).click()
+    await page.waitForFunction(() => document.querySelectorAll('#my-favorites .favorite-list > li').length === 3)
+    assert(!favorites.a.has(key('website', 'website-does-not-exist')), 'unavailable official entry can actually be removed from saved records')
+    assert(rpcCalls.filter(call => call.pathname.endsWith('/list_my_campus_favorites')).every(call => Object.keys(call.input).join(',') === 'p_expected_user_id' && call.input.p_expected_user_id===ids[call.who]), 'favorite read carries an identity consistency guard; server still derives owner from Auth')
+    assert(rpcCalls.filter(call => /(?:save|remove)_my_campus_favorite$/.test(call.pathname)).every(call => call.input.p_expected_user_id===ids[call.who] && !Object.keys(call.input).some(name => name!=='p_expected_user_id' && /owner|user/.test(name))), 'favorite writes guard expected identity without supplying a different authorization owner')
 
     listMode = 'failure'
     await page.reload()
@@ -262,10 +304,10 @@ async (page) => {
     listMode = 'normal'
     await page.getByRole('button', { name: '重试我的收藏', exact: true }).click()
     await page.locator('#my-favorites .favorite-list > li').first().waitFor()
-    assert(await page.locator('#my-favorites .favorite-list > li').count() === 4, 'favorite read retry restores only current account records')
+    assert(await page.locator('#my-favorites .favorite-list > li').count() === 3, 'favorite read retry restores only current account records')
     listMode = 'missing'
     await page.reload()
-    await page.getByText('收藏尚待共享服务接入，请联系项目维护者完成收藏增量迁移。', { exact: true }).waitFor()
+    await page.getByText('收藏功能尚待接入，暂时无法读取或保存。你仍可正常浏览。', { exact: true }).waitFor()
     assert(!(await favoriteSection.innerText()).includes('还没有收藏'), 'undeployed favorite RPC is pending integration, not a fake empty success')
     listMode = 'normal'
 

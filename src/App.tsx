@@ -198,7 +198,7 @@ export default function App() {
   const mainContent = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    const title = pageTitles[location.pathname] ?? (location.pathname.startsWith('/guides/') ? '办事指南详情' : location.pathname.startsWith('/sources/') ? '公众号信息' : location.pathname.startsWith('/food/') ? '美食详情' : '页面未找到')
+    const title = pageTitles[location.pathname] ?? (location.pathname.startsWith('/guides/') ? '办事指南详情' : location.pathname.startsWith('/sources/') ? '公众号信息' : location.pathname.startsWith('/sites/') ? '官方服务入口' : location.pathname.startsWith('/food/') ? '美食详情' : '页面未找到')
     document.title = `${title} · 浙大校园指南`
     if (previousPath.current !== location.pathname) {
       window.scrollTo({ top: 0, behavior: 'instant' })
