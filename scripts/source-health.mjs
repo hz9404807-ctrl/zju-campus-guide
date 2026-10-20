@@ -8,9 +8,10 @@ const options = { limits: { ...DEFAULT_LIMITS } };
 for (const argument of process.argv.slice(2)) {
   if (argument === '--offline') options.offline = true;
   else if (/^--max-requests=\d+$/.test(argument)) options.limits.maxRequests = Number(argument.split('=')[1]);
+  else if (/^--offset=\d+$/.test(argument)) options.offset = Number(argument.split('=')[1]);
   else if (/^--as-of=\d{4}-\d{2}-\d{2}$/.test(argument)) options.asOf = argument.split('=')[1];
   else {
-    console.error('只接受 --offline、--max-requests=1..100、--as-of=YYYY-MM-DD；不接受任意 URL 或外部输入文件。');
+    console.error('只接受 --offline、--max-requests=1..100、--offset=N、--as-of=YYYY-MM-DD；不接受任意 URL 或外部输入文件。');
     process.exitCode = 1;
   }
 }

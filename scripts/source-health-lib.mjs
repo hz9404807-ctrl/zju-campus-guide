@@ -188,7 +188,9 @@ export async function checkLink(raw, { lookup = dnsLookup, transport = pinnedReq
 }
 
 function refs(record) {
-  return [...(record.references ?? []), ...(record.stepActions ?? []), ...(record.routes ?? []).flatMap((route) => [...(route.references ?? []), ...(route.stepActions ?? [])])].filter((item) => typeof item.url === 'string').map((item) => item.url);
+  return [...(record.references ?? []), ...(record.stepActions ?? []), record.timetable?.source,
+    ...(record.routes ?? []).flatMap((route) => [...(route.references ?? []), ...(route.stepActions ?? []), route.timetable?.source])]
+    .filter((item) => item && typeof item.url === 'string').map((item) => item.url);
 }
 
 export function collectConfiguredSources(data) {
@@ -210,8 +212,12 @@ export function collectConfiguredSources(data) {
 }
 
 function textFields(row) {
-  const fields = ['title', 'name', 'summary', 'steps', 'materials', 'notes', 'troubleshooting', 'verificationScope', 'openingHours', 'notice', 'completionNote'];
+  const fields = ['title', 'name', 'label', 'summary', 'steps', 'materials', 'notes', 'troubleshooting', 'verificationScope', 'openingHours', 'notice', 'notices', 'completionNote', 'audienceNote', 'source'];
   return fields.flatMap((key) => (Array.isArray(row[key]) ? row[key] : [row[key]]).filter((value) => typeof value === 'string').map((text) => ({ field: key, text })))
+    .concat((row.references ?? []).filter((item) => typeof item.label === 'string').map((item, index) => ({ field: `references.${index}.label`, text: item.label })))
+    .concat((row.stepActions ?? []).filter((item) => typeof item.label === 'string').map((item, index) => ({ field: `stepActions.${index}.label`, text: item.label })))
+    .concat(row.timetable ? textFields({ ...row.timetable, source: undefined }).map((entry) => ({ ...entry, field: `timetable.${entry.field}` })) : [])
+    .concat(typeof row.timetable?.source?.label === 'string' ? [{ field: 'timetable.source.label', text: row.timetable.source.label }] : [])
     .concat((row.routes ?? []).flatMap((route) => textFields({ ...route, routes: undefined }).map((entry) => ({ ...entry, field: `routes.${route.id}.${entry.field}` }))));
 }
 
@@ -227,8 +233,11 @@ export function findDateCandidates(rows, asOf) {
       if (!seen.has(key)) { seen.add(key); candidates.push({ type: row.recordType, id: row.id, title: row.label, kind, field, evidence, conclusion: '仅为可能过期的候选，不自动修改正文或核实标记。' }); }
     };
     for (const { field, text } of textFields(row)) {
-      for (const match of text.matchAll(/(20\d{2})\s*[-—–至/]\s*(20\d{2})\s*学年/g)) {
+      for (const match of text.matchAll(/(20\d{2})\s*年?\s*[-—–至/]\s*(20\d{2})\s*年?\s*学年/g)) {
         if (+match[1] < schoolStart) add('academic-year', `${match[0]}；检查日 ${asOf} 已处于更新学年，需确认是否仍适用。`, field);
+      }
+      for (const match of text.matchAll(/(20\d{2})年(?:\d{1,2}月)?[^。；\n]{0,14}?(?:修订|修正|编印|发布|版)|(?:修订|修正|编印|发布)[^。；\n]{0,12}?(20\d{2})年/g)) {
+        if (+(match[1] ?? match[2]) < year) add('dated-edition', `${match[0]}；旧修订/发布版本，需确认有无新版；历史版本不自动等于失效。`, field);
       }
       for (const match of text.matchAll(/(20\d{2})年?度|(?:关于|通知|报名|申请|申报|招生)[^。；\n]{0,25}?(20\d{2})年/g)) {
         if (+(match[1] ?? match[2]) < year) add('annual-notice', `${match[0]}；早于检查年 ${year}，需确认是否有新版。`, field);
@@ -258,7 +267,7 @@ const normalized = (value) => String(value ?? '').replace(/[\s，,、；;。()�
 const phones = (value) => [...String(value ?? '').matchAll(/(?:0\d{2,3}[-\s]?)?\d{7,8}/g)].map((match) => match[0].replace(/\D/g, '')).sort();
 
 export function findConflicts(data) {
-  const candidates = []; const groups = new Map();
+  const candidates = []; const groups = new Map(); const compared = new Set();
   const windowMap = new Map(data.windows.map((row) => [row.id, row]));
   const values = (row) => ({ location: row.location, openingHours: row.openingHours, phone: row.contacts?.map((contact) => contact.number).join(' / ') ?? row.contact });
   const compare = (left, right, affected, basis) => {
@@ -268,14 +277,22 @@ export function findConflicts(data) {
         const a = phones(left[key]); const b = phones(right[key]);
         if (!a.length || !b.length || a.some((phone) => b.includes(phone))) continue;
       } else if (normalized(left[key]) === normalized(right[key])) continue;
+      const comparisonId = `${key}:${affected.map((row) => `${row.type}:${row.id}`).sort().join('|')}`;
+      if (compared.has(comparisonId)) continue;
+      compared.add(comparisonId);
       candidates.push({ kind: 'possible-conflict', field: key, affected, evidence: `${basis}；记录A：${left[key]}；记录B：${right[key]}`, conclusion: '文本差异只作为疑似冲突，可能是不同窗口、同义表述或历史安排；须人工确认。' });
     }
   };
   for (const row of data.windows) {
-    const key = `${normalized(row.campus)}:${normalized(row.name)}`;
-    if (!groups.has(key)) groups.set(key, []);
-    for (const other of groups.get(key)) compare(values(other), values(row), [{ type: 'window', id: other.id }, { type: 'window', id: row.id }], '同校区、同名服务窗口存在多条记录');
-    groups.get(key).push(row);
+    const campus = normalized(row.campus);
+    const identities = [{ key: `${campus}:name:${normalized(row.name)}`, basis: '同校区、同名服务窗口存在多条记录' }];
+    if (row.location) identities.push({ key: `${campus}:location:${normalized(row.location)}`, basis: '同校区的服务窗口填写相同地点，但其他字段不同' });
+    for (const phone of phones(values(row).phone)) identities.push({ key: `${campus}:phone:${phone}`, basis: '同校区的服务窗口共用电话号码，但地点或时段不同；也可能是共用热线' });
+    for (const { key, basis } of identities) {
+      if (!groups.has(key)) groups.set(key, []);
+      for (const other of groups.get(key)) compare(values(other), values(row), [{ type: 'window', id: other.id }, { type: 'window', id: row.id }], basis);
+      groups.get(key).push(row);
+    }
   }
   for (const row of data.guides) {
     const variants = [{ ...row, variantId: row.id }, ...(row.routes ?? []).map((route) => ({ ...route, variantId: `${row.id}#${route.id}` }))];
@@ -293,8 +310,9 @@ export function findConflicts(data) {
   return candidates;
 }
 
-export async function runSourceHealth(data, { offline = false, asOf = new Date().toISOString().slice(0, 10), limits: inputLimits, lookup, transport } = {}) {
+export async function runSourceHealth(data, { offline = false, offset = 0, asOf = new Date().toISOString().slice(0, 10), limits: inputLimits, lookup, transport } = {}) {
   const limits = boundedLimits(inputLimits); const collected = collectConfiguredSources(data);
+  if (!Number.isSafeInteger(offset) || offset < 0 || offset > collected.links.length) throw failure('INVALID_OFFSET');
   const dateCandidates = findDateCandidates(collected.rows, asOf); const conflicts = findConflicts(data);
   let requests = 0; let resolutions = 0; let index = 0; const links = Array(collected.links.length);
   const takeRequest = () => { if (requests >= limits.maxRequests) return false; requests += 1; return true; };
@@ -304,14 +322,15 @@ export async function runSourceHealth(data, { offline = false, asOf = new Date()
       const slot = index++; const item = collected.links[slot];
       let safeOfflineUrl;
       try { safeOfflineUrl = safeSourceUrl(item.url).href; } catch { safeOfflineUrl = '[来源地址已隐藏：不符合安全规则]'; }
-      const result = offline || requests >= limits.maxRequests || resolutions >= limits.maxRequests
-        ? { url: safeOfflineUrl, status: safeOfflineUrl.startsWith('[') ? 'blocked' : 'not-checked', evidence: safeOfflineUrl.startsWith('[') ? '配置地址不符合安全规则，按受影响内容 ID 检查原始配置。' : offline ? '离线模式：未发出网络请求。' : '已达到本轮请求或 DNS/目标解析上限（跳转和重试也计入）。', attempts: 0 }
+      const result = slot < offset || offline || requests >= limits.maxRequests || resolutions >= limits.maxRequests
+        ? { url: safeOfflineUrl, status: safeOfflineUrl.startsWith('[') ? 'blocked' : 'not-checked', evidence: safeOfflineUrl.startsWith('[') ? '配置地址不符合安全规则，按受影响内容 ID 检查原始配置。' : slot < offset ? '位于本轮来源起点之前；本次未请求。' : offline ? '离线模式：未发出网络请求。' : '已达到本轮请求或 DNS/目标解析上限（跳转和重试也计入）。', attempts: 0 }
         : await checkLink(item.url, { limits, lookup, transport, takeRequest, takeResolution });
       links[slot] = { ...result, affected: item.affected };
     }
   };
   await Promise.all(Array.from({ length: limits.concurrency }, worker));
-  return { schemaVersion: 1, checkedAt: new Date().toISOString(), asOf, mode: offline ? 'offline' : 'bounded-network', limits, requests, resolutions,
+  const nextIndex = links.findIndex((item, index) => index >= offset && item.status === 'not-checked');
+  return { schemaVersion: 1, checkedAt: new Date().toISOString(), asOf, mode: offline ? 'offline' : 'bounded-network', startIndex: offset, nextOffset: offline || nextIndex < 0 ? null : nextIndex, limits, requests, resolutions,
     boundary: '只检查仓库配置来源。链接可访问不等于流程有效；年度/冲突规则读取仓库文本与来源路径，不做官方网页语义核验；所有提示均待人工确认，不修改业务内容或 verifiedAt。无登录态、Cookie、凭据或访客 URL 输入。',
     summary: { records: collected.rows.length, uniqueLinks: links.length, statuses: Object.fromEntries(Object.keys(STATUS_LABELS).map((status) => [status, links.filter((link) => link.status === status).length])), dateCandidates: dateCandidates.length, conflictCandidates: conflicts.length, missingSources: collected.missing.length },
     links, dateCandidates, conflicts, missingSources: collected.missing };
@@ -321,7 +340,7 @@ function escapeMarkdown(value) { return String(value ?? '').replace(/[\r\n]+/g, 
 function affectedText(affected) { return affected.map((item) => `${item.type}:${item.id}${item.title ? `（${item.title}）` : ''}`).join('；'); }
 
 export function renderMarkdown(report) {
-  const lines = ['# 校园资料待核查清单', '', `检查日：${report.asOf}；模式：${report.mode}；实际 HTTP 请求 ${report.requests}/${report.limits.maxRequests}，DNS/目标解析 ${report.resolutions}/${report.limits.maxRequests}（各自上限均含重试和跳转）。`, '', report.boundary, '', '## 摘要', '', `记录 ${report.summary.records} 条；去重来源 ${report.summary.uniqueLinks} 个；日期候选 ${report.summary.dateCandidates} 条；冲突候选 ${report.summary.conflictCandidates} 条；缺少在线核查依据 ${report.summary.missingSources} 条。`, '', ...Object.entries(report.summary.statuses).map(([status, count]) => `- ${STATUS_LABELS[status]}：${count}`), '', '## 链接检查', '', '| 状态 | 来源 | 受影响内容 | 依据 |', '| --- | --- | --- | --- |'];
+  const lines = ['# 校园资料待核查清单', '', `检查日：${report.asOf}；模式：${report.mode}；实际 HTTP 请求 ${report.requests}/${report.limits.maxRequests}，DNS/目标解析 ${report.resolutions}/${report.limits.maxRequests}（各自上限均含重试和跳转）。`, '', `本轮从去重来源索引 ${report.startIndex ?? 0} 开始。${report.nextOffset != null ? `仍有未请求来源，下一批可加 --offset=${report.nextOffset}；先审阅本批报告，再运行下一批。` : report.mode === 'offline' ? '离线模式未做网络检查。' : '本轮范围内来源已处理，仍需按分类人工核查。'}`, '', report.boundary, '', '## 摘要', '', `记录 ${report.summary.records} 条；去重来源 ${report.summary.uniqueLinks} 个；日期候选 ${report.summary.dateCandidates} 条；冲突候选 ${report.summary.conflictCandidates} 条；缺少在线核查依据 ${report.summary.missingSources} 条。`, '', ...Object.entries(report.summary.statuses).map(([status, count]) => `- ${STATUS_LABELS[status]}：${count}`), '', '## 链接检查', '', '| 状态 | 来源 | 受影响内容 | 依据 |', '| --- | --- | --- | --- |'];
   const priority = { blocked: 0, 'suspected-invalid': 1, 'manual-review': 2, 'network-restricted': 3, 'login-required': 4, reachable: 5, 'not-checked': 6 };
   for (const item of [...report.links].sort((a, b) => priority[a.status] - priority[b.status])) lines.push(`| ${STATUS_LABELS[item.status]} | ${escapeMarkdown(item.url)}${item.finalUrl && item.finalUrl !== item.url ? ` → ${escapeMarkdown(item.finalUrl)}` : ''} | ${escapeMarkdown(affectedText(item.affected))} | ${escapeMarkdown(item.evidence)} |`);
   lines.push('', '## 年度、学年与截止日期候选', '');

@@ -82,12 +82,24 @@ test('failed DNS checks also have a global budget and cannot traverse the whole 
   const report = await runSourceHealth(data({ websites: Array.from({ length: 20 }, (_, index) => ({ id: `w${index}`, name: '来源', url: `https://www.zju.edu.cn/${index}` })) }), { limits: { maxRequests: 2 }, lookup: async () => { lookupCalls += 1; throw new Error('ENOTFOUND'); }, transport: () => assert.fail('DNS failure must not initiate HTTP') });
   assert.equal(report.requests, 0); assert.equal(report.resolutions, 2); assert.equal(lookupCalls, 2);
   assert.equal(report.links.filter((entry) => entry.status === 'not-checked').length, 18);
+  assert.equal(report.nextOffset, 2);
+});
+
+test('a numeric offset reviews the tail of configured sources without accepting a visitor URL', async () => {
+  const requested = [];
+  const fixture = data({ websites: Array.from({ length: 5 }, (_, index) => ({ id: `w${index}`, name: '来源', url: `https://www.zju.edu.cn/${index}` })) });
+  const report = await runSourceHealth(fixture, { offset: 3, lookup: publicLookup, transport: async (url) => { requested.push(url.pathname); return html(); } });
+  assert.deepEqual(requested.sort(), ['/3', '/4']); assert.equal(report.startIndex, 3); assert.equal(report.nextOffset, null);
+  assert.equal(report.links.slice(0, 3).every((item) => item.status === 'not-checked'), true);
+  for (const offset of [-1, 1.2, 6, 'https://127.0.0.1/']) await assert.rejects(runSourceHealth(fixture, { offset, offline: true }), { code: 'INVALID_OFFSET' });
 });
 
 test('configured source collection deduplicates route/source links with all affected IDs', () => {
   const result = collectConfiguredSources(data({ guides: [{ id: 'guide-a', title: '办事', references: [{ url: 'https://www.zju.edu.cn/a#one' }], routes: [{ id: 'online', stepActions: [{ url: 'https://www.zju.edu.cn/a#two' }] }] }], websites: [{ id: 'website-a', name: '官网', url: 'https://www.zju.edu.cn/a' }], accounts: [{ id: 'account-a', name: '公众号', source: '原采集表第2行', image: '/sources/a.jpg' }] }));
   assert.equal(result.links.length, 1); assert.equal(result.links[0].affected.length, 2);
   assert.equal(result.missing.length, 1); assert.match(result.missing[0].evidence, /采集出处/);
+  const timetable = collectConfiguredSources(data({ guides: [{ id: 'timetable', title: '班车', routes: [{ id: 'route', timetable: { source: { url: 'https://www.zju.edu.cn/timetable' } } }] }] }));
+  assert.equal(timetable.links.length, 1); assert.equal(timetable.missing.length, 0);
 });
 
 test('date candidates use explicit evidence and ignore import/verification metadata and future rules', () => {
@@ -96,6 +108,22 @@ test('date candidates use explicit evidence and ignore import/verification metad
   for (const kind of ['annual-notice', 'academic-year', 'past-date', 'dated-source-url', 'undated-deadline']) assert.ok(result.some((item) => item.kind === kind), kind);
   assert.ok(result.every((item) => item.id !== 'b' && !/importedAt|verifiedAt/.test(item.field)));
   assert.throws(() => findDateCandidates(rows, '2026-02-30'));
+});
+
+test('dated reference editions and structured notices are examined without inventing an unstated deadline', () => {
+  const rows = [{ id: 'finance', recordType: 'guide', label: '报销', references: [{ label: '财务报销办事指南（2025年5月修订）', url: 'https://www.zju.edu.cn/finance.pdf' }], source: '校方财务资料', importedAt: '2020-01-01', routes: [{ id: 'bus', timetable: { notices: ['有效期截至2026年10月19日。'], source: { label: '2025年度班车通知', url: 'https://www.zju.edu.cn/bus.pdf' } } }] }, { id: 'annual', recordType: 'guide', label: '每年申请', steps: ['核对当年度通知中的截止时间。'] }];
+  const result = findDateCandidates(rows, '2026-10-20');
+  assert.ok(result.some((item) => item.kind === 'dated-edition' && item.field === 'references.0.label'));
+  assert.ok(result.some((item) => item.kind === 'past-date' && item.field === 'routes.bus.timetable.notices'));
+  assert.ok(result.some((item) => item.kind === 'annual-notice' && item.field === 'routes.bus.timetable.source.label'));
+  assert.ok(result.every((item) => item.id !== 'annual'));
+});
+
+test('shared phone or shared location can expose mismatches under different window names, without duplicate candidates', () => {
+  const result = findConflicts(data({ windows: [{ id: 'a', name: '窗口A', campus: '紫金港', location: 'A楼101', openingHours: '8:00–12:00', contacts: [{ number: '0571-88201111' }] }, { id: 'b', name: '窗口B', campus: '紫金港', location: 'B楼201', openingHours: '9:00–12:00', contacts: [{ number: '0571-88201111' }] }, { id: 'c', name: '窗口C', campus: '紫金港', location: 'A楼101', openingHours: '8:00–12:00', contacts: [{ number: '0571-88203333' }] }] }));
+  assert.ok(result.some((item) => item.field === 'location' && /共用电话号码/.test(item.evidence)));
+  assert.ok(result.some((item) => item.field === 'phone' && /相同地点/.test(item.evidence)));
+  assert.equal(new Set(result.map((item) => `${item.field}:${item.affected.map((entry) => entry.id).sort().join()}`)).size, result.length);
 });
 
 test('conflicts compare the same shared window and retain affected records without treating all campuses as one', () => {
