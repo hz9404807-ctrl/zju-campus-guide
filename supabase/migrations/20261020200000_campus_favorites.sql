@@ -47,23 +47,38 @@ using (user_id = (select auth.uid()) and (select campus_private.is_campus_member
 create policy campus_favorites_delete_own on public.campus_favorites for delete to authenticated
 using (user_id = (select auth.uid()) and (select campus_private.is_campus_member()));
 -- Ordinary clients cannot write a supplied owner, alter timestamps or bypass the
--- target/context checks. Mutations below take identity solely from auth.uid().
-
-create function public.list_my_campus_favorites()
-returns table (target_kind text, target_id text, context jsonb, created_at timestamptz)
-language plpgsql stable security definer set search_path = '' as $$
+-- target/context checks. expected_user_id below is a concurrency guard only:
+-- mismatching/missing identities are rejected, never used as an ownership source.
+create function campus_private.require_favorite_owner(p_expected_user_id uuid)
+returns uuid language plpgsql security definer set search_path = '' as $$
+declare v_owner uuid := auth.uid();
 begin
   perform campus_private.require_campus_member();
-  return query select f.target_kind, f.target_id, f.context, f.created_at
-    from public.campus_favorites f where f.user_id = (select auth.uid())
+  if p_expected_user_id is null or p_expected_user_id is distinct from v_owner then
+    raise exception using errcode='40001',message='Favorite request identity changed.';
+  end if;
+  return v_owner;
+end;
+$$;
+revoke all on function campus_private.require_favorite_owner(uuid) from public, anon, authenticated;
+
+create function public.list_my_campus_favorites(p_expected_user_id uuid)
+returns table (owner_id uuid, target_kind text, target_id text, context jsonb, created_at timestamptz)
+language plpgsql stable security definer set search_path = '' as $$
+declare v_owner uuid;
+begin
+  v_owner := campus_private.require_favorite_owner(p_expected_user_id);
+  return query select f.user_id, f.target_kind, f.target_id, f.context, f.created_at
+    from public.campus_favorites f where f.user_id = v_owner
     order by f.created_at desc, f.target_kind, f.target_id;
 end;
 $$;
 
-create function public.save_my_campus_favorite(p_target_kind text, p_target_id text, p_context jsonb default '{}'::jsonb)
-returns void language plpgsql security definer set search_path = '' as $$
+create function public.save_my_campus_favorite(p_expected_user_id uuid, p_target_kind text, p_target_id text, p_context jsonb default '{}'::jsonb)
+returns uuid language plpgsql security definer set search_path = '' as $$
+declare v_owner uuid;
 begin
-  perform campus_private.require_campus_member();
+  v_owner := campus_private.require_favorite_owner(p_expected_user_id);
   if not campus_private.valid_favorite_target(p_target_kind,p_target_id)
     or not campus_private.valid_favorite_context(p_target_kind,p_context) then
     raise exception using errcode='23514',message='Invalid favorite target or context.';
@@ -75,24 +90,27 @@ begin
     if not found then raise exception using errcode='P0002',message='Food is not publicly available.'; end if;
   end if;
   insert into public.campus_favorites(user_id,target_kind,target_id,context)
-    values(auth.uid(),p_target_kind,p_target_id,p_context)
+    values(v_owner,p_target_kind,p_target_id,p_context)
     on conflict (user_id,target_kind,target_id) do update set context=excluded.context;
+  return v_owner;
 end;
 $$;
 
-create function public.remove_my_campus_favorite(p_target_kind text, p_target_id text)
-returns void language plpgsql security definer set search_path = '' as $$
+create function public.remove_my_campus_favorite(p_expected_user_id uuid, p_target_kind text, p_target_id text)
+returns uuid language plpgsql security definer set search_path = '' as $$
+declare v_owner uuid;
 begin
-  perform campus_private.require_campus_member();
+  v_owner := campus_private.require_favorite_owner(p_expected_user_id);
   if not campus_private.valid_favorite_target(p_target_kind,p_target_id) then
     raise exception using errcode='23514',message='Invalid favorite target.';
   end if;
-  delete from public.campus_favorites f where f.user_id = (select auth.uid())
+  delete from public.campus_favorites f where f.user_id = v_owner
     and f.target_kind=p_target_kind and f.target_id=p_target_id;
+  return v_owner;
 end;
 $$;
-revoke all on function public.list_my_campus_favorites(), public.save_my_campus_favorite(text,text,jsonb), public.remove_my_campus_favorite(text,text) from public, anon, authenticated;
-grant execute on function public.list_my_campus_favorites(), public.save_my_campus_favorite(text,text,jsonb), public.remove_my_campus_favorite(text,text) to authenticated;
+revoke all on function public.list_my_campus_favorites(uuid), public.save_my_campus_favorite(uuid,text,text,jsonb), public.remove_my_campus_favorite(uuid,text,text) from public, anon, authenticated;
+grant execute on function public.list_my_campus_favorites(uuid), public.save_my_campus_favorite(uuid,text,text,jsonb), public.remove_my_campus_favorite(uuid,text,text) to authenticated;
 comment on table public.campus_favorites is 'Private Auth-owner favorites. Stores configured target IDs and limited route/campus identifiers only, never food snapshots or arbitrary URLs.';
 notify pgrst, 'reload schema';
 commit;

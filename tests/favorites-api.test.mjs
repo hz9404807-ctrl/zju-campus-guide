@@ -21,7 +21,7 @@ function fixture(options = {}) {
     async rpc(name, params) {
       calls.rpc.push({ name, params })
       if (options.rpc) return options.rpc(name, params)
-      return { data: name === 'list_my_campus_favorites' ? [row] : null, error: null }
+      return { data: name === 'list_my_campus_favorites' ? [{ ...row, owner_id: A }] : A, error: null }
     },
   }
   return { api: createFavoritesApi(client), calls }
@@ -30,23 +30,23 @@ async function rejects(promise, code) {
   await assert.rejects(promise, (error) => error instanceof FoodServiceError && error.code === code)
 }
 
-test('收藏列表使用零用户参数 RPC，服务端验证前后身份', async () => {
+test('收藏列表仅传身份并发守卫，服务端验证前后身份与响应归属', async () => {
   const { api, calls } = fixture()
   assert.deepEqual(await api.listFavorites(), [row])
-  assert.deepEqual(calls.rpc, [{ name: 'list_my_campus_favorites', params: undefined }])
+  assert.deepEqual(calls.rpc, [{ name: 'list_my_campus_favorites', params: { p_expected_user_id: A } }])
   assert.equal(calls.user, 2)
 })
 test('收藏空列表保持真实空结果', async () => {
   const { api } = fixture({ rpc: () => ({ data: [], error: null }) })
   assert.deepEqual(await api.listFavorites(), [])
 })
-test('保存仅提交目标与允许的重访上下文，取消收藏无用户参数', async () => {
+test('保存仅提交目标、重访上下文和身份并发守卫，绝不传授权owner', async () => {
   const { api, calls } = fixture()
   await api.saveFavorite('guide', row.target_id, row.context)
   await api.removeFavorite('guide', row.target_id)
   assert.deepEqual(calls.rpc, [
-    { name: 'save_my_campus_favorite', params: { p_target_kind: 'guide', p_target_id: row.target_id, p_context: row.context } },
-    { name: 'remove_my_campus_favorite', params: { p_target_kind: 'guide', p_target_id: row.target_id } },
+    { name: 'save_my_campus_favorite', params: { p_expected_user_id: A, p_target_kind: 'guide', p_target_id: row.target_id, p_context: row.context } },
+    { name: 'remove_my_campus_favorite', params: { p_expected_user_id: A, p_target_kind: 'guide', p_target_id: row.target_id } },
   ])
 })
 test('菜品 UUID 统一小写以匹配数据库唯一约束', async () => {
@@ -96,7 +96,7 @@ for (const [kind, id] of [['account', 'account-1'], ['guide', '//evil.invalid'],
 }
 for (const response of [null, {}, [null], [{ ...row, target_id: '//invalid' }], [{ ...row, context: { q: 'secret' } }], [{ ...row, created_at: 'invalid-date' }], [row, row]]) {
   test(`列表响应无效时不能冒充已加载 ${JSON.stringify(response)}`, async () => {
-    const { api } = fixture({ rpc: () => ({ data: response, error: null }) })
+    const { api } = fixture({ rpc: () => ({ data: Array.isArray(response) ? response.map(item => item && ({ ...item, owner_id: A })) : response, error: null }) })
     await rejects(api.listFavorites(), 'LOAD_FAILED')
   })
 }
@@ -106,7 +106,7 @@ for (const method of ['listFavorites', 'saveFavorite', 'removeFavorite']) {
     await rejects(api[method]('guide', row.target_id), 'IDENTITY_CHANGED')
   })
 }
-for (const [code, expected] of [['PGRST202', 'NOT_READY'], ['42883', 'NOT_READY'], ['42501', 'LOGIN_REQUIRED'], ['P0002', 'TARGET_UNAVAILABLE'], ['23514', 'INVALID_FAVORITE'], ['503', 'SAVE_FAILED']]) {
+for (const [code, expected] of [['PGRST202', 'NOT_READY'], ['42883', 'NOT_READY'], ['42501', 'LOGIN_REQUIRED'], ['40001', 'IDENTITY_CHANGED'], ['P0002', 'TARGET_UNAVAILABLE'], ['23514', 'INVALID_FAVORITE'], ['503', 'SAVE_FAILED']]) {
   test(`保存错误 ${code} 保留明确失败状态`, async () => {
     const { api } = fixture({ rpc: () => ({ data: null, error: { code } }) })
     await rejects(api.saveFavorite('food', FOOD), expected)
@@ -124,3 +124,40 @@ test('请求失败不返回空列表或假成功', async () => {
   await rejects(api.saveFavorite('guide', row.target_id), 'SAVE_FAILED')
   await rejects(api.removeFavorite('guide', row.target_id), 'SAVE_FAILED')
 })
+for (const method of ['listFavorites', 'saveFavorite', 'removeFavorite']) {
+  test(`${method} 拒绝 A→B→A 的服务端身份竞态，不能把实际B请求当作A`, async () => {
+    let signedIn = A
+    let userReads = 0
+    let writes = 0
+    const { api } = fixture({
+      getUser: () => {
+        const current = signedIn
+        if (++userReads === 1) signedIn = B
+        return { data: { user: verified(current) }, error: null }
+      },
+      rpc: (_name, params) => {
+        const actualOwner = signedIn
+        signedIn = A
+        // Mirrors the DB guard: expected identity is never an ownership source.
+        if (params.p_expected_user_id !== actualOwner) return { data: null, error: { code: '40001' } }
+        writes += 1
+        return { data: method === 'listFavorites' ? [{ ...row, owner_id: actualOwner }] : actualOwner, error: null }
+      },
+    })
+    await rejects(api[method]('guide', row.target_id), 'IDENTITY_CHANGED')
+    assert.equal(writes, 0)
+    assert.equal(signedIn, A)
+  })
+}
+test('即使请求前后均为A，也拒绝带B的serverOwner列表，不能依赖前后同ID', async () => {
+  const { api } = fixture({ rpc: () => ({ data: [{ ...row, owner_id: B }], error: null }) })
+  await rejects(api.listFavorites(), 'IDENTITY_CHANGED')
+})
+for (const method of ['saveFavorite', 'removeFavorite']) {
+  test(`${method} 的返回serverOwner不同或缺失时不得确认成功`, async () => {
+    for (const responseOwner of [B, null, undefined, {}]) {
+      const { api } = fixture({ rpc: () => ({ data: responseOwner, error: null }) })
+      await rejects(api[method]('guide', row.target_id), 'IDENTITY_CHANGED')
+    }
+  })
+}

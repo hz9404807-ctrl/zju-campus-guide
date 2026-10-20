@@ -77,7 +77,7 @@ try {
     console.log(`Verified write assertions (${stage}): ${(verifiedChecks.match(/select pg_temp\.(?:check_write|expect_write)\(/g) ?? []).length}`)
   }
   async function checkFavorites(stage) {
-    const favoriteMigration = await readFile(new URL('../migrations/202610200001_favorites.sql', import.meta.url), 'utf8')
+    const favoriteMigration = await readFile(new URL('../migrations/20261020200000_campus_favorites.sql', import.meta.url), 'utf8')
     const favoriteChecks = await readFile(new URL('../favorites.tests.sql', import.meta.url), 'utf8')
     await db.exec('begin;\n' + favoriteMigration.replace(/^begin;|^commit;/gm, '') + '\n' + favoriteChecks + '\nrollback;')
     console.log(`Favorite assertions (${stage}): ${(favoriteChecks.match(/select pg_temp\.(?:check_favorite|expect_favorite)\(/g) ?? []).length}`)
