@@ -1,5 +1,6 @@
 ## 2026-10-21 魔搭首次上线（电脑共享预览）
 
+- 组长直接使用的分享链接、PR #4 合并步骤、Actions 入口和手机原站入口已置于 README 顶部与 [魔搭部署](modelscope-deployment.md)；仓库 About 网址同步指向魔搭。文档随部署 PR 提交，main 保持由组长审核合并。
 - 公开全屏网址：https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full 。OpenAPI与页面均确认Running，资源 platform/2v-cpu-8g-mem 的实时 resource_type=free，支持docker；未购买或选择付费资源。魔搭镜像提交540d4223ec59e4f1e3ce52de310cd9dc05d11078，应用来源main 25f2e695feb9aeba376b28904419f4ff3f498602；/release.json 与此一致。构建与运行均已实际发生。
 - 用户本人完成魔搭注册登录，并明确授权使用现有部署令牌及存GitHub Actions Secret。令牌只经本机内存传递及加密存储，Git remote无凭据，未进入源码、配置文件或应用构建；临时连接工具位于忽略scratch。公开客户端配置沿用原站，未修改SMTP、数据库结构、五档案或原Sites。
 - 六项GitHub接入已完成：Secret MODELSCOPE_TOKEN，Variables中的Studio、三项公开客户端配置与enabled=true。初始空间只有README/.gitattributes，经精确SHA核对后普通推送，保留初始历史；首次bootstrap变量已移除。PR #4审阅合入main后才触发首次Actions自动部署；本次是本机调用同一发布脚本的真实Git/API部署，未将其记为Actions通过。

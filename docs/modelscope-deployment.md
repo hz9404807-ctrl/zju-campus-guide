@@ -1,5 +1,16 @@
 # 共同使用的魔搭网站
 
+## 组长直接使用
+
+1. 浏览或分享：[魔搭共享网页](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full)。公开浏览无需登录魔搭，也无需下载或启动项目；网站内发布、评分和个人管理继续使用自己的浙大邮箱身份。
+2. 开启后续自动更新：审阅 [PR #4](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/4) → **Merge pull request** → **Confirm merge**。本次空间、免费资源、部署 Secret 和 Variables 已配置，无需重复创建或重新提供令牌。
+3. 合并后打开 [Actions](https://github.com/hz9404807-ctrl/zju-campus-guide/actions) → **ModelScope website** → main 最新运行，查看结果。绿色表示检查和部署请求成功；再到[魔搭空间](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide)确认 **Running** 并实际打开网页。此流程的首次 Actions 运行仍待验证。
+4. 以后双方把已审核的功能通过 PR 合入 main，等待同一流程更新即可。功能分支或 PR 本身不会发布；原 Sites 不随此工作流更新。[PR #3](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/3)的新功能及迁移需单独审阅。
+
+仓库首页右侧 **About** 的网址也指向魔搭共享网页。手机暂用[原 Sites 网页](https://zju-campus-guide.sangnuo0808.chatgpt.site)，魔搭外框限制见下文。
+
+## 当前上线记录
+
 2026-10-21已上线电脑共享预览：[打开浙大校园指南](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full)。当前应用为main 25f2e69，镜像540d4223，公开免费Docker为Running。原Sites保留。GitHub接入已完成，PR #4审阅合入main后触发自动部署，Actions首次运行仍待验证。
 
 **手机与刷新限制：** 魔搭的全屏外框在390px视口仍固定1280px。iframe内导航不会同步外层URL，外层刷新会回入口路径。直接深链会通过app_path恢复目标；电脑可用页面内导航和返回。当前把魔搭作为电脑共享预览，手机继续用原Sites，后续正式托管选择需考虑这两项限制。
@@ -14,7 +25,7 @@ GitHub 保存代码；Sites 和魔搭分别运行某次构建。推送代码不�
 
 选择 Docker 是为了正确处理 `/food`、`/account`、`/sources` 和指南详情直接打开及刷新。运行容器仅含已构建网页和无依赖 Node 静态服务，不运行开发服务器。`index.html` 重新校验缓存，带哈希资源长期缓存；缺失脚本真正返回404。
 
-## 首次接入（账号持有人完成账号操作）
+## 首次接入参考（本次已完成配置）
 
 1. 在 [魔搭](https://modelscope.cn/studios) 注册并登录。平台若要求实名认证、阿里云绑定或条款确认，由本人在官方页面完成，不共享身份证、密码或验证码。Docker 的前置条件见[官方模板](https://github.com/modelscope/modelscope-skills/blob/main/skills/ms-studio-deploy/references/docker-templates.md)。
 2. 创建**公开 Docker 创空间**，例如 `你的用户名/zju-campus-guide`，仅选择当前界面明确免费的 CPU 资源。先查实时可用配置和免费额度；无免费资源就停止，不购买资源、不自动换付费档。官方只说明免费额度可能受限，不能承诺永不休眠。
@@ -32,7 +43,7 @@ GitHub 保存代码；Sites 和魔搭分别运行某次构建。推送代码不�
 
 4. 账号持有人在魔搭官方页面创建最小可用权限的访问令牌，直接保存到 GitHub 同页面 **Secrets → New repository secret → `MODELSCOPE_TOKEN`**。不要发到聊天、写进 Git remote、环境文件、前端变量或截图。此令牌允许工作流更新指定创空间，保护好 GitHub main 的合并权限；不用时在魔搭撤销令牌。
 5. 新空间若自带 README，先只读核对它确实是本次新建、仅含初始 README/.gitattributes 的空间。把核对过的 master 完整 SHA 填入可选 Variable `MODELSCOPE_BOOTSTRAP_COMMIT`。脚本只在这一 SHA 精确匹配时允许首发，不能用来覆盖其他项目；后续凭本项目镜像标记识别。首发成功后可移除此 Variable。
-6. 审阅并合并本部署 PR 后，在 main 的 Actions → **ModelScope website → Run workflow** 首次运行。之后每次 main 更新自动运行。不要为部署直接合并尚未审核的功能 PR。
+6. 审阅并合并本部署 PR 后，main 的更新会自动触发 Actions → **ModelScope website**；若需手动重跑，可用 **Run workflow** 并选择 main。不要为部署直接合并尚未审核的功能 PR。
 
 脚本不自动建空间、不改资源或可见性。它会查询现有 Studio 与 hardware 信息，只有明确确认公开 Docker 和免费资源才继续；API 字段不明时停止供人工核对。Git 推送后调用[官方 deploy 接口](https://github.com/modelscope/modelscope-skills/blob/main/skills/ms-studio-deploy/references/openapi-studio-endpoints.md)，成功仅代表**部署请求被接受**，首次上线还必须查看魔搭构建/运行状态与实际网页。不要把工作流绿灯写成云端端到端验收通过。
 
