@@ -1,3 +1,9 @@
+## 魔搭共享部署接入（2026-10-21）
+
+用户要求将项目部署到魔搭，并让双方通过同一个网址查看合并后的版本。`codex/modelscope-deploy` 从 main 25f2e69 建立独立工作目录；原 feat/campus-discovery 与未合并 PR #3 保留。工作流跟随 main，接入本人魔搭账号、确认公开免费 Docker 资源后启用 MODELSCOPE_DEPLOY_ENABLED。操作见 [魔搭部署](modelscope-deployment.md)。
+
+已完成本机托管、打包和自动部署脚本。原公开站点JS中的四项客户端配置已在忽略的本机文件保存，connected构建与原公开JS文件名一致；邮箱true、五档案false。魔搭账号及首次云端 API/Git/容器联调待完成，目前无魔搭生产网址。原 Sites 和共享后台维持原状。实际检查结果见 development-status.md 顶部。
+
 ## 当前协作状态（2026-10-19）
 
 个人中心代码已由组长合并，原 Supabase 已部署评分历史 RPC 与邮箱发布/评分限制。一个邮箱一个 Auth 账号，五档案关闭；账号注销未实现。后续 AI 请从最新 main 开始，勿重复执行已部署迁移或重新配置 SMTP。当前部署版本与验收边界见 `docs/development-status.md` 最上方记录，下方较早的交接任务作为历史背景。

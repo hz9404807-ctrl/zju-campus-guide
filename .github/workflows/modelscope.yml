@@ -1,0 +1,45 @@
+name: ModelScope website
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modelscope-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main' && vars.MODELSCOPE_DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run typecheck
+      - name: Build shared-service website
+        env:
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.VITE_SUPABASE_PUBLISHABLE_KEY }}
+          VITE_FOOD_EMAIL_AUTH_READY: ${{ vars.VITE_FOOD_EMAIL_AUTH_READY }}
+          VITE_FOOD_PROFILES_READY: 'false'
+        run: |
+          npm run build
+          node scripts/modelscope-release.mjs prepare
+      - name: Update existing free ModelScope Studio
+        env:
+          MODELSCOPE_STUDIO: ${{ vars.MODELSCOPE_STUDIO }}
+          MODELSCOPE_BOOTSTRAP_COMMIT: ${{ vars.MODELSCOPE_BOOTSTRAP_COMMIT }}
+          MODELSCOPE_TOKEN: ${{ secrets.MODELSCOPE_TOKEN }}
+        run: node scripts/modelscope-release.mjs deploy

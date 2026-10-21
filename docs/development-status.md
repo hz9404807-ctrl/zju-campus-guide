@@ -1,3 +1,14 @@
+## 2026-10-21 魔搭共享部署配置（待账号接入）
+
+- 用户授权准备魔搭公开网页，目标为双方共用一个网址，main 合入后自动更新。独立 worktree/分支 codex/modelscope-deploy 基于最新 origin/main 25f2e69；原功能分支及未合并 PR #3 保留，本次只接入当前 main 的应用。
+- 新增无依赖 Node24 Docker 托管：端口7860、SPA 深链接、静态资源类型和缓存、健康检查。覆盖 /sources 页面与同名截图目录的路由冲突；缺失 JS/CSS/图片返回404。
+- 新增允许清单打包与 main 工作流；只同步网页和运行文件。镜像使用 master、普通快进推送并显式请求 deploy，保留远端历史。凭据只由最终步骤的 GitHub Secret 提供。自动部署默认关闭，公开免费 Docker 资源明确确认后接入。
+- npm ci、359 项 Node 测试、typecheck、生产构建通过（343 原有 + 8 静态服务 HTTP + 8 打包/模拟 API/Git 检查）。connected构建仍有原 main 约932KB单JS提示；PR #3拆包尚未合入。npm audit --omit=dev 为0；全量审计保留既有 Vite8.3.2 的1项 high 开发依赖提示（补丁8.3.5可用），本容器仅运行预构建文件和 Node 服务。
+- 实际 prepare --allow-demo 与 connected 打包均通过。后者使用原生产页面直接引用的公开JS中四项客户端配置，保存到忽略的 .env.local；构建产物 index-DeIiEZEK.js 与原生产文件名一致，邮箱true、五档案false。只读取公开静态资源，未访问Supabase、私有配置或管理页；没有配置值进入Git文档。
+- 浏览器在本机打包服务7861直接打开公众号目录、来源详情、个人中心访客页通过（只读演示构建）。Node HTTP检查另覆盖指南/美食深链接、缺失资源、HEAD、目录/路径和符号链接。无SQL/权限改动，本次未运行数据库测试。
+- 待完成：本人魔搭注册/登录、平台要求的Docker实名/绑定、实时免费额度、首次API字段与Git联调、容器构建及真实域名登录/手机验收。Docker未安装，本机检查为Node运行服务；目前无魔搭空间或生产网址。原 Sites、数据库和邮箱配置维持原状。
+- 接入、暂停、回退和点击验收见 [魔搭部署](modelscope-deployment.md)。本部署 PR 审阅合并后由 main 开启；令牌由本人直接保存 GitHub Secret。
+
 ## 2026-10-20 视觉与浏览体验合并上线（Sites第6版）
 
 - 合并视觉与首屏提交87edd07及同学fix/browse-experience的4aee5e3，合并提交238fa45已同步GitHub main。仅开发记录冲突，双方记录保留；原工作区未提交的结构化地点与草稿代码保留，不在本次发布范围。
