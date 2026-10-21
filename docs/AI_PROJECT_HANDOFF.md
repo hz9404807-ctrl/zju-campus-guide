@@ -1,3 +1,11 @@
+## 魔搭共享部署接入（2026-10-21）
+
+用户要求部署到魔搭并共同查看合并后的版本。`codex/modelscope-deploy` 从 main 25f2e69 建立独立工作目录；PR #4 为部署配置，PR #3 为此前功能，两者尚未合并。实际已将 main 应用手动发布到 zzzhr777/zju-campus-guide，免费 Docker 为 Running。全屏网址：https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full 。操作见 [魔搭部署](modelscope-deployment.md)。
+
+本人登录后明确授权使用现有魔搭部署令牌并保存 GitHub Actions Secret。六项接入设置已完成，MODELSCOPE_DEPLOY_ENABLED=true；PR #4 合入 main 时才触发首次 Actions 自动部署，尚未执行该工作流。初始 bootstrap 确认变量已移除，后续凭镜像标记保留历史。公开配置仍只在忽略文件和 GitHub Variables；邮箱true、五档案false，原 Sites 和数据库配置维持原状。
+
+电脑端已验证主要公开流程与访客登录入口。魔搭宿主390px视口仍以1280px容器显示，且iframe内导航后外层刷新回到入口app_path；这些平台限制使本次仅适合作为电脑共享预览。直接深链会由平台保留app_path，复制链接时使用干净的分享地址，勿记录iframe临时参数。真实浙大邮箱发码、换号与物理手机仍待验收，详见 development-status.md 顶部。
+
 ## 当前协作状态（2026-10-19）
 
 个人中心代码已由组长合并，原 Supabase 已部署评分历史 RPC 与邮箱发布/评分限制。一个邮箱一个 Auth 账号，五档案关闭；账号注销未实现。后续 AI 请从最新 main 开始，勿重复执行已部署迁移或重新配置 SMTP。当前部署版本与验收边界见 `docs/development-status.md` 最上方记录，下方较早的交接任务作为历史背景。
