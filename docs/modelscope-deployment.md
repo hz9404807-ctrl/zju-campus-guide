@@ -40,7 +40,7 @@ npm test
 npm run typecheck
 npm run build
 # 与上一步构建使用同一份公开客户端环境变量。
-node scripts/modelscope-release.mjs prepare
+node --env-file=.env.local scripts/modelscope-release.mjs prepare
 ```
 
 部署脚本运行在 GitHub 的 Linux runner，token 仅注入最终步骤。只打包 `dist/`、`Dockerfile`、`server.mjs`、镜像说明和版本清单；不打包源码、`.env*`、会话、原始临时材料。`prepare --allow-demo` 仅供本机检查，此产物会被 deploy 拒绝。
@@ -52,7 +52,7 @@ node scripts/modelscope-release.mjs prepare
 - 美食 → 筛选 → 详情 → 返回；原条件保留。
 - 个人中心访客入口 → 用自己的浙大邮箱登录 → 本人数据 → 退出；不测试组长账号。
 - 手机宽度打开以上页面；浏览器控制台无脚本 MIME/404 错误。
-- 验证发布版本 `release.json` 中的 commit 与预期源码提交一致；只读核对真实美食，不能把演示数据当共享服务验收。
+- 验证发布版本 `/release.json` 中的 `sourceCommit` 与预期源码提交一致；只读核对真实美食，不能把演示数据当共享服务验收。
 
 使用最终独立应用网址访问并验证登录；若平台用 iframe 包裹应用，应同时测试外层和独立页面的浏览器存储限制。需要后台管理员接入的新域名设置时集中交接，不修改 SMTP 或放宽 RLS。
 
