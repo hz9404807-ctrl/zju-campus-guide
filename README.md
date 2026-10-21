@@ -1,8 +1,10 @@
 # 浙大校园指南
 
-## 共享网址与自动部署（2026-10-21，待接入）
+## 魔搭共享预览与自动部署（2026-10-21）
 
-新增从 GitHub main 更新同一个魔搭创空间的部署配置，接入说明见 [魔搭部署](docs/modelscope-deployment.md)。账号和首次线上验收完成后开启自动部署。当前公开网站仍使用原 Sites 地址；部署配置通过独立 PR 审阅，应用以当前 main 为准。
+电脑共享预览：[打开浙大校园指南](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full)。魔搭免费 Docker 已运行，应用对应 main 25f2e69，共享后台沿用原 Supabase。部署配置在 PR #4，组长审阅合入 main 后自动更新；PR #3 的新功能仍待单独合并。
+
+魔搭外框在390px视口实测仍固定1280px，且内部导航不会同步外层刷新地址。手机继续使用原 Sites 站点；此共享版先用于电脑交流。接入与实际验收边界见 [魔搭部署](docs/modelscope-deployment.md)。
 
 ## 个人中心与邮箱权限（2026-10-19）
 

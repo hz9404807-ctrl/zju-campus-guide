@@ -1,8 +1,10 @@
 ## 魔搭共享部署接入（2026-10-21）
 
-用户要求将项目部署到魔搭，并让双方通过同一个网址查看合并后的版本。`codex/modelscope-deploy` 从 main 25f2e69 建立独立工作目录；原 feat/campus-discovery 与未合并 PR #3 保留。工作流跟随 main，接入本人魔搭账号、确认公开免费 Docker 资源后启用 MODELSCOPE_DEPLOY_ENABLED。操作见 [魔搭部署](modelscope-deployment.md)。
+用户要求部署到魔搭并共同查看合并后的版本。`codex/modelscope-deploy` 从 main 25f2e69 建立独立工作目录；PR #4 为部署配置，PR #3 为此前功能，两者尚未合并。实际已将 main 应用手动发布到 zzzhr777/zju-campus-guide，免费 Docker 为 Running。全屏网址：https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full 。操作见 [魔搭部署](modelscope-deployment.md)。
 
-已完成本机托管、打包和自动部署脚本。原公开站点JS中的四项客户端配置已在忽略的本机文件保存，connected构建与原公开JS文件名一致；邮箱true、五档案false。魔搭账号及首次云端 API/Git/容器联调待完成，目前无魔搭生产网址。原 Sites 和共享后台维持原状。实际检查结果见 development-status.md 顶部。
+本人登录后明确授权使用现有魔搭部署令牌并保存 GitHub Actions Secret。六项接入设置已完成，MODELSCOPE_DEPLOY_ENABLED=true；PR #4 合入 main 时才触发首次 Actions 自动部署，尚未执行该工作流。初始 bootstrap 确认变量已移除，后续凭镜像标记保留历史。公开配置仍只在忽略文件和 GitHub Variables；邮箱true、五档案false，原 Sites 和数据库配置维持原状。
+
+电脑端已验证主要公开流程与访客登录入口。魔搭宿主390px视口仍以1280px容器显示，且iframe内导航后外层刷新回到入口app_path；这些平台限制使本次仅适合作为电脑共享预览。直接深链会由平台保留app_path，复制链接时使用干净的分享地址，勿记录iframe临时参数。真实浙大邮箱发码、换号与物理手机仍待验收，详见 development-status.md 顶部。
 
 ## 当前协作状态（2026-10-19）
 
