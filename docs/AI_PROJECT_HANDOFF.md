@@ -157,6 +157,18 @@ npm run dev
 
 ## 11. 本轮交接：个人中心（2026-10-15）
 
+后续新增（`feat/brand-account-guides`，待组长审阅）：全站使用小组“浙里有方”Logo；账号操作栏统一对齐；`OwnedFoodList` 复用共享 `FoodImage` 展示右侧缩略图。用户另授权私有资料编辑，新增独立 `campus_account_details` 表及本人读取/保存RPC，支持性别、签名、常驻校区；需要组长只部署 `202610220001_campus_account_details.sql`，不重跑旧迁移，不启用五档案。云端未接入时明确显示待接入，真实跨设备保存待验收，详情见 [个人中心说明](personal-center.md)。官方学业内容现为102份指南与112个网站，年度、院系和来源边界见 [核对记录](content-review/guide-verification.md)。
+
+与未合入PR #3的只读 `git merge-tree` 试算发现5处文本冲突（未实际合并或改动main）。组长整合时逐项保留：
+
+- `src/App.tsx`：PR #3的路由按需加载/失败恢复/首页搜索，加上本轮Logo、标题与页脚；不要退回同步加载。
+- `src/lib/foodService.ts`：收藏和个人资料的服务导出都保留，继续使用现有唯一Supabase客户端。
+- `src/pages/FoodPages.tsx`：保留PR #3预算/排序/收藏/返回条件，本轮图片函数已移到 `components/FoodImage.tsx`，改用共享导入，删除重复内联实现。
+- `src/pages/PersonalCenterPage.tsx`：同时保留我的收藏与本轮 `PersonalDetailsCard`，同级key用 `details:${id}` / `content:${id}` 区分，私有内容继续按账号重建。
+- `supabase/test-runtime/run.mjs`：收藏与资料的独立迁移和两种结构权限测试都执行；资料不依赖五档案，测试夹具全部回滚。
+
+整合后重跑双方Node、数据库和浏览器检查。本轮的360/235/54仅对应本分支，不能直接当作合并版结果。两份新增迁移独立审阅，云端只执行尚未部署的文件。
+
 2026-10-17：个人中心工作在独立 `feat/personal-center` 分支实现，交付与复现入口见 [个人中心交付说明](personal-center.md)。新增评分历史增量迁移仅供审阅，未在云端执行；用户暂缓自己的真实邮箱注册与联调。功能分支或本地检查通过不表示已合并、发布或完成真实服务验收。以下目标与边界继续适用。
 
 ### 已确认与未完成

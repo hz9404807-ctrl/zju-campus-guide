@@ -64,6 +64,7 @@ button:focus-visible, a:focus-visible {
 }
 .header-inner { min-height: 80px; display: flex; align-items: center; gap: 30px; }
 .brand { display: inline-flex; align-items: center; gap: 12px; flex-shrink: 0; border-radius: 8px; }
+.brand-wordmark { display: block; width: 189px; height: 56px; object-fit: contain; }
 .brand-mark {
   display: grid;
   place-items: center;
@@ -85,6 +86,9 @@ button:focus-visible, a:focus-visible {
   min-height: 44px;
   padding: 10px 17px;
   font-size: 14px;
+  line-height: 1.4;
+  white-space: nowrap;
+  justify-content: center;
   font-weight: 500;
   color: var(--muted);
   border-radius: 10px;
@@ -92,7 +96,7 @@ button:focus-visible, a:focus-visible {
 }
 .nav-link:hover { background: #f1f4f8; color: var(--ink); }
 .nav-link.active { background: var(--blue-soft); color: var(--blue); font-weight: 600; }
-.about-link { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; color: var(--muted); border-radius: 6px; }
+.about-link { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; font-size: 14px; line-height: 1.4; white-space: nowrap; color: var(--muted); border-radius: 6px; }
 .about-link:hover { color: var(--blue); }
 .menu-toggle {
   display: none;
@@ -274,6 +278,7 @@ button:focus-visible, a:focus-visible {
   .header-inner { min-height: 68px; }
   .header-inner { gap: 6px; }
   .brand { gap: 10px; }
+  .brand-wordmark { width: 164px; height: 49px; }
   .brand-mark { width: 39px; height: 39px; border-radius: 11px; }
   .brand-mark svg { width: 23px; height: 23px; }
   .brand-copy strong { font-size: 16px; }

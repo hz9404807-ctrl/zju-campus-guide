@@ -4,6 +4,7 @@ import type { Food, FoodPublishInput } from '../types/food'
 import { createFoodApi, FoodServiceError } from './foodApi'
 import { createFoodProfilesApi } from './foodProfiles'
 import { createFoodAuth } from './foodAuth'
+import { createCampusAccountApi, type CampusAccountInput } from './campusAccountDetails'
 
 const projectUrl = (import.meta.env.VITE_SUPABASE_URL ?? '').trim()
 const publishableKey = (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? '').trim()
@@ -87,6 +88,8 @@ export async function verifyFoodCode(email: string, token: string, type: 'email_
 export async function signOutFood() { getApi(); return auth!.signOut() }
 export async function myFoods(profileId?: string) { return getApi().myFoods(profileId) }
 export async function myRatings() { return getApi().myRatings() }
+export async function loadCampusAccountDetails(userId: string) { getApi(); return createCampusAccountApi(clientInstance!).load(userId) }
+export async function saveCampusAccountDetails(input: CampusAccountInput, updatedAt: string | null, userId: string) { getApi(); return createCampusAccountApi(clientInstance!).save(input, updatedAt, userId) }
 export async function updateFood(id: string, updatedAt: string, input: FoodPublishInput, image: File | null, removeImage: boolean, profileId?: string) { return getApi().updateFood(id, updatedAt, input, image, removeImage, profileId) }
 export async function setFoodDeleted(id: string, updatedAt: string, deleted: boolean, profileId?: string) { return getApi().setFoodDeleted(id, updatedAt, deleted, profileId) }
 

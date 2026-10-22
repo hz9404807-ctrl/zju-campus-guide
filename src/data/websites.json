@@ -224,7 +224,8 @@
       "campus-036",
       "campus-037",
       "campus-042",
-      "campus-097"
+      "campus-097",
+      "postgraduate-recommendation"
     ],
     "sourceRows": [
       18,
@@ -1310,7 +1311,8 @@
     "scope": "学校域名",
     "guideIds": [
       "campus-053",
-      "campus-054"
+      "campus-054",
+      "undergraduate-scholarships"
     ],
     "sourceRows": [
       54,
@@ -1670,5 +1672,149 @@
     ],
     "sourceRows": [],
     "verifiedAt": "2026-10-11"
+  },
+  {
+    "id": "website-fd5ad33367",
+    "name": "材料学院2027届推免细则（学院示例，2026-08-29）",
+    "url": "https://mse.zju.edu.cn/2026/0829/c50981a3197561/pagem.htm",
+    "category": "教务与学习",
+    "summary": "材料学院面向2027届本科生的推免资格申请、遴选与成果认定示例；具体条件适用于该院。",
+    "scope": "学校域名",
+    "guideIds": [
+      "postgraduate-recommendation",
+      "competition-recognition"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-21"
+  },
+  {
+    "id": "website-5baa3411b4",
+    "name": "体艺部2027届推免细则（部门示例，2026-08-26）",
+    "url": "https://tyys.zju.edu.cn/redir.php?catalog_id=206311&object_id=221116",
+    "category": "教务与学习",
+    "summary": "先核对本院面向本人毕业届别的推免细则，再提交校内资格申请、核对成绩和公示；取得资格后还需办理目标院校的接收申请。",
+    "scope": "学校域名",
+    "guideIds": [
+      "postgraduate-recommendation"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-21"
+  },
+  {
+    "id": "website-5c7038976c",
+    "name": "集成电路学院2027级推免接收通知（2026-08-07）",
+    "url": "https://ic.zju.edu.cn/2026/0807/c53676a3193921/page.htm",
+    "category": "交流与发展",
+    "summary": "按目标学院的接收通知选择项目、提交材料并参加考核，再按正式通知完成国家推免系统的志愿与确认；本科院校推荐资格另行取得。",
+    "scope": "学校域名",
+    "guideIds": [
+      "postgraduate-admission"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-21"
+  },
+  {
+    "id": "website-c4ef968e9b",
+    "name": "工程师学院2027年推免招生通知（含本校、外校）",
+    "url": "https://pi.zju.edu.cn/2026/0730/c67820a3192667/page.psp",
+    "category": "交流与发展",
+    "summary": "按目标学院的接收通知选择项目、提交材料并参加考核，再按正式通知完成国家推免系统的志愿与确认；本科院校推荐资格另行取得。",
+    "scope": "学校域名",
+    "guideIds": [
+      "postgraduate-admission"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-21"
+  },
+  {
+    "id": "website-bc102020f2",
+    "name": "2027年各学院推免报名说明入口",
+    "url": "https://yjsy.zju.edu.cn/open/zsss/ZsssBksmOpenList?bksmlx=2&nf=2027",
+    "category": "交流与发展",
+    "summary": "按目标学院的接收通知选择项目、提交材料并参加考核，再按正式通知完成国家推免系统的志愿与确认；本科院校推荐资格另行取得。",
+    "scope": "学校域名",
+    "guideIds": [
+      "postgraduate-admission"
+    ],
+    "sourceRows": [],
+    "verifiedAt": null
+  },
+  {
+    "id": "website-62dccf8970",
+    "name": "体艺部2025—2026学年国家及校设奖学金通知（部门示例）",
+    "url": "https://tyys.zju.edu.cn/redir.php?catalog_id=213873&object_id=221855",
+    "category": "缴费与资助",
+    "summary": "先查本院对应学年的奖学金通知与综合评价结果，再按奖项在ETA或指定渠道申请，核对院校公示与获奖记录。",
+    "scope": "学校域名",
+    "guideIds": [
+      "undergraduate-scholarships"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-21"
+  },
+  {
+    "id": "website-bd586c7e3b",
+    "name": "材料学院2025—2026学年国家及一等奖学金通知（学院示例）",
+    "url": "https://mse.zju.edu.cn/2026/1009/c51031a3212393/pagem.htm",
+    "category": "缴费与资助",
+    "summary": "先查本院对应学年的奖学金通知与综合评价结果，再按奖项在ETA或指定渠道申请，核对院校公示与获奖记录。",
+    "scope": "学校域名",
+    "guideIds": [
+      "undergraduate-scholarships"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-21"
+  },
+  {
+    "id": "website-7d1f1b6d3b",
+    "name": "历史学院2026年竺可桢奖学金申报通知（专项示例）",
+    "url": "https://ls.zju.edu.cn/2026/0914/c65207a3202422/page.htm",
+    "category": "缴费与资助",
+    "summary": "先查本院对应学年的奖学金通知与综合评价结果，再按奖项在ETA或指定渠道申请，核对院校公示与获奖记录。",
+    "scope": "学校域名",
+    "guideIds": [
+      "undergraduate-scholarships"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-21"
+  },
+  {
+    "id": "website-a7bad8fe01",
+    "name": "本科生学科竞赛管理办法（2021，第9—11、16—17条）",
+    "url": "https://zje.zju.edu.cn/_upload/article/files/3b/93/926af8cc4462bf92f2ea2af3a928/3164a161-6dd9-4571-9410-1e40092c6e91.pdf",
+    "category": "科研与活动",
+    "summary": "本科生院2021年竞赛项目、级别与成果奖励管理办法，学院另制定素质评价实施细则。",
+    "scope": "学校域名",
+    "guideIds": [
+      "competition-recognition"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-21"
+  },
+  {
+    "id": "website-4ece0072d4",
+    "name": "本科生院2026通知（明确引用2021版认定名单）",
+    "url": "https://ugrs.zju.edu.cn/dwjlfwpt/2026/0609/c90666a3176774/page.htm",
+    "category": "科研与活动",
+    "summary": "本科生院2026年境外交流资助通知，附件提供当次所引用的竞赛认定名单；资助条件按通知适用范围。",
+    "scope": "学校域名",
+    "guideIds": [
+      "competition-recognition"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-21"
+  },
+  {
+    "id": "website-634126f1ad",
+    "name": "本科生学科竞赛项目认定名单（2021版，2026通知附件）",
+    "url": "https://ugrs.zju.edu.cn/_upload/article/files/0c/2c/eb49ed784370b3732dc986fe04a4/bf4d3ef2-b0fe-4951-9da5-8e7f4e64785a.pdf",
+    "category": "科研与活动",
+    "summary": "本科生院2026通知所附2021版认定名单，用于核对具体赛项及级别并继续确认后续调整。",
+    "scope": "学校域名",
+    "guideIds": [
+      "competition-recognition"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-21"
   }
 ]

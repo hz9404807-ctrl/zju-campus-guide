@@ -3,9 +3,9 @@
   "faqWorkbook": "副本校园信息问题-solution收集_合并(3).xlsx",
   "faqSheet": "Sheet1",
   "faqRows": 110,
-  "guideCount": 98,
+  "guideCount": 102,
   "accountCount": 48,
-  "websiteCount": 101,
+  "websiteCount": 112,
   "sourceFiles": [
     {
       "name": "副本校园信息问题-solution收集_合并(3).xlsx",
@@ -17,6 +17,7 @@
     }
   ],
   "initialWebsiteCount": 55,
-  "contentUpdatedAt": "2026-10-13",
-  "serviceWindowCount": 31
+  "contentUpdatedAt": "2026-10-21",
+  "serviceWindowCount": 31,
+  "officialSupplementCount": 4
 }

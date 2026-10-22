@@ -4,10 +4,10 @@
 
 ## 当前规范数据
 
-- `src/data/guides.json`：95份指南（110条原始问题去重后94份，另补充原有校医院示例）。每份保留源工作表行号、问题、整理日期、参考链接和核对范围。
-- `src/data/service-windows.json`：27个服务点（校园卡7、网络4、邮政14、校史馆1、本科出国成绩单1）的地点、常规时间、电话与待确认提示，供相关指南共用；依据见[校园卡核对记录](content-review/campus-card-verification.md)。
+- `src/data/guides.json`：102份指南。110条原始问题的行号映射全部保留；既有98份指南之外，按用户要求增加4份官方学业指南。官方增补条目的`sourceRows`与`sourceQuestions`为空，不冒充原始问卷材料；`source`、参考链接和核对范围单独记录。
+- `src/data/service-windows.json`：31个服务点的地点、常规时间、电话与待确认提示，供相关指南共用；依据见[校园卡核对记录](content-review/campus-card-verification.md)和[其他指南核对记录](content-review/guide-verification.md)。
 - `src/data/accounts.json`：48个公众号，保留原始6类、主题、机构、摘要及备注。
-- `src/data/websites.json`：86个去重服务链接，保留相关指南；原始55个入口数量保留于manifest.initialWebsiteCount。学校域名标签只说明域名，不等同于内容实时核验。
+- `src/data/websites.json`：112个去重服务链接，保留相关指南；原始55个入口数量保留于manifest.initialWebsiteCount。学校域名标签只说明域名，不等同于内容实时核验。
 - `public/sources/裁剪后/`：48张原始已裁剪截图。
 - `src/data/content-manifest.json`：原始文件SHA-256及导入数量，方便判断后续收到的资料是否变化。
 
@@ -138,3 +138,7 @@
 | 110 | campus-109 | 怎样查学校正式文件和办事规则？ |
 | 111 | campus-110 | Hugging Face怎样查找模型和数据集？ |
 | 原有医院示例 | campus-hospital-registration | 校医院怎样预约挂号和确认院区？ |
+
+## 本轮品牌素材
+
+“浙里有方”Logo由小组本次提供。原始JPEG原样保存在 `public/brand/zheli-youfang-original.jpg`，与提供文件SHA256一致；`public/brand/wordmark.svg` 和 `public/favicon.svg` 嵌入同一原图，以SVG视窗去掉外围白边或选取图形部分，保留原始字形与颜色。界面截图仅作需求参考，不作为业务内容或真实菜品素材导入。

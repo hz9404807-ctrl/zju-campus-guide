@@ -4,6 +4,7 @@ import { useFoodProfiles } from '../hooks/useFoodProfiles'
 import { useFoodResource } from '../hooks/useFoodResource'
 import { myFoods, setFoodDeleted } from '../lib/foodService'
 import type { Food } from '../types/food'
+import { FoodImage } from './FoodImage'
 
 /** Mount under a verified account and key by its ID so pending actions cannot cross accounts. */
 export function OwnedFoodList({ onBusyChange, onChanged }: { onBusyChange?: (busy: boolean) => void; onChanged?: () => void }) {
@@ -51,6 +52,7 @@ export function OwnedFoodList({ onBusyChange, onChanged }: { onBusyChange?: (bus
     {!resource.loading && !resource.error && !resource.data?.length && <div className="account-empty"><h3>还没有发布美食</h3><p>分享一道你吃过的菜，方便同学参考。旧匿名发布需在原浏览器绑定邮箱，不会自动转移。</p><Link className="button-link" to="/food/new">发布一道菜</Link></div>}
     <ul className="account-item-list">{resource.data?.map((food) => <li key={food.id}>
       <article className="account-post">
+        <div className="account-post-content">
         <div className="account-item-heading"><h3>{food.name}</h3><span className={`account-item-status${food.deleted_at ? ' withdrawn' : ''}`}>{food.deleted_at ? '已撤下' : '已发布'}</span></div>
         <p className="account-item-meta">{food.location}</p>
         <div className="food-account-actions">
@@ -60,6 +62,8 @@ export function OwnedFoodList({ onBusyChange, onChanged }: { onBusyChange?: (bus
           </>}
         </div>
         {!food.updated_at && <p className="food-account-hint">发布管理暂未接入，请联系项目维护者。</p>}
+        </div>
+        <FoodImage food={food} className="account-post-image" />
         {confirm === food.id && <div className="food-delete-confirm"><p>撤下“{food.name}”？公共列表和详情将不再展示，已有评分保留，你可以恢复。</p><div className="food-account-actions"><button className="food-delete-button" type="button" disabled={busy} onClick={() => change(food, true)}>{busy ? '撤下中…' : '确认撤下'}</button><button type="button" disabled={busy} onClick={() => setConfirm(null)}>取消</button></div></div>}
       </article>
     </li>)}</ul>

@@ -1,0 +1,27 @@
+.account-details-card { margin-top: 24px; padding: 26px 28px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; }
+.account-details-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; }
+.account-details-heading h2 { margin: 0 0 8px; font-size: 21px; }
+.account-details-heading p { display: flex; align-items: center; gap: 6px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.account-details-edit { display: inline-flex; justify-content: center; align-items: center; gap: 7px; min-height: 44px; padding: 8px 13px; color: var(--blue); font: inherit; font-size: 14px; background: transparent; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; }
+.account-details-values, .account-details-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+.account-details-values { margin: 25px 0 18px; }
+.account-details-values dt { display: flex; align-items: center; gap: 4px; color: var(--muted); font-size: 13px; margin-bottom: 7px; }
+.account-details-values dd { margin: 0; font-weight: 600; }
+.account-details-signature { margin: 0; padding: 16px 18px; border-left: 3px solid var(--blue); background: #f4f7fb; border-radius: 0 8px 8px 0; overflow-wrap: anywhere; line-height: 1.8; }
+.account-details-signature.is-empty { color: var(--muted); font-size: 14px; }
+.account-details-form { margin-top: 22px; }
+.account-details-form label { display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; }
+.account-details-fields { margin-bottom: 18px; }
+.account-details-form input, .account-details-form select { width: 100%; min-width: 0; min-height: 46px; padding: 10px 12px; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 8px; font: inherit; font-weight: 400; }
+.account-details-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+.account-details-hint, .account-details-error, .account-details-saved, .account-details-state { font-size: 14px; line-height: 1.8; }
+.account-details-hint { margin: 6px 0 0; color: var(--muted); text-align: right; }
+.account-details-error { color: #a32626; }
+.account-details-saved { margin: 14px 0 0; color: var(--blue); }
+.account-details-state { margin: 22px 0 0; color: var(--muted); }
+.account-details-form button:disabled, .account-details-form input:disabled, .account-details-form select:disabled { opacity: .65; cursor: wait; }
+@media (max-width: 560px) {
+  .account-details-card { padding: 21px 18px; }
+  .account-details-heading { flex-wrap: wrap; gap: 12px; }
+  .account-details-fields { grid-template-columns: 1fr; gap: 16px; }
+}
