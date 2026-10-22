@@ -1715,7 +1715,8 @@
     ],
     "relatedGuideIds": [
       "campus-068",
-      "campus-103"
+      "campus-103",
+      "competition-recognition"
     ],
     "stepActions": [
       {
@@ -4107,7 +4108,8 @@
       "赛事通知过期时，查该赛事的新一届信息；不同赛事的组队人数和学分认定不通用。"
     ],
     "relatedGuideIds": [
-      "campus-026"
+      "campus-026",
+      "competition-recognition"
     ],
     "stepActions": [
       {
@@ -7705,6 +7707,336 @@
     "aliases": [
       "紫金港校车",
       "小白巴士"
+    ]
+  },
+  {
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "sourceRows": [],
+    "sourceQuestions": [],
+    "importedAt": "2026-10-21",
+    "verifiedAt": "2026-10-21",
+    "isExample": false,
+    "kind": "procedure",
+    "relatedSourceIds": [],
+    "serviceWindowIds": [],
+    "id": "postgraduate-recommendation",
+    "title": "浙大本科生怎样申请推免资格（保研）？",
+    "category": "教务与学习",
+    "keywords": [
+      "保研",
+      "推免资格",
+      "推荐免试",
+      "2027届",
+      "推免排名",
+      "综合素质加分"
+    ],
+    "summary": "先核对本院面向本人毕业届别的推免细则，再提交校内资格申请、核对成绩和公示；取得资格后还需办理目标院校的接收申请。",
+    "steps": [
+      "从所在学院官网的本科教学通知找到本人毕业届别的推免细则，核对推荐对象、课程、学分、外语、成绩与素质评价要求。2027届材料学院和体艺部通知可作查找示例，具体规则各有适用对象。",
+      "按本院当届通知，在教学管理信息服务平台提交推免资格申请，并按学院清单提交签字表格、承诺书及证明。核对申请状态，另行完成学院要求的材料提交。",
+      "核对学院公布的成绩、成果认定和推荐名单；有异议时，按当届公示中的渠道及期限向本院反映。",
+      "确认学校最终推荐资格结果，接着按目标院校接收通知完成报名、考核及后续确认。推免资格与接收录取是两个环节。"
+    ],
+    "materials": [
+      "本人当届推免细则、成绩与课程修读记录；申请表、承诺书、外语及成果证明按本院清单准备。"
+    ],
+    "references": [
+      {
+        "label": "材料学院2027届推免细则（学院示例，2026-08-29）",
+        "url": "https://mse.zju.edu.cn/2026/0829/c50981a3197561/pagem.htm"
+      },
+      {
+        "label": "体艺部2027届推免细则（部门示例，2026-08-26）",
+        "url": "https://tyys.zju.edu.cn/redir.php?catalog_id=206311&object_id=221116"
+      },
+      {
+        "label": "本科教学管理信息服务平台",
+        "url": "https://zdbk.zju.edu.cn"
+      }
+    ],
+    "source": "浙江大学官方公开文件增补 · 材料学院、公共体育与艺术部2027届推免细则",
+    "verificationScope": "核对2027届两份院系公开细则的申请、审核与公示流程；未核验本人资格、教务登录后页面或全部院系细则。",
+    "notes": [
+      "已核对的2027届示例中，校内申请截止为2026年8月30日16:00，现已截止。后续届别须查新通知，不沿用该日期。",
+      "本院当届细则决定适用的课程、外语、名额和加分计算；本页不把某学院的分数门槛推广为全校统一标准。"
+    ],
+    "completionNote": "学校最终推荐结果已明确；获得推免资格后，继续完成目标院校的接收流程。",
+    "troubleshooting": [
+      "找不到当届细则时，先联系本院本科教学科；不要用其他学院的排名或竞赛分值估算自己的资格。",
+      "夏令营或预报名结果需结合正式接收通知确认，不能代替学校最终推免资格和录取程序。"
+    ],
+    "relatedGuideIds": [
+      "postgraduate-admission",
+      "competition-recognition",
+      "campus-016",
+      "campus-097"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "看2027届推免细则示例",
+        "url": "https://mse.zju.edu.cn/2026/0829/c50981a3197561/pagem.htm"
+      },
+      {
+        "stepIndex": 1,
+        "kind": "service",
+        "label": "打开本科教务平台",
+        "url": "https://zdbk.zju.edu.cn"
+      }
+    ]
+  },
+  {
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "sourceRows": [],
+    "sourceQuestions": [],
+    "importedAt": "2026-10-21",
+    "verifiedAt": "2026-10-21",
+    "isExample": false,
+    "kind": "procedure",
+    "relatedSourceIds": [],
+    "serviceWindowIds": [],
+    "id": "postgraduate-admission",
+    "title": "有推免资格后，怎样申请浙大接收（硕士或直博）？",
+    "category": "交流与发展",
+    "keywords": [
+      "保研接收",
+      "推免接收",
+      "预推免",
+      "直博",
+      "推荐免试研究生",
+      "2027级"
+    ],
+    "summary": "按目标学院的接收通知选择项目、提交材料并参加考核，再按正式通知完成国家推免系统的志愿与确认；本科院校推荐资格另行取得。",
+    "steps": [
+      "查看浙江大学目标学院面向本人入学年度的接收通知，确认硕士或直博项目、方向、本校与外校申请安排，以及所需的本科院校推免资格。",
+      "按目标学院通知进入学校报名系统并提交材料。集成电路学院2027级通知要求按研究所报名，材料为一个不超过10MB的PDF，这是该院当年的要求。",
+      "跟进目标学院的材料审核、考核与结果通知。需要补材料、专家推荐意见或参加面试时，按该院当次安排完成。",
+      "取得本科院校推免资格后，按学校正式接收通知完成全国推免系统的志愿、复试及待录取等确认环节，并继续满足毕业和入学条件。具体开放时间及确认期限查当年通知。"
+    ],
+    "materials": [
+      "通常需身份证、盖章成绩单与排名、外语和成果证明；直博专家推荐意见、文件格式及补充材料以目标学院通知为准。"
+    ],
+    "references": [
+      {
+        "label": "集成电路学院2027级推免接收通知（2026-08-07）",
+        "url": "https://ic.zju.edu.cn/2026/0807/c53676a3193921/page.htm"
+      },
+      {
+        "label": "工程师学院2027年推免招生通知（含本校、外校）",
+        "url": "https://pi.zju.edu.cn/2026/0730/c67820a3192667/page.psp"
+      },
+      {
+        "label": "2027年各学院推免报名说明入口",
+        "url": "https://yjsy.zju.edu.cn/open/zsss/ZsssBksmOpenList?bksmlx=2&nf=2027"
+      }
+    ],
+    "source": "浙江大学官方公开文件增补 · 集成电路学院、工程师学院2027年推免接收通知",
+    "verificationScope": "核对2027年院系公开接收通知；研究生院主通知本次外部读取失败，报名说明入口仅返回动态加载页，未验证登录后的申请或国家系统操作。",
+    "notes": [
+      "已核对的集成电路学院2027级校内报名期为2026年8月10日至9月10日，现已截止；其他学院及后续年度应分别查询。",
+      "已有本科院校推荐资格仍需完成目标学院接收；前期报名或考核结果须按正式通知办理后续确认。"
+    ],
+    "completionNote": "正式接收程序中的必要确认已完成，结果可查询；毕业及入学资格还需持续满足学校规定。",
+    "troubleshooting": [
+      "本校学生也按目标学院通知报名；不要把本校推免资格申请页面当作研究生接收报名。",
+      "正式通知或系统无法访问时，使用目标学院公开通知中的招生联系方式咨询，不将无法读取理解为停止招生。"
+    ],
+    "relatedGuideIds": [
+      "postgraduate-recommendation",
+      "campus-097",
+      "campus-016"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看学院接收要求示例",
+        "url": "https://ic.zju.edu.cn/2026/0807/c53676a3193921/page.htm"
+      },
+      {
+        "stepIndex": 1,
+        "kind": "reference",
+        "label": "查看2027年各院报名说明",
+        "url": "https://yjsy.zju.edu.cn/open/zsss/ZsssBksmOpenList?bksmlx=2&nf=2027"
+      }
+    ]
+  },
+  {
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "sourceRows": [],
+    "sourceQuestions": [],
+    "importedAt": "2026-10-21",
+    "verifiedAt": "2026-10-21",
+    "isExample": false,
+    "kind": "procedure",
+    "relatedSourceIds": [],
+    "serviceWindowIds": [],
+    "id": "undergraduate-scholarships",
+    "title": "本科生奖学金怎样查条件、申请和看结果？",
+    "category": "缴费与资助",
+    "keywords": [
+      "本科奖学金",
+      "国家奖学金",
+      "浙江大学奖学金",
+      "评奖评优",
+      "竺可桢奖学金",
+      "ETA",
+      "奖学金申请"
+    ],
+    "summary": "先查本院对应学年的奖学金通知与综合评价结果，再按奖项在ETA或指定渠道申请，核对院校公示与获奖记录。",
+    "steps": [
+      "在所在学院学生工作或评奖评优栏目查对应学年的通知，区分国家奖学金、浙江大学奖学金及专项奖项，核对年级、学籍、评价结果、成绩条件和材料期限。",
+      "先核对本学年的综合评价、个人荣誉和证明材料。竺可桢奖学金另有申报条件和推荐安排，应阅读其专项通知。",
+      "按本院通知登录三全育人学生信息平台（ETA），在服务大厅的评奖评优类别选择相应申请；校设与政府奖学金入口按具体奖项区分，纸质或邮件材料另按学院要求提交。",
+      "提交前检查信息。已核对的2025—2026学年通知提示提交后无法撤回或修改；提交后查询申请结果，关注学院、学校公示，再核对个人获奖记录。"
+    ],
+    "materials": [
+      "本院当学年奖项通知、综合评价与个人荣誉记录；申请理由、成绩及其他证明按具体奖项清单准备。"
+    ],
+    "references": [
+      {
+        "label": "体艺部2025—2026学年国家及校设奖学金通知（部门示例）",
+        "url": "https://tyys.zju.edu.cn/redir.php?catalog_id=213873&object_id=221855"
+      },
+      {
+        "label": "材料学院2025—2026学年国家及一等奖学金通知（学院示例）",
+        "url": "https://mse.zju.edu.cn/2026/1009/c51031a3212393/pagem.htm"
+      },
+      {
+        "label": "历史学院2026年竺可桢奖学金申报通知（专项示例）",
+        "url": "https://ls.zju.edu.cn/2026/0914/c65207a3202422/page.htm"
+      },
+      {
+        "label": "三全育人学生信息平台（ETA）",
+        "url": "https://eta.zju.edu.cn/"
+      }
+    ],
+    "source": "浙江大学官方公开文件增补 · 2025—2026学年院系本科生奖学金通知",
+    "verificationScope": "核对体艺部、材料学院和历史学院2026年公开通知；学工部主通知本次外部读取失败，未验证ETA登录后界面、个人资格或发放结果。",
+    "notes": [
+      "已核对的2025—2026学年示例截止分别为体艺部2026年10月10日12:00、材料学院10月10日24:00，现已截止；本院其他奖项及后续年度须查新通知。",
+      "不同院系的分批申报和线下材料要求存在差异；奖金兼得、名额和具体金额按该学年奖项文件确认。"
+    ],
+    "completionNote": "申请审核及公示结果已明确，个人获奖记录可查询；推荐或提交成功不等于已经获奖或到账。",
+    "troubleshooting": [
+      "综合评价或荣誉记录有误时，先按本院通知联系评奖负责老师核对；不要重复提交无法修改的申请。",
+      "材料学院示例将二、三等奖申请安排为后续通知，不能把一等奖截止当作所有奖学金统一截止。"
+    ],
+    "relatedGuideIds": [
+      "competition-recognition",
+      "campus-016",
+      "campus-068"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看当学年奖学金通知示例",
+        "url": "https://tyys.zju.edu.cn/redir.php?catalog_id=213873&object_id=221855"
+      },
+      {
+        "stepIndex": 2,
+        "kind": "service",
+        "label": "打开ETA学生信息平台",
+        "url": "https://eta.zju.edu.cn/"
+      }
+    ]
+  },
+  {
+    "location": null,
+    "openingHours": null,
+    "contact": null,
+    "sourceRows": [],
+    "sourceQuestions": [],
+    "importedAt": "2026-10-21",
+    "verifiedAt": "2026-10-21",
+    "isExample": false,
+    "kind": "procedure",
+    "relatedSourceIds": [],
+    "serviceWindowIds": [],
+    "id": "competition-recognition",
+    "title": "学科竞赛怎样查学校认定、奖项级别和学院加分？",
+    "category": "科研与活动",
+    "keywords": [
+      "学科竞赛认定",
+      "竞赛级别",
+      "学校认定名单",
+      "竞赛加分",
+      "推免加分",
+      "素质评价",
+      "保研竞赛"
+    ],
+    "summary": "先查学校认定名单中的具体赛项和级别，再按本人学院及用途核对成果认定；推免、评奖和素拓学分分别办理。",
+    "steps": [
+      "核对完整赛事名称、组别、赛道、举办年份与本人获奖证明。在本科生院认定名单查对应赛项和级别，不能只按比赛名称中的“国际”或“全国”自行定级。",
+      "阅读《浙江大学本科生学科竞赛管理办法》（浙大本发〔2021〕20号）。学校认定项目与奖项等级有规定，具体认定名单须结合当前校方通知核对。",
+      "按用途查看本院当届推免细则或当学年评奖规则，确认团队本人排名、重复获奖、认可项目及证明材料；把证书、名单和身份材料交本院规定的审核单位。",
+      "核对审核、公示与最终记录，有疑问在规定时间反馈。需要素拓学分时再按素质拓展平台规则办理，分别检查各项记录。"
+    ],
+    "materials": [
+      "完整赛事与赛道名称、获奖证书、官方获奖名单、本人团队排名证明，以及本院当届或当学年认定通知。"
+    ],
+    "references": [
+      {
+        "label": "本科生学科竞赛管理办法（2021，第9—11、16—17条）",
+        "url": "https://zje.zju.edu.cn/_upload/article/files/3b/93/926af8cc4462bf92f2ea2af3a928/3164a161-6dd9-4571-9410-1e40092c6e91.pdf"
+      },
+      {
+        "label": "本科生院2026通知（明确引用2021版认定名单）",
+        "url": "https://ugrs.zju.edu.cn/dwjlfwpt/2026/0609/c90666a3176774/page.htm"
+      },
+      {
+        "label": "本科生学科竞赛项目认定名单（2021版，2026通知附件）",
+        "url": "https://ugrs.zju.edu.cn/_upload/article/files/0c/2c/eb49ed784370b3732dc986fe04a4/bf4d3ef2-b0fe-4951-9da5-8e7f4e64785a.pdf"
+      },
+      {
+        "label": "材料学院2027届推免细则（学院加分示例）",
+        "url": "https://mse.zju.edu.cn/2026/0829/c50981a3197561/pagem.htm"
+      }
+    ],
+    "source": "浙江大学官方公开文件增补 · 本科生院2021竞赛管理办法、2026通知附件及材料学院2027届推免细则",
+    "verificationScope": "核对2021管理办法相关条文、2026本科生院通知及所附2021版名单、2027届材料学院细则；未逐项核验所有赛项变更或所有学院认定结果。",
+    "notes": [
+      "本科生院2026年“求是雏鹰”通知仍引用2021版竞赛名单；该通知的境外资助适用范围不等于所有竞赛的加分范围。办理本人认定时查校方及本院后续通知。",
+      "2021办法已明确废止2018年管理办法及2018年推免等政策细则。本院当届实施规则和审核结果决定本人适用分值，不把某学院示例推广为全校。"
+    ],
+    "completionNote": "本次用途对应的认定结果已在本院公示或平台中确认；推免、奖学金和素拓学分各自核对。",
+    "troubleshooting": [
+      "名单中找不到赛项或名称变更时，向竞赛主管单位和本院教学科提交完整材料核实；不自行承诺加分、奖金或学分。",
+      "同一成果、团队排名和非学校认定项目的处理按适用细则核对，获奖证书本身不能决定所有用途的加分。"
+    ],
+    "relatedGuideIds": [
+      "campus-067",
+      "campus-026",
+      "postgraduate-recommendation",
+      "undergraduate-scholarships"
+    ],
+    "stepActions": [
+      {
+        "stepIndex": 0,
+        "kind": "reference",
+        "label": "查看学校竞赛认定名单",
+        "url": "https://ugrs.zju.edu.cn/_upload/article/files/0c/2c/eb49ed784370b3732dc986fe04a4/bf4d3ef2-b0fe-4951-9da5-8e7f4e64785a.pdf"
+      },
+      {
+        "stepIndex": 1,
+        "kind": "reference",
+        "label": "查看竞赛管理办法",
+        "url": "https://zje.zju.edu.cn/_upload/article/files/3b/93/926af8cc4462bf92f2ea2af3a928/3164a161-6dd9-4571-9410-1e40092c6e91.pdf"
+      },
+      {
+        "stepIndex": 2,
+        "kind": "reference",
+        "label": "查看学院推免认定示例",
+        "url": "https://mse.zju.edu.cn/2026/0829/c50981a3197561/pagem.htm"
+      }
     ]
   }
 ]

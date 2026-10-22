@@ -4,10 +4,10 @@
 
 ## 当前规范数据
 
-- `src/data/guides.json`：95份指南（110条原始问题去重后94份，另补充原有校医院示例）。每份保留源工作表行号、问题、整理日期、参考链接和核对范围。
-- `src/data/service-windows.json`：27个服务点（校园卡7、网络4、邮政14、校史馆1、本科出国成绩单1）的地点、常规时间、电话与待确认提示，供相关指南共用；依据见[校园卡核对记录](content-review/campus-card-verification.md)。
+- `src/data/guides.json`：102份指南。110条原始问题的行号映射全部保留；既有98份指南之外，按用户要求增加4份官方学业指南。官方增补条目的`sourceRows`与`sourceQuestions`为空，不冒充原始问卷材料；`source`、参考链接和核对范围单独记录。
+- `src/data/service-windows.json`：31个服务点的地点、常规时间、电话与待确认提示，供相关指南共用；依据见[校园卡核对记录](content-review/campus-card-verification.md)和[其他指南核对记录](content-review/guide-verification.md)。
 - `src/data/accounts.json`：48个公众号，保留原始6类、主题、机构、摘要及备注。
-- `src/data/websites.json`：86个去重服务链接，保留相关指南；原始55个入口数量保留于manifest.initialWebsiteCount。学校域名标签只说明域名，不等同于内容实时核验。
+- `src/data/websites.json`：112个去重服务链接，保留相关指南；原始55个入口数量保留于manifest.initialWebsiteCount。学校域名标签只说明域名，不等同于内容实时核验。
 - `public/sources/裁剪后/`：48张原始已裁剪截图。
 - `src/data/content-manifest.json`：原始文件SHA-256及导入数量，方便判断后续收到的资料是否变化。
 
