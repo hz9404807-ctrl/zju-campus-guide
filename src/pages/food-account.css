@@ -2,6 +2,13 @@
 .food-account-bar > div, .food-account-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 18px; }
 .food-account-bar a, .food-account-bar button, .food-account-actions button { color: var(--blue); min-height: 44px; background: transparent; border: 0; font: inherit; text-decoration: underline; text-underline-offset: 4px; }
 .food-account-bar p { margin-top: 8px; }
+.food-account-bar .food-account-row { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 18px; }
+.food-account-status { display: inline-flex; align-items: center; gap: 7px; min-height: 40px; line-height: 1.4; }
+.food-account-status > svg { color: var(--blue); }
+.food-account-links { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; margin-left: auto; }
+.food-account-bar .food-account-action { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 40px; margin: 0; padding: 9px 12px; border: 1px solid transparent; border-radius: 8px; text-decoration: none; line-height: 1.4; white-space: nowrap; }
+.food-account-bar .food-account-action:hover { background: #ffffffba; border-color: var(--line); }
+.food-account-bar .food-account-action:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 .food-login-page { max-width: 780px; }
 .food-login-panel { padding: 28px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; }
 .food-login-panel form { display: grid; gap: 12px; }
@@ -51,6 +58,10 @@
 .account-empty p { color: var(--muted); font-size: 14px; margin-top: 8px; }
 .account-item-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
 .account-post, .account-rating { min-width: 0; padding: 22px 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); overflow-wrap: anywhere; }
+.account-post { display: grid; grid-template-columns: minmax(0, 1fr) 164px; align-items: center; gap: 16px 24px; }
+.account-post-content { min-width: 0; }
+.account-post .account-post-image { width: 164px; height: 120px; aspect-ratio: auto; border: 1px solid var(--line); border-radius: 10px; }
+.account-post .food-delete-confirm { grid-column: 1 / -1; margin-top: 0; }
 .account-item-heading h3 { font-size: 18px; line-height: 1.6; }
 .account-item-heading a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .account-item-status { font-size: 13px; color: var(--blue); }
@@ -64,6 +75,11 @@
 @media (max-width: 600px) {
   .account-guest, .account-overview, .account-state, .account-empty { padding: 20px; }
   .account-post, .account-rating { padding: 18px; }
+  .account-post { grid-template-columns: minmax(0, 1fr) 92px; gap: 12px; align-items: start; }
+  .account-post .account-post-image { width: 92px; height: 92px; }
+  .account-post-image .food-image-placeholder { font-size: 11px; padding: 7px; text-align: center; gap: 4px; }
+  .account-post-image .food-image-placeholder > svg { width: 22px; height: 22px; }
+  .food-account-links { margin-left: 0; }
   .account-overview dd { font-size: 17px; }
   .account-section-heading { align-items: flex-start; }
 }

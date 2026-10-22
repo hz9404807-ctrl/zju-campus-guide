@@ -5,7 +5,6 @@ import { Link, NavLink, Route, Routes, useLocation } from 'react-router'
 import {
   ArrowLeft,
   ArrowRight,
-  BookOpen,
   ClipboardList,
   Compass,
   Info,
@@ -76,9 +75,8 @@ function Header() {
       }}
     >
       <div className="header-inner">
-        <Link to="/" className="brand" aria-label="浙大校园指南，返回首页">
-          <span className="brand-mark"><BookOpen size={23} aria-hidden="true" /></span>
-          <span className="brand-copy"><strong>浙大校园指南</strong><span>校园生活，一处找到</span></span>
+        <Link to="/" className="brand" aria-label="浙里有方 · 浙大校园指南，返回首页">
+          <img className="brand-wordmark" src="/brand/wordmark.svg" width="189" height="56" alt="浙里有方" />
         </Link>
         <nav className="desktop-nav" aria-label="主导航">{links}</nav>
         <NavLink to="/about" className="about-link">关于项目</NavLink>
@@ -159,7 +157,7 @@ function AboutPage() {
       <div className="page-heading">
         <Link to="/" className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回首页</Link>
         <p className="eyebrow">一个来自同学的课程项目</p>
-        <h1>关于浙大校园指南</h1>
+        <h1>关于浙里有方</h1>
         <p className="page-description">少一点来回查找，多一点清楚的答案。</p>
       </div>
       <div className="about-grid">
@@ -196,7 +194,7 @@ export default function App() {
 
   useEffect(() => {
     const title = pageTitles[location.pathname] ?? (location.pathname.startsWith('/guides/') ? '办事指南详情' : location.pathname.startsWith('/sources/') ? '公众号信息' : location.pathname.startsWith('/food/') ? '美食详情' : '页面未找到')
-    document.title = `${title} · 浙大校园指南`
+    document.title = `${title} · 浙里有方 · 浙大校园指南`
     if (previousPath.current !== location.pathname) {
       window.scrollTo({ top: 0, behavior: 'instant' })
       mainContent.current?.focus({ preventScroll: true })
@@ -229,7 +227,7 @@ export default function App() {
         </Routes>
       </main>
       <footer className="site-footer">
-        <div className="footer-inner"><span>浙大校园指南</span><p className="footer-project">《人类工效学》课程项目 · 非学校官方平台</p></div>
+        <div className="footer-inner"><span>浙里有方 · 浙大校园指南</span><p className="footer-project">《人类工效学》课程项目 · 非学校官方平台</p></div>
       </footer>
     </div>
   )
