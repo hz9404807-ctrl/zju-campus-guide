@@ -23,7 +23,7 @@ import './guides.css'
 const guides = guideData as Guide[]
 const serviceWindows = serviceWindowData as ServiceWindow[]
 const categories = [...new Set(guides.map((guide) => guide.category))]
-const quickKeywords = ['校园卡', '场地', '选课', '报修', 'VPN', '志愿', '校历']
+const quickKeywords = ['校园卡', '场地', '选课', '报修', '保研', '奖学金', '竞赛', 'VPN', '志愿', '校历']
 const pageSize = 24
 
 export function GuidePage() {
@@ -53,7 +53,7 @@ export function GuidePage() {
       <Link to="/" className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回首页</Link>
       <p className="eyebrow">把分散的入口，整理成清楚的答案</p>
       <h1>校园办事指南</h1>
-      <p className="page-description">校园卡、选课、预约、报修和校园服务，从你遇到的问题开始查找。</p>
+      <p className="page-description">办事、升学与校园生活，从你遇到的问题开始查找。</p>
     </div>
     <section className="guide-search-panel" role="search" aria-label="查找校园办事指南">
       <SearchField id="guide-search" label="你想办什么事？" placeholder="例如：校园卡丢了、图书馆预约、寝室报修" value={query} onChange={(value) => update('q', value)} hint="可以直接输入问题，如“寝室灯坏了”；支持近义词、地点、时间和电话，匹配标题的指南优先，并展示相关网站和公众号。" />

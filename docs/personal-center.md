@@ -56,6 +56,8 @@ npm run dev
 
 ## 可复现的隔离浏览器检查
 
+本轮品牌与资料编辑新增回归使用 `tests/browser/fixture/server.mjs` 启动独立本机夹具，命令与范围见 [夹具说明](../tests/browser/fixture/README.md)。`tests/browser/brand-account.js` 共54项断言通过，截图在忽略的 `scratch/brand-ui/`，包括有本机模拟标记的资料展示/编辑和右侧发布图片。该结果证明隔离组件交互与布局，云端写入及真实Auth/RLS仍按前文迁移后验收。下方为此前个人中心验证码回归的独立复现方法。
+
 `tests/browser/personal-center.js` 是可审阅的 Playwright CLI 回归脚本，不自动加入 Node 单元测试；不增加项目依赖。已安装 Playwright CLI 的开发者可在单独终端启动以下本机测试进程：
 
 ```powershell

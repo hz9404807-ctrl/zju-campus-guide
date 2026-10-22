@@ -79,7 +79,9 @@
   .account-post .account-post-image { width: 92px; height: 92px; }
   .account-post-image .food-image-placeholder { font-size: 11px; padding: 7px; text-align: center; gap: 4px; }
   .account-post-image .food-image-placeholder > svg { width: 22px; height: 22px; }
-  .food-account-links { margin-left: 0; }
+  .food-account-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; margin-left: 0; gap: 2px; }
+  .food-account-links .food-account-action { min-width: 0; min-height: 44px; padding: 9px 4px; gap: 4px; font-size: 12px; }
+  .food-account-links .food-account-action > svg { width: 14px; height: 14px; }
   .account-overview dd { font-size: 17px; }
   .account-section-heading { align-items: flex-start; }
 }

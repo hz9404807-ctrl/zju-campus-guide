@@ -138,3 +138,7 @@
 | 110 | campus-109 | 怎样查学校正式文件和办事规则？ |
 | 111 | campus-110 | Hugging Face怎样查找模型和数据集？ |
 | 原有医院示例 | campus-hospital-registration | 校医院怎样预约挂号和确认院区？ |
+
+## 本轮品牌素材
+
+“浙里有方”Logo由小组本次提供。原始JPEG原样保存在 `public/brand/zheli-youfang-original.jpg`，与提供文件SHA256一致；`public/brand/wordmark.svg` 和 `public/favicon.svg` 嵌入同一原图，以SVG视窗去掉外围白边或选取图形部分，保留原始字形与颜色。界面截图仅作需求参考，不作为业务内容或真实菜品素材导入。
