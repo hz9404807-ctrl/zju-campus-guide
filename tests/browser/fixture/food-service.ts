@@ -34,6 +34,13 @@ for (let index = 5; index <= 14; index += 1) rows.push({ ...rows[0]!, id: `f0000
 
 export function fixturePublishLog() { return copy(publishLog) }
 
+/** Local display edge cases only; no ownership, identity or backend configuration overrides. */
+export function setFixtureFood(id: string, value: Partial<Pick<Food, 'name' | 'location' | 'price' | 'average_rating' | 'rating_count'>>) {
+  const row = rows.find((item) => item.id === id)
+  if (!row) throw new Error('Unknown local fixture food')
+  Object.assign(row, value)
+}
+
 export function fixtureState() { return { identity, readMode, mutationFailure, delay } }
 export function setFixtureState(next: Partial<ReturnType<typeof fixtureState>>, notify = true) {
   const previous = identity

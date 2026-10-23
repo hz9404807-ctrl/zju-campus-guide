@@ -46,7 +46,7 @@ function FoodCard({ food, query }: { food: Food; query: string }) {
         <h2>{food.name}</h2>
         <p className="food-location"><MapPin size={15} aria-hidden="true" /><span>{food.location}</span></p>
         <div className="food-card-numbers">
-          {food.price !== null && <span className="food-price">¥{food.price.toFixed(2)} {food.isExample && <small>示例</small>}</span>}
+          <span className={`food-price${food.price === null ? ' food-price-unknown' : ''}`}>{food.price === null ? '价格待补充' : `¥${food.price.toFixed(2)}`} {food.isExample && <small>示例</small>}</span>
           <RatingSummary food={food} />
         </div>
         <div className="food-tags" aria-label={food.isExample ? '示例短评标签' : '短评标签'}>{food.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
@@ -188,7 +188,7 @@ export function FoodDetailPage() {
           <h1>{food.name}</h1>
           {auth.user?.verifiedCampus && food.created_by === auth.user.id && food.updated_at && <div className="food-owner-actions"><Link className="button-link" to={`/food/${food.id}/edit${editQuery ? `?${editQuery}` : ''}`}>编辑这条发布</Link><Link className="button-link" to="/account/posts">管理我的发布</Link></div>}
           <p className="food-location"><MapPin size={17} aria-hidden="true" /><span>{food.location}</span></p>
-          {food.price !== null && <p className="food-detail-price">¥{food.price.toFixed(2)}<span>参考价格{food.isExample ? ' · 示例' : ''}</span></p>}
+          <p className={`food-detail-price${food.price === null ? ' food-price-unknown' : ''}`}>{food.price === null ? '价格待补充' : <>¥{food.price.toFixed(2)}<span>参考价格{food.isExample ? ' · 示例' : ''}</span></>}</p>
           <div className="food-detail-rating"><RatingSummary food={food} />{food.isExample && <p>平均分和评分人数为展示用示例。</p>}</div>
           <section className="food-detail-description"><h2>菜品介绍</h2><p>{food.description || '暂未填写菜品介绍。'}</p></section>
           {food.tags.length > 0 && <section className="food-detail-tags"><h2>短评标签 {food.isExample && <span>示例</span>}</h2><div className="food-tags">{food.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></section>}
