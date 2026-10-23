@@ -22,9 +22,12 @@
 .website-card { min-width: 0; padding: 23px; background: white; border: 1px solid var(--line); border-radius: 16px; display: flex; flex-direction: column; align-items: flex-start; }
 .website-card > p { margin-top: 10px; margin-bottom: 20px; color: var(--muted); font-size: 14px; line-height: 1.8; overflow-wrap: anywhere; }
 .source-scope { font-size: 11px; color: var(--muted); border: 1px solid var(--line); padding: 3px 8px; border-radius: 6px; }
-.website-entry { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; color: var(--blue); font-size: 14px; font-weight: 600; margin-top: auto; }
+.website-actions { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 10px 20px; width: 100%; min-width: 0; margin-top: auto; margin-bottom: 8px; }
+.website-actions .guide-copy-control { flex: 1; min-width: 0; max-width: 100%; }
+.website-actions .guide-copy-control > p { max-width: 100%; overflow-wrap: anywhere; }
+.website-entry { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; color: var(--blue); font-size: 14px; font-weight: 600; }
 .website-address { display: block; max-width: 100%; color: var(--muted); font-size: 11px; line-height: 1.8; overflow-wrap: anywhere; }
-.website-guide-link { display: inline-flex; gap: 5px; align-items: center; color: var(--muted); margin-top: 16px; font-size: 12px; min-height: 32px; }
+.website-guide-link { display: inline-flex; gap: 5px; align-items: center; color: var(--muted); margin-top: 16px; font-size: 12px; min-height: 44px; }
 .result-pager { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px; margin-top: 26px; }
 .result-pager button { min-height: 44px; padding: 8px 15px; background: white; color: var(--blue); border: 1px solid var(--line); border-radius: 8px; }
 .result-pager span { color: var(--muted); font-size: 12px; }

@@ -1,4 +1,5 @@
 name: ModelScope mobile release
+# Authorized follow-up: larger touch targets and an external-link copy fallback.
 
 on:
   push:

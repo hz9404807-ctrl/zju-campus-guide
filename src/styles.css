@@ -163,7 +163,7 @@ button:focus-visible, a:focus-visible {
 .module-card > p { max-width: 430px; color: var(--muted); font-size: 15px; line-height: 1.8; }
 .card-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-block: 18px 22px; }
 .card-tags span { padding: 4px 9px; color: #58677a; background: #f5f7f9; border-radius: 6px; font-size: 12px; line-height: 1.6; }
-.card-link { display: inline-flex; align-items: center; gap: 9px; align-self: flex-start; margin-top: auto; color: var(--blue); font-size: 14px; font-weight: 600; line-height: 1.6; }
+.card-link { display: inline-flex; align-items: center; gap: 9px; align-self: flex-start; min-height: 44px; margin-top: auto; color: var(--blue); font-size: 14px; font-weight: 600; line-height: 1.6; }
 .food-card .card-link { color: var(--warm-dark); }
 .card-link svg { width: 17px; height: 17px; transition: transform .2s ease; }
 .module-card:hover .card-link svg { transform: translateX(3px); }
@@ -376,7 +376,7 @@ button:focus-visible, a:focus-visible {
 .home-page .card-tags span { background: transparent; border: 1px solid #e0e6ee; }
 .home-page .food-card .card-tags span { border-color: #ecddc7; background: #fffaf3; }
 .food-artwork { display: block; width: 220px; height: auto; flex-shrink: 0; }
-.home-page .food-card > .food-artwork { position: absolute; width: 164px; right: -7px; bottom: 18px; opacity: .95; }
+.home-page .food-card > .food-artwork { position: absolute; width: 164px; right: -7px; bottom: 18px; opacity: .95; pointer-events: none; }
 .home-page .source-banner { background: white; border-radius: 16px; padding: 24px 28px; border-color: #dbe3ee; }
 .home-page .source-banner h2 { font-size: 18px; }
 .home-page .source-status { background: transparent; border: 0; color: var(--blue); }

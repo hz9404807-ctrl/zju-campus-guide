@@ -9,6 +9,16 @@
 
 另开终端运行 `playwright-cli -s=brand-account open about:blank`，再运行 `playwright-cli -s=brand-account --raw run-code --filename=tests/browser/brand-account.js`。截图输出到忽略的 `scratch/brand-ui/`。该回归不读取已有浏览器配置、不创建真实用户、不进入生产测试会话。
 
+手机触控与资料折叠回归：保持上述夹具服务器运行，从仓库根目录执行：
+
+```powershell
+playwright-cli -s=mobile-navigation open about:blank
+playwright-cli -s=mobile-navigation --raw run-code --filename=tests/browser/mobile-navigation.js
+playwright-cli -s=mobile-navigation close
+```
+
+脚本创建独立的触控浏览器上下文，不读取已有用户会话。每个 320/375/390 px 宽度执行 18 项，共 54 项：覆盖首页提醒移除、Logo、入口与手机菜单导航、资料说明触控和Enter折叠、无横向溢出；另检查正常动画模式下先滚动再按文字坐标触摸、44px点击区、真实外链href及新窗口请求、复制成功值与失败后的原链接。外部请求在本机拦截，不访问官方站点，剪贴板成功/失败由夹具控制。390 px 页面截图保存在忽略的 `scratch/mobile-release/`。这些是本地隔离界面检查，不代表手指滑动、真机、魔搭外框或云端登录已验收。
+
 建议逐项点击：
 - /account 检查 A 的邮箱、发布和评分；切换 B 后不可残留 A；退出后个人内容收起。
 - 有图、无图、图加载失败、已撤下四种发布；撤下确认与恢复；右侧图片手机不溢出。
