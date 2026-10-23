@@ -1,4 +1,16 @@
-## 2026-10-23 周六更新准备（代码完成，待审阅与发布）
+## 2026-10-23 本轮更新已发布到魔搭（main待审）
+
+- 用户在开发交付后明确要求“更新到魔搭和github”，替代此前等待周六的前端发布安排。使用既有免费空间、部署Secret和公开客户端变量，经[发布运行39944450516](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/39944450516)更新同一个[魔搭网址](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full)。未直接合并main；PR #7包含完整应用代码，PR #3仍独立。原Sites保持原版本。
+- 实际运行来源 `661e561ea677f626a4ec197d722809826dfc69a4`、connected；公开API为Running，资源为 `platform/2v-cpu-8g-mem`。发布脚本在推送前核对公开Docker及免费资源，使用普通快进推送与同一个并发组。平台重建时曾短暂返回DomainNameNotFound/404；等待Running和精确新SHA后再验收，未重复重启或改资源。
+- Actions重新运行 `npm ci`、399项Node、235项隔离PGlite断言、类型检查、生产构建与构建文件允许清单扫描，全部通过。PGlite夹具全部回滚，没有连接真实Supabase执行SQL。既有大分块告警保留，未将构建或上线视为联网性能比较。
+- 16项只读HTTP检查通过：精确源码与connected、健康及no-store、主页/指南/来源/美食/个人子页的HTML深链、Logo/favicon、JS/CSS MIME及immutable缓存、缺失脚本和 `.env.local` 路径404。脚本在忽略的 `scratch/polish-release/verify-public.mjs`，不打包或提交。
+- 生产访客浏览器92/92项通过：同一明确Android UA的触控上下文复用320/375/390/1440px，各次应用innerWidth与目标一致。检查新版slogan、对称图形、无溢出、手机菜单与Escape、成绩单搜索、数字末页/键盘首页、真实共享美食列表→详情→返回，以及发布/评分子页访客状态、登录入口返回pathname与页码。1440是同一触控上下文的宽视口，不是实体桌面验收；真实登录和写入未执行。
+- 生产检查确认应用未捕获异常0、未知归属0；魔搭宿主 `g.alicdn.com/8898.js` 有16次相同setAttribute异常，单独记录，未把它写成应用错误或全页面零异常。首轮桌面UA的窄窗口仍被宿主固定宽度，改用Android 14 / Pixel 8 / Chrome 129移动UA后尺寸及触控正常；1440宽视口的宿主浮动工具遮住首页右边缘，未影响上述操作。等待React提交和数据加载后重测，未改线上DOM或伪造响应。整个验收因初次上下文更正而触发两次现有匿名访客初始化，后续复用无额外初始化，没有发验证码或业务写入。
+- 已实际查看 `scratch/polish-release-live/home-390.png`、`home-1440.png`、`guide-pager-390.png`、`ratings-guest-390.png`及 `food-return-390.png`。首轮美食返回截图没有等待首图完成解码，因此该截图仅验证列表布局/返回，不作为图片完整加载通过。脚本与截图均在忽略目录，不含真实邮箱、会话或临时iframe参数记录。
+- 精确版本及浏览器验收后删除一次性发布工作流；永久 `.github/workflows/modelscope.yml` 未修改。清理与交接提交不再部署、不改变已运行的应用来源；未来main自动更新仍待PR #7由组长审核合并。
+- 本次只发布前端，没有执行云端迁移、撤下四条测试菜品、修改SMTP、邮箱规则或五档案开关。个人资料的 `202610220001_campus_account_details.sql`仍待组长接入；不能把前端上线当作资料保存已可用。真实邮箱登录、本人写入、跨设备、鸿蒙/微信实机仍按原交接验收。
+
+## 2026-10-23 周六更新准备（以下为发布前记录）
 
 交付：[整合PR #7](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/7)，已包含PR #6及其前置代码。周六优先审阅该PR，旧PR不用重复应用。
 
