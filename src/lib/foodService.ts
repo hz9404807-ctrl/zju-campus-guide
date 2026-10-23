@@ -5,6 +5,7 @@ import { createFoodApi, FoodServiceError } from './foodApi'
 import { createFoodProfilesApi } from './foodProfiles'
 import { createFoodAuth } from './foodAuth'
 import { createCampusAccountApi, type CampusAccountInput } from './campusAccountDetails'
+import { createTimeoutFetch } from './timeoutFetch'
 
 const projectUrl = (import.meta.env.VITE_SUPABASE_URL ?? '').trim()
 const publishableKey = (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? '').trim()
@@ -31,7 +32,7 @@ function getApi() {
       const client = createClient(projectUrl, publishableKey, {
         auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false },
         global: {
-          fetch: (input, init) => fetch(input, { ...init, signal: init?.signal ? AbortSignal.any([init.signal, AbortSignal.timeout(12000)]) : AbortSignal.timeout(12000) }),
+          fetch: createTimeoutFetch(),
         },
       })
       clientInstance = client
