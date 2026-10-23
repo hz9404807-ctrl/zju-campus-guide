@@ -1,5 +1,20 @@
 # 浙大校园指南
 
+## 魔搭共享预览与自动部署（2026-10-21）
+
+| 要做什么 | 直接打开 |
+| --- | --- |
+| 电脑浏览、向同学分享 | [魔搭共享网页](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full) |
+| 手机浏览 | [原 Sites 网页](https://zju-campus-guide.sangnuo0808.chatgpt.site) |
+| 接入 main 自动更新 | [部署 PR #4](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/4) |
+| 查看部署记录或失败日志 | [GitHub Actions](https://github.com/hz9404807-ctrl/zju-campus-guide/actions) |
+
+**给组长：** 现在点“魔搭共享网页”即可使用，无需本地启动或登录魔搭。指南、信息源和美食浏览公开；发布、评分和个人数据管理沿用已验证浙大邮箱规则。后续审阅合并 PR #4，等 GitHub Actions 中 **ModelScope website** 运行结束，再打开共享网页检查版本。之后功能经 PR 合入 main 时更新同一个魔搭网址，原 Sites 仍需单独发布。
+
+魔搭免费 Docker 已运行，应用对应 main 25f2e69，共享后台沿用原 Supabase；首次 Actions 自动部署待 PR #4 合并后验证。[PR #3 的新功能](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/3)仍待单独审核、合并和迁移验收。
+
+魔搭外框在390px视口实测仍固定1280px，且内部导航不会同步外层刷新地址。手机继续使用原 Sites 站点；此共享版先用于电脑交流。接入与实际验收边界见 [魔搭部署](docs/modelscope-deployment.md)。
+
 ## 个人中心与邮箱权限（2026-10-19）
 
 `/account` 提供账号概览、我的发布、我的评分和退出登录；我的发布支持编辑、撤下与恢复，评分条目可返回仍在展示的菜品详情。校园办事、信息源和美食浏览公开，发布与评分要求已验证的浙大邮箱。
