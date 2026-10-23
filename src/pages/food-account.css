@@ -2,6 +2,13 @@
 .food-account-bar > div, .food-account-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 18px; }
 .food-account-bar a, .food-account-bar button, .food-account-actions button { color: var(--blue); min-height: 44px; background: transparent; border: 0; font: inherit; text-decoration: underline; text-underline-offset: 4px; }
 .food-account-bar p { margin-top: 8px; }
+.food-account-bar .food-account-row { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 18px; }
+.food-account-status { display: inline-flex; align-items: center; gap: 7px; min-height: 40px; line-height: 1.4; }
+.food-account-status > svg { color: var(--blue); }
+.food-account-links { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; margin-left: auto; }
+.food-account-bar .food-account-action { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 40px; margin: 0; padding: 9px 12px; border: 1px solid transparent; border-radius: 8px; text-decoration: none; line-height: 1.4; white-space: nowrap; }
+.food-account-bar .food-account-action:hover { background: #ffffffba; border-color: var(--line); }
+.food-account-bar .food-account-action:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 .food-login-page { max-width: 780px; }
 .food-login-panel { padding: 28px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; }
 .food-login-panel form { display: grid; gap: 12px; }
@@ -51,6 +58,10 @@
 .account-empty p { color: var(--muted); font-size: 14px; margin-top: 8px; }
 .account-item-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
 .account-post, .account-rating { min-width: 0; padding: 22px 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); overflow-wrap: anywhere; }
+.account-post { display: grid; grid-template-columns: minmax(0, 1fr) 164px; align-items: center; gap: 16px 24px; }
+.account-post-content { min-width: 0; }
+.account-post .account-post-image { width: 164px; height: 120px; aspect-ratio: auto; border: 1px solid var(--line); border-radius: 10px; }
+.account-post .food-delete-confirm { grid-column: 1 / -1; margin-top: 0; }
 .account-item-heading h3 { font-size: 18px; line-height: 1.6; }
 .account-item-heading a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .account-item-status { font-size: 13px; color: var(--blue); }
@@ -64,6 +75,13 @@
 @media (max-width: 600px) {
   .account-guest, .account-overview, .account-state, .account-empty { padding: 20px; }
   .account-post, .account-rating { padding: 18px; }
+  .account-post { grid-template-columns: minmax(0, 1fr) 92px; gap: 12px; align-items: start; }
+  .account-post .account-post-image { width: 92px; height: 92px; }
+  .account-post-image .food-image-placeholder { font-size: 11px; padding: 7px; text-align: center; gap: 4px; }
+  .account-post-image .food-image-placeholder > svg { width: 22px; height: 22px; }
+  .food-account-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; margin-left: 0; gap: 2px; }
+  .food-account-links .food-account-action { min-width: 0; min-height: 44px; padding: 9px 4px; gap: 4px; font-size: 12px; }
+  .food-account-links .food-account-action > svg { width: 14px; height: 14px; }
   .account-overview dd { font-size: 17px; }
   .account-section-heading { align-items: flex-start; }
 }
@@ -101,6 +119,55 @@
 .account-section-nav a { display: inline-flex; align-items: center; gap: 9px; border-bottom: 2px solid transparent; }
 .account-section-nav a:hover, .account-section-nav a:focus-visible { border-bottom-color: var(--blue); }
 .account-post, .account-rating { border-radius: 16px; }
+.account-rating-with-image { display: grid; grid-template-columns: minmax(0, 1fr) 164px; align-items: center; gap: 16px 24px; }
+.account-rating-content { min-width: 0; }
+.account-rating .account-rating-image { width: 164px; height: 120px; aspect-ratio: auto; border: 1px solid var(--line); border-radius: 10px; }
+.account-rating .account-item-heading h2 { font-size: 18px; line-height: 1.6; }
+.account-record-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+.account-record-entry { display: flex; align-items: center; gap: 15px; min-width: 0; padding: 24px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; }
+.account-record-entry > span:not(.account-record-icon) { flex: 1; min-width: 0; }
+.account-record-entry strong { display: block; font-size: 20px; color: var(--ink); }
+.account-record-entry small { display: block; margin-top: 7px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.account-record-entry > svg { color: var(--blue); flex-shrink: 0; }
+.account-record-icon { display: grid; place-items: center; flex-shrink: 0; width: 52px; height: 52px; border-radius: 15px; color: var(--blue); background: #eef4fc; }
+.account-record-entry:hover { border-color: #8caace; box-shadow: 0 8px 24px #173f7508; }
+.account-record-entry:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.account-section-nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--blue); }
+.personal-records-page .account-section-heading h1 { scroll-margin-top: 110px; }
+.personal-records-page .account-section-heading h1:focus { outline: none; }
+.personal-records-page .account-section-heading h1:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+.personal-records-page .account-section-heading .page-description { max-width: 600px; }
+.account-record-navigation { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0 12px; border-bottom: 1px solid var(--line); margin-bottom: 24px; }
+.account-record-navigation .breadcrumb { margin: 0; }
+.account-record-navigation .account-section-nav { margin: 0; border: 0; gap: 12px; }
+.account-record-navigation .account-section-nav a { gap: 6px; }
+.personal-records-page .account-section-heading { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; }
+.personal-records-page .account-section-heading > div { display: contents; }
+.personal-records-page .account-section-heading h1 { grid-column: 1; grid-row: 1; }
+.personal-records-page .account-section-heading .page-description { grid-column: 1 / -1; grid-row: 2; margin-top: 0; }
+.personal-records-page .account-section-heading > .button-link { grid-column: 2; grid-row: 1; }
+.theme-information .personal-records-page > .page-heading.account-section-heading { margin-bottom: 16px; padding-bottom: 0; border-bottom: 0; }
+.food-account-bar-session { padding: 6px 12px; margin-bottom: 16px; }
+.food-account-bar-session .food-account-status { min-height: 44px; }
+.food-account-bar-session .food-account-links { display: flex; width: auto; margin-left: auto; }
+.food-account-bar-session .food-account-action { min-height: 44px; padding: 9px 10px; }
+@media (max-width: 600px) {
+  .account-record-navigation { margin-bottom: 20px; }
+  .account-record-navigation .account-section-nav { font-size: 14px; }
+  .personal-records-page .account-section-heading h1 { font-size: 28px; }
+  .personal-records-page .account-section-heading > .button-link { padding-inline: 14px; }
+  .food-account-bar-session .food-account-row { gap: 0 8px; }
+  .food-account-bar-session .food-account-status { font-size: 12px; }
+  .food-account-bar-session .food-account-links .food-account-action { padding: 9px 6px; }
+  .account-record-links { grid-template-columns: 1fr; gap: 12px; }
+  .account-record-entry { padding: 20px; gap: 12px; }
+  .account-record-entry strong { font-size: 18px; }
+  .account-record-icon { width: 44px; height: 44px; border-radius: 12px; }
+  .account-rating-with-image { grid-template-columns: minmax(0, 1fr) 92px; gap: 12px; align-items: start; }
+  .account-rating .account-rating-image { width: 92px; height: 92px; }
+  .account-rating-image .food-image-placeholder { font-size: 11px; padding: 7px; text-align: center; gap: 4px; }
+  .account-rating-image .food-image-placeholder > svg { width: 22px; height: 22px; }
+}
 .account-section-heading { padding-inline: 4px; }
 .login-layout { display: grid; grid-template-columns: .9fr 1.1fr; border: 1px solid #dce5ef; border-radius: 24px; overflow: hidden; background: #fff; box-shadow: 0 18px 50px #173f7508; }
 .login-story { padding: 48px 40px; }

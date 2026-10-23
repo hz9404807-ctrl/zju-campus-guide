@@ -4,14 +4,16 @@
 
 ## 当前规范数据
 
-- `src/data/guides.json`：95份指南（110条原始问题去重后94份，另补充原有校医院示例）。每份保留源工作表行号、问题、整理日期、参考链接和核对范围。
-- `src/data/service-windows.json`：27个服务点（校园卡7、网络4、邮政14、校史馆1、本科出国成绩单1）的地点、常规时间、电话与待确认提示，供相关指南共用；依据见[校园卡核对记录](content-review/campus-card-verification.md)。
+- `src/data/guides.json`：102份指南。110条原始问题的行号映射全部保留；既有98份指南之外，按用户要求增加4份官方学业指南。2026-10-23在原有10份选课、转专业、经费及推免指南中补充内容，未重复新增同事项指南。官方增补条目的`sourceRows`与`sourceQuestions`为空，不冒充原始问卷材料；`source`、参考链接和核对范围单独记录。
+- `src/data/service-windows.json`：31个服务点的地点、常规时间、电话与待确认提示，供相关指南共用；依据见[校园卡核对记录](content-review/campus-card-verification.md)和[其他指南核对记录](content-review/guide-verification.md)。
 - `src/data/accounts.json`：48个公众号，保留原始6类、主题、机构、摘要及备注。
-- `src/data/websites.json`：86个去重服务链接，保留相关指南；原始55个入口数量保留于manifest.initialWebsiteCount。学校域名标签只说明域名，不等同于内容实时核验。
+- `src/data/websites.json`：121个去重服务链接，保留相关指南；2026-10-23增加9条官方参考。原始55个入口数量保留于manifest.initialWebsiteCount。学校域名标签只说明域名，不等同于内容实时核验。
 - `public/sources/裁剪后/`：48张原始已裁剪截图。
 - `src/data/content-manifest.json`：原始文件SHA-256及导入数量，方便判断后续收到的资料是否变化。
 
 ## 处理与核对边界
+
+- 2026-10-23补充的规则按身份及年度划分：2026级新生首学年秋冬30学分及允许增加5学分，与官网常见问题一般35/40口径分别说明；2026年已结束的选课、转专业和活动申报不作为当前仍开放。转专业区分普通本科、强基、浙江省三位一体及中外合作招生约定；推免区分学校评价框架、本院当届资格与目标院校接收；学生项目和学生活动报销继续复用现有独立流程。出处、读取失败和未执行事项见[核验记录](content-review/guide-verification.md#2026-10-23-选课转专业经费与推免细则增补)。
 
 - 不导入采集者姓名，不公开原始工作簿；网页只使用问题、答案及公众号公开信息。
 - 重复条目合并，所有110条原始问题均有行号映射；不把互有差异的碎片自动认定为一致政策。
@@ -138,3 +140,7 @@
 | 110 | campus-109 | 怎样查学校正式文件和办事规则？ |
 | 111 | campus-110 | Hugging Face怎样查找模型和数据集？ |
 | 原有医院示例 | campus-hospital-registration | 校医院怎样预约挂号和确认院区？ |
+
+## 本轮品牌素材
+
+“浙里有方”Logo由小组本次提供。原始JPEG原样保存在 `public/brand/zheli-youfang-original.jpg`，与提供文件SHA256一致；`public/brand/wordmark.svg` 和 `public/favicon.svg` 嵌入同一原图，以SVG视窗去掉外围白边或选取图形部分，保留原始字形与颜色。界面截图仅作需求参考，不作为业务内容或真实菜品素材导入。

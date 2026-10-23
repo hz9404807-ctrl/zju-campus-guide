@@ -23,3 +23,5 @@ outputs/food-email-*-review.png
 
 outputs/personal-center-cloud-check.png
 outputs/ui-refresh/
+outputs/modelscope-release/
+outputs/.modelscope-release-*/

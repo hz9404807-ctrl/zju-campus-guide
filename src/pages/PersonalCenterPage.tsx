@@ -1,37 +1,17 @@
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { Link, useLocation } from 'react-router'
 import { ArrowLeft, ArrowRight, CheckCircle2, LogOut, Star, UserRound, Mail, PenLine, ShieldCheck, ArrowUpRight } from 'lucide-react'
 import { useFoodAuth } from '../hooks/useFoodAuth'
-import { useFoodResource } from '../hooks/useFoodResource'
-import { isFoodEmailAuthReady, myRatings, signOutFood } from '../lib/foodService'
-import { OwnedFoodList } from '../components/OwnedFoodList'
+import { isFoodEmailAuthReady, signOutFood } from '../lib/foodService'
+import { PersonalDetailsCard } from '../components/PersonalDetailsCard'
 import './food.css'
 import './food-account.css'
-
-function MyRatings({ revision }: { revision: number }) {
-  const load = useCallback(() => myRatings(), [])
-  const resource = useFoodResource(load, String(revision))
-  return <div aria-busy={resource.loading}>
-    {resource.loading && <p className="account-state" role="status">正在加载我的评分…</p>}
-    {resource.error && <div className="account-state" role="alert"><p>{resource.error}</p><button type="button" className="button-link" onClick={resource.reload}>重试我的评分</button></div>}
-    {!resource.loading && !resource.error && !resource.data?.length && <div className="account-empty"><h3>还没有评分记录</h3><p>你实际提交的评分会出现在这里，包括发布菜品时的首次评分。</p><Link className="button-link" to="/food">去看看美食</Link></div>}
-    <ul className="account-item-list">{resource.data?.map((item) => <li key={item.food_id}>
-      <article className="account-rating">
-        <div className="account-item-heading"><h3>{item.food ? <Link to={`/food/${item.food_id}`}>{item.food.name}</Link> : '原菜品已撤下或不再可见'}</h3><span className="account-rating-score"><Star size={17} aria-hidden="true" />{item.rating} / 5 星</span></div>
-        {item.food && <p className="account-item-meta">{item.food.location}</p>}
-        <p className="account-item-meta">评分日期：<time dateTime={item.created_at}>{new Date(item.created_at).toLocaleDateString('zh-CN')}</time></p>
-        {item.food ? <Link className="account-detail-link" to={`/food/${item.food_id}`}>查看美食详情 <ArrowRight size={16} aria-hidden="true" /></Link> : <p className="food-account-hint">你的评分记录已保留，当前无法打开菜品详情。</p>}
-      </article>
-    </li>)}</ul>
-  </div>
-}
 
 export function PersonalCenterPage() {
   const auth = useFoodAuth()
   const location = useLocation()
   const [signingOut, setSigningOut] = useState(false)
   const [signOutError, setSignOutError] = useState('')
-  const [revision, setRevision] = useState(0)
   const returnTo = location.pathname + location.search + location.hash
   const verified = !auth.loading && !auth.error && auth.user?.verifiedCampus
 
@@ -72,11 +52,11 @@ export function PersonalCenterPage() {
         <p className="food-account-hint">邮箱仅在你自己的账号页面显示，不会出现在公开发布或评分中。一个邮箱对应一个登录账号。</p>
         <button type="button" className="account-sign-out" onClick={signOut}><LogOut size={17} aria-hidden="true" />退出登录</button></div>
       </section>
-      <nav className="account-section-nav" aria-label="个人内容"><a href="#my-posts"><PenLine size={17} aria-hidden="true" />我的发布</a><a href="#my-ratings"><Star size={17} aria-hidden="true" />我的评分</a></nav>
-      <div key={auth.user!.id}>
-        <section className="account-section" id="my-posts" aria-labelledby="my-posts-title"><div className="account-section-heading"><div><h2 id="my-posts-title">我的发布</h2><p>编辑、撤下或恢复你分享过的美食。</p></div><Link className="button-link" to="/food/new">发布一道菜</Link></div><OwnedFoodList onChanged={() => setRevision((value) => value + 1)} /></section>
-        <section className="account-section" id="my-ratings" aria-labelledby="my-ratings-title"><div className="account-section-heading"><div><h2 id="my-ratings-title">我的评分</h2><p>按当前账号汇总你实际提交过的评分。</p></div></div><MyRatings revision={revision} /></section>
-      </div>
+      <PersonalDetailsCard key={`details:${auth.user!.id}`} userId={auth.user!.id} />
+      <nav className="account-record-links" aria-label="个人内容">
+        <Link className="account-record-entry" to="/account/posts"><span className="account-record-icon"><PenLine size={24} aria-hidden="true" /></span><span><strong>我的发布</strong><small>编辑、撤下或恢复分享过的美食</small></span><ArrowRight size={20} aria-hidden="true" /></Link>
+        <Link className="account-record-entry" to="/account/ratings"><span className="account-record-icon"><Star size={24} aria-hidden="true" /></span><span><strong>我的评分</strong><small>回看评分记录与菜品图片</small></span><ArrowRight size={20} aria-hidden="true" /></Link>
+      </nav>
     </>}
   </div>
 }

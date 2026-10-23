@@ -78,6 +78,14 @@ try {
   }
   await checkPersonalHistory('email-only schema')
   await checkVerifiedWrites('email-only schema')
+  await db.exec(await readFile(new URL('../migrations/202610220001_campus_account_details.sql', import.meta.url), 'utf8'))
+  const detailsChecks = await readFile(new URL('../campus-account-details.tests.sql', import.meta.url), 'utf8')
+  async function checkAccountDetails(stage) {
+    const detailsResults = await db.exec(detailsChecks)
+    console.log(detailsResults.flatMap((r) => r.rows ?? []).find((r) => r.result)?.result ?? 'Account details checks passed.')
+    console.log(`Account details assertions (${stage}): ${(detailsChecks.match(/select pg_temp\.(?:check_details|expect_details)\(/g) ?? []).length}`)
+  }
+  await checkAccountDetails('email-only schema')
   await db.exec(await readFile(new URL('../migrations/202610130002_food_profiles.sql', import.meta.url), 'utf8'))
   const profileChecks = await readFile(new URL('../food-profiles.tests.sql', import.meta.url), 'utf8')
   const profileResults = await db.exec(profileChecks)
@@ -85,13 +93,14 @@ try {
   console.log('Profile assertions: ' + (profileChecks.match(/select pg_temp\.(?:check_profile|expect_profile)\(/g) ?? []).length)
   await checkPersonalHistory('profile-compatible schema')
   await checkVerifiedWrites('profile-compatible schema')
-  const leftover = await db.query('select (select count(*) from public.foods)::int as foods, (select count(*) from public.ratings)::int as ratings, (select count(*) from auth.users)::int as users, (select count(*) from public.food_profiles)::int as profiles')
+  await checkAccountDetails('profile-compatible schema')
+  const leftover = await db.query('select (select count(*) from public.foods)::int as foods, (select count(*) from public.ratings)::int as ratings, (select count(*) from auth.users)::int as users, (select count(*) from public.food_profiles)::int as profiles, (select count(*) from public.campus_account_details)::int as details')
   if (Object.values(leftover.rows[0]).some((count) => count !== 0)) {
     throw new Error('SQL tests did not roll back all their fixtures')
   }
   console.log(result?.result ?? 'SQL checks passed.')
   console.log(`Assertions: ${(checks.match(/select pg_temp\.(?:assert_true|expect_sqlstate)\(/g) ?? []).length}`)
-  console.log('Rollback verified: no food, rating, user or profile test fixtures remain.')
+  console.log('Rollback verified: no food, rating, user, profile or account detail test fixtures remain.')
   console.log('Scope: embedded PostgreSQL plus minimal Auth/Storage schema fixtures; no live Supabase service was contacted.')
 } catch (error) {
   console.error('SQL checks failed:', error.message)

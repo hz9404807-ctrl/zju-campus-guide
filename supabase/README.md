@@ -261,6 +261,21 @@ npm run test:db
 
 匿名身份仅限制同一匿名会话；清除浏览器数据或换设备可以产生新身份。此版本没有防刷分系统。已产生菜品或评分的匿名用户受外键保护，不应随意在后台删除 Auth 用户；需要清理时由项目管理员明确处理对应业务记录。
 
+## 私有个人资料增量迁移（待部署）
+
+`202610220001_campus_account_details.sql` 在已部署的 `202610130001_food_email_management.sql` 之后执行一次即可；与个人评分历史、收藏和五档案迁移无依赖。不要重复运行初始化脚本，不启用五档案、不修改 SMTP 或云端功能开关。本轮只交付迁移及本地权限测试，没有执行真实云端结构变更。
+
+它创建 `public.campus_account_details`：`user_id` 主键关联 Auth 账号（不是发布档案），`gender` 为 `undisclosed/female/male/other`，`signature` 最多120个字符且无控制字符，`campus` 为允许的校区或空字符串，`updated_at` 为服务端版本。字段全部仅本人可见，不含邮箱或公开个人主页。表启用RLS，authenticated只有经真实Auth资格检查的本人SELECT，anon无读取权，普通客户端无直接写权限。
+
+公开RPC契约：
+
+- `get_my_campus_details(p_expected_user_id uuid)` 返回0或1条本人记录；0条表示尚未保存，不自动创建资料。
+- `save_my_campus_details(p_expected_user_id uuid, p_gender text, p_signature text, p_campus text, p_expected_updated_at timestamptz)` 返回已保存的1条本人记录；首次写入传NULL版本，更新须携带读取到的原始版本。唯一约束与版本比较使重复创建、过期修改返回40001，参数身份不符或邮箱失去验证返回42501。
+
+两函数均固定空search_path、撤销PUBLIC/anon权限、仅授authenticated执行，并在函数体调用已有`require_campus_member()`且按`auth.uid()`查写；预期用户ID仅用于比较，不充当所有者来源。未部署的RPC返回PGRST202/42883时前端明确提示待接入。浏览器继续使用原Supabase客户端，没有管理密钥或直接读取`auth.users`。
+
+`npm run test:db` 已接入 `campus-account-details.tests.sql`，在邮箱-only与兼容五档案结构上各40项断言，覆盖本人读取、跨账号隔离、匿名/未验证/伪造JWT拒绝、旧会话失去资格、重复创建、并发版本、Unicode/控制字符/首尾空格长度约束及权限。测试事务回滚资料与Auth夹具。Supabase HTTP/RLS网关、真实邮箱及跨设备同步仍需部署后验收，详细点击步骤见 [个人中心说明](../docs/personal-center.md)。
+
 ## 官方依据
 
 - [数据库函数与权限](https://supabase.com/docs/guides/database/functions)

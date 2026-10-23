@@ -105,12 +105,12 @@ test('未知问题与互不相关的组合不会因问句清理误返回全部�
   const windows = read('service-windows')
   for (const query of ['你好', '怎么办', '？', '校园卡 奖学金', '图书馆 飞船999', '不存在的事务987'])
     assert.equal(filterGuides(guides, query, '', windows).length, 0, query)
-  assert.equal(filterGuides(guides, '').length, 98)
+  assert.equal(filterGuides(guides, '').length, 102)
   assert.equal(filterGuides(guides, '寝室灯坏了', '校园卡').length, 0)
 })
 
 test('其余指南均具有完整操作信息，原始问题保留，关联不悬空', () => {
-  assert.equal(guides.filter((guide) => guide.category !== '校园卡').length, 91)
+  assert.equal(guides.filter((guide) => guide.category !== '校园卡').length, 95)
   for (const guide of guides) {
     assert.ok(guide.steps.length >= 3, guide.id)
     assert.ok(guide.materials.length > 0, guide.id)
@@ -141,7 +141,7 @@ test('不同业务窗口独立关联，电话和人工时段可检索', () => {
 })
 
 test('网站导航包含新办理入口和完整摘要，学校与校外链接区分保留', () => {
-  assert.equal(websites.length, 101)
+  assert.equal(websites.length, 121)
   assert.equal(read('content-manifest').websiteCount, websites.length)
   assert.equal(read('content-manifest').serviceWindowCount, read('service-windows').length)
   for (const guide of guides)
@@ -179,8 +179,8 @@ test('近似建议与准确结果分开，并保持类别限制', () => {
 })
 
 
-test('全部98份指南提供对应步骤的真实参考或平台链接，不再提供App路径复制', () => {
-  assert.equal(guides.length, 98)
+test('全部指南提供对应步骤的真实参考或平台链接，不再提供App路径复制', () => {
+  assert.equal(guides.length, 102)
   const windows = read('service-windows')
   for (const guide of guides) {
     assert.ok(guide.stepActions.length > 0, guide.id)

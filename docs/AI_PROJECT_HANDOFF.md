@@ -1,3 +1,29 @@
+## 本轮更新交接（2026-10-23，魔搭已发布、main待审）
+
+用户在开发交付后明确要求立即更新GitHub和魔搭。分支 `codex/saturday-polish`、[整合PR #7](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/7)已通过 [发布运行](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/39944450516) 更新同一个魔搭站点；公开运行来源为 `661e561ea677f626a4ec197d722809826dfc69a4`、connected，空间Running。远程main仍 `25f2e69`、未直接合并；PR #7包含PR #6前置代码，组长优先审阅PR #7，避免重复应用旧PR。后续文档和临时工作流清理不改变运行构建；合并前再核对协作更新。PR #3仍独立，保留其收藏/搜索/拆包能力；原Sites与共享业务数据未改。
+
+个人中心子页 `/account/posts`、`/account/ratings` 各6条显示分页，旧 `/food/mine` 继续兼容。现有本人服务读取与RLS不变；账号切换按ID重建，评分撤下条目不读图。`personalRecords.ts`限定三个个人路径及安全page，详情、编辑、发布和登录续接均保留合法返回页。新建真实成功后原页显示继续发布操作，第二份草稿清空旧图/评分；编辑成功仍返回详情。
+
+同一PR后续打磨：个人子页合并顶部导航并精简重复账号链接，保留验证状态/退出/错误；共享 `ResultPager` 增加最多5槽的数字页码与首尾直达，手机44px及标题焦点不变。发布校验等待错误渲染后聚焦，损坏预览提示/拦截/换图恢复，移除后回到选图。美食空价格明确显示“价格待补充”，0元和长文本分别处理。最新399项Node、类型检查与构建通过，本机界面各组49/53/86/93/37项；发布Actions另重跑依赖安装、同组测试、PGlite和构建均通过。范围和截图见开发记录，没有新迁移或云端数据库操作。
+
+首页采用用户原文“办事有方法，信息有方向，生活有去处”，`CampusEmblem`为简洁对称SVG，原Logo和原插画文件保留。补充既有10份官方指南，目录121网站；证据、读取失败和年度范围见内容核验文档。旧WebView兼容改在 `timeoutFetch.ts`，保留12秒请求及响应体截止，不另建客户端或登录态。
+
+周六测试结束后才由组长执行 `supabase/maintenance/withdraw-acceptance-foods.sql`：默认ROLLBACK、锁定四条精确指纹、保留评分/图片、创建私有回退审计表；这是可恢复撤下而非永久删除，未在云端执行。功能本身无新增迁移；上一轮个人资料的 `202610220001_campus_account_details.sql`仍待接入。验证数字、截图及不能替代的实机/云端验收见最新开发记录。
+
+## 魔搭共享部署接入（2026-10-21）
+
+本轮发布整合：用户另行明确要求更新GitHub与同一魔搭站点，`fix/mobile-release`已整合PR #4/#5并精简页面小字、加大手机入口及补充外链复制。main仍待组长审核；本次精确分支Actions运行39904983944成功，公网版本已核对为 `5db6f58e15a9edb9bf3deb0efb9d945acf25926f`、connected，云端启动与复测见 development-status.md 最上方。验收后已删除一次性工作流，永久main流程保留。本分支需要组长审阅PR #6，避免重复应用旧PR代码；PR #3仍独立。
+
+与PR #3的最新试算有9处文本冲突（不执行实际合并）：除第11节原五个文件外，另有 `SourcePages.tsx` 与三份记录 `README.md`、`docs/AI_PROJECT_HANDOFF.md`、`docs/development-status.md`。整合时来源页同时保留收藏按钮和本轮“资料说明”披露；文档保留各轮证据并由最新实际状态领头。不要把本轮单分支验证数字当成组合版结果。
+
+### 首次接入历史（2026-10-21）
+
+用户要求部署到魔搭并共同查看合并后的版本。`codex/modelscope-deploy` 从 main 25f2e69 建立独立工作目录；PR #4 为部署配置，PR #3 为此前功能，当时两者均未合并。首次将 main 应用手动发布到 zzzhr777/zju-campus-guide，免费 Docker 为 Running。全屏网址：https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full 。操作见 [魔搭部署](modelscope-deployment.md)。
+
+本人登录后明确授权使用现有魔搭部署令牌并保存 GitHub Actions Secret。六项接入设置已完成，MODELSCOPE_DEPLOY_ENABLED=true；当时尚未执行Actions，计划PR #4合入main后触发。初始 bootstrap 确认变量已移除，后续凭镜像标记保留历史。公开配置只在忽略文件和 GitHub Variables；邮箱true、五档案false，原 Sites 和数据库配置维持原状。
+
+首次电脑端验证了主要公开流程与访客登录入口。当时390px窄窗口检查出现1280px容器，因此只作为电脑共享预览；本轮手机触摸UA已按视口适配，具体点击问题见 development-status.md 顶部最新记录。iframe内导航后外层刷新仍回到入口app_path，分享使用干净地址，勿记录iframe临时参数。真实浙大邮箱发码、换号与物理手机待验收。
+
 ## 当前协作状态（2026-10-19）
 
 个人中心代码已由组长合并，原 Supabase 已部署评分历史 RPC 与邮箱发布/评分限制。一个邮箱一个 Auth 账号，五档案关闭；账号注销未实现。后续 AI 请从最新 main 开始，勿重复执行已部署迁移或重新配置 SMTP。当前部署版本与验收边界见 `docs/development-status.md` 最上方记录，下方较早的交接任务作为历史背景。
@@ -156,6 +182,18 @@ npm run dev
 | 需求与协作规则 | `docs/project-requirements-v0.3.md`、`AGENTS.md` |
 
 ## 11. 本轮交接：个人中心（2026-10-15）
+
+后续新增（原PR #5，现已整合到PR #6并发布魔搭前端，main合并待组长审阅）：全站使用小组“浙里有方”Logo；账号操作栏统一对齐；`OwnedFoodList` 复用共享 `FoodImage` 展示右侧缩略图。用户另授权私有资料编辑，新增独立 `campus_account_details` 表及本人读取/保存RPC，支持性别、签名、常驻校区；需要组长只部署 `202610220001_campus_account_details.sql`，不重跑旧迁移，不启用五档案。云端未接入时明确显示待接入，真实跨设备保存待验收，详情见 [个人中心说明](personal-center.md)。官方学业内容现为102份指南与112个网站，年度、院系和来源边界见 [核对记录](content-review/guide-verification.md)。
+
+原PR #5与未合入PR #3的只读 `git merge-tree` 试算发现以下5处文本冲突；现PR #6整合部署与说明清理后共9处，新增 `SourcePages.tsx`、`README.md`、`docs/AI_PROJECT_HANDOFF.md`、`docs/development-status.md`。未实际合并或改动main。来源页需保留双方收藏和资料披露，记录保留各轮证据；其余源码逐项保留：
+
+- `src/App.tsx`：PR #3的路由按需加载/失败恢复/首页搜索，加上本轮Logo、标题与页脚；不要退回同步加载。
+- `src/lib/foodService.ts`：收藏和个人资料的服务导出都保留，继续使用现有唯一Supabase客户端。
+- `src/pages/FoodPages.tsx`：保留PR #3预算/排序/收藏/返回条件，本轮图片函数已移到 `components/FoodImage.tsx`，改用共享导入，删除重复内联实现。
+- `src/pages/PersonalCenterPage.tsx`：同时保留我的收藏与本轮 `PersonalDetailsCard`，同级key用 `details:${id}` / `content:${id}` 区分，私有内容继续按账号重建。
+- `supabase/test-runtime/run.mjs`：收藏与资料的独立迁移和两种结构权限测试都执行；资料不依赖五档案，测试夹具全部回滚。
+
+整合后重跑双方Node、数据库和浏览器检查。本轮的360/235/54仅对应本分支，不能直接当作合并版结果。两份新增迁移独立审阅，云端只执行尚未部署的文件。
 
 2026-10-17：个人中心工作在独立 `feat/personal-center` 分支实现，交付与复现入口见 [个人中心交付说明](personal-center.md)。新增评分历史增量迁移仅供审阅，未在云端执行；用户暂缓自己的真实邮箱注册与联调。功能分支或本地检查通过不表示已合并、发布或完成真实服务验收。以下目标与边界继续适用。
 

@@ -2,11 +2,39 @@
 
 最初由同学在 `feat/personal-center` 实现。2026-10-19 经组长授权已合入本地 main，云端评分历史接口和邮箱写入限制已部署，现已发布到原公开网址（Sites版本5）。
 
+## 本轮调整：个人记录拆页与分页
+
+`/account` 保留账号概览、本人邮箱、资料卡及两个记录入口；“我的发布”进入 `/account/posts`，“我的评分”进入 `/account/ratings`。每页显示6条，页码写入 `?page=2`，支持刷新、浏览器返回、键盘翻页与详情页返回原页。非法页码恢复第一页，超出末页时待本人数据加载后回退到实际末页；换号、退出或账号验证失败立即卸载旧列表。旧 `/food/mine` 地址继续可用并同样分页。
+
+评分卡片复用 `FoodImage` 显示菜品缩略图，缺图或加载失败使用准确提示。撤下的菜品沿用评分历史RPC的空名称、地点、图片，不请求或展示受限详情；仅保留本人评分和日期。我的发布继续使用原编辑、撤下与恢复接口，操作进行中禁用翻页，避免重复操作。
+
+实现位于 `PersonalRecordsPage.tsx`、`OwnedFoodList.tsx`、`usePersonalRecordPagination.ts`、`personalRecords.ts`。列表查询沿用既有 `myFoods()`、`myRatings()` 和服务端身份校验；本轮为本人结果的显示分页，不增加服务端分页查询、数据结构或迁移。详情返回只接受 `/account/posts`、`/account/ratings`、`/food/mine` 和安全的正整数页码；不沿用其他参数或任意外部跳转地址。登录续接允许两个新子页，保持原账号体系。
+
+隔离夹具的 `tests/browser/personal-records.js` 53项检查通过：A有14条、B有1条本机记录，覆盖6/6/2页、刷新/返回、越界页、图片、撤下隐藏、加载失败重试与空态、两类记录的迟到响应/切号/退出，以及登录回到原第二页。发布入口保留经过白名单的个人列表页码，空态发布也可回到本人列表。320/375/390px均无横向溢出，截图已查看；品牌与资料的 `brand-account.js` 适配拆页后55项通过。它们不访问真实Supabase，不表示云端或鸿蒙实机已验收。
+
+## 本轮新增：私有个人资料（待云端接入）
+
+`/account` 新增“个人资料”：性别可选“不透露 / 女 / 男 / 其他”，常驻校区可留空，个性签名最多120个Unicode字符。三项仅当前本人可见；编辑、取消、保存和失败重试均由真实服务响应决定。保存错误保留填写，其他页面版本冲突提示重新加载；同一已验证账号的令牌刷新保留编辑，实际切号或退出卸载资料组件。
+
+实现位于 `src/components/PersonalDetailsCard.tsx`、`src/pages/personal-center.css` 和 `src/lib/campusAccountDetails.ts`。服务通过既有 `foodService` 导出的 `loadCampusAccountDetails(userId)`、`saveCampusAccountDetails(input, updatedAt, userId)` 使用项目唯一的 Supabase 客户端。请求前后都用 `getUser()` 复核，RPC 还接收 `p_expected_user_id`，使切号过程中迟到的请求无法写入新账号。
+
+新增迁移 `supabase/migrations/202610220001_campus_account_details.sql`，依赖已部署的 `202610130001_food_email_management.sql`。由组长审阅后仅执行这份新增迁移，再部署前端；已运行过的初始化/邮箱迁移不重跑。它创建 `campus_account_details`（`user_id` 主键关联 Auth UUID、`gender`、`signature`、`campus`、`updated_at`），一个 Auth 账号一条记录，不依赖或改动 `food_profiles` 五档案迁移和开关，也不改变邮箱、SMTP、发布和评分规则。
+
+数据库启用RLS，仅给 authenticated 的真实已验证本人 SELECT；普通客户端无直接 INSERT / UPDATE / DELETE 权限。`get_my_campus_details(uuid)` 与 `save_my_campus_details(uuid,text,text,text,timestamptz)` 固定空 search_path，撤销 PUBLIC/anon 执行权；函数内部调用已有 canonical Auth 校验、比对预期UID与`auth.uid()`，只读写当前用户。保存使用更新时间并发保护，重复首次写入或过时版本返回40001，不覆盖其他页面的新资料。浏览器不读 `auth.users`、不使用用户metadata作权限判断、不将资料写入localStorage。常驻校区本轮仅为私有资料字段，不覆盖公共浏览页已有校区选择。
+
+**这份迁移本轮未在云端执行。** 接口缺失时页面显示“个人资料尚待共享服务接入”，不能编辑或假报已保存。前端回退时可保留私有表及权限；已保存数据不删表、不清空。真实邮箱联调、跨设备读写和云端RLS验收由组长部署后执行。本地数据库通过两种结构各40项资料断言，API相关55项Node检查通过；这些使用隔离夹具，不代表云端验收。
+
+部署后的点击验收：
+
+1. 使用自己的已验证浙大邮箱进入个人中心 → 编辑资料 → 选择性别、校区并填写签名 → 保存；刷新及在第二台设备登录同账号，确认读取相同资料。
+2. 编辑后点击取消，确认恢复原资料；离线保存应保留输入并显示失败，恢复网络后重试。两个页面同时编辑，后保存的旧版本应提示重新加载。
+3. 退出时邮箱、资料、发布与评分应立即收起；切换另一个测试账号后不能看到第一账号资料。匿名访问保留公开浏览与个人中心登录入口。
+
 ## 页面与行为
 
-- `/account`：账号概览、仅本人可见的登录邮箱、我的发布、我的评分、退出登录。桌面主导航与手机顶部均有入口。
-- `/food/mine` 继续可用，与个人中心复用 `OwnedFoodList` 及原有编辑、撤下、恢复接口；撤下恢复后同步刷新个人评分。
-- `/food/login?returnTo=...` 可返回 `/account`，保留查询与锚点；原 `/food` 返回地址与验证码续接不变，仍拒绝外部返回地址。
+- `/account`：账号概览、仅本人可见的登录邮箱、个人资料、我的发布/评分子页入口、退出登录。桌面主导航与手机顶部均有入口。
+- `/account/posts` 与旧 `/food/mine` 复用 `OwnedFoodList` 及原有编辑、撤下、恢复接口；切换到评分子页时重新读取实际可见内容。
+- `/food/login?returnTo=...` 可返回 `/account` 及两个记录子页，保留查询与锚点；原 `/food` 返回地址与验证码续接不变，仍拒绝外部返回地址。
 - 账号检查、个人发布和个人评分分别提供加载、失败及重试状态；空记录与接口尚未接入明确区分。未验证账号不挂载个人内容。
 - 账号事件立即使旧身份请求失效；同一已验证账号的令牌刷新或重复登录只后台复核，保留未保存文字与本地图片，实际换号、退出或复核失败才清空。个人列表和发布/编辑表单按账号重建，退出后卸载，旧请求、未保存字段与本地图片预览不带入其他账号。
 - 校园办事、信息源、美食浏览保持公开；不添加昵称/头像编辑、账号注销或另一套身份存储。
@@ -38,6 +66,8 @@ npm run dev
 
 ## 可复现的隔离浏览器检查
 
+本轮品牌与资料编辑回归使用 `tests/browser/fixture/server.mjs` 启动独立本机夹具，命令与范围见 [夹具说明](../tests/browser/fixture/README.md)。`tests/browser/brand-account.js` 拆页适配后共55项断言通过，截图在忽略的 `scratch/brand-ui/`，包括有本机模拟标记的资料展示/编辑和右侧发布图片。新增分页脚本在同一服务器运行。该结果证明隔离组件交互与布局，云端写入及真实Auth/RLS仍按前文迁移后验收。下方为个人中心验证码/SDK回归的独立复现方法。
+
 `tests/browser/personal-center.js` 是可审阅的 Playwright CLI 回归脚本，不自动加入 Node 单元测试；不增加项目依赖。已安装 Playwright CLI 的开发者可在单独终端启动以下本机测试进程：
 
 ```powershell
@@ -57,6 +87,8 @@ playwright-cli -s=personal-center close
 ```
 
 这些变量仅属于隔离测试进程，不保存为真实环境配置，不调整云端开关。脚本拦截测试域名的全部服务请求，生成两个明确的测试身份和响应，检查实际前端与 Supabase SDK 的衔接；不创建真实账户、不发送邮件、不写云端。Node 测试验证 API/Hook 竞态，PGlite 测试独立验证 SQL 权限；这些证据不等于真实 Supabase 联调。
+
+本轮SDK回归适配拆页后32项通过，包含验证码返回、本人查询、撤下/恢复、评分详情返回、刷新、失败退出、同账号 `TOKEN_REFRESHED` / `SIGNED_IN` 保留编辑文字与图片、切号和退出拒收旧评分响应、未部署接口与重试，以及1440/1024/901/780/390/320px布局。测试服务与浏览器请求均使用上述假域名配置和拦截响应。
 
 截图输出到被忽略的 `scratch/personal-center-desktop.png` 和 `scratch/personal-center-mobile.png`，仅显示浏览器测试数据。截图、会话、环境配置、构建产物和工具缓存不进入 Git。
 

@@ -1,14 +1,13 @@
-import { CampusArtwork, FoodArtwork } from './components/CampusArtwork'
+import { FoodArtwork } from './components/CampusArtwork'
+import { CampusEmblem } from './components/CampusEmblem'
 import FoodAccountProvider from './components/FoodAccountProvider'
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router'
 import {
   ArrowLeft,
   ArrowRight,
-  BookOpen,
   ClipboardList,
   Compass,
-  Info,
   Menu,
   Utensils,
   UserRound,
@@ -20,6 +19,7 @@ import { FoodPublishPage } from './pages/FoodPublishPage'
 import { FoodLoginPage } from './pages/FoodLoginPage'
 import { FoodMinePage } from './pages/FoodMinePage'
 import { PersonalCenterPage } from './pages/PersonalCenterPage'
+import { PersonalPostsPage, PersonalRatingsPage } from './pages/PersonalRecordsPage'
 import { SourcesPage, SourceDetailPage } from './pages/SourcePages'
 import contentManifest from './data/content-manifest.json'
 import { initializeFoodIdentity } from './lib/foodService'
@@ -40,6 +40,8 @@ const pageTitles: Record<string, string> = {
   '/food/login': '浙大邮箱登录',
   '/food/mine': '我的发布',
   '/account': '个人中心',
+  '/account/posts': '我的发布',
+  '/account/ratings': '我的评分',
   '/sources': '校园信息源导航',
   '/about': '关于项目',
 }
@@ -76,9 +78,8 @@ function Header() {
       }}
     >
       <div className="header-inner">
-        <Link to="/" className="brand" aria-label="浙大校园指南，返回首页">
-          <span className="brand-mark"><BookOpen size={23} aria-hidden="true" /></span>
-          <span className="brand-copy"><strong>浙大校园指南</strong><span>校园生活，一处找到</span></span>
+        <Link to="/" className="brand" aria-label="浙里有方 · 浙大校园指南，返回首页">
+          <img className="brand-wordmark" src="/brand/wordmark.svg" width="189" height="56" alt="浙里有方" />
         </Link>
         <nav className="desktop-nav" aria-label="主导航">{links}</nav>
         <NavLink to="/about" className="about-link">关于项目</NavLink>
@@ -110,11 +111,11 @@ function HomePage() {
     <div className="page home-page">
       <section className="hero" aria-labelledby="home-title"><div className="hero-edition" aria-hidden="true"><span>ZJU / CAMPUS COMPANION</span><span>学习 · 生活 · 在浙里</span></div>
         <div className="hero-copy"><p className="eyebrow">在浙里 · 过好校园每一天</p>
-          <h1 id="home-title">校园大小事，<br /><span>都有好去处。</span></h1>
-          <p className="hero-description">找清楚的办事指引，也找一顿喜欢的饭。<br />你的校园生活，从这里出发。</p>
+          <h1 id="home-title">办事有方法，<br /><span>信息有方向，</span><br />生活有去处。</h1>
+          <p className="hero-description">清楚的办事指引，常用的校园信息，<br />还有同学分享的那一顿好饭。</p>
           <Link className="hero-action" to="/guides">查找办事指南 <ArrowRight size={18} aria-hidden="true" /></Link>
         </div>
-        <div className="hero-art"><CampusArtwork /><span className="hero-art-caption">求知 · 办事 · 好好生活</span></div>
+        <div className="hero-art"><CampusEmblem /><span className="hero-art-caption">浙里有方 · 校园生活指南</span></div>
       </section>
       <div className="home-section-heading"><h2>今天，从哪件事开始？</h2><span>校园生活的三个入口</span></div>
 
@@ -148,7 +149,6 @@ function HomePage() {
         <span className="source-status">{contentManifest.accountCount}个公众号 · {contentManifest.websiteCount}个网站 <ArrowRight size={17} aria-hidden="true" /></span>
       </Link>
 
-      <div className="home-note"><Info size={17} aria-hidden="true" /><p>信息正在逐步整理和核验，办事指南请以最新官方通知为准。</p></div>
     </div>
   )
 }
@@ -159,7 +159,7 @@ function AboutPage() {
       <div className="page-heading">
         <Link to="/" className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回首页</Link>
         <p className="eyebrow">一个来自同学的课程项目</p>
-        <h1>关于浙大校园指南</h1>
+        <h1>关于浙里有方</h1>
         <p className="page-description">少一点来回查找，多一点清楚的答案。</p>
       </div>
       <div className="about-grid">
@@ -196,7 +196,7 @@ export default function App() {
 
   useEffect(() => {
     const title = pageTitles[location.pathname] ?? (location.pathname.startsWith('/guides/') ? '办事指南详情' : location.pathname.startsWith('/sources/') ? '公众号信息' : location.pathname.startsWith('/food/') ? '美食详情' : '页面未找到')
-    document.title = `${title} · 浙大校园指南`
+    document.title = `${title} · 浙里有方 · 浙大校园指南`
     if (previousPath.current !== location.pathname) {
       window.scrollTo({ top: 0, behavior: 'instant' })
       mainContent.current?.focus({ preventScroll: true })
@@ -215,6 +215,8 @@ export default function App() {
           <Route path="/guides/:guideId" element={<GuideDetailPage />} />
           <Route element={<FoodAccountProvider />}>
             <Route path="/account" element={<PersonalCenterPage />} />
+            <Route path="/account/posts" element={<PersonalPostsPage />} />
+            <Route path="/account/ratings" element={<PersonalRatingsPage />} />
             <Route path="/food" element={<FoodPage />} />
             <Route path="/food/login" element={<FoodLoginPage />} />
             <Route path="/food/mine" element={<FoodMinePage />} />
@@ -229,7 +231,7 @@ export default function App() {
         </Routes>
       </main>
       <footer className="site-footer">
-        <div className="footer-inner"><span>浙大校园指南</span><p className="footer-project">《人类工效学》课程项目 · 非学校官方平台</p></div>
+        <div className="footer-inner"><span>浙里有方</span><Link className="footer-about" to="/about">关于我们</Link></div>
       </footer>
     </div>
   )

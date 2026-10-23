@@ -46,10 +46,12 @@
 .food-card-content h2 { font-size: 19px; line-height: 1.5; }
 .food-location { display: flex; align-items: flex-start; gap: 6px; color: var(--muted); font-size: 13px; line-height: 1.75; }
 .food-location > svg { margin-top: 4px; }
+.food-location > span { min-width: 0; overflow-wrap: anywhere; }
 .food-card-content .food-location { margin-top: 8px; }
 .food-card-numbers { display: flex; flex-direction: column; gap: 9px; margin-top: 15px; }
 .food-price { color: #273d58; font-size: 15px; font-weight: 600; line-height: 1.6; }
 .food-price small { margin-left: 3px; color: var(--muted); font-size: 11px; font-weight: 400; }
+.food-list-page .food-price.food-price-unknown, .theme-food .food-detail-price.food-price-unknown { color: var(--muted); font-size: 14px; font-weight: 500; }
 .food-rating-summary { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; color: #845916; font-size: 12px; line-height: 1.6; }
 .food-rating-summary strong { font-size: 15px; font-weight: 600; }
 .food-rating-summary > svg { margin-right: 2px; color: #c38a20; }
@@ -74,7 +76,7 @@
 .food-image-large .food-image-placeholder { gap: 15px; font-size: 14px; }
 .food-detail-content { min-width: 0; padding: 31px 34px; }
 .food-detail-content .food-card-topline { margin-bottom: 15px; }
-.food-detail-content h1 { font-size: clamp(26px, 3vw, 34px); line-height: 1.5; letter-spacing: -.025em; }
+.food-detail-content h1 { font-size: clamp(26px, 3vw, 34px); line-height: 1.5; letter-spacing: -.025em; overflow-wrap: anywhere; }
 .food-detail-content .food-location { margin-top: 11px; font-size: 14px; }
 .food-detail-content .food-location > svg { margin-top: 4px; }
 .food-detail-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-top: 20px; color: #29425f; font-size: 24px; line-height: 1.6; font-weight: 600; }
@@ -86,7 +88,7 @@
 .food-detail-rating > p { margin-top: 5px; color: var(--muted); font-size: 11px; line-height: 1.7; }
 .food-detail-description { margin-top: 24px; }
 .food-detail-description h2, .food-detail-tags h2 { font-size: 15px; line-height: 1.7; }
-.food-detail-description p { margin-top: 9px; color: var(--muted); font-size: 14px; line-height: 1.95; }
+.food-detail-description p { margin-top: 9px; color: var(--muted); font-size: 14px; line-height: 1.95; overflow-wrap: anywhere; }
 .food-detail-tags { margin-top: 22px; }
 .food-detail-tags h2 > span { margin-left: 5px; color: var(--muted); font-size: 11px; font-weight: 400; }
 .food-detail-tags .food-tags { margin-top: 10px; }
