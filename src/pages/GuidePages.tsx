@@ -56,7 +56,7 @@ export function GuidePage() {
       <p className="page-description">办事、升学与校园生活，从你遇到的问题开始查找。</p>
     </div>
     <section className="guide-search-panel" role="search" aria-label="查找校园办事指南">
-      <SearchField id="guide-search" label="你想办什么事？" placeholder="例如：校园卡丢了、图书馆预约、寝室报修" value={query} onChange={(value) => update('q', value)} hint="可以直接输入问题，如“寝室灯坏了”；支持近义词、地点、时间和电话，匹配标题的指南优先，并展示相关网站和公众号。" />
+      <SearchField id="guide-search" label="你想办什么事？" placeholder="例如：校园卡丢了、图书馆预约、寝室报修" value={query} onChange={(value) => update('q', value)} />
       <div className="content-filter-row"><label htmlFor="guide-category">按类别查找</label><select id="guide-category" value={category} onChange={(event) => update('category', event.target.value)}><option value="">全部类别（{guides.length}）</option>{categories.map((item) => <option key={item} value={item}>{item}（{guides.filter((guide) => guide.category === item).length}）</option>)}</select></div>
       <div className="guide-quick-search"><span>常见需求</span>{quickKeywords.map((keyword) => <button key={keyword} type="button" className="guide-keyword-button" onClick={() => update('q', keyword)}>{keyword}</button>)}</div>
     </section>
@@ -74,7 +74,7 @@ export function GuidePage() {
       </> : <div className="guide-empty-state"><Search size={27} aria-hidden="true" /><h3>没有找到相关指南</h3><p>可以换一种说法，或带着当前问题继续查找网站和公众号。</p>{category && <button type="button" className="button-link" onClick={() => update('category', '')}>仅取消类别筛选</button>}{suggestions.length > 0 && <div className="guide-suggestions"><p>可能相关的事项（并非准确匹配）：</p>{suggestions.map((guide) => <Link key={guide.id} to={`/guides/${guide.id}${detailSearch}`}>{guide.title}<ArrowRight size={15} aria-hidden="true" /></Link>)}</div>}<div className="guide-entry-links"><Link to={sourceSearchUrl(debouncedQuery, 'websites')}>继续查网站 <ArrowRight size={16} aria-hidden="true" /></Link><Link to={sourceSearchUrl(debouncedQuery, 'accounts')}>继续查公众号 <ArrowRight size={16} aria-hidden="true" /></Link></div><button type="button" className="guide-reset-button" onClick={() => setParams({}, { replace: true })}>清除筛选，查看全部指南</button></div>}
     </section>
     {debouncedQuery.trim() && (sources.websites.length > 0 || sources.accounts.length > 0) && <section className="guide-search-sources" aria-label="相关网站与公众号" aria-busy={updating}>
-      <h2>相关网站与公众号</h2><p className="guide-source-hint">与问题匹配的信息源，以及前几条指南关联的入口。</p>
+      <h2>相关网站与公众号</h2>
       {sources.websites.length > 0 && <div className="guide-source-group"><h3>网站入口</h3><ul>{sources.websites.slice(0, 3).map((site) => <li key={site.id}><a href={site.url} target="_blank" rel="noopener noreferrer">{websiteSearchDetails(site, results, debouncedQuery).name}<ExternalLink size={15} aria-hidden="true" /></a><span>{site.scope}</span></li>)}</ul><Link to={sourceSearchUrl(debouncedQuery, 'websites')} className="guide-bottom-back">继续查网站 <ArrowRight size={16} aria-hidden="true" /></Link></div>}
       {sources.accounts.length > 0 && <div className="guide-source-group"><h3>微信公众号</h3><ul>{sources.accounts.slice(0, 3).map((account) => <li key={account.id}><Link to={`/sources/${account.id}?q=${encodeURIComponent(debouncedQuery)}`}>{account.name}<ArrowRight size={15} aria-hidden="true" /></Link><span>{account.topic}</span></li>)}</ul><Link to={sourceSearchUrl(debouncedQuery, 'accounts')} className="guide-bottom-back">继续查公众号 <ArrowRight size={16} aria-hidden="true" /></Link></div>}
     </section>}

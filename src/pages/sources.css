@@ -1,5 +1,3 @@
-.content-source-note { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 22px; color: var(--muted); font-size: 13px; line-height: 1.8; }
-.content-source-note svg { margin-top: 3px; color: var(--blue); }
 .content-filter-row { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
 .content-filter-row label { color: var(--muted); font-size: 13px; }
 .content-filter-row select { max-width: 100%; min-height: 44px; padding: 8px 34px 8px 12px; border: 1px solid var(--line); border-radius: 9px; background: white; color: var(--ink); font-size: 14px; }
@@ -38,9 +36,10 @@
 .source-copy-actions .button-link { gap: 8px; }
 .source-copy-actions > p { margin-top: 8px; color: var(--blue); font-size: 12px; line-height: 1.7; }
 .source-wechat-hint { margin-top: 12px; font-size: 13px; color: var(--muted); line-height: 1.9; }
-.source-notes { margin-top: 22px; padding: 16px; background: var(--warm-soft); border: 1px solid #ead5aa; border-radius: 10px; }
-.source-notes h3 { margin: 0; font-size: 14px; }
-.source-notes p { font-size: 13px; line-height: 1.9; margin-top: 8px; }
+.source-provenance { margin-top: 24px; border-top: 1px solid var(--line); }
+.source-provenance > summary { display: list-item; min-height: 44px; padding-block: 14px; color: var(--muted); font-size: 13px; cursor: pointer; }
+.source-provenance > summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+.source-provenance .guide-meta-list { margin-top: 4px; }
 .source-original { margin: 0; padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: #edf3f7; }
 .source-original img { display: block; width: 100%; height: auto; border-radius: 8px; }
 .source-original figcaption { margin-top: 12px; font-size: 12px; line-height: 1.8; color: var(--muted); text-align: center; }

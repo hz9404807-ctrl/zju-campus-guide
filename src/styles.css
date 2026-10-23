@@ -237,6 +237,8 @@ button:focus-visible, a:focus-visible {
 .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 76px; padding-block: 20px; color: var(--muted); font-size: 12px; line-height: 1.7; }
 .footer-inner > span, .footer-project { color: #44566d; font-weight: 500; }
 .footer-inner p { text-align: right; }
+.footer-about { display: inline-flex; align-items: center; min-height: 44px; color: var(--muted); }
+.footer-about:hover { color: var(--blue); }
 
 @keyframes page-enter {
   from { opacity: 0; transform: translateY(5px); }

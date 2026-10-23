@@ -7,7 +7,6 @@ import {
   ArrowRight,
   ClipboardList,
   Compass,
-  Info,
   Menu,
   Utensils,
   UserRound,
@@ -146,7 +145,6 @@ function HomePage() {
         <span className="source-status">{contentManifest.accountCount}个公众号 · {contentManifest.websiteCount}个网站 <ArrowRight size={17} aria-hidden="true" /></span>
       </Link>
 
-      <div className="home-note"><Info size={17} aria-hidden="true" /><p>信息正在逐步整理和核验，办事指南请以最新官方通知为准。</p></div>
     </div>
   )
 }
@@ -227,7 +225,7 @@ export default function App() {
         </Routes>
       </main>
       <footer className="site-footer">
-        <div className="footer-inner"><span>浙里有方 · 浙大校园指南</span><p className="footer-project">《人类工效学》课程项目 · 非学校官方平台</p></div>
+        <div className="footer-inner"><span>浙里有方</span><Link className="footer-about" to="/about">关于我们</Link></div>
       </footer>
     </div>
   )
