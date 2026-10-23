@@ -141,7 +141,7 @@ test('不同业务窗口独立关联，电话和人工时段可检索', () => {
 })
 
 test('网站导航包含新办理入口和完整摘要，学校与校外链接区分保留', () => {
-  assert.equal(websites.length, 112)
+  assert.equal(websites.length, 121)
   assert.equal(read('content-manifest').websiteCount, websites.length)
   assert.equal(read('content-manifest').serviceWindowCount, read('service-windows').length)
   for (const guide of guides)

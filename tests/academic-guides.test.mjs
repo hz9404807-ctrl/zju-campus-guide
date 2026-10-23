@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { readFileSync } from 'node:fs'
-import { filterGuides } from '../src/lib/campusContent.ts'
+import { filterGuides, primaryGuideAction } from '../src/lib/campusContent.ts'
 
 const read = (name) => JSON.parse(readFileSync(new URL(`../src/data/${name}.json`, import.meta.url), 'utf8'))
 const guides = read('guides')
@@ -78,4 +78,56 @@ test('动态或登录入口没有冒充已核验业务页面，学业目录关�
   const eta = websites.find((entry) => entry.url === 'https://eta.zju.edu.cn/')
   assert.ok(eta.guideIds.includes('undergraduate-scholarships'))
   assert.ok(!eta.guideIds.includes('postgraduate-recommendation'))
+})
+
+test('2026新生学分与一般FAQ分清适用对象，退补选不沿用过期时段', () => {
+  const limit = guide('campus-020')
+  assert.match(text(limit), /2026级新生.*30学分.*增加5学分/)
+  assert.match(text(limit), /常见问题.*35学分.*40学分.*专门通知/)
+  assert.match(text(limit), /已选上课程、待定课程和补选申请课程一起相加/)
+  assert.match(text(limit), /毕业班.*例外/)
+  const selection = guide('campus-019')
+  assert.match(text(selection), /2026年6月.*均已结束/)
+  assert.match(text(selection), /第四轮须查看新通知/)
+  const changes = guide('campus-022')
+  assert.match(text(changes), /均不允许免听时不能冲突补选/)
+  assert.match(text(changes), /9月11—13日.*9月14—16日.*9月24—27日.*均已结束/)
+  assert.match(text(changes), /每人限申请退一门.*不外推所有轮次/)
+  assert.match(text(guide('campus-042')), /跨专业、跨年级.*第一轮.*第二轮/)
+})
+
+test('转专业保留年级与专项边界，入口对应教务而非院系历史公示', () => {
+  const eligibility = guide('campus-032')
+  assert.match(text(eligibility), /强基.*原则上不转专业/)
+  assert.match(text(eligibility), /三位一体.*不参加主修专业确认.*高考投档成绩/)
+  assert.match(text(eligibility), /不同中外合作联合学院之间也不能互转/)
+  assert.match(text(eligibility), /历史学院2025细则.*2023\/2024级/)
+  assert.match(eligibility.verificationScope, /校级2026转专业通知直接读取失败/)
+  const application = guide('campus-033')
+  assert.match(text(application), /学籍管理→转专业申请/)
+  assert.match(text(application), /提交成功仍需审核/)
+  assert.match(text(application), /后续申请须使用新学期安排/)
+  assert.equal(primaryGuideAction(eligibility)?.url, 'https://zdbk.zju.edu.cn/')
+  assert.equal(primaryGuideAction(application)?.url, 'https://zdbk.zju.edu.cn/')
+})
+
+test('推免细则增补学校框架与院系要求，资格申请与接收仍分开', () => {
+  const recommendation = guide('postgraduate-recommendation')
+  assert.match(text(recommendation), /学校2023.*学业\/素质评价/)
+  assert.match(text(recommendation), /有效学分达到125.*该院当届要求/)
+  assert.match(text(recommendation), /素质评价总分上限1.0/)
+  assert.match(text(recommendation), /本研贯通.*特殊培养/)
+  assert.ok(recommendation.references.some((ref) => ref.url.endsWith('01-1693813526-208542.pdf')))
+  assert.equal(filterGuides(guides, '推免细则')[0]?.id, recommendation.id)
+})
+
+test('学生项目报销保留独立流程、用途授权和业务附件，不把立项当到账', () => {
+  const project = guide('campus-028').routes.find((route) => route.id === 'srtp-reimbursement')
+  assert.match(project.steps.join(' '), /入库单.*自购备案/)
+  assert.match(project.troubleshooting.join(' '), /本科教学科.*分期拨款.*余额/)
+  assert.match(project.completionNote, /送审和审核中均属办理过程/)
+  assert.match(text(guide('campus-111')), /当年票据原则上当年报销.*年末.*当年通知/)
+  assert.match(text(guide('campus-112')), /5月申报已截止/)
+  assert.ok(guide('campus-111').relatedGuideIds.includes('campus-112'))
+  assert.ok(guide('campus-112').relatedGuideIds.includes('campus-111'))
 })

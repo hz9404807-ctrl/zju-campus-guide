@@ -225,7 +225,8 @@
       "campus-037",
       "campus-042",
       "campus-097",
-      "postgraduate-recommendation"
+      "postgraduate-recommendation",
+      "campus-032"
     ],
     "sourceRows": [
       18,
@@ -1816,5 +1817,130 @@
     ],
     "sourceRows": [],
     "verifiedAt": "2026-10-21"
+  },
+  {
+    "id": "website-9aba5afeb8",
+    "name": "本科生院2026—2027秋冬本科选课通知",
+    "url": "https://zdbk.zju.edu.cn/jwglxt/xtgl/xwck_ckLoginNews.html?xwbh=52D7480DCC55A050E0632AB3CA0ACC17",
+    "category": "教务与学习",
+    "summary": "区分预置课、跨专业筛选、补选免听及本研课程；该学期前两轮已结束。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-019",
+      "campus-022",
+      "campus-042"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-23"
+  },
+  {
+    "id": "website-b43264136f",
+    "name": "本科生院2026级新生秋冬选课通知",
+    "url": "https://zdbk.zju.edu.cn/jwglxt/xtgl/xwck_ckLoginNews.html?xwbh=569D011381027E3FE06329B3CA0A448F",
+    "category": "教务与学习",
+    "summary": "2026级首学年30学分上限、允许增加条件、预修与体育课要求，前两轮已结束。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-019",
+      "campus-020"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-23"
+  },
+  {
+    "id": "website-489e6f6fa8",
+    "name": "本科生院2026秋冬第三轮选退课通知",
+    "url": "https://zdbk.zju.edu.cn/jwglxt/xtgl/xwck_ckLoginNews.html?xwbh=5ADD2E8131280957E06329B3CA0AAA5B",
+    "category": "教务与学习",
+    "summary": "第三轮不同阶段的选退、补选、低学分定点和退课申请规则；该轮已结束。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-019",
+      "campus-022"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-23"
+  },
+  {
+    "id": "website-84cd647648",
+    "name": "材料学院2026—2027秋冬转专业通知",
+    "url": "https://mse.zju.edu.cn/2026/0701/c50981a3184196/pagem.htm",
+    "category": "教务与学习",
+    "summary": "查看材料学院当期年级容量、细则入口和教学咨询，后续申请另查新通知。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-032",
+      "campus-033"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-23"
+  },
+  {
+    "id": "website-3e2986f252",
+    "name": "历史学院本科转专业细则（2025）",
+    "url": "https://ls.zju.edu.cn/2025/0709/c65176a3068714/page.htm",
+    "category": "教务与学习",
+    "summary": "历史学院年级、前置课程、遴选和院校公示流程示例，条件按本人年级适用。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-032",
+      "campus-033"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-23"
+  },
+  {
+    "id": "website-dff6539864",
+    "name": "浙江大学2026强基计划招生简章",
+    "url": "https://zdzsc.zju.edu.cn/2026/0412/c87333a3150289/page.htm",
+    "category": "教务与学习",
+    "summary": "核对2026强基录取后的转专业约定及培养方案，招生报名已截止。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-032"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-23"
+  },
+  {
+    "id": "website-c76fb9f1b0",
+    "name": "浙江大学2026浙江省三位一体招生简章",
+    "url": "https://zdzsc.zju.edu.cn/2026/0511/c87242a3161363/page.htm",
+    "category": "教务与学习",
+    "summary": "核对2026该类录取的主修确认、投档成绩和中外合作转专业限制，招生报名已截止。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-032",
+      "campus-033"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-23"
+  },
+  {
+    "id": "website-11f6618024",
+    "name": "学校完善推免工作通知（2023）",
+    "url": "https://tyys.zju.edu.cn/attachments/2023-09/01-1693813526-208542.pdf",
+    "category": "教务与学习",
+    "summary": "被2027届学院细则引用的学校学业/素质评价框架与特殊培养项目规则。",
+    "scope": "学校域名",
+    "guideIds": [
+      "postgraduate-recommendation"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-23"
+  },
+  {
+    "id": "website-7bde6c2f74",
+    "name": "材料学院2026导学团队活动立项通知",
+    "url": "https://mse.zju.edu.cn/2026/0513/c51031a3162276/pagem.htm",
+    "category": "财务与经费",
+    "summary": "该院项目结项材料和所附2025年5月财务指南的版本依据；该活动申报已结束。",
+    "scope": "学校域名",
+    "guideIds": [
+      "campus-111",
+      "campus-112"
+    ],
+    "sourceRows": [],
+    "verifiedAt": "2026-10-23"
   }
 ]
