@@ -21,7 +21,7 @@ const server = await createServer({
       },
       configureServer(vite) {
         vite.middlewares.use((request, response, next) => {
-          response.setHeader('Content-Security-Policy', "connect-src 'self' ws://127.0.0.1:5182; img-src 'self' data:; form-action 'self'; object-src 'none'")
+          response.setHeader('Content-Security-Policy', "connect-src 'self' ws://127.0.0.1:5182; img-src 'self' data: blob:; form-action 'self'; object-src 'none'")
           if (request.url?.startsWith('/__fixture/food.svg')) {
             response.setHeader('Content-Type', 'image/svg+xml')
             response.end('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240"><rect width="320" height="240" fill="#ece3cf"/><circle cx="160" cy="106" r="72" fill="#fff" stroke="#bcab89" stroke-width="6"/><circle cx="160" cy="106" r="48" fill="#b7874f"/><text x="160" y="216" font-size="20" text-anchor="middle" fill="#57442d">本地测试图片</text></svg>')

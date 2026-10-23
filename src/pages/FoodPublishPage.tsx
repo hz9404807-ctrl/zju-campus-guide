@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router'
-import { ArrowLeft, ArrowRight, Check, ImagePlus, Info, LoaderCircle, MapPin, X } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Check, CircleCheck, ImagePlus, Info, LoaderCircle, MapPin, Plus, X } from 'lucide-react'
 import StarRating from '../components/StarRating'
 import { isFoodBackendConfigured, getFood, listFoods, publishFood, updateFood } from '../lib/foodService'
 import { FOOD_CATEGORIES, findSimilarFoods, toFoodPublishInput, validateFoodImage, validateFoodPublishDraft } from '../lib/foodValidation'
@@ -11,6 +11,7 @@ import './food-publish.css'
 import { useFoodProfiles } from '../hooks/useFoodProfiles'
 import { useFoodAuth } from '../hooks/useFoodAuth'
 import FoodAccountBar from '../components/FoodAccountBar'
+import { personalRecordReturn } from '../lib/personalRecords'
 
 const fieldOrder: FoodPublishField[] = ['name', 'location', 'area', 'category', 'price', 'image', 'description', 'tags', 'rating']
 
@@ -50,15 +51,20 @@ function FoodPublishForm() {
   const [errors, setErrors] = useState<FoodPublishErrors>({})
   const [busy, setBusy] = useState(false)
   const [feedback, setFeedback] = useState('')
+  const [published, setPublished] = useState<{ name: string; area: Food['area']; url: string } | null>(null)
   const [foods, setFoods] = useState<Food[]>([])
   const [similarLoadFailed, setSimilarLoadFailed] = useState(false)
   const [dismissedSimilarKey, setDismissedSimilarKey] = useState('')
   const imageInput = useRef<HTMLInputElement>(null)
   const feedbackElement = useRef<HTMLDivElement>(null)
+  const successElement = useRef<HTMLDivElement>(null)
+  const focusFreshDraft = useRef(false)
   const submissionLock = useRef(false)
   const mounted = useRef(true)
   const returnQuery = searchParams.toString()
-  const returnUrl = `/food${returnQuery ? `?${returnQuery}` : ''}`
+  const personalReturn = personalRecordReturn(searchParams)
+  const returnUrl = personalReturn?.url ?? `/food${returnQuery ? `?${returnQuery}` : ''}`
+  const returnLabel = personalReturn?.label ?? '返回美食列表'
   const similarFoods = useMemo(() => findSimilarFoods(foods.filter((food) => food.id !== foodId && food.area === draft.area), draft.name, draft.location), [foods, foodId, draft.area, draft.name, draft.location])
   const similarKey = `${draft.area}\n${draft.name.trim()}\n${draft.location.trim()}`
   const showSimilar = similarFoods.length > 0 && dismissedSimilarKey !== similarKey
@@ -105,6 +111,14 @@ function FoodPublishForm() {
     if (feedback) feedbackElement.current?.focus({ preventScroll: false })
   }, [feedback])
 
+  useEffect(() => {
+    if (published) successElement.current?.focus()
+    else if (focusFreshDraft.current) {
+      focusFreshDraft.current = false
+      document.getElementById('publish-name')?.focus()
+    }
+  }, [published])
+
   function updateDraft<K extends keyof FoodPublishDraft>(field: K, value: FoodPublishDraft[K]) {
     setDraft((current) => ({ ...current, [field]: value }))
     setErrors((current) => ({ ...current, [field]: undefined }))
@@ -118,9 +132,23 @@ function FoodPublishForm() {
     setFeedback('')
   }
 
+  function continuePublishing() {
+    if (!published || busy) return
+    setDraft({ name: '', location: '', area: published.area, category: '', price: '', description: '', tags: '', rating: 0 })
+    setImage(null)
+    if (imageInput.current) imageInput.current.value = ''
+    setPreviewUrl('')
+    setErrors({})
+    setFeedback('')
+    setDismissedSimilarKey('')
+    setRemoveOriginalImage(false)
+    focusFreshDraft.current = true
+    setPublished(null)
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    if (submissionLock.current) return
+    if (submissionLock.current || published) return
     setFeedback('')
     if (!auth.user?.verifiedCampus) { setFeedback('请先使用浙大邮箱登录。'); return }
     if (profileBlocked) { setFeedback('请先加载并选择一个档案，再提交发布。'); return }
@@ -148,7 +176,14 @@ function FoodPublishForm() {
       if (!mounted.current) return
       const nextQuery = new URLSearchParams(searchParams)
       nextQuery.set('area', input.area)
-      navigate(`/food/${encodeURIComponent(savedId)}?${nextQuery.toString()}`)
+      const detailUrl = `/food/${encodeURIComponent(savedId)}?${nextQuery.toString()}`
+      if (editing) navigate(detailUrl)
+      else {
+        // Only the service's completed write can enter this success state. Keep
+        // the form unmounted until the author explicitly starts a fresh draft.
+        setPublished({ name: input.name, area: input.area, url: detailUrl })
+        setImage(null)
+      }
     } catch (error) {
       if (mounted.current) setFeedback(error instanceof Error ? error.message : '菜品发布失败，请稍后重试。你的填写仍然保留。')
     } finally {
@@ -157,10 +192,27 @@ function FoodPublishForm() {
     }
   }
 
+  if (published && !editing) return (
+    <div className="page module-page food-publish-page">
+      <FoodAccountBar auth={auth} profileLocked={busy} />
+      <div ref={successElement} className="food-publish-success" tabIndex={-1} aria-labelledby="publish-success-title">
+        <div className="food-publish-success-icon"><CircleCheck size={32} aria-hidden="true" /></div>
+        <p className="eyebrow">分享成功</p>
+        <h1 id="publish-success-title">这道好味道，已经分享给同学了。</h1>
+        <p className="food-publish-success-description" role="status">「{published.name}」已发布，你的首次评分也已保存。</p>
+        <div className="food-publish-success-actions">
+          <button type="button" className="food-publish-submit" onClick={continuePublishing} disabled={busy}><Plus size={19} aria-hidden="true" />继续发布一道菜</button>
+          <Link className="food-publish-cancel" to={published.url}>查看刚发布的菜品<ArrowRight size={17} aria-hidden="true" /></Link>
+        </div>
+        <Link className="food-publish-success-return" to={returnUrl}><ArrowLeft size={16} aria-hidden="true" />{returnLabel}</Link>
+      </div>
+    </div>
+  )
+
   return (
     <div className="page module-page food-publish-page">
       <div className="page-heading">
-        <Link className="breadcrumb" to={returnUrl}><ArrowLeft size={16} aria-hidden="true" /> 返回美食列表</Link>
+        <Link className="breadcrumb" to={returnUrl}><ArrowLeft size={16} aria-hidden="true" /> {returnLabel}</Link>
         <p className="eyebrow">把吃过的好味道分享给同学</p>
         <h1>{editing ? '编辑美食发布' : '发布一道菜'}</h1>
         <p className="page-description">{editing ? '修改菜品信息，已有评分会保留。若换成另一道菜或另一家店，请新建发布。' : '填好菜品和地点，再留下你的第一次评分。'}</p>
@@ -191,7 +243,7 @@ function FoodPublishForm() {
           {!editing && <div className="food-publish-rating"><StarRating id="publish-rating" label="你的第一次评分" value={draft.rating} onChange={(rating) => updateDraft('rating', rating)} disabled={busy} required error={errors.rating} /><p className="food-publish-rating-note">发布者也参与评分。这次评分会计入平均分，提交后不能修改。</p></div>}
         </fieldset>
         {feedback && <div ref={feedbackElement} className="food-publish-feedback" role="alert" tabIndex={-1}><Info size={20} aria-hidden="true" /><p>{feedback}</p></div>}
-        <div className="food-publish-actions"><Link to={returnUrl} className="food-publish-cancel">返回列表</Link><button className="food-publish-submit" type="submit" disabled={busy || auth.loading || !auth.user?.verifiedCampus || profileBlocked || editLoading || !!editError}>{busy ? <><LoaderCircle size={18} className="food-publish-spinner" aria-hidden="true" />{editing ? '保存中…' : image ? '上传图片并发布中…' : '发布中…'}</> : <>{editing ? '保存修改' : '发布菜品'} <ArrowRight size={18} aria-hidden="true" /></>}</button></div>
+        <div className="food-publish-actions"><Link to={returnUrl} className="food-publish-cancel">{personalReturn ? returnLabel : '返回列表'}</Link><button className="food-publish-submit" type="submit" disabled={busy || auth.loading || !auth.user?.verifiedCampus || profileBlocked || editLoading || !!editError}>{busy ? <><LoaderCircle size={18} className="food-publish-spinner" aria-hidden="true" />{editing ? '保存中…' : image ? '上传图片并发布中…' : '发布中…'}</> : <>{editing ? '保存修改' : '发布菜品'} <ArrowRight size={18} aria-hidden="true" /></>}</button></div>
       {!isFoodBackendConfigured && <p className="food-publish-submit-note">当前提交只检查填写内容，不会发布到共享列表。</p>}
       </form>
     </div>

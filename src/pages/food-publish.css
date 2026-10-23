@@ -69,6 +69,16 @@
 .food-publish-similar-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; color: var(--blue); font-size: 12px; line-height: 1.7; }
 .food-publish-continue { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 8px 0; margin-top: 10px; color: var(--blue); background: transparent; border: 0; border-radius: 4px; font-size: 12px; font-weight: 600; }
 .food-publish-spinner { animation: food-publish-spin 1s linear infinite; }
+.food-publish-success { margin-top: 28px; padding: 44px; border: 1px solid var(--line); border-radius: 20px; background: white; box-shadow: var(--shadow); }
+.food-publish-success:focus { outline: none; }
+.food-publish-success-icon { display: grid; place-items: center; width: 64px; height: 64px; margin-bottom: 26px; border-radius: 20px; color: var(--blue); background: var(--blue-soft); }
+.food-publish-success .eyebrow { margin-bottom: 11px; }
+.food-publish-success h1 { max-width: 21em; color: var(--ink); font-size: clamp(24px, 3.2vw, 32px); line-height: 1.5; overflow-wrap: anywhere; }
+.food-publish-success-description { margin-top: 15px; color: var(--muted); font-size: 15px; line-height: 1.9; overflow-wrap: anywhere; }
+.food-publish-success-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.food-publish-success-actions .food-publish-cancel { gap: 8px; }
+.food-publish-success-return { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; margin-top: 20px; color: var(--muted); font-size: 13px; }
+.food-publish-success-return:hover { color: var(--blue); }
 @keyframes food-publish-spin { to { transform: rotate(360deg); } }
 
 @media (max-width: 600px) {
@@ -87,4 +97,7 @@
   .food-publish-image-preview > img { width: 80px; height: 80px; }
   .food-publish-similar { padding: 15px; }
   .food-publish-similar-list { grid-template-columns: 1fr; }
+  .food-publish-success { padding: 27px 22px; margin-top: 22px; border-radius: 16px; }
+  .food-publish-success-actions { flex-direction: column; align-items: stretch; margin-top: 24px; }
+  .food-publish-success-actions .food-publish-submit, .food-publish-success-actions .food-publish-cancel { flex: none; width: 100%; }
 }
