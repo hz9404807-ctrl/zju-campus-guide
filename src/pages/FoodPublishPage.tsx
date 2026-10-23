@@ -14,6 +14,7 @@ import FoodAccountBar from '../components/FoodAccountBar'
 import { personalRecordReturn } from '../lib/personalRecords'
 
 const fieldOrder: FoodPublishField[] = ['name', 'location', 'area', 'category', 'price', 'image', 'description', 'tags', 'rating']
+const imagePreviewError = '这张图片无法打开，请重新选择 JPG、PNG 或 WEBP 图片。'
 
 function FieldError({ field, errors }: { field: FoodPublishField; errors: FoodPublishErrors }) {
   return errors[field] ? <p className="food-publish-field-error" id={`publish-${field}-error`}>{errors[field]}</p> : null
@@ -48,6 +49,7 @@ function FoodPublishForm() {
   const [draft, setDraft] = useState<FoodPublishDraft>(() => ({ name: searchParams.get('q') ?? '', location: '', area: searchParams.get('area') === 'off_campus' ? 'off_campus' : 'campus', category: '', price: '', description: '', tags: '', rating: 0 }))
   const [image, setImage] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState('')
+  const [failedPreviewUrl, setFailedPreviewUrl] = useState('')
   const [errors, setErrors] = useState<FoodPublishErrors>({})
   const [busy, setBusy] = useState(false)
   const [feedback, setFeedback] = useState('')
@@ -56,6 +58,8 @@ function FoodPublishForm() {
   const [similarLoadFailed, setSimilarLoadFailed] = useState(false)
   const [dismissedSimilarKey, setDismissedSimilarKey] = useState('')
   const imageInput = useRef<HTMLInputElement>(null)
+  const activePreviewUrl = useRef('')
+  const invalidFieldToFocus = useRef<FoodPublishField | null>(null)
   const feedbackElement = useRef<HTMLDivElement>(null)
   const successElement = useRef<HTMLDivElement>(null)
   const focusFreshDraft = useRef(false)
@@ -68,6 +72,7 @@ function FoodPublishForm() {
   const similarFoods = useMemo(() => findSimilarFoods(foods.filter((food) => food.id !== foodId && food.area === draft.area), draft.name, draft.location), [foods, foodId, draft.area, draft.name, draft.location])
   const similarKey = `${draft.area}\n${draft.name.trim()}\n${draft.location.trim()}`
   const showSimilar = similarFoods.length > 0 && dismissedSimilarKey !== similarKey
+  const previewFailed = !!previewUrl && failedPreviewUrl === previewUrl
 
   useEffect(() => {
     mounted.current = true
@@ -101,11 +106,23 @@ function FoodPublishForm() {
   }, [foodId, auth.loading, auth.user?.id, auth.user?.verifiedCampus, profiles.enabled, profiles.loading, profiles.error, profileId])
 
   useEffect(() => {
-    if (!image || validateFoodImage(image)) { setPreviewUrl(''); return }
+    if (!image || validateFoodImage(image)) { activePreviewUrl.current = ''; setPreviewUrl(''); return }
     const url = URL.createObjectURL(image)
+    activePreviewUrl.current = url
     setPreviewUrl(url)
-    return () => URL.revokeObjectURL(url)
+    return () => {
+      if (activePreviewUrl.current === url) activePreviewUrl.current = ''
+      URL.revokeObjectURL(url)
+    }
   }, [image])
+
+  useEffect(() => {
+    const field = invalidFieldToFocus.current
+    if (!field) return
+    invalidFieldToFocus.current = null
+    const id = field === 'rating' ? 'publish-rating-1' : field === 'area' ? 'publish-area-campus' : `publish-${field}`
+    document.getElementById(id)?.focus()
+  }, [errors])
 
   useEffect(() => {
     if (feedback) feedbackElement.current?.focus({ preventScroll: false })
@@ -126,15 +143,18 @@ function FoodPublishForm() {
   }
 
   function removeImage() {
+    activePreviewUrl.current = ''
     setImage(null)
     if (imageInput.current) imageInput.current.value = ''
     setErrors((current) => ({ ...current, image: undefined }))
     setFeedback('')
+    imageInput.current?.focus()
   }
 
   function continuePublishing() {
     if (!published || busy) return
     setDraft({ name: '', location: '', area: published.area, category: '', price: '', description: '', tags: '', rating: 0 })
+    activePreviewUrl.current = ''
     setImage(null)
     if (imageInput.current) imageInput.current.value = ''
     setPreviewUrl('')
@@ -154,13 +174,11 @@ function FoodPublishForm() {
     if (profileBlocked) { setFeedback('请先加载并选择一个档案，再提交发布。'); return }
     if (editing && (!original || editError || editLoading)) return
     const nextErrors = validateFoodPublishDraft({ ...draft, rating: editing ? 1 : draft.rating }, image)
-    setErrors(nextErrors)
+    if (previewFailed) nextErrors.image = imagePreviewError
     const firstInvalid = fieldOrder.find((field) => nextErrors[field])
-    if (firstInvalid) {
-      const id = firstInvalid === 'rating' ? 'publish-rating-1' : firstInvalid === 'area' ? 'publish-area-campus' : `publish-${firstInvalid}`
-      document.getElementById(id)?.focus()
-      return
-    }
+    invalidFieldToFocus.current = firstInvalid ?? null
+    setErrors(nextErrors)
+    if (firstInvalid) return
     if (!isFoodBackendConfigured) {
       setFeedback('共享服务尚未连接，这次填写没有发布。')
       return
@@ -235,7 +253,31 @@ function FoodPublishForm() {
           {showSimilar && <section className="food-publish-similar" aria-labelledby="publish-similar-title"><div><h3 id="publish-similar-title">可能已经有这道菜了</h3><p>先看看已有卡片，也可以继续创建新卡片。</p></div><div className="food-publish-similar-list">{similarFoods.map((food) => <Link key={food.id} to={`/food/${food.id}?area=${food.area}`}><div><strong>{food.name}</strong>{food.isExample && <span className="food-publish-example-badge">示例</span>}</div><p><MapPin size={14} aria-hidden="true" />{food.location}</p><span className="food-publish-similar-link">查看已有卡片 <ArrowRight size={14} aria-hidden="true" /></span></Link>)}</div><button type="button" className="food-publish-continue" disabled={busy} onClick={() => setDismissedSimilarKey(similarKey)}>仍然创建新卡片 <Check size={15} aria-hidden="true" /></button></section>}
           {similarLoadFailed && <p className="food-publish-field-hint">暂时无法检查相似菜品，你仍可以继续填写。</p>}
 
-          <div className="food-publish-field food-publish-image-field"><label htmlFor="publish-image">菜品图片 <span>选填，最多 1 张</span></label><div className={`food-publish-image-control${errors.image ? ' is-invalid' : ''}`}><span><ImagePlus size={22} aria-hidden="true" /><span>选择一张图片</span></span><input ref={imageInput} id="publish-image" type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" aria-invalid={Boolean(errors.image)} aria-describedby={errors.image ? 'publish-image-error' : 'publish-image-hint'} onChange={(event) => { const file = event.target.files?.[0] ?? null; setImage(file); setErrors((current) => ({ ...current, image: validateFoodImage(file) })); setFeedback('') }} /></div><p className="food-publish-field-hint" id="publish-image-hint">支持 JPG、PNG、WEBP，图片不超过 5 MB。</p><FieldError field="image" errors={errors} />{image && <div className="food-publish-image-preview">{previewUrl && <img src={previewUrl} alt="尚未发布的菜品图片预览" />}<div><p>{image.name}</p><span>{previewUrl ? '仅本地预览，尚未上传' : '这张图片暂不可使用'}</span><button type="button" disabled={busy} onClick={removeImage}><X size={15} aria-hidden="true" />移除所选图片</button></div></div>}</div>
+          <div className="food-publish-field food-publish-image-field">
+            <label htmlFor="publish-image">菜品图片 <span>选填，最多 1 张</span></label>
+            <div className={`food-publish-image-control${errors.image ? ' is-invalid' : ''}`}>
+              <span><ImagePlus size={22} aria-hidden="true" /><span>选择一张图片</span></span>
+              <input ref={imageInput} id="publish-image" type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" aria-invalid={Boolean(errors.image)} aria-describedby={errors.image ? 'publish-image-error' : 'publish-image-hint'} onChange={(event) => {
+                const file = event.target.files?.[0] ?? null
+                // Invalidate the old element before React replaces its preview.
+                // A late decode error must not affect a newly selected file.
+                activePreviewUrl.current = ''
+                setImage(file)
+                setErrors((current) => ({ ...current, image: validateFoodImage(file) }))
+                setFeedback('')
+              }} />
+            </div>
+            <p className="food-publish-field-hint" id="publish-image-hint">支持 JPG、PNG、WEBP，图片不超过 5 MB。</p>
+            <FieldError field="image" errors={errors} />
+            {image && <div className="food-publish-image-preview">
+              {previewUrl && !previewFailed && <img src={previewUrl} alt="尚未发布的菜品图片预览" onError={() => {
+                if (activePreviewUrl.current !== previewUrl) return
+                setFailedPreviewUrl(previewUrl)
+                setErrors((current) => ({ ...current, image: imagePreviewError }))
+              }} />}
+              <div><p>{image.name}</p><span aria-live="polite">{previewFailed ? '图片无法预览，请重新选图或移除。' : previewUrl ? '仅本地预览，尚未上传' : '这张图片暂不可使用'}</span><button type="button" disabled={busy} onClick={removeImage}><X size={15} aria-hidden="true" />移除所选图片</button></div>
+            </div>}
+          </div>
           <div className="food-publish-field"><label htmlFor="publish-description">菜品介绍 <span>选填</span></label><textarea id="publish-description" rows={4} maxLength={200} value={draft.description} placeholder="可以写写口味、分量，或值得留意的地方。" aria-invalid={Boolean(errors.description)} aria-describedby={errors.description ? 'publish-description-error' : 'publish-description-hint'} onChange={(event) => updateDraft('description', event.target.value)} /><p className="food-publish-field-hint food-publish-character-count" id="publish-description-hint">{Array.from(draft.description).length} / 200 字</p><FieldError field="description" errors={errors} /></div>
           <div className="food-publish-field"><label htmlFor="publish-tags">短评标签 <span>选填</span></label><input id="publish-tags" value={draft.tags} placeholder="例如：分量充足，汤底清淡" aria-invalid={Boolean(errors.tags)} aria-describedby={errors.tags ? 'publish-tags-error' : 'publish-tags-hint'} onChange={(event) => updateDraft('tags', event.target.value)} /><p className="food-publish-field-hint" id="publish-tags-hint">用逗号分隔，最多 5 个，每个不超过 12 个字。</p><FieldError field="tags" errors={errors} /></div>
           {editing && original?.image_url && !removeOriginalImage && !image && <div className="food-publish-image-preview"><img src={original.image_url} alt="当前菜品图片" /><button type="button" disabled={busy} onClick={() => setRemoveOriginalImage(true)}>移除当前图片</button></div>}

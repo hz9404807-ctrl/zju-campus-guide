@@ -9,6 +9,7 @@ async (page) => {
   const screenshots = []
   const errors = []
   const check = (ok, label) => (ok ? checks : failures).push(label)
+  const firstDishName = `本机${'L'.repeat(78)}`
   const png = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aS1sAAAAASUVORK5CYII='
   for (const width of [320, 375, 390, 1280]) {
     const context = await browser.newContext({ viewport: { width, height: width > 600 ? 900 : 844 }, isMobile: width < 600, hasTouch: width < 600 })
@@ -39,15 +40,44 @@ async (page) => {
     }
     try {
       await gotoNew()
-      await fill('本机发布失败后再试')
+      await p.locator('#publish-name').fill('')
+      await p.evaluate(() => {
+        window.publishErrorReadyAtFocus = false
+        document.getElementById('publish-name').addEventListener('focus', (event) => {
+          const input = event.target
+          window.publishErrorReadyAtFocus = input.getAttribute('aria-invalid') === 'true' && !!document.getElementById(input.getAttribute('aria-describedby'))
+        }, { once: true })
+      })
+      await p.getByRole('button', { name: '发布菜品', exact: true }).click()
+      await p.locator('#publish-name-error').waitFor()
+      check(await p.evaluate(() => window.publishErrorReadyAtFocus) && (await log()).attempts === 0, `${width}: invalid input is announced only after its error exists and never writes`)
+      await fill(firstDishName)
+      await p.locator('#publish-image').evaluate((input) => {
+        const selection = new DataTransfer()
+        selection.items.add(new File(['not an image'], '损坏的本机图片.png', { type: 'image/png' }))
+        input.files = selection.files
+        input.dispatchEvent(new Event('change', { bubbles: true }))
+      })
+      await p.locator('#publish-image-error').waitFor()
+      check(await p.locator('.food-publish-image-preview img').count() === 0 && await p.locator('.food-publish-image-preview').innerText().then((text) => text.includes('图片无法预览')), `${width}: a corrupt image shows an honest recoverable preview error`)
+      if (width === 320 || width === 390) {
+        const errorShot = `scratch/saturday-publish/image-recovery-${width}.png`
+        await p.locator('.food-publish-image-field').screenshot({ path: errorShot, animations: 'disabled' })
+        screenshots.push(errorShot)
+      }
+      await p.getByRole('button', { name: '发布菜品', exact: true }).click()
+      check((await log()).attempts === 0 && await p.locator('#publish-image').evaluate((input) => input === document.activeElement), `${width}: a known unreadable image focuses the image picker without a write`)
+      await p.getByRole('button', { name: '移除所选图片', exact: true }).click()
+      check(await p.locator('#publish-image').evaluate((input) => input === document.activeElement && input.files.length === 0) && await p.locator('#publish-image-error').count() === 0 && await p.locator('.food-publish-image-preview').count() === 0, `${width}: removing a bad image clears its error and returns focus to the picker`)
+      await fill(firstDishName)
       await p.waitForFunction(() => { const image = document.querySelector('.food-publish-image-preview img'); return image instanceof HTMLImageElement && image.complete && image.naturalWidth > 0 })
-      check(true, `${width}: the selected local image actually loads as a preview`)
+      check(await p.locator('#publish-image-error').count() === 0, `${width}: selecting a valid image recovers from the failed preview`)
       await p.getByRole('checkbox', { name: '模拟写入失败' }).check()
       await p.getByRole('button', { name: '发布菜品', exact: true }).click()
       await p.locator('.food-publish-feedback').waitFor()
       const failedLog = await log()
       check(failedLog.attempts === 1 && failedLog.successes === 0 && await p.locator('.food-publish-success').count() === 0, `${width}: failed write never reports success`)
-      check(await p.locator('#publish-name').inputValue() === '本机发布失败后再试' && await p.locator('#publish-image').evaluate((input) => input.files.length) === 1 && await p.locator('#publish-rating-4').isChecked(), `${width}: failed write retains text, local file and rating`)
+      check(await p.locator('#publish-name').inputValue() === firstDishName && await p.locator('#publish-image').evaluate((input) => input.files.length) === 1 && await p.locator('#publish-rating-4').isChecked(), `${width}: failed write retains text, local file and rating`)
       await p.getByRole('checkbox', { name: '模拟写入失败' }).uncheck()
       await p.getByRole('combobox', { name: '响应延迟' }).selectOption('2500')
       await p.locator('.food-publish-form').evaluate((form) => { form.requestSubmit(); form.requestSubmit() })
@@ -57,6 +87,7 @@ async (page) => {
       const savedLog = await log()
       check(savedLog.attempts === 2 && savedLog.successes === 1, `${width}: rapid repeated submit produces one successful write`)
       check(await p.locator('.food-publish-form').count() === 0 && await p.locator('.food-publish-success').evaluate((el) => el === document.activeElement), `${width}: saved draft is replaced by focused success panel`)
+      check(await p.locator('.food-publish-success-description').innerText().then((text) => text.includes(firstDishName)) && await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${width}: a maximum-length dish name remains complete without horizontal overflow`)
       const detail = p.getByRole('link', { name: '查看刚发布的菜品' })
       const detailUrl = await detail.evaluate((link) => { const url = new URL(link.href); return { pathname: url.pathname, area: url.searchParams.get('area'), query: url.searchParams.get('q') } })
       check(/^\/food\/[0-9a-f-]{36}$/.test(detailUrl.pathname) && detailUrl.area === 'off_campus' && detailUrl.query === '保留搜索', `${width}: detail link preserves the saved ID and browsing filters`)
