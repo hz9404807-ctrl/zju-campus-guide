@@ -1,7 +1,8 @@
 import { FoodArtwork } from '../components/CampusArtwork'
-import { useCallback, useEffect, useMemo, useState, useRef } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { Link, useParams, useSearchParams, useLocation, useNavigationType } from 'react-router'
 import { ArrowLeft, ArrowRight, Info, MapPin, Plus, Search, Star, Utensils } from 'lucide-react'
+import { FoodImage } from '../components/FoodImage'
 import SearchField from '../components/SearchField'
 import { useDebouncedValue } from '../hooks/useDebouncedValue'
 import { useFoodResource } from '../hooks/useFoodResource'
@@ -11,23 +12,6 @@ import type { Food, FoodArea } from '../types/food'
 import './food.css'
 import FoodAccountBar from '../components/FoodAccountBar'
 import { useFoodAuth } from '../hooks/useFoodAuth'
-
-function FoodImage({ food, large = false }: { food: Food; large?: boolean }) {
-  const [failed, setFailed] = useState(false)
-  useEffect(() => setFailed(false), [food.image_url])
-  return (
-    <div className={`food-image${large ? ' food-image-large' : ''}`}>
-      {food.image_url && !failed ? (
-        <img src={food.image_url} alt={food.name} loading={large ? 'eager' : 'lazy'} onError={() => setFailed(true)} />
-      ) : (
-        <div className="food-image-placeholder">
-          <Utensils size={large ? 42 : 30} aria-hidden="true" />
-          <span>{failed ? '图片暂时无法加载' : '暂无图片'}</span>
-        </div>
-      )}
-    </div>
-  )
-}
 
 function ExampleNotice() {
   return (

@@ -1,8 +1,27 @@
 # 浙大校园指南
 
+## 共享网站与自动更新
+
+| 要做什么 | 直接打开 |
+| --- | --- |
+| 浏览、向同学分享 | [魔搭共享网页](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full) |
+| 原站备用（版本独立） | [原 Sites 网页](https://zju-campus-guide.sangnuo0808.chatgpt.site) |
+| 审阅完整发布分支 | [整合 PR #6](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/6) |
+| 查看部署记录或失败日志 | [GitHub Actions](https://github.com/hz9404807-ctrl/zju-campus-guide/actions) |
+
+**给组长：** 现在点“魔搭共享网页”即可使用，无需本地启动或登录魔搭。指南、信息源和美食浏览公开；发布、评分和个人数据管理沿用已验证浙大邮箱规则。本次用户明确授权发布，已通过 [Actions运行](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/39904983944) 更新同一个免费Docker站点，公网 `/release.json` 来源为 `5db6f58e15a9edb9bf3deb0efb9d945acf25926f`，包含新Logo、精简说明、手机入口改进和PR #5内容。后续文档及一次性工作流清理提交不改变应用构建。
+
+本次源码在 `fix/mobile-release`，main仍为25f2e69。组长审阅合并PR #6（已整合PR #4/#5）后，后续合入main的代码由 **ModelScope website** 自动更新。资料编辑仍需按 [个人中心说明](docs/personal-center.md) 接入新增迁移；本次没有执行云端SQL。[PR #3 的搜索收藏等功能](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/3)仍待独立整合和迁移验收，原Sites不会随魔搭自动更新。
+
+手机宽度与触摸模拟结果见 [开发记录](docs/development-status.md)。首页入口文字、网站步骤入口的点击区已加大；网站入口可“复制链接”，自动复制失败时提供原文。模拟器跨魔搭外框自动滚动后的首次点击仍可能停在宿主层，先滚到可见并稳定后的站内点击通过；实体鸿蒙与微信内置浏览器尚未验证。外部按钮已实测发出官方站点导航请求，目的站正文加载仍受网络影响。魔搭外框内部导航不会同步外层刷新地址，外层刷新回到最初分享的入口路径。接入与分享方式见 [魔搭部署](docs/modelscope-deployment.md)。
+
 ## 个人中心与邮箱权限（2026-10-19）
 
 `/account` 提供账号概览、我的发布、我的评分和退出登录；我的发布支持编辑、撤下与恢复，评分条目可返回仍在展示的菜品详情。校园办事、信息源和美食浏览公开，发布与评分要求已验证的浙大邮箱。
+
+本轮换用小组提供的“浙里有方”Logo，统一账号操作栏对齐，并在我的发布右侧展示已有图片；新增私有资料编辑（性别、签名、常驻校区）。这些前端已发布到魔搭，main合并仍待审阅。个人资料需要组长先部署独立增量迁移 `202610220001_campus_account_details.sql`，接入前会明确显示待接入，操作与验收见 [个人中心说明](docs/personal-center.md)。
+
+办事指南新增校内推免资格、推免接收、本科奖学金和竞赛认定四个专题，共102份指南、112个网站。可在“常见需求”点保研、奖学金或竞赛。正文保留官方来源、适用院系和已截止年度提醒，详见 [内容核对记录](docs/content-review/guide-verification.md)。
 
 原 Supabase 项目已部署 `202610170001_personal_center_ratings.sql` 和 `202610180001_food_verified_writes.sql`。无需重新配置 SMTP；五档案仍关闭。最新上线和验收状态见 [开发记录](docs/development-status.md) 与 [个人中心说明](docs/personal-center.md)。
 
