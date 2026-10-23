@@ -36,4 +36,14 @@ playwright-cli -s=publish-continuation --raw run-code --filename=tests/browser/p
 playwright-cli -s=saturday-shell --raw run-code --filename=tests/browser/saturday-shell.js
 ```
 
-这三组分别53/73/26项。发布检查覆盖4种宽度、blob图片真实预览、失败、双提交和继续发布；只修改内存。首页组使用OpenHarmony UA，并主动移除 `AbortSignal.any/timeout`验证本机请求兼容及超时取消；Chromium模拟不能代替实际ArkWeb或鸿蒙设备。图片CSP只为本机夹具允许blob预览，不改变正式站点策略。每组新建上下文，不共享用户会话或云端凭据。
+这三组当前分别53/93/26项。发布检查覆盖4种宽度、blob图片真实预览、失败、双提交和继续发布，并检查错误渲染后的焦点、移除后焦点、损坏图片拦截/替换及80字菜名成功反馈；只修改内存。首页组使用OpenHarmony UA，并主动移除 `AbortSignal.any/timeout`验证本机请求兼容及超时取消；Chromium模拟不能代替实际ArkWeb或鸿蒙设备。图片CSP只为本机夹具允许blob预览，不改变正式站点策略。每组新建上下文，不共享用户会话或云端凭据。
+
+继续打磨的三组检查（各自先open、结束后close同名会话）：
+
+```powershell
+playwright-cli -s=records-header --raw run-code --filename=tests/browser/records-header.js
+playwright-cli -s=result-pager --raw run-code --filename=tests/browser/result-pager.js
+playwright-cli -s=food-display --raw run-code --filename=tests/browser/food-display-edges.js
+```
+
+分别49/86/37项。页头检查包含状态/键盘/退出失败和换号；数字分页检查真实指南、个人子页及独立大页码边界，覆盖焦点、URL、当前页与44px。空价格检查仅在本机把两条夹具设置为空值和0元，并使用合法长度的长名称/地点；确认列表、详情的提示与样式、评分人数、无溢出和返回。截图在忽略目录 `scratch/records-header/`、`scratch/result-pager-*.png`、`scratch/continued-polish/`。各组有重叠，不累加成独立用户场景。编辑夹具模块后应重启测试服务器并重新打开页面，避免热更新前后的模块实例混用；不要在测试运行中编辑服务夹具。
