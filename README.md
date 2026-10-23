@@ -1,17 +1,24 @@
 # 浙大校园指南
 
+## 周六待发布更新
+
+本轮 [整合PR #7](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/7) 在 `codex/saturday-polish` 独立开发，已包含PR #6完整前置界面，**现有魔搭与Sites均未更新，共享数据未清理**，供同学继续测试。个人中心改为“我的发布”“我的评分”两个子页面，每页6条，评分带图；首页加入小组slogan与对称图形；完善10份既有指南；发布成功后可继续发布；补充旧内核请求兼容。验证和待接入事项见 [开发记录](docs/development-status.md) 最新一节。
+
+组长周六确认本轮测试结束后，再按PR依赖审阅合并、发布。截图中4条验收样例的精确ID、默认回滚预览和可恢复撤下操作见 [样例清理](docs/food-fixture-cleanup.md)，需要数据库所有者执行，不会因推送网页代码自动删除。个人分页、评分图片和继续发布无需新增功能迁移；此前个人资料编辑的独立迁移仍按原交接接入。
+
 ## 共享网站与自动更新
 
 | 要做什么 | 直接打开 |
 | --- | --- |
 | 浏览、向同学分享 | [魔搭共享网页](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full) |
 | 原站备用（版本独立） | [原 Sites 网页](https://zju-campus-guide.sangnuo0808.chatgpt.site) |
-| 审阅完整发布分支 | [整合 PR #6](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/6) |
+| 审阅周六更新 | [整合 PR #7](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/7) |
+| 当前运行源码（前一轮） | [PR #6](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/6) |
 | 查看部署记录或失败日志 | [GitHub Actions](https://github.com/hz9404807-ctrl/zju-campus-guide/actions) |
 
 **给组长：** 现在点“魔搭共享网页”即可使用，无需本地启动或登录魔搭。指南、信息源和美食浏览公开；发布、评分和个人数据管理沿用已验证浙大邮箱规则。本次用户明确授权发布，已通过 [Actions运行](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/39904983944) 更新同一个免费Docker站点，公网 `/release.json` 来源为 `5db6f58e15a9edb9bf3deb0efb9d945acf25926f`，包含新Logo、精简说明、手机入口改进和PR #5内容。后续文档及一次性工作流清理提交不改变应用构建。
 
-本次源码在 `fix/mobile-release`，main仍为25f2e69。组长审阅合并PR #6（已整合PR #4/#5）后，后续合入main的代码由 **ModelScope website** 自动更新。资料编辑仍需按 [个人中心说明](docs/personal-center.md) 接入新增迁移；本次没有执行云端SQL。[PR #3 的搜索收藏等功能](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/3)仍待独立整合和迁移验收，原Sites不会随魔搭自动更新。
+当前运行源码来自 `fix/mobile-release`，main仍为25f2e69。本轮PR #7包含PR #6及PR #4/#5，组长周六优先审阅合并PR #7，避免重复应用旧PR；后续合入main的代码由 **ModelScope website** 自动更新。资料编辑仍需按 [个人中心说明](docs/personal-center.md) 接入新增迁移；本次没有执行云端SQL。[PR #3 的搜索收藏等功能](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/3)仍待独立整合和迁移验收，原Sites不会随魔搭自动更新。
 
 手机宽度与触摸模拟结果见 [开发记录](docs/development-status.md)。首页入口文字、网站步骤入口的点击区已加大；网站入口可“复制链接”，自动复制失败时提供原文。模拟器跨魔搭外框自动滚动后的首次点击仍可能停在宿主层，先滚到可见并稳定后的站内点击通过；实体鸿蒙与微信内置浏览器尚未验证。外部按钮已实测发出官方站点导航请求，目的站正文加载仍受网络影响。魔搭外框内部导航不会同步外层刷新地址，外层刷新回到最初分享的入口路径。接入与分享方式见 [魔搭部署](docs/modelscope-deployment.md)。
 

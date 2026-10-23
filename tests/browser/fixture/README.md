@@ -27,3 +27,13 @@ playwright-cli -s=mobile-navigation close
 - /food/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa 检查账号工具条文字居中、键盘焦点和手机换行。
 - 个人资料编辑、取消、合法保存、错误不报成功；切换账号或退出不保留其他账号未保存字段。
 - 320/375/390/1280 px 检查导航、长标题、长地点与控件，桌面和手机各存截图到 scratch。
+
+周六更新的新增回归也复用此5182夹具。各自先 `playwright-cli -s=名称 open about:blank`，再执行对应命令，结束后关闭自己的浏览器：
+
+```powershell
+playwright-cli -s=personal-records --raw run-code --filename=tests/browser/personal-records.js
+playwright-cli -s=publish-continuation --raw run-code --filename=tests/browser/publish-continuation.js
+playwright-cli -s=saturday-shell --raw run-code --filename=tests/browser/saturday-shell.js
+```
+
+这三组分别53/73/26项。发布检查覆盖4种宽度、blob图片真实预览、失败、双提交和继续发布；只修改内存。首页组使用OpenHarmony UA，并主动移除 `AbortSignal.any/timeout`验证本机请求兼容及超时取消；Chromium模拟不能代替实际ArkWeb或鸿蒙设备。图片CSP只为本机夹具允许blob预览，不改变正式站点策略。每组新建上下文，不共享用户会话或云端凭据。

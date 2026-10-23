@@ -1,3 +1,16 @@
+## 2026-10-23 周六更新准备（代码完成，待审阅与发布）
+
+交付：[整合PR #7](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/7)，已包含PR #6及其前置代码。周六优先审阅该PR，旧PR不用重复应用。
+
+- 新工作目录/分支 `codex/saturday-polish` 从PR #6完整版本 `42ca622`建立；开始时各原工作区干净，main仍 `25f2e69`。本轮按用户“周六做好、不影响测试”要求，不更新魔搭/Sites、不合并main、不写真实共享数据。公开测试站仍为 `5db6f58`，本轮整合PR包含PR #6前置代码，优先审阅整合PR，旧PR无需重复应用；PR #3独立保留。
+- `/account`只保留账号、私有资料与两张子页入口。`/account/posts`、`/account/ratings`每页6条，旧 `/food/mine`兼容；URL页码、越界回退、刷新/浏览器返回、详情/编辑/发布及登录续接均保留合法个人页码。评分显示现有图片；缺图/坏图有真实占位，撤下菜品不显示名称、图片或详情入口。沿用现有服务身份确认和RLS，当前为本人结果的显示分页，未伪称服务端分页。
+- 新建发布成功后有明显“继续发布一道菜”，另可查看刚发布内容或返回；继续时清空文字、图片和首次评分，保留范围。失败保留输入，不显示假成功，双提交仅调用一次；编辑成功仍回详情。独立审查发现并修复个人第二页的新建发布入口漏传returnTo。
+- 首页换为小组slogan三行标题及简洁对称书本/拱门图形，保留用户Logo与原插画。10份已有指南补选课、转专业、报销及推免条件，仍102指南，新增9条官方参考至121网站；原110问题追溯不变。年级/院系条件、截止轮次、无法读取的官方正文均在核验文档明确记录。
+- 鸿蒙兼容按能力处理：原SDK请求包装依赖较新的静态AbortSignal API，改为 `AbortController`+有界计时；取消、已有取消信号、请求超时、响应头后JSON体卡住均测试。原始Response保留，计时及上游监听有12秒上界，不增加全局polyfill或UA专属登录逻辑。依据 [MDN any](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/any_static)、[MDN timeout](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout_static)及[华为ArkWeb说明](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/web-page-loading)。本轮是Chromium触摸/尺寸、OpenHarmony UA及移除相关API的能力模拟，鸿蒙/微信实机、魔搭宿主触摸与真实邮箱跨设备仍待验收。
+- 截图4条测试菜品已匿名只读精确核对，提供独立维护/恢复SQL，默认ROLLBACK。本地PGlite执行原SQL的6项检查覆盖精准撤下、正常内容保护、评分/图片保留、私有审计权限、重复操作与变化后恢复中止。当前4条仍在云端；周六组长确认测试结束后，按 [清理说明](food-fixture-cleanup.md)预览再提交。操作会创建私有回退审计表，功能无新迁移；此前资料迁移仍独立待接入。
+- 最终集成：`npm ci`、394项Node测试、235项本地数据库断言、`npm run typecheck`及生产构建通过；数据库夹具全部回滚。浏览器：分页53项、品牌/资料55项、旧SDK集成32项、继续发布73项、首页/旧API能力26项、既有手机/来源/复制54项均通过。各组范围见测试脚本，不等于真实Auth/云端写入或物理设备测试。独立代码审查另运行定向14项通过，属于上述测试的子集。
+- 已实际查看1440px首页、390px首页/评分及390/1280px发布成功界面，320/375/390px无横向溢出；键盘导航和成功焦点通过。截图在忽略目录 `scratch/saturday-polish/`、`scratch/personal-records/`、`scratch/saturday-publish/`，均带本机夹具标记；没有将测试菜品写入生产。保留既有大分块提示，本轮未将演示构建大小当成真实联网性能比较。
+
 ## 页面说明清理与手机发布（魔搭已更新，main待审）
 
 - 用户明确要求更新GitHub与同一魔搭网站。新建独立 `fix/mobile-release`，整合PR #5品牌/资料/学业内容和PR #4部署配置，仅开发记录冲突，两份记录全部保留；main与PR #3未改动。

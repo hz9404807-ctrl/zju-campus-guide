@@ -1,3 +1,13 @@
+## 周六更新交接（2026-10-23，待审阅及发布）
+
+分支 `codex/saturday-polish`、[整合PR #7](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/7)基于PR #6的 `42ca622`；远程main仍 `25f2e69`，不丢弃上一轮界面，不直接合并main或发布。当前测试站继续运行 `5db6f58`。PR #7已包含PR #6前置代码，周六优先审阅PR #7，避免重复应用旧PR；合并前重新检查协作更新与组合版本；PR #3仍独立，保留其收藏/搜索/拆包能力。
+
+个人中心子页 `/account/posts`、`/account/ratings` 各6条显示分页，旧 `/food/mine` 继续兼容。现有本人服务读取与RLS不变；账号切换按ID重建，评分撤下条目不读图。`personalRecords.ts`限定三个个人路径及安全page，详情、编辑、发布和登录续接均保留合法返回页。新建真实成功后原页显示继续发布操作，第二份草稿清空旧图/评分；编辑成功仍返回详情。
+
+首页采用用户原文“办事有方法，信息有方向，生活有去处”，`CampusEmblem`为简洁对称SVG，原Logo和原插画文件保留。补充既有10份官方指南，目录121网站；证据、读取失败和年度范围见内容核验文档。旧WebView兼容改在 `timeoutFetch.ts`，保留12秒请求及响应体截止，不另建客户端或登录态。
+
+周六测试结束后才由组长执行 `supabase/maintenance/withdraw-acceptance-foods.sql`：默认ROLLBACK、锁定四条精确指纹、保留评分/图片、创建私有回退审计表；这是可恢复撤下而非永久删除，未在云端执行。功能本身无新增迁移；上一轮个人资料的 `202610220001_campus_account_details.sql`仍待接入。验证数字、截图及不能替代的实机/云端验收见最新开发记录。
+
 ## 魔搭共享部署接入（2026-10-21）
 
 本轮发布整合：用户另行明确要求更新GitHub与同一魔搭站点，`fix/mobile-release`已整合PR #4/#5并精简页面小字、加大手机入口及补充外链复制。main仍待组长审核；本次精确分支Actions运行39904983944成功，公网版本已核对为 `5db6f58e15a9edb9bf3deb0efb9d945acf25926f`、connected，云端启动与复测见 development-status.md 最上方。验收后已删除一次性工作流，永久main流程保留。本分支需要组长审阅PR #6，避免重复应用旧PR代码；PR #3仍独立。

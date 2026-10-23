@@ -1,5 +1,9 @@
 # 共同使用的魔搭网站
 
+## 周六更新尚未发布
+
+`codex/saturday-polish`包含下一轮分页子页、首页、内容及发布交互优化；用户要求不影响当前同学测试，因此现有运行版仍为下述 `5db6f58`。该分支没有临时发布工作流，不会因推送而更新魔搭。本轮整合PR已包含PR #6，组长确认周六测试窗口后审阅整合PR并合入main，旧PR不用重复合并；main合并会触发已有永久部署流程。4条样例的数据撤下另外按 `docs/food-fixture-cleanup.md`由数据库所有者执行，不和前端构建混为一步。
+
 ## 本轮已发布版本
 
 共享网址不变。本次用户明确要求更新网站，已把PR #4/#5整合到 `fix/mobile-release`，运行 [ModelScope mobile release](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/39904983944) 成功；公网 `/release.json` 返回 `5db6f58e15a9edb9bf3deb0efb9d945acf25926f`、`connected`，浏览器HTML请求下主页/美食/来源/账号/新指南及Logo资源返回200，健康检查正常。源码交付为 [PR #6](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/6)，main合并及首次main自动更新待组长验收。
@@ -11,7 +15,7 @@
 ## 组长直接使用
 
 1. 浏览或分享：[魔搭共享网页](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full)。公开浏览无需登录魔搭，也无需下载或启动项目；网站内发布、评分和个人管理继续使用自己的浙大邮箱身份。
-2. 开启后续main自动更新：审阅 [整合PR #6](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/6) → **Merge pull request** → **Confirm merge**。PR #6已含PR #4/#5，无需重复应用两份代码。本次空间、免费资源、部署 Secret 和 Variables 已配置，无需重复创建或重新提供令牌。
+2. 周六测试窗口结束后开启后续main自动更新：审阅 [整合PR #7](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/7) → **Merge pull request** → **Confirm merge**。PR #7已含PR #6及PR #4/#5，无需重复应用旧PR。本次空间、免费资源、部署 Secret 和 Variables 已配置，无需重复创建或重新提供令牌。
 3. 合并后打开 [Actions](https://github.com/hz9404807-ctrl/zju-campus-guide/actions) → **ModelScope website** → main 最新运行，查看结果。绿色表示检查和部署请求成功；再到[魔搭空间](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide)确认 **Running** 并实际打开网页。本次分支Actions已成功，main首次自动运行仍待合并后验收。
 4. 以后双方把已审核的功能通过 PR 合入 main，等待同一流程更新即可。功能分支或 PR 本身不会发布；原 Sites 不随此工作流更新。[PR #3](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/3)的新功能及迁移需单独审阅。
 
