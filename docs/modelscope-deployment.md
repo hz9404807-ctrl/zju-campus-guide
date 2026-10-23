@@ -1,19 +1,27 @@
 # 共同使用的魔搭网站
 
+## 本轮已发布版本
+
+共享网址不变。本次用户明确要求更新网站，已把PR #4/#5整合到 `fix/mobile-release`，运行 [ModelScope mobile release](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/39904983944) 成功；公网 `/release.json` 返回 `5db6f58e15a9edb9bf3deb0efb9d945acf25926f`、`connected`，浏览器HTML请求下主页/美食/来源/账号/新指南及Logo资源返回200，健康检查正常。源码交付为 [PR #6](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/6)，main合并及首次main自动更新待组长验收。
+
+一次性push工作流仅用于本次固定分支发布，已在验收后的清理提交删除；该提交仅改变文档与工作流，不改变上述线上应用来源。永久main工作流保持PR #4设计。组长审阅PR #6后合入main即可启用后续main更新，不必重新提供部署令牌或创建空间。个人资料的新增SQL本次没有在云端执行，仍按个人中心交接接入。
+
+旧记录中的390px固定1280px是此前窄窗口检查结果。本轮手机触摸UA下320/375/390px已正常按视口显示。模拟器自动定位跨iframe后立即点击文字时，曾只命中宿主而未送入应用；先滚到可见并稳定后点击通过。外链已发出官方站点的页面导航请求，目的站正文未完成响应，不能当作失效或宣称已成功打开。新版扩大入口触摸区，并提供外链复制及失败后的手动备用。实体鸿蒙、微信和真实浙大邮箱登录仍待验收，具体截图见最新开发记录。以下首次上线与接入内容保留作历史及重建参考。
+
 ## 组长直接使用
 
 1. 浏览或分享：[魔搭共享网页](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full)。公开浏览无需登录魔搭，也无需下载或启动项目；网站内发布、评分和个人管理继续使用自己的浙大邮箱身份。
-2. 开启后续自动更新：审阅 [PR #4](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/4) → **Merge pull request** → **Confirm merge**。本次空间、免费资源、部署 Secret 和 Variables 已配置，无需重复创建或重新提供令牌。
-3. 合并后打开 [Actions](https://github.com/hz9404807-ctrl/zju-campus-guide/actions) → **ModelScope website** → main 最新运行，查看结果。绿色表示检查和部署请求成功；再到[魔搭空间](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide)确认 **Running** 并实际打开网页。此流程的首次 Actions 运行仍待验证。
+2. 开启后续main自动更新：审阅 [整合PR #6](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/6) → **Merge pull request** → **Confirm merge**。PR #6已含PR #4/#5，无需重复应用两份代码。本次空间、免费资源、部署 Secret 和 Variables 已配置，无需重复创建或重新提供令牌。
+3. 合并后打开 [Actions](https://github.com/hz9404807-ctrl/zju-campus-guide/actions) → **ModelScope website** → main 最新运行，查看结果。绿色表示检查和部署请求成功；再到[魔搭空间](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide)确认 **Running** 并实际打开网页。本次分支Actions已成功，main首次自动运行仍待合并后验收。
 4. 以后双方把已审核的功能通过 PR 合入 main，等待同一流程更新即可。功能分支或 PR 本身不会发布；原 Sites 不随此工作流更新。[PR #3](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/3)的新功能及迁移需单独审阅。
 
-仓库首页右侧 **About** 的网址也指向魔搭共享网页。手机暂用[原 Sites 网页](https://zju-campus-guide.sangnuo0808.chatgpt.site)，魔搭外框限制见下文。
+仓库首页右侧 **About** 的网址也指向魔搭共享网页。[原 Sites 网页](https://zju-campus-guide.sangnuo0808.chatgpt.site)作为版本独立的备用入口；手机触摸验收与魔搭外框问题见最新开发记录。
 
-## 当前上线记录
+## 首次上线记录（2026-10-21）
 
-2026-10-21已上线电脑共享预览：[打开浙大校园指南](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full)。当前应用为main 25f2e69，镜像540d4223，公开免费Docker为Running。原Sites保留。GitHub接入已完成，PR #4审阅合入main后触发自动部署，Actions首次运行仍待验证。
+2026-10-21首次上线电脑共享预览：[打开浙大校园指南](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full)。当时应用为main 25f2e69，镜像540d4223，公开免费Docker为Running。原Sites保留；当时Actions首次运行仍待验证。本轮实际发布以顶部版本记录为准。
 
-**手机与刷新限制：** 魔搭的全屏外框在390px视口仍固定1280px。iframe内导航不会同步外层URL，外层刷新会回入口路径。直接深链会通过app_path恢复目标；电脑可用页面内导航和返回。当前把魔搭作为电脑共享预览，手机继续用原Sites，后续正式托管选择需考虑这两项限制。
+**首次窄窗口检查：** 当时390px视口出现固定1280px外框，本轮手机触摸UA已正常适配，不能将旧观察推广到所有手机。iframe内导航不会同步外层URL，外层刷新会回入口路径；直接深链通过app_path恢复目标。手机点击和外部网站跳转需分别验收。
 
 GitHub 保存代码；Sites 和魔搭分别运行某次构建。推送代码不会自动改变既有 Sites 网页。小组应约定一个共享网址，功能分支通过 PR 合入 main 后，由 main 的工作流更新这个网址。任何人的本机预览、旧 Sites 站点仍是独立版本。
 

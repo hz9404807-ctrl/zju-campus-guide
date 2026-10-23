@@ -1,10 +1,16 @@
 ## 魔搭共享部署接入（2026-10-21）
 
-用户要求部署到魔搭并共同查看合并后的版本。`codex/modelscope-deploy` 从 main 25f2e69 建立独立工作目录；PR #4 为部署配置，PR #3 为此前功能，两者尚未合并。实际已将 main 应用手动发布到 zzzhr777/zju-campus-guide，免费 Docker 为 Running。全屏网址：https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full 。操作见 [魔搭部署](modelscope-deployment.md)。
+本轮发布整合：用户另行明确要求更新GitHub与同一魔搭站点，`fix/mobile-release`已整合PR #4/#5并精简页面小字、加大手机入口及补充外链复制。main仍待组长审核；本次精确分支Actions运行39904983944成功，公网版本已核对为 `5db6f58e15a9edb9bf3deb0efb9d945acf25926f`、connected，云端启动与复测见 development-status.md 最上方。验收后已删除一次性工作流，永久main流程保留。本分支需要组长审阅PR #6，避免重复应用旧PR代码；PR #3仍独立。
 
-本人登录后明确授权使用现有魔搭部署令牌并保存 GitHub Actions Secret。六项接入设置已完成，MODELSCOPE_DEPLOY_ENABLED=true；PR #4 合入 main 时才触发首次 Actions 自动部署，尚未执行该工作流。初始 bootstrap 确认变量已移除，后续凭镜像标记保留历史。公开配置仍只在忽略文件和 GitHub Variables；邮箱true、五档案false，原 Sites 和数据库配置维持原状。
+与PR #3的最新试算有9处文本冲突（不执行实际合并）：除第11节原五个文件外，另有 `SourcePages.tsx` 与三份记录 `README.md`、`docs/AI_PROJECT_HANDOFF.md`、`docs/development-status.md`。整合时来源页同时保留收藏按钮和本轮“资料说明”披露；文档保留各轮证据并由最新实际状态领头。不要把本轮单分支验证数字当成组合版结果。
 
-电脑端已验证主要公开流程与访客登录入口。魔搭宿主390px视口仍以1280px容器显示，且iframe内导航后外层刷新回到入口app_path；这些平台限制使本次仅适合作为电脑共享预览。直接深链会由平台保留app_path，复制链接时使用干净的分享地址，勿记录iframe临时参数。真实浙大邮箱发码、换号与物理手机仍待验收，详见 development-status.md 顶部。
+### 首次接入历史（2026-10-21）
+
+用户要求部署到魔搭并共同查看合并后的版本。`codex/modelscope-deploy` 从 main 25f2e69 建立独立工作目录；PR #4 为部署配置，PR #3 为此前功能，当时两者均未合并。首次将 main 应用手动发布到 zzzhr777/zju-campus-guide，免费 Docker 为 Running。全屏网址：https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full 。操作见 [魔搭部署](modelscope-deployment.md)。
+
+本人登录后明确授权使用现有魔搭部署令牌并保存 GitHub Actions Secret。六项接入设置已完成，MODELSCOPE_DEPLOY_ENABLED=true；当时尚未执行Actions，计划PR #4合入main后触发。初始 bootstrap 确认变量已移除，后续凭镜像标记保留历史。公开配置只在忽略文件和 GitHub Variables；邮箱true、五档案false，原 Sites 和数据库配置维持原状。
+
+首次电脑端验证了主要公开流程与访客登录入口。当时390px窄窗口检查出现1280px容器，因此只作为电脑共享预览；本轮手机触摸UA已按视口适配，具体点击问题见 development-status.md 顶部最新记录。iframe内导航后外层刷新仍回到入口app_path，分享使用干净地址，勿记录iframe临时参数。真实浙大邮箱发码、换号与物理手机待验收。
 
 ## 当前协作状态（2026-10-19）
 
@@ -165,9 +171,9 @@ npm run dev
 
 ## 11. 本轮交接：个人中心（2026-10-15）
 
-后续新增（`feat/brand-account-guides`，待组长审阅）：全站使用小组“浙里有方”Logo；账号操作栏统一对齐；`OwnedFoodList` 复用共享 `FoodImage` 展示右侧缩略图。用户另授权私有资料编辑，新增独立 `campus_account_details` 表及本人读取/保存RPC，支持性别、签名、常驻校区；需要组长只部署 `202610220001_campus_account_details.sql`，不重跑旧迁移，不启用五档案。云端未接入时明确显示待接入，真实跨设备保存待验收，详情见 [个人中心说明](personal-center.md)。官方学业内容现为102份指南与112个网站，年度、院系和来源边界见 [核对记录](content-review/guide-verification.md)。
+后续新增（原PR #5，现已整合到PR #6并发布魔搭前端，main合并待组长审阅）：全站使用小组“浙里有方”Logo；账号操作栏统一对齐；`OwnedFoodList` 复用共享 `FoodImage` 展示右侧缩略图。用户另授权私有资料编辑，新增独立 `campus_account_details` 表及本人读取/保存RPC，支持性别、签名、常驻校区；需要组长只部署 `202610220001_campus_account_details.sql`，不重跑旧迁移，不启用五档案。云端未接入时明确显示待接入，真实跨设备保存待验收，详情见 [个人中心说明](personal-center.md)。官方学业内容现为102份指南与112个网站，年度、院系和来源边界见 [核对记录](content-review/guide-verification.md)。
 
-与未合入PR #3的只读 `git merge-tree` 试算发现5处文本冲突（未实际合并或改动main）。组长整合时逐项保留：
+原PR #5与未合入PR #3的只读 `git merge-tree` 试算发现以下5处文本冲突；现PR #6整合部署与说明清理后共9处，新增 `SourcePages.tsx`、`README.md`、`docs/AI_PROJECT_HANDOFF.md`、`docs/development-status.md`。未实际合并或改动main。来源页需保留双方收藏和资料披露，记录保留各轮证据；其余源码逐项保留：
 
 - `src/App.tsx`：PR #3的路由按需加载/失败恢复/首页搜索，加上本轮Logo、标题与页脚；不要退回同步加载。
 - `src/lib/foodService.ts`：收藏和个人资料的服务导出都保留，继续使用现有唯一Supabase客户端。
