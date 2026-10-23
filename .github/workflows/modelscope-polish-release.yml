@@ -1,0 +1,52 @@
+name: ModelScope polish release
+# One-time publication explicitly requested after the Saturday-polish review.
+# Remove this publisher after public version and browser verification.
+
+on:
+  push:
+    branches: [codex/saturday-polish]
+    paths: [.github/workflows/modelscope-polish-release.yml]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modelscope-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: >-
+      github.repository == 'hz9404807-ctrl/zju-campus-guide' &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/codex/saturday-polish' &&
+      vars.MODELSCOPE_DEPLOY_ENABLED == 'true' &&
+      vars.MODELSCOPE_STUDIO == 'zzzhr777/zju-campus-guide'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run test:db
+      - run: npm run typecheck
+      - name: Build shared-service website
+        env:
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.VITE_SUPABASE_PUBLISHABLE_KEY }}
+          VITE_FOOD_EMAIL_AUTH_READY: ${{ vars.VITE_FOOD_EMAIL_AUTH_READY }}
+          VITE_FOOD_PROFILES_READY: 'false'
+        run: |
+          npm run build
+          node scripts/modelscope-release.mjs prepare
+      - name: Update existing free ModelScope Studio
+        env:
+          MODELSCOPE_STUDIO: zzzhr777/zju-campus-guide
+          MODELSCOPE_TOKEN: ${{ secrets.MODELSCOPE_TOKEN }}
+        run: node scripts/modelscope-release.mjs deploy
