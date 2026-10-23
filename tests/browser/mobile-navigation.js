@@ -27,7 +27,7 @@ async (browserPage) => {
     for (const width of [320, 375, 390]) {
       await page.setViewportSize({ width, height: 844 })
       await page.goto(base + '/')
-      await page.getByRole('heading', { name: /校园大小事/ }).waitFor()
+      await page.getByRole('heading', { name: /办事有方法/ }).waitFor()
       check(!(await page.locator('main').innerText()).includes('信息正在逐步整理和核验'), `home extra caveat removed ${width}`)
       check(await page.locator('header img.brand-wordmark').evaluate((image) => image.complete && image.naturalWidth > 0), `new logo loaded ${width}`)
       if (width === 390) await page.screenshot({ path: destination + 'home-390.png', fullPage: true, animations: 'disabled' })

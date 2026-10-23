@@ -1,4 +1,5 @@
-import { CampusArtwork, FoodArtwork } from './components/CampusArtwork'
+import { FoodArtwork } from './components/CampusArtwork'
+import { CampusEmblem } from './components/CampusEmblem'
 import FoodAccountProvider from './components/FoodAccountProvider'
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router'
@@ -110,11 +111,11 @@ function HomePage() {
     <div className="page home-page">
       <section className="hero" aria-labelledby="home-title"><div className="hero-edition" aria-hidden="true"><span>ZJU / CAMPUS COMPANION</span><span>学习 · 生活 · 在浙里</span></div>
         <div className="hero-copy"><p className="eyebrow">在浙里 · 过好校园每一天</p>
-          <h1 id="home-title">校园大小事，<br /><span>都有好去处。</span></h1>
-          <p className="hero-description">找清楚的办事指引，也找一顿喜欢的饭。<br />你的校园生活，从这里出发。</p>
+          <h1 id="home-title">办事有方法，<br /><span>信息有方向，</span><br />生活有去处。</h1>
+          <p className="hero-description">清楚的办事指引，常用的校园信息，<br />还有同学分享的那一顿好饭。</p>
           <Link className="hero-action" to="/guides">查找办事指南 <ArrowRight size={18} aria-hidden="true" /></Link>
         </div>
-        <div className="hero-art"><CampusArtwork /><span className="hero-art-caption">求知 · 办事 · 好好生活</span></div>
+        <div className="hero-art"><CampusEmblem /><span className="hero-art-caption">浙里有方 · 校园生活指南</span></div>
       </section>
       <div className="home-section-heading"><h2>今天，从哪件事开始？</h2><span>校园生活的三个入口</span></div>
 
