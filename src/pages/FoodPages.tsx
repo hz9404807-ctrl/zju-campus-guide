@@ -12,6 +12,7 @@ import type { Food, FoodArea } from '../types/food'
 import './food.css'
 import FoodAccountBar from '../components/FoodAccountBar'
 import { useFoodAuth } from '../hooks/useFoodAuth'
+import { personalRecordReturn } from '../lib/personalRecords'
 
 function ExampleNotice() {
   return (
@@ -156,24 +157,28 @@ export function FoodDetailPage() {
   const loadFood = useCallback(() => getFood(foodId ?? ''), [foodId])
   const resource = useFoodResource(loadFood)
   const food = resource.data
+  const personalReturn = personalRecordReturn(searchParams)
   const returnParams = new URLSearchParams(searchParams)
+  returnParams.delete('returnTo')
   if (food && !returnParams.has('area')) returnParams.set('area', food.area)
   const returnQuery = returnParams.toString()
-  const returnUrl = `/food${returnQuery ? `?${returnQuery}` : ''}`
+  const returnUrl = personalReturn?.url ?? `/food${returnQuery ? `?${returnQuery}` : ''}`
+  const returnLabel = personalReturn?.label ?? '返回美食列表'
+  const editQuery = personalReturn ? new URLSearchParams({ returnTo: personalReturn.url }).toString() : returnQuery
 
   if (!food && (resource.loading || resource.error)) {
-    return <div className="page module-page food-page"><Link to={returnUrl} className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回美食列表</Link>{resource.loading ? <FoodLoading /> : <FoodFailure message={resource.error} retry={resource.reload} />}</div>
+    return <div className="page module-page food-page"><Link to={returnUrl} className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> {returnLabel}</Link>{resource.loading ? <FoodLoading /> : <FoodFailure message={resource.error} retry={resource.reload} />}</div>
   }
 
   if (!food) {
     return (
-      <div className="page module-page food-page"><Link to={returnUrl} className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回美食列表</Link><section className="food-no-results"><span className="food-empty-icon"><Utensils size={28} aria-hidden="true" /></span><h1>这道菜暂时没有找到</h1><p>可能是链接有误，可以返回列表继续查找。</p><Link className="button-link" to={returnUrl}>返回美食列表 <ArrowRight size={16} aria-hidden="true" /></Link></section></div>
+      <div className="page module-page food-page"><Link to={returnUrl} className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> {returnLabel}</Link><section className="food-no-results"><span className="food-empty-icon"><Utensils size={28} aria-hidden="true" /></span><h1>这道菜暂时没有找到</h1><p>可能是链接有误，可以返回列表继续查找。</p><Link className="button-link" to={returnUrl}>{returnLabel} <ArrowRight size={16} aria-hidden="true" /></Link></section></div>
     )
   }
 
   return (
     <div className="page module-page food-page food-detail-page">
-      <Link to={returnUrl} className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回美食列表</Link>
+      <Link to={returnUrl} className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> {returnLabel}</Link>
       <FoodAccountBar auth={auth} />
       {food.isExample && <ExampleNotice />}
       <article className="food-detail-card">
@@ -181,7 +186,7 @@ export function FoodDetailPage() {
         <div className="food-detail-content">
           <div className="food-card-topline">{food.isExample && <span className="food-example-badge">示例数据</span>}<span className="food-category">{food.area === 'campus' ? '校内食堂' : '校外美食'} · {food.category}</span></div>
           <h1>{food.name}</h1>
-          {auth.user?.verifiedCampus && food.created_by === auth.user.id && food.updated_at && <div className="food-owner-actions"><Link className="button-link" to={`/food/${food.id}/edit${returnQuery ? `?${returnQuery}` : ''}`}>编辑这条发布</Link><Link className="button-link" to="/food/mine">管理或删除</Link></div>}
+          {auth.user?.verifiedCampus && food.created_by === auth.user.id && food.updated_at && <div className="food-owner-actions"><Link className="button-link" to={`/food/${food.id}/edit${editQuery ? `?${editQuery}` : ''}`}>编辑这条发布</Link><Link className="button-link" to="/account/posts">管理我的发布</Link></div>}
           <p className="food-location"><MapPin size={17} aria-hidden="true" /><span>{food.location}</span></p>
           {food.price !== null && <p className="food-detail-price">¥{food.price.toFixed(2)}<span>参考价格{food.isExample ? ' · 示例' : ''}</span></p>}
           <div className="food-detail-rating"><RatingSummary food={food} />{food.isExample && <p>平均分和评分人数为展示用示例。</p>}</div>

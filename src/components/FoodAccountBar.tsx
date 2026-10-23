@@ -15,7 +15,7 @@ export default function FoodAccountBar({ auth, profileLocked = false, compact = 
         <span className="food-account-status"><BadgeCheck size={16} aria-hidden="true" />浙大邮箱已登录</span>
         <nav className="food-account-links" aria-label="美食账号操作">
           <Link className="food-account-action" to="/account"><UserRound size={16} aria-hidden="true" />个人中心</Link>
-          <Link className="food-account-action" to="/food/mine"><PenLine size={16} aria-hidden="true" />我的发布</Link>
+          <Link className="food-account-action" to="/account/posts"><PenLine size={16} aria-hidden="true" />我的发布</Link>
           <button className="food-account-action" type="button" disabled={busy} onClick={async () => {
             setBusy(true); setError('')
             try { await signOutFood(); auth.retry() }

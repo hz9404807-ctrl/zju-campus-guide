@@ -119,6 +119,34 @@
 .account-section-nav a { display: inline-flex; align-items: center; gap: 9px; border-bottom: 2px solid transparent; }
 .account-section-nav a:hover, .account-section-nav a:focus-visible { border-bottom-color: var(--blue); }
 .account-post, .account-rating { border-radius: 16px; }
+.account-rating-with-image { display: grid; grid-template-columns: minmax(0, 1fr) 164px; align-items: center; gap: 16px 24px; }
+.account-rating-content { min-width: 0; }
+.account-rating .account-rating-image { width: 164px; height: 120px; aspect-ratio: auto; border: 1px solid var(--line); border-radius: 10px; }
+.account-rating .account-item-heading h2 { font-size: 18px; line-height: 1.6; }
+.account-record-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+.account-record-entry { display: flex; align-items: center; gap: 15px; min-width: 0; padding: 24px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; }
+.account-record-entry > span:not(.account-record-icon) { flex: 1; min-width: 0; }
+.account-record-entry strong { display: block; font-size: 20px; color: var(--ink); }
+.account-record-entry small { display: block; margin-top: 7px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.account-record-entry > svg { color: var(--blue); flex-shrink: 0; }
+.account-record-icon { display: grid; place-items: center; flex-shrink: 0; width: 52px; height: 52px; border-radius: 15px; color: var(--blue); background: #eef4fc; }
+.account-record-entry:hover { border-color: #8caace; box-shadow: 0 8px 24px #173f7508; }
+.account-record-entry:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.account-section-nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--blue); }
+.personal-records-page .account-section-heading h1 { scroll-margin-top: 110px; }
+.personal-records-page .account-section-heading h1:focus { outline: none; }
+.personal-records-page .account-section-heading h1:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+.personal-records-page .account-section-heading .page-description { max-width: 600px; }
+@media (max-width: 600px) {
+  .account-record-links { grid-template-columns: 1fr; gap: 12px; }
+  .account-record-entry { padding: 20px; gap: 12px; }
+  .account-record-entry strong { font-size: 18px; }
+  .account-record-icon { width: 44px; height: 44px; border-radius: 12px; }
+  .account-rating-with-image { grid-template-columns: minmax(0, 1fr) 92px; gap: 12px; align-items: start; }
+  .account-rating .account-rating-image { width: 92px; height: 92px; }
+  .account-rating-image .food-image-placeholder { font-size: 11px; padding: 7px; text-align: center; gap: 4px; }
+  .account-rating-image .food-image-placeholder > svg { width: 22px; height: 22px; }
+}
 .account-section-heading { padding-inline: 4px; }
 .login-layout { display: grid; grid-template-columns: .9fr 1.1fr; border: 1px solid #dce5ef; border-radius: 24px; overflow: hidden; background: #fff; box-shadow: 0 18px 50px #173f7508; }
 .login-story { padding: 48px 40px; }

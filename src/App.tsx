@@ -18,6 +18,7 @@ import { FoodPublishPage } from './pages/FoodPublishPage'
 import { FoodLoginPage } from './pages/FoodLoginPage'
 import { FoodMinePage } from './pages/FoodMinePage'
 import { PersonalCenterPage } from './pages/PersonalCenterPage'
+import { PersonalPostsPage, PersonalRatingsPage } from './pages/PersonalRecordsPage'
 import { SourcesPage, SourceDetailPage } from './pages/SourcePages'
 import contentManifest from './data/content-manifest.json'
 import { initializeFoodIdentity } from './lib/foodService'
@@ -38,6 +39,8 @@ const pageTitles: Record<string, string> = {
   '/food/login': '浙大邮箱登录',
   '/food/mine': '我的发布',
   '/account': '个人中心',
+  '/account/posts': '我的发布',
+  '/account/ratings': '我的评分',
   '/sources': '校园信息源导航',
   '/about': '关于项目',
 }
@@ -211,6 +214,8 @@ export default function App() {
           <Route path="/guides/:guideId" element={<GuideDetailPage />} />
           <Route element={<FoodAccountProvider />}>
             <Route path="/account" element={<PersonalCenterPage />} />
+            <Route path="/account/posts" element={<PersonalPostsPage />} />
+            <Route path="/account/ratings" element={<PersonalRatingsPage />} />
             <Route path="/food" element={<FoodPage />} />
             <Route path="/food/login" element={<FoodLoginPage />} />
             <Route path="/food/mine" element={<FoodMinePage />} />
