@@ -5,17 +5,17 @@ import { signOutFood } from '../lib/foodService'
 import type { useFoodAuth } from '../hooks/useFoodAuth'
 import { BadgeCheck, LogOut, UserRound, PenLine } from 'lucide-react'
 import '../pages/food-account.css'
-export default function FoodAccountBar({ auth, profileLocked = false, compact = false }: { auth: ReturnType<typeof useFoodAuth>; profileLocked?: boolean; compact?: boolean }) {
+export default function FoodAccountBar({ auth, profileLocked = false, compact = false, navigation = 'full' }: { auth: ReturnType<typeof useFoodAuth>; profileLocked?: boolean; compact?: boolean; navigation?: 'full' | 'session' }) {
   const location = useLocation()
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
-  return <div className="food-account-bar">
+  return <div className={`food-account-bar${navigation === 'session' ? ' food-account-bar-session' : ''}`}>
     <div className="food-account-row">
       {auth.loading ? <span role="status">正在检查账号…</span> : auth.user?.verifiedCampus ? <>
         <span className="food-account-status"><BadgeCheck size={16} aria-hidden="true" />浙大邮箱已登录</span>
         <nav className="food-account-links" aria-label="美食账号操作">
-          <Link className="food-account-action" to="/account"><UserRound size={16} aria-hidden="true" />个人中心</Link>
-          <Link className="food-account-action" to="/account/posts"><PenLine size={16} aria-hidden="true" />我的发布</Link>
+          {navigation === 'full' && <><Link className="food-account-action" to="/account"><UserRound size={16} aria-hidden="true" />个人中心</Link>
+          <Link className="food-account-action" to="/account/posts"><PenLine size={16} aria-hidden="true" />我的发布</Link></>}
           <button className="food-account-action" type="button" disabled={busy} onClick={async () => {
             setBusy(true); setError('')
             try { await signOutFood(); auth.retry() }
