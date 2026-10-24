@@ -8,7 +8,7 @@ function browserStorage() {
   try { return window.localStorage } catch { return null }
 }
 
-export default function GuideServiceWindows({ windows, allCampuses }: { windows: ServiceWindow[]; allCampuses: string[] }) {
+export default function GuideServiceWindows({ windows, allCampuses, context }: { windows: ServiceWindow[]; allCampuses: string[]; context?: string | null }) {
   const campuses = [...new Set(allCampuses)]
   const multipleCampuses = new Set(windows.map((window) => window.campus)).size > 1
   const [campus, setCampus] = useState(() => readCampusPreference(browserStorage(), [...new Set(windows.map((window) => window.campus))], windows[0]?.campus ?? '') || windows[0]?.campus || '')
@@ -21,6 +21,7 @@ export default function GuideServiceWindows({ windows, allCampuses }: { windows:
   const references = [...new Map(visible.flatMap((window) => window.references ?? []).map((reference) => [reference.url, reference])).values()]
   return <aside className="guide-detail-section guide-windows" aria-labelledby="guide-windows-heading">
     <h2 id="guide-windows-heading" tabIndex={-1}>办理地点与时间</h2>
+    {context && <p className="guide-window-context">{context}</p>}
     {multipleCampuses && <div className="guide-window-filter">
       <span>选择办理校区</span>
       <div className="guide-campus-buttons" role="group" aria-label="办理校区">{campuses.map((item) => <button key={item} type="button" aria-pressed={campus === item} onClick={() => chooseCampus(item)}>{item}</button>)}</div>

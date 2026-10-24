@@ -1,6 +1,12 @@
 # 共同使用的魔搭网站
 
-## 当前运行版本（2026-10-23）
+## 当前运行版本（2026-10-24）
+
+问卷反馈优化已通过[ModelScope feedback release](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40086456065)更新同一个免费空间，源码 `codex/user-test-feedback` / [PR #8](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/8)。公开运行来源 `d3287a042cc15a05b854e6cc99a2e9b0baa0428c`、connected，API为Running；16项HTTP检查通过。main仍25f2e69，PR #8以未合并PR #7分支为基线；建议先审核PR #8合到该分支，再审核PR #7整体合main，避免main自动部署旧中间版。站点更新无需提供新令牌或账号。
+
+本次沿用原Secret/公开变量/免费Docker，永久main工作流不变；一次性流程只允许当前仓库、精确分支和原Studio，在16项HTTP及87项生产访客检查通过后已删除。无数据库结构、SMTP、五档案和业务数据变更；资料迁移与样例清理继续独立处理，原Sites不变。生产检查为单一移动UA四宽，宿主异常20与应用异常0分别记录，不能替代实体鸿蒙/真实账号。详见开发记录；后续交接/临时流程清理提交不改变上述运行来源。
+
+## 上一轮运行版本（2026-10-23）
 
 用户随后明确要求立即更新GitHub和魔搭，已使用现有令牌、公开客户端配置及免费空间，通过 [ModelScope polish release](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/39944450516) 发布 `codex/saturday-polish`。公网 `/release.json` 为 `661e561ea677f626a4ec197d722809826dfc69a4`、`connected`，公开API确认Running，资源仍为 `platform/2v-cpu-8g-mem`。16项只读HTTP检查覆盖精确版本、健康、个人子页等深链、Logo和JS/CSS MIME及缓存、缺失脚本和敏感路径404。
 
@@ -17,7 +23,7 @@
 ## 组长直接使用
 
 1. 浏览或分享：[魔搭共享网页](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full)。公开浏览无需登录魔搭，也无需下载或启动项目；网站内发布、评分和个人管理继续使用自己的浙大邮箱身份。
-2. 当前更新已在魔搭运行；开启后续main自动更新：审阅 [整合PR #7](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/7) → **Merge pull request** → **Confirm merge**。PR #7已含PR #6及PR #4/#5，无需重复应用旧PR。本次空间、免费资源、部署 Secret 和 Variables 已配置，无需重复创建或重新提供令牌。
+2. 当前更新已在魔搭运行；建议先在 [PR #8](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/8)审核并合到其目标 `codex/saturday-polish` 功能分支，再审核 [整合PR #7](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/7)合main。这样main一次接入当前完整代码；PR #7已含PR #6及PR #4/#5，无需重复应用旧PR。本次空间、免费资源、Secret和Variables已配置，无需重复创建或重新提供令牌。
 3. 合并后打开 [Actions](https://github.com/hz9404807-ctrl/zju-campus-guide/actions) → **ModelScope website** → main 最新运行，查看结果。绿色表示检查和部署请求成功；再到[魔搭空间](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide)确认 **Running** 并实际打开网页。本次分支Actions已成功，main首次自动运行仍待合并后验收。
 4. 以后双方把已审核的功能通过 PR 合入 main，等待同一流程更新即可。功能分支或 PR 本身不会发布；原 Sites 不随此工作流更新。[PR #3](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/3)的新功能及迁移需单独审阅。
 

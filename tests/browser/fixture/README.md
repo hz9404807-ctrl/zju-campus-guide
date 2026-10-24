@@ -1,5 +1,18 @@
 # 本机隔离界面检查
 
+问卷反馈对应的指南优化回归同样复用5182服务：
+
+```powershell
+playwright-cli -s=guide-journey open about:blank
+playwright-cli -s=guide-journey --raw run-code --filename=tests/browser/guide-journey.js
+playwright-cli -s=guide-journey close
+playwright-cli -s=guide-feedback open about:blank
+playwright-cli -s=guide-feedback --raw run-code --filename=tests/browser/guide-feedback.js
+playwright-cli -s=guide-feedback close
+```
+
+分别130/58项。前者检查入口独立点击、当前路线速览、44px、固定目录、同锚点重复定位、搜索/页码返回、身份路线隔离和财务适用范围；后者检查来源与两种日期语义、GitHub草稿去处、上下文白名单、键盘展开及复制失败原文回退。四种手机/宽屏尺寸、零外部请求，没有提交issue或写入共享服务。截图位于忽略目录 `scratch/guide-journey/`、`scratch/guide-feedback-*.png`。UI状态和布局检查使用真实App与隔离内存服务，不能代替真实设备或已验证账号验收。
+
 运行 `node tests/browser/fixture/server.mjs`，打开 `http://127.0.0.1:5182/account`。
 
 此目录保存可复现的测试夹具。配置不会进入正式 Vite 配置、src 或打包入口；仅通过此独立测试服务器启用。

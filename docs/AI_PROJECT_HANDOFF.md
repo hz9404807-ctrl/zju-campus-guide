@@ -1,4 +1,14 @@
-## 本轮更新交接（2026-10-23，魔搭已发布、main待审）
+## 问卷反馈交接（2026-10-24，魔搭已发布、main待审）
+
+本轮 `codex/user-test-feedback` / [PR #8](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/8)从最新main创建工作区，再快进接入PR #7的 `dd7e58d`。PR以 `codex/saturday-polish`为基线，只显示本轮增量；建议组长先审核PR #8合到该功能分支，再审核更新后的PR #7整体合main，避免先部署旧中间版。合并前重新获取远程、检查差异；没有由AI合并main或覆盖其他工作区，PR #3独立保留。
+
+已通过[运行40086456065](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40086456065)发布原魔搭，运行来源 `d3287a042cc15a05b854e6cc99a2e9b0baa0428c` / connected / Running。`GuideExternalLink`复用既有service/reference/windows语义，通用学校服务标“官方入口”，不把电话表或教师检索称作办理；`GuideContents`手机固定在页头下，使用location.key处理同锚点重复定位；`guideTaskSummary`仅按当前路线统计，不混合材料。`GuideServiceWindows.context`保留财务适用范围原文。
+
+`GuideProvenance`展示收集与资料核对日期/范围，`guideFeedback.ts`只接受数据内指南/路线构造固定项目GitHub新建Issue草稿。用户自行确认提交，需GitHub登录且内容公开；复制失败有原文，不携带搜索、returnTo或宿主参数，不自动提交。本轮不重建组长计划中的准备清单/纠错后台；后续用真实接口替换反馈入口即可，不保留双写流程。
+
+无新依赖/迁移/云端配置，不改账号、SMTP、五档案或评分规则。420项Node、类型检查、构建和本机130/58/54项界面检查通过；发布流程另跑235项PGlite断言；生产16项HTTP和87项访客浏览器检查通过。一次性发布流程已删除，永久main流程不变，交接提交不改变运行构建。宿主异常/宽视口、截图及原资料迁移未接入等边界见开发记录。原Sites和共享业务数据不变。
+
+## 上一轮更新交接（2026-10-23，魔搭已发布、main待审）
 
 用户在开发交付后明确要求立即更新GitHub和魔搭。分支 `codex/saturday-polish`、[整合PR #7](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/7)已通过 [发布运行](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/39944450516) 更新同一个魔搭站点；公开运行来源为 `661e561ea677f626a4ec197d722809826dfc69a4`、connected，空间Running。远程main仍 `25f2e69`、未直接合并；PR #7包含PR #6前置代码，组长优先审阅PR #7，避免重复应用旧PR。后续文档和临时工作流清理不改变运行构建；合并前再核对协作更新。PR #3仍独立，保留其收藏/搜索/拆包能力；原Sites与共享业务数据未改。
 

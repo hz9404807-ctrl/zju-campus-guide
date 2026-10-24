@@ -7,6 +7,10 @@ import ResultPager from '../components/ResultPager'
 import GuideStepActions from '../components/GuideStepActions'
 import GuideServiceWindows from '../components/GuideServiceWindows'
 import GuideTimetable from '../components/GuideTimetable'
+import GuideContents from '../components/GuideContents'
+import GuideExternalLink from '../components/GuideExternalLink'
+import GuideProvenance from '../components/GuideProvenance'
+import { guideTaskSummary } from '../lib/guideTaskSummary'
 import { clearTimetableParams } from '../lib/guideTimetable'
 import { guideSections } from '../lib/guideSections'
 import { guideNavigation } from '../lib/browseNavigation'
@@ -68,7 +72,7 @@ export function GuidePage() {
           <div className="guide-card-labels"><span className="guide-category">{guide.category}</span></div>
           <h3><Link to={`/guides/${guide.id}${cardSearch}`} className="guide-card-title">{guide.title}</Link></h3><p className="guide-card-summary">{view.summary}</p>
           {match && <Link className="guide-match-link" to={`/guides/${guide.id}${cardSearch}#${match.anchor}`}><span>{match.label}</span><SearchHighlight text={match.text} query={debouncedQuery} /><span className="guide-match-go">定位这段内容 <ArrowRight size={14} aria-hidden="true" /></span></Link>}
-          <div className="guide-card-footer"><Link to={`/guides/${guide.id}${cardSearch}`} className="guide-card-action">{guide.routes?.length && !route ? guide.routeChoiceLabel : '查看办理方法'} <ArrowRight size={17} aria-hidden="true" /></Link>{action && <a href={action.url} target="_blank" rel="noopener noreferrer" className="guide-card-reference">{action.label} <ExternalLink size={14} aria-hidden="true" /></a>}</div>
+          <div className="guide-card-footer"><Link to={`/guides/${guide.id}${cardSearch}`} className="guide-card-action">查看指南 <ArrowRight size={17} aria-hidden="true" /></Link>{action && <GuideExternalLink action={action} variant="card" className="guide-card-reference" />}</div>
         </article></li> })}</ul>
         <ResultPager page={page} total={results.length} pageSize={pageSize} resultHeadingId="guide-results-heading" onChange={(value) => update('page', String(value))} />
       </> : <div className="guide-empty-state"><Search size={27} aria-hidden="true" /><h3>没有找到相关指南</h3><p>可以换一种说法，或带着当前问题继续查找网站和公众号。</p>{category && <button type="button" className="button-link" onClick={() => update('category', '')}>仅取消类别筛选</button>}{suggestions.length > 0 && <div className="guide-suggestions"><p>可能相关的事项（并非准确匹配）：</p>{suggestions.map((guide) => <Link key={guide.id} to={`/guides/${guide.id}${detailSearch}`}>{guide.title}<ArrowRight size={15} aria-hidden="true" /></Link>)}</div>}<div className="guide-entry-links"><Link to={sourceSearchUrl(debouncedQuery, 'websites')}>继续查网站 <ArrowRight size={16} aria-hidden="true" /></Link><Link to={sourceSearchUrl(debouncedQuery, 'accounts')}>继续查公众号 <ArrowRight size={16} aria-hidden="true" /></Link></div><button type="button" className="guide-reset-button" onClick={() => setParams({}, { replace: true })}>清除筛选，查看全部指南</button></div>}
@@ -88,11 +92,14 @@ export function GuideDetailPage() {
     if (!/^#guide-(?:(?:step|help|material)-\d+|[a-z]+-heading)$/.test(location.hash)) return
     const frame = requestAnimationFrame(() => {
       const target = document.getElementById(location.hash.slice(1))
-      target?.focus({ preventScroll: true })
-      target?.scrollIntoView({ block: 'start' })
+      if (!target) return
+      target.focus({ preventScroll: true })
+      const headerHeight = document.querySelector('.site-header')?.getBoundingClientRect().height ?? 0
+      const navHeight = document.querySelector('.guide-contents')?.getBoundingClientRect().height ?? 0
+      window.scrollTo({ top: Math.max(0, window.scrollY + target.getBoundingClientRect().top - headerHeight - navHeight - 16), behavior: 'instant' })
     })
     return () => cancelAnimationFrame(frame)
-  }, [location.pathname, location.search, location.hash])
+  }, [location.pathname, location.search, location.hash, location.key])
   const [params, setParams] = useSearchParams()
   const originalGuide = guides.find((item) => item.id === guideId || item.aliases?.includes(guideId ?? ''))
   const query = params.get('q') ?? ''
@@ -116,13 +123,14 @@ export function GuideDetailPage() {
   const hasServiceInfo = !overview && (windows.length > 0 || Boolean(guide.location || guide.openingHours || guide.contact))
   const mainHeading = guide.kind === 'options' ? '选择一种充值方式' : guide.kind === 'procedure' ? '具体操作' : guide.kind === 'resource' ? '如何使用这个入口' : '具体说明'
   const sections = guideSections(guide, overview, hasServiceInfo, mainHeading)
+  const taskSummary = guideTaskSummary(guide, overview, windows.length)
   return <div className="page module-page guide-detail-page">
     <div className="page-heading"><Link to={backTo} className="breadcrumb"><ArrowLeft size={16} aria-hidden="true" /> 返回{backLabel}</Link><p className="eyebrow">校园办事 · {guide.category}</p><h1>{guide.title}</h1></div>
-    <section className="guide-answer-panel" aria-labelledby="guide-answer-heading"><h2 id="guide-answer-heading">{['procedure', 'options'].includes(guide.kind) ? '整体流程' : '事项概览'}</h2><p>{guide.summary}</p></section>
+    <section className="guide-answer-panel" aria-labelledby="guide-answer-heading"><h2 id="guide-answer-heading">办理速览</h2><p>{guide.summary}</p><dl className="guide-task-summary">{taskSummary.map(item => <div key={item.label}><dt>{item.label}</dt><dd>{item.anchor ? <Link to={{ pathname: location.pathname, search: location.search, hash: `#${item.anchor}` }}>{item.text}<ArrowRight size={14} aria-hidden="true" /></Link> : <span>{item.text}</span>}</dd></div>)}</dl></section>
     {conditionNotice && <p className="guide-condition-note" role="note">{conditionNotice}</p>}
     {guide.routes && <section className="guide-route-panel" aria-labelledby="guide-route-heading"><h2 id="guide-route-heading">{guide.routeChoiceLabel}</h2><div className="guide-route-choices"><button type="button" aria-pressed={!route} onClick={() => chooseRoute('all')}>查看全部办理方式</button>{guide.routes.map((option) => <button key={option.id} type="button" aria-pressed={route?.id === option.id} onClick={() => chooseRoute(option.id)}>{option.label}</button>)}</div><p role="status" aria-live="polite">{route ? `当前显示：${route.label}。可随时切换，搜索词不会限制选择。` : '选择与你的需求相符的方式，查看对应的准备材料、操作和入口。'}</p>{route?.audienceNote && <p className="guide-route-scope">适用范围：{route.audienceNote}</p>}</section>}
     {match && <p className="guide-search-location"><a href={`#${match.anchor}`}>定位与“{contentQuery}”匹配的段落 <ArrowRight size={15} aria-hidden="true" /></a></p>}
-    <nav className="guide-contents" aria-label="本页内容"><p>本页内容</p><ul>{sections.map((section) => <li key={section.id}><Link to={{ pathname: location.pathname, search: location.search, hash: `#${section.id}` }} aria-current={location.hash === `#${section.id}` ? 'location' : undefined}>{section.label}</Link></li>)}</ul></nav>
+    <GuideContents sections={[...sections, { id: 'guide-provenance-heading', label: '来源与反馈' }]} pathname={location.pathname} search={location.search} hash={location.hash} />
     {overview && <section className="guide-detail-section" aria-labelledby="guide-methods-heading"><h2 id="guide-methods-heading" tabIndex={-1}>全部办理方式</h2><ul className="guide-method-list">{guide.routes?.map((option) => <li key={option.id}><h3>{option.label}</h3>{option.audienceNote && <p>适用范围：{option.audienceNote}</p>}<p>{option.summary}</p><button type="button" className="guide-action-button" onClick={() => chooseRoute(option.id)}>查看{option.label}流程 <ArrowRight size={16} aria-hidden="true" /></button></li>)}</ul></section>}
     {!overview && <div className={`guide-detail-grid${hasServiceInfo ? ' has-service-info' : ''}`}><div className="guide-detail-main">
       {guide.materials.length > 0 && <section className="guide-detail-section"><h2 id="guide-materials-heading" tabIndex={-1}>办理前准备</h2><ul className="guide-material-list">{guide.materials.map((material, i) => <li key={i} id={`guide-material-${i}`} tabIndex={-1}>{highlight(material, `guide-material-${i}`)}</li>)}</ul></section>}
@@ -132,11 +140,12 @@ export function GuideDetailPage() {
       {guide.notes.length > 0 && <section className="guide-detail-section guide-notes"><h2 id="guide-notes-heading" tabIndex={-1}>办理前留意</h2><ul className="guide-material-list">{guide.notes.map((note, i) => <li key={i}>{note}</li>)}</ul></section>}
       {relatedGuides.length > 0 && <section className="guide-detail-section"><h2>相关办理</h2><div className="guide-related-accounts">{relatedGuides.map((item) => <Link key={item.id} to={`/guides/${item.id}${listSearch}`}>{item.title}<ArrowRight size={16} aria-hidden="true" /></Link>)}</div></section>}
     </div>
-      {windows.length > 0 ? <GuideServiceWindows key={`${guide.id}:${route?.id ?? 'all'}`} windows={windows} allCampuses={serviceWindows.map((window) => window.campus)} /> : hasServiceInfo && <aside className="guide-detail-section"><h2 id="guide-windows-heading" tabIndex={-1}>办理地点与时间</h2><dl className="guide-meta-list">
+      {windows.length > 0 ? <GuideServiceWindows key={`${guide.id}:${route?.id ?? 'all'}`} windows={windows} allCampuses={serviceWindows.map((window) => window.campus)} context={guide.contact} /> : hasServiceInfo && <aside className="guide-detail-section"><h2 id="guide-windows-heading" tabIndex={-1}>办理地点与时间</h2><dl className="guide-meta-list">
         {guide.location && <div><dt>办理地点</dt><dd>{guide.location}</dd></div>}{guide.openingHours && <div><dt>开放时间</dt><dd>{guide.openingHours}</dd></div>}{guide.contact && <div><dt>联系方式</dt><dd>{guide.contact}</dd></div>}
       </dl></aside>}
     </div>}
-    {guide.references.length > 0 && <section className="info-panel"><h2 id="guide-references-heading" tabIndex={-1}>{guide.category === '校园卡' ? '官方办事参考' : '办事入口与参考'}</h2><ul className="guide-reference-list">{guide.references.map((reference, i) => <li key={i}><a href={reference.url} target="_blank" rel="noopener noreferrer">{reference.label}</a></li>)}</ul></section>}
+    {guide.references.length > 0 && <section className="info-panel"><h2 id="guide-references-heading" tabIndex={-1}>办事入口与参考</h2><ul className="guide-reference-list">{guide.references.map((reference, i) => <li key={i}><GuideExternalLink action={{ ...reference, kind: (guide.stepActions ?? []).some(action => action.kind === 'service' && action.url === reference.url) ? 'service' : 'reference' }} variant="inline" /></li>)}</ul></section>}
+    <GuideProvenance key={`${guide.id}:${route?.id ?? 'all'}`} guide={originalGuide!} routeId={route?.id} />
     {related.length > 0 && <section className="info-panel"><h2>相关公众号</h2><p>可从这些信息源继续查看通知。</p><div className="guide-related-accounts">{related.map((account) => <Link key={account.id} to={`/sources/${account.id}`}>{account.name}<ArrowRight size={16} aria-hidden="true" /></Link>)}</div></section>}
     <Link to={backTo} className="guide-bottom-back"><ArrowLeft size={16} aria-hidden="true" /> 返回{backLabel}</Link>
   </div>

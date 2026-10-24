@@ -1,0 +1,21 @@
+.guide-detail-page .guide-task-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 18px 0 0; }
+.guide-task-summary > div { min-width: 0; border: 1px solid #d6e2f2; border-radius: 10px; background: #ffffffb8; }
+.guide-task-summary dt { padding: 12px 14px 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.guide-task-summary dd { margin: 0; }
+.guide-task-summary dd > a, .guide-task-summary dd > span { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; padding: 8px 14px 12px; color: var(--blue-dark); font-size: 14px; font-weight: 600; line-height: 1.65; overflow-wrap: anywhere; }
+.guide-detail-page .guide-contents { position: sticky; top: var(--guide-nav-top, 80px); z-index: 10; padding: 12px 0; background: var(--bg); border-bottom: 1px solid var(--line); }
+.guide-detail-page .guide-contents p { margin: 0 0 7px; }
+.guide-detail-page .guide-contents ul { display: flex; flex-wrap: nowrap; gap: 7px; overflow-x: auto; padding: 3px 3px 8px; margin: 0; list-style: none; scrollbar-width: thin; }
+.guide-detail-page .guide-contents li { flex: 0 0 auto; }
+.guide-detail-page .guide-contents a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 9px 13px; border: 1px solid var(--line); border-radius: 9px; background: white; color: var(--blue); white-space: nowrap; }
+.guide-detail-page .guide-contents a[aria-current="location"] { background: var(--blue); border-color: var(--blue); color: white; }
+.guide-window-context { margin: 12px 0 18px; padding: 12px 14px; border-left: 3px solid #b9cde7; background: #f2f6fc; color: var(--muted); font-size: 13px; line-height: 1.8; overflow-wrap: anywhere; }
+@media (max-width: 600px) {
+  .guide-detail-page .guide-contents { padding: 7px 0 0; margin-bottom: 18px; }
+  .guide-detail-page .guide-contents p { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .guide-detail-page .guide-contents a { padding: 9px 12px; font-size: 13px; }
+  .guide-detail-page .guide-task-summary { grid-template-columns: 1fr; gap: 7px; margin-top: 15px; }
+  .guide-task-summary > div { display: grid; grid-template-columns: 90px minmax(0, 1fr); align-items: center; }
+  .guide-task-summary dt { padding: 10px 0 10px 12px; }
+  .guide-task-summary dd > a, .guide-task-summary dd > span { padding: 10px 12px; font-size: 13px; }
+}
