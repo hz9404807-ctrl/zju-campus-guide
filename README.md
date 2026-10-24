@@ -1,12 +1,12 @@
 # 浙大校园指南
 
-## 本轮更新已发布到魔搭
+## 问卷反馈优化已发布（2026-10-24）
 
-用户于2026-10-23明确要求立即更新GitHub与魔搭，本轮 [整合PR #7](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/7) 已通过 [发布运行](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/39944450516) 更新到同一个魔搭网址。公开版本为 `661e561ea677f626a4ec197d722809826dfc69a4`、connected，空间Running；main仍待组长审阅，原Sites和共享数据保持不变。个人中心拆成“我的发布”“我的评分”两个子页，每页6条、评分带图；首页加入小组slogan与对称图形，完善10份指南，发布成功后可继续发布，并补充旧内核请求兼容。
+用户要求依据问卷反馈继续优化网站，本轮 [PR #8](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/8) 已通过 [发布运行](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40086456065) 更新同一个魔搭网址。公开版本 `d3287a042cc15a05b854e6cc99a2e9b0baa0428c`、connected，空间Running。站内统一“查看指南”，外链显示业务名、类型、域名及新窗口；详情增加当前路线速览和手机固定目录，重复点击仍可定位；来源日期与核对范围可查看，问题可复制或生成项目GitHub反馈草稿；修复财务窗口隐藏适用范围的问题。
 
-继续打磨已加入手机紧凑页头、数字翻页与首尾直达、坏图提示和键盘焦点修复；空价格明确显示待补充，长菜名和地点可以换行。最新399项Node测试、类型检查与构建通过，界面检查使用本机隔离数据。
+此前个人分页、评分图片、首页slogan、数字翻页、连续发布、坏图恢复和未知价格提示均保留。本轮420项Node、类型检查与构建通过，发布流程另重跑235项PGlite断言；本机指南130项、反馈58项和旧手机导航54项通过。来源显示实际收集/核对日期，不把今天或链接正常当作内容已更新。
 
-组长仍按PR依赖审阅后合并main，旧PR无需重复应用。截图中4条验收样例的精确ID、默认回滚预览和可恢复撤下操作见 [样例清理](docs/food-fixture-cleanup.md)，需要数据库所有者执行，不会因发布网页自动删除。个人分页、评分图片和继续发布无需新增功能迁移；此前个人资料编辑的独立迁移仍按原交接接入。
+建议组长先审核PR #8并合入其目标分支 `codex/saturday-polish`，再审核更新后的 [PR #7](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/7)整体合入main。这样main一次接入完整更新，避免先部署旧中间版本；PR #8只展示本轮增量。四条验收样例仍需数据库所有者按 [样例清理](docs/food-fixture-cleanup.md)独立处理。没有新增迁移或账号规则；此前个人资料迁移仍待接入。准备清单与站内纠错后台不在本轮重建，当前反馈由用户在GitHub自行确认提交。
 
 ## 共享网站与自动更新
 
@@ -14,13 +14,14 @@
 | --- | --- |
 | 浏览、向同学分享 | [魔搭共享网页](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full) |
 | 原站备用（版本独立） | [原 Sites 网页](https://zju-campus-guide.sangnuo0808.chatgpt.site) |
-| 审阅当前更新 | [整合 PR #7](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/7) |
-| 当前上线检查 | [本轮发布运行](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/39944450516) |
+| 审阅当前增量 | [PR #8](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/8) |
+| 前置完整界面 | [整合 PR #7](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/7) |
+| 当前上线检查 | [本轮发布运行](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40086456065) |
 | 查看部署记录或失败日志 | [GitHub Actions](https://github.com/hz9404807-ctrl/zju-campus-guide/actions) |
 
-**给组长：** 现在点“魔搭共享网页”即可使用，无需本地启动或登录魔搭。指南、信息源和美食浏览公开；发布、评分和个人数据管理沿用已验证浙大邮箱规则。同一个免费Docker站点已运行本轮 `661e561`，包含PR #7及PR #6前置界面；后续文档与一次性工作流清理提交不改变应用构建。发布及验收边界见 [开发记录](docs/development-status.md)。
+**给组长：** 现在点“魔搭共享网页”即可使用，无需本地启动或登录魔搭。指南、信息源和美食浏览公开；发布、评分和个人管理沿用已验证浙大邮箱规则。同一个免费Docker站点已运行 `d3287a0`，包含PR #8与PR #7前置界面；后续文档/临时工作流清理不改变应用构建。发布及验收边界见 [开发记录](docs/development-status.md)。
 
-当前运行源码来自 `codex/saturday-polish`，main仍为25f2e69。PR #7包含PR #6及PR #4/#5，组长优先审阅合并PR #7，避免重复应用旧PR；后续合入main的代码由 **ModelScope website** 自动更新。资料编辑仍需按 [个人中心说明](docs/personal-center.md) 接入新增迁移；本次没有执行云端SQL。[PR #3 的搜索收藏等功能](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/3)仍待独立整合和迁移验收，原Sites不会随魔搭自动更新。
+当前运行源码来自 `codex/user-test-feedback`，main仍为25f2e69。建议PR #8先合到PR #7功能分支，再由PR #7（包含PR #6及PR #4/#5）整体接入main，沿用 **ModelScope website** 流程。资料编辑仍需按 [个人中心说明](docs/personal-center.md) 接入新增迁移；本次没有执行云端SQL。[PR #3 的搜索收藏等功能](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/3)仍待独立整合和迁移验收，原Sites不会随魔搭自动更新。
 
 手机宽度与触摸模拟结果见 [开发记录](docs/development-status.md)。首页入口文字、网站步骤入口的点击区已加大；网站入口可“复制链接”，自动复制失败时提供原文。模拟器跨魔搭外框自动滚动后的首次点击仍可能停在宿主层，先滚到可见并稳定后的站内点击通过；实体鸿蒙与微信内置浏览器尚未验证。外部按钮已实测发出官方站点导航请求，目的站正文加载仍受网络影响。魔搭外框内部导航不会同步外层刷新地址，外层刷新回到最初分享的入口路径。接入与分享方式见 [魔搭部署](docs/modelscope-deployment.md)。
 
