@@ -13,6 +13,7 @@ import './food.css'
 import FoodAccountBar from '../components/FoodAccountBar'
 import { useFoodAuth } from '../hooks/useFoodAuth'
 import { personalRecordReturn } from '../lib/personalRecords'
+import { foodSortDescription, parseFoodSort, sortFoods } from '../lib/foodSorting'
 
 function ExampleNotice() {
   return (
@@ -63,6 +64,7 @@ export function FoodPage() {
   const query = searchParams.get('q') ?? ''
   const category = searchParams.get('category') ?? ''
   const location = area === 'campus' ? searchParams.get('location') ?? '' : ''
+  const sort = parseFoodSort(searchParams.get('sort'))
   const debouncedQuery = useDebouncedValue(query, 250)
   const resource = useFoodResource(listFoods)
   const foods = resource.data ?? []
@@ -71,12 +73,12 @@ export function FoodPage() {
   const locations = [...new Set([...areaFoods.map((food) => food.location), location].filter(Boolean))]
   const filteredFoods = useMemo(() => {
     const keywords = debouncedQuery.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean)
-    return foods.filter((food) => {
+    return sortFoods(foods.filter((food) => {
       if (food.area !== area || (category && food.category !== category) || (location && food.location !== location)) return false
       const searchable = [food.name, food.location, food.category, ...food.tags].join(' ').toLocaleLowerCase()
       return keywords.every((keyword) => searchable.includes(keyword))
-    })
-  }, [foods, area, category, location, debouncedQuery])
+    }), sort)
+  }, [foods, area, category, location, debouncedQuery, sort])
 
   function updateFilter(key: string, value: string) {
     const next = new URLSearchParams(searchParams)
@@ -94,7 +96,7 @@ export function FoodPage() {
   }
 
   function clearFilters() {
-    setSearchParams({ area }, { replace: true })
+    setSearchParams(sort === 'latest' ? { area } : { area, sort }, { replace: true })
   }
 
   const returnQuery = searchParams.toString()
@@ -129,8 +131,10 @@ export function FoodPage() {
         <div className="food-filters">
           <label className="food-select-field" htmlFor="food-category"><span>菜品分类</span><select id="food-category" value={category} onChange={(event) => updateFilter('category', event.target.value)}><option value="">全部分类</option>{categories.map((item) => <option value={item} key={item}>{item}</option>)}</select></label>
           {area === 'campus' && <label className="food-select-field" htmlFor="food-location"><span>食堂 / 窗口</span><select id="food-location" value={location} onChange={(event) => updateFilter('location', event.target.value)}><option value="">全部地点</option>{locations.map((item) => <option value={item} key={item}>{item}</option>)}</select></label>}
+          <label className="food-select-field" htmlFor="food-sort"><span>排序方式</span><select id="food-sort" aria-label="排序方式" value={sort} aria-describedby={sort === 'latest' ? undefined : 'food-sort-description'} onChange={(event) => updateFilter('sort', event.target.value === 'latest' ? '' : event.target.value)}><option value="latest">默认顺序</option><option value="price-asc">价格：从低到高</option><option value="price-desc">价格：从高到低</option><option value="rating-asc">评分：从低到高</option><option value="rating-desc">评分：从高到低</option></select></label>
           {(query || category || location) && <button className="food-clear-filters" type="button" onClick={clearFilters}>清除筛选</button>}
         </div>
+        {sort !== 'latest' && <p className="food-sort-description" id="food-sort-description">{foodSortDescription(sort)}</p>}
       </section>
       <div className="food-results-heading" aria-live="polite" aria-atomic="true"><h2>{area === 'campus' ? '校内食堂' : '校外美食'}</h2><span>{resource.loading ? (resource.data ? '正在更新，保留现有结果…' : '正在加载…') : resource.error ? '暂时无法显示菜品' : `${filteredFoods.length} 道${isFoodExampleMode ? '示例' : ''}菜品`}{query !== debouncedQuery ? ' · 正在查找…' : ''}</span>{isFoodBackendConfigured && <button type="button" className="food-clear-filters" onClick={resource.refresh} disabled={resource.loading}>刷新列表</button>}</div>
       {resource.error && <FoodFailure message={resource.error} retry={resource.refresh} />}
