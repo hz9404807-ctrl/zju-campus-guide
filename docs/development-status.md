@@ -1,3 +1,15 @@
+## 2026-10-25 手机版首页、反馈精简与美食排序
+
+- 用户明确三项调整：只压缩手机版首页，截图所指区域只保留反馈入口，增加价格/评分各升降序。隔离分支 `codex/mobile-home-food-sort` 从最新main25f2e69建立并快进接入已上线PR #8的e904795；[PR #9](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/9)以PR #8分支为基线，只展示本轮增量。原工作区保留，未合并main。
+- 首页只追加 `max-width:600px` 且限定 `.home-page` 的规则，封面约212px，保留完整slogan，两个主入口并排，信息源紧随其后；关键操作44px。320/375/390在844px首屏看到三个入口（含本机测试条，最后入口底部约777/726/726px）。1280/1440四个首页区域的改前后几何完全一致，已看对应截图，桌面内容与样式不变。
+- `GuideProvenance`区域删除可见标题、来源、日期、核对说明，仅保留反馈。导航改“信息反馈”并定位到可见summary；展开、复制、GitHub草稿仍可用。原guides.json溯源数据、其他官方参考链接保留；移除不再使用的日期展示helper和断言，没有删除采集依据。
+- `foodSorting.ts`复用PR #3排序参数与同分规则，增加rating-asc；单个select提供默认、价格升降、评分升降。未知价始终最后、0元有效；无评分最后，同分人数多→ID；不修改服务数组、评分资格或共享数据。排序保留在URL，组合筛选、详情返回、刷新、清空筛选与切换范围保留。未添加预算、推荐分或请求。
+- 本机npm ci、423项Node、类型检查及生产构建通过；首页38项、反馈54项、排序106项隔离浏览器检查通过，均没有真实业务写入。已实际查看 `scratch/mobile-home-compact/home-390.png`、`before/after-1280.png`、`before/after-1440.png`、`scratch/food-sorting-390.png`。无新依赖/迁移/云端配置；无数据库改动，因此本轮没有重跑数据库组。原审计/大分块提示保留，未宣称提速。
+- [发布40187500836](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40187500836)已通过安装、423项测试、类型检查及构建，向原免费Studio请求部署源 `c311ffbb7b18a9c4b90cc4f0cc4b57003b746b2d`。实际公网版本与手机验收结果在启动确认后补充。
+- 首次镜像构建成功，但实例持续Deploying约12分钟且没有应用启动日志，公网404/412。只读[诊断40188114244](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40188114244)确认构建日志无错误、镜像已生成。随后[恢复40188414117](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40188414117)重新确认同一空间仍为免费Docker，停止旧运行并观察到Stopped后，仅请求一次启动；不重传构建、不改镜像/配置/数据，不连续重启。
+- 恢复后的运行从11:22 UTC左右进入Deploying，交接检查时仍返回412，尚无生产访客验收。原魔搭网址可能暂时不可用；必须等Running并核对release.json精确为c311ffb/connected后，才能执行已准备的 `scratch/mobile-sort-live/check.js`。没有把38/54/106项本机检查称为云端通过。临时发布/诊断/单次恢复工作流已移除，永久main流程不变；后续文档提交不改变已上传构建。
+- 协作建议按本PR #9→PR #8分支，再PR #8→PR #7分支，最后PR #7整体合main，避免部署旧中间版；PR #3仍独立，未来接入预算时复用sortFoods并保留rating-asc。SMTP、五档案、个人资料迁移、样例清理均不在本轮执行范围。
+
 ## 2026-10-24 问卷反馈优化已发布（main待审）
 
 - 按用户确认的四类反馈迭代：入口区分、手机长页定位、来源日期/反馈、信息呈现完整性。开始时各原工作区干净，远程main仍25f2e69、线上为661e561；隔离 `codex/user-test-feedback` 从main建立，再快进接入已上线PR #7依赖dd7e58d。交付[PR #8](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/8)以PR #7分支为基线，只显示增量；建议先审核PR #8合到PR #7功能分支，再由更新后的PR #7整体接入main，避免旧中间版本覆盖本轮线上。没有由AI合并main或覆盖同学工作。

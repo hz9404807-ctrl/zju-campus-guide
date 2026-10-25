@@ -1,6 +1,12 @@
 # 共同使用的魔搭网站
 
-## 当前运行版本（2026-10-24）
+## 10月25日部署状态：构建已上传，运行待确认
+
+手机版首页与排序已在[PR #9](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/9)，[发布40187500836](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40187500836)的安装/423项测试/类型检查/构建/上传与部署请求成功，待运行来源 `c311ffbb7b18a9c4b90cc4f0cc4b57003b746b2d`。魔搭镜像构建完成后长期Deploying，公网404/412，不能认定已上线。
+
+只读[诊断](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40188114244)确认构建无错误、没有应用启动日志。[一次恢复](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40188414117)核对仍为原免费Docker后停止旧运行，确认Stopped再启动，未改镜像、资源或变量，未连续重启；当前仍等待Running和精确版本验收。现场记录见development-status.md。main未合并，业务数据与原Sites不改。
+
+## 上一正常运行版本（2026-10-24）
 
 问卷反馈优化已通过[ModelScope feedback release](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40086456065)更新同一个免费空间，源码 `codex/user-test-feedback` / [PR #8](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/8)。公开运行来源 `d3287a042cc15a05b854e6cc99a2e9b0baa0428c`、connected，API为Running；16项HTTP检查通过。main仍25f2e69，PR #8以未合并PR #7分支为基线；建议先审核PR #8合到该分支，再审核PR #7整体合main，避免main自动部署旧中间版。站点更新无需提供新令牌或账号。
 

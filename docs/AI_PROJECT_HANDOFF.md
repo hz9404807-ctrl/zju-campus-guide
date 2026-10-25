@@ -1,3 +1,11 @@
+## 手机版首页与排序交接（2026-10-25）
+
+`codex/mobile-home-food-sort` / [PR #9](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/9)从最新main建立后快进接入PR #8的e904795，以 `codex/user-test-feedback`为基线，仅包含本轮三项增量。建议审核后PR #9先合PR #8分支，再PR #8合PR #7分支，最后PR #7完整接入main；AI没有直接合并，PR #3独立。
+
+本轮仅用<=600px首页CSS压缩封面/入口，桌面1280/1440改前后几何一致；反馈区域只保留可展开入口，数据原始来源字段和官方参考链接不删；美食增加四方向排序，`foodSorting.ts`沿用sort参数并补rating-asc，未知价/无评分后置、0元有效，返回/刷新/组合筛选保留。未来合PR #3预算比较时复用这个排序函数，保持一套sort状态。
+
+423项Node、类型检查、构建和本机38/54/106项界面检查通过，无新依赖/迁移/数据库或SMTP操作；本轮不重跑无关数据库组。构建已通过运行40187500836上传，待运行来源c311ffbb7b18a9c4b90cc4f0cc4b57003b746b2d，但平台持续Deploying。只读诊断确认镜像已生成、无运行日志；确认原免费资源后仅执行一次Stopped→启动恢复，仍待Running/生产检查。不要把上传或本机截图写成线上成功。现有资料迁移及样例维护仍按原交接处理，原Sites不变。
+
 ## 问卷反馈交接（2026-10-24，魔搭已发布、main待审）
 
 本轮 `codex/user-test-feedback` / [PR #8](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/8)从最新main创建工作区，再快进接入PR #7的 `dd7e58d`。PR以 `codex/saturday-polish`为基线，只显示本轮增量；建议组长先审核PR #8合到该功能分支，再审核更新后的PR #7整体合main，避免先部署旧中间版。合并前重新获取远程、检查差异；没有由AI合并main或覆盖其他工作区，PR #3独立保留。

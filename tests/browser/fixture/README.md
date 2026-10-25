@@ -1,5 +1,15 @@
 # 本机隔离界面检查
 
+2026-10-25手机版首页与排序验收：复用下述5182服务，各自先open/结束后close自有会话。
+
+```powershell
+playwright-cli -s=mobile-home --raw run-code --filename=tests/browser/mobile-home-compact.js
+playwright-cli -s=guide-feedback --raw run-code --filename=tests/browser/guide-feedback.js
+playwright-cli -s=food-sort --raw run-code --filename=tests/browser/food-sorting.js
+```
+
+当前分别38/54/106项。首页脚本采用本次Windows环境改前记录的1280/1440桌面几何值，并检查320/375/390px三入口在844px首屏内；换字体或浏览器时应在相同环境比较旧/新版本，不能把跨环境数值差当作回归。改前/后截图保存在scratch。反馈区按用户最新要求仅保留入口，旧日期展示断言已替换；排序用本机夹具覆盖0元、未知价、无评分、四方向与返回条件，不修改真实服务。
+
 问卷反馈对应的指南优化回归同样复用5182服务：
 
 ```powershell
@@ -11,7 +21,7 @@ playwright-cli -s=guide-feedback --raw run-code --filename=tests/browser/guide-f
 playwright-cli -s=guide-feedback close
 ```
 
-分别130/58项。前者检查入口独立点击、当前路线速览、44px、固定目录、同锚点重复定位、搜索/页码返回、身份路线隔离和财务适用范围；后者检查来源与两种日期语义、GitHub草稿去处、上下文白名单、键盘展开及复制失败原文回退。四种手机/宽屏尺寸、零外部请求，没有提交issue或写入共享服务。截图位于忽略目录 `scratch/guide-journey/`、`scratch/guide-feedback-*.png`。UI状态和布局检查使用真实App与隔离内存服务，不能代替真实设备或已验证账号验收。
+前者130项；后者按10月25日用户要求调整为54项，删除来源/日期显示断言，保留仅反馈入口、GitHub草稿去处、上下文白名单、键盘展开和复制失败原文回退。前者检查入口独立点击、当前路线速览、44px、固定目录、同锚点重复定位、搜索/页码返回、身份路线隔离和财务适用范围。四种手机/宽屏尺寸、零外部请求，没有提交issue或写入共享服务。截图位于忽略目录 `scratch/guide-journey/`、`scratch/guide-feedback-*.png`。UI状态和布局检查使用真实App与隔离内存服务，不能代替真实设备或已验证账号验收。
 
 运行 `node tests/browser/fixture/server.mjs`，打开 `http://127.0.0.1:5182/account`。
 
