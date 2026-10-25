@@ -1,0 +1,51 @@
+name: ModelScope mobile sort recovery
+on:
+  push:
+    branches: [codex/mobile-home-food-sort]
+    paths: [.github/workflows/modelscope-mobile-sort-recovery.yml]
+permissions:
+  contents: read
+concurrency:
+  group: modelscope-production
+  cancel-in-progress: false
+jobs:
+  recover:
+    if: github.repository == 'hz9404807-ctrl/zju-campus-guide' && github.ref == 'refs/heads/codex/mobile-home-food-sort' && vars.MODELSCOPE_STUDIO == 'zzzhr777/zju-campus-guide'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - name: Recover the stalled existing free runtime once
+        env:
+          MODELSCOPE_TOKEN: ${{ secrets.MODELSCOPE_TOKEN }}
+        run: |
+          node --input-type=module <<'JS'
+          import { studioRequest, assertFreePublicDocker } from './scripts/modelscope-release.mjs'
+          const options = { token: process.env.MODELSCOPE_TOKEN }
+          const root = '/studios/zzzhr777/zju-campus-guide'
+          const studio = await studioRequest(root, options)
+          const hardware = await studioRequest('/studios/hardware?sdk_type=docker&studio=zzzhr777%2Fzju-campus-guide', options)
+          assertFreePublicDocker(studio, hardware)
+          if (studio.status === 'Running') {
+            console.log('Runtime is already Running; no recovery performed.')
+          } else {
+            const age = Date.now() - Date.parse(studio.runtime?.created_at ?? '')
+            if (studio.status !== 'Deploying' || !Number.isFinite(age) || age < 8 * 60 * 1000) throw new Error('Runtime is not the confirmed stalled deployment; stopped without mutation.')
+            await studioRequest(root + '/stop', { ...options, method: 'POST' })
+            let stopped = false
+            for (let attempt = 0; attempt < 20; attempt++) {
+              const state = await studioRequest(root, options)
+              console.log('Recovery state: ' + state.status)
+              if (state.status === 'Stopped') { stopped = true; break }
+              await new Promise(resolve => setTimeout(resolve, 3000))
+            }
+            if (!stopped) throw new Error('Stop not confirmed; no second deployment request was sent.')
+            await studioRequest(root + '/deploy', { ...options, method: 'POST' })
+            console.log('One restart requested for the existing free Studio; mirror and configuration unchanged.')
+          }
+          JS
