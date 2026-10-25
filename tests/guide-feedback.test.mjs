@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import guides from '../src/data/guides.json' with { type: 'json' }
-import { buildGuideFeedback, GUIDE_FEEDBACK_LIMIT, guideFeedbackPath, recordedGuideDate } from '../src/lib/guideFeedback.ts'
+import { buildGuideFeedback, GUIDE_FEEDBACK_LIMIT, guideFeedbackPath } from '../src/lib/guideFeedback.ts'
 
 const guide = { id: 'campus-card', title: '校园卡怎么补办？', routes: [{ id: 'student', label: '在校学生' }] }
 
@@ -56,11 +56,6 @@ test('限制长标题、路线标签和说明，中文及 emoji 编码可还原'
 test('没有填写说明时提供待填写草稿，非法指南不生成跳转', () => {
   assert.ok(buildGuideFeedback(guide, undefined, 'missing', ' ').text.includes('请在提交前补充'))
   assert.equal(buildGuideFeedback({ ...guide, id: '//other' }, undefined, 'link', ''), null)
-})
-
-test('日期只显示合法原始日期，保留收集和核对的独立语义', () => {
-  for (const date of ['2026-10-08', '2026-10-09', '2024-02-29']) assert.equal(recordedGuideDate(date), date)
-  for (const date of [null, undefined, '', 'today', '2026-2-01', '2026-02-29', '2026-04-31', '2026-10-08T00:00:00Z', '2026-13-01']) assert.equal(recordedGuideDate(date), null)
 })
 
 test('当前真实指南与全部办理路线可生成固定仓库反馈', () => {

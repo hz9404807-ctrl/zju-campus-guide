@@ -1,6 +1,16 @@
 # 共同使用的魔搭网站
 
-## 当前运行版本（2026-10-24）
+## 10月25日部署状态：访问已恢复
+
+手机版首页、反馈精简、排序及公开美食读取修复已在[PR #9](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/9)。当前原空间Running，runtime于10月25日12:33:48 UTC创建，公网运行来源 `b8e9f5d32216a9169b4230dffaa44ab3263ffda8` / connected，16项HTTP及46项生产手机访客浏览器检查通过。原共享网址恢复访问，免费资源、账号及业务数据未改。
+
+原c311ffb构建后长期Deploying并进入DeployFailed，公网404/412，镜像构建无错误但运行日志为空；运行配置与上一正常d3287a0完全相同。[诊断](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40188114244)及[一次停止再启动](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40188414117)后，管理页确认无文件/配置变更并重部署同一构建，12:21 UTC恢复Running。平台未提供具体内部原因。独立[容器检查40192744562](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40192744562)实际启动相同运行文件与基础镜像，Node24.22.1、healthy、五条路径200，不把这一结果当作已定位平台内部原因。
+
+恢复后发现公开美食读取先依赖匿名注册，已最小移除listFoods/getFood的显式身份初始化。修复[发布40193293791](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40193293791)的安装、425项测试、类型检查、构建和镜像仓Git推送成功，但POST deploy返回400导致工作流失败；随后在管理页核对仅网页文件变化、配置0变更并确认部署，才上线当前b8e9f5d。此次没有验收自动部署全流程，main永久流程保持原样，后续需单独验证API触发成功。
+
+生产浏览器用单一新Android14上下文检查375/390px、真实校内24道菜的四方向排序及返回；全部非读auth/rest/storage请求被拦，旧匿名初始化10次被阻止、业务/验证码/Issue尝试0，无真实登录或写入验收。应用pageerror0、ModelScope/g.alicdn宿主10分别记录；未知价/无评分生产样本0，仅本机回归覆盖。临时容器与修复发布流程已在交接清理时移除；原Sites保持，main未合并，PR #9→#8→#7审核链不变。截图及详细边界见development-status.md。
+
+## 上一正常运行版本（2026-10-24）
 
 问卷反馈优化已通过[ModelScope feedback release](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40086456065)更新同一个免费空间，源码 `codex/user-test-feedback` / [PR #8](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/8)。公开运行来源 `d3287a042cc15a05b854e6cc99a2e9b0baa0428c`、connected，API为Running；16项HTTP检查通过。main仍25f2e69，PR #8以未合并PR #7分支为基线；建议先审核PR #8合到该分支，再审核PR #7整体合main，避免main自动部署旧中间版。站点更新无需提供新令牌或账号。
 

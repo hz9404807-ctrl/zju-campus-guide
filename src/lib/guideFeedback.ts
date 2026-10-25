@@ -53,11 +53,3 @@ export function buildGuideFeedback(guide: FeedbackGuide, routeId: string | undef
   url.searchParams.set('body', body)
   return { path, text: body, issueUrl: url.href }
 }
-
-// Dates describe existing collection/review records; rendering never supplies
-// today's date or infers verification from a successful link request.
-export function recordedGuideDate(value: unknown) {
-  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return null
-  const date = new Date(`${value}T00:00:00Z`)
-  return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value ? value : null
-}

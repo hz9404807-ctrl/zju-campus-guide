@@ -1,16 +1,6 @@
-.guide-provenance { min-width: 0; padding: 24px 28px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
-.guide-provenance-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 20px; }
-.guide-provenance-heading h2 { color: var(--ink); font-size: 20px; line-height: 1.6; scroll-margin-top: 110px; }
-.guide-provenance-heading > span { color: var(--muted); font-size: 13px; line-height: 1.7; }
-.guide-provenance-records { display: grid; gap: 8px; margin: 16px 0 0; font-size: 14px; line-height: 1.8; }
-.guide-provenance-records > div { display: grid; grid-template-columns: 68px minmax(0, 1fr); gap: 10px; }
-.guide-provenance-records dt { color: var(--muted); }
-.guide-provenance-records dd { margin: 0; color: var(--ink); overflow-wrap: anywhere; }
-.guide-provenance-scope { margin-top: 6px; color: var(--muted); font-size: 14px; line-height: 1.9; }
-.guide-provenance-scope summary, .guide-feedback summary { min-height: 44px; padding: 10px 0; cursor: pointer; border-radius: 6px; }
-.guide-provenance-scope summary { width: fit-content; max-width: 100%; }
-.guide-provenance-scope p { margin: 0 0 12px; overflow-wrap: anywhere; }
-.guide-feedback { margin-top: 12px; border-top: 1px solid var(--line); font-size: 14px; line-height: 1.8; }
+.guide-provenance { min-width: 0; padding: 6px 28px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+.guide-feedback summary { min-height: 44px; cursor: pointer; border-radius: 6px; }
+.guide-feedback { font-size: 14px; line-height: 1.8; }
 .guide-feedback > summary { display: flex; align-items: center; gap: 9px; color: var(--blue); font-weight: 600; padding-block: 14px; }
 .guide-feedback > summary::after { content: '+'; margin-left: auto; font-size: 20px; line-height: 1; font-weight: 400; }
 .guide-feedback[open] > summary::after { content: '−'; }
@@ -31,8 +21,7 @@
 .guide-feedback .guide-copy-fallback { white-space: pre-wrap; }
 .guide-feedback-next { margin-top: 12px; font-size: 13px; }
 @media (max-width: 600px) {
-  .guide-provenance { padding: 20px; }
-  .guide-provenance-records > div { grid-template-columns: 62px minmax(0, 1fr); gap: 8px; }
+  .guide-provenance { padding: 6px 20px; }
   .guide-feedback-actions > .guide-copy-control, .guide-feedback-actions > a { flex-basis: 100%; }
   .guide-feedback-actions .guide-action-button { justify-content: center; width: 100%; }
 }
