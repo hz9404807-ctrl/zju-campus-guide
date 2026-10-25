@@ -2,9 +2,9 @@
 
 ## 手机版首页、反馈精简与美食排序（2026-10-25）
 
-[PR #9](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/9)完成三项：手机首页封面缩小、三个入口同屏，桌面不变；截图所指区域只保留反馈入口；美食增加价格/评分各自升降序，未知价格和无评分始终靠后。423项测试、类型检查和构建通过，本机38/54/106项界面检查通过。无需新依赖、迁移或云端配置。
+[PR #9](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/9)完成三项：手机首页封面缩小、三个入口同屏，桌面不变；截图所指区域只保留反馈入口；美食增加价格/评分各自升降序，未知价格和无评分始终靠后。另修复公开美食浏览被匿名注册失败阻断的问题。425项测试、类型检查和构建在本机及CI通过，本机38/54/106项界面检查通过。无需新依赖、迁移或云端配置。
 
-**本次魔搭尚未完成上线验收。** [发布40187500836](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40187500836)已上传构建，待运行源码为 `c311ffbb7b18a9c4b90cc4f0cc4b57003b746b2d`。平台首次启动长时间Deploying；诊断确认镜像构建成功、无启动日志后，执行一次确认Stopped再启动的恢复，当前仍等待Running。原魔搭网址可能暂时无法访问；实际状态及验证记录见[开发记录](docs/development-status.md)，没有将本机截图称作生产验收。
+**魔搭访问已恢复，新版已验收。** 当前为Running，公网精确版本 `b8e9f5d32216a9169b4230dffaa44ab3263ffda8` / connected，16项HTTP及46项生产手机浏览器检查通过。此前平台启动失败经管理页重新部署恢复，内部原因未给出；随后补上公开美食读取修复并完成新版验收。此次CI安装、测试、构建及镜像仓推送成功，但部署API返回400，最终通过管理页确认仅网页文件变化、配置无变化后部署成功；不能据此认定自动部署已验收。账号、业务数据与免费资源未改，独立容器验证及详细记录见[开发记录](docs/development-status.md)。
 
 PR #9以PR #8功能分支为目标。建议依次审核合入PR #9→PR #8分支、PR #8→PR #7分支，再由PR #7整体接入main；AI不直接合并。资料迁移、样例清理、PR #3预算收藏等仍按原独立交接处理。
 
@@ -25,10 +25,10 @@ PR #9以PR #8功能分支为目标。建议依次审核合入PR #9→PR #8分支
 | 审阅当前增量 | [PR #9](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/9) |
 | 问卷反馈前置界面 | [PR #8](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/8) |
 | 前置完整界面 | [整合 PR #7](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/7) |
-| 本次构建与发布请求 | [运行40187500836](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40187500836) |
+| 本次修复构建与发布记录 | [运行40193293791（部署API返回400，后经管理页部署）](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40193293791) |
 | 查看部署记录或失败日志 | [GitHub Actions](https://github.com/hz9404807-ctrl/zju-campus-guide/actions) |
 
-**给组长：** 分享仍使用同一魔搭网址；10月25日这次构建已上传，但当前平台尚在启动，不能据Actions绿灯认定网页已可用。上一正常运行来源为 `d3287a0`，待启动构建为 `c311ffb`。指南/信息源/美食公开浏览与原邮箱规则保持；实际状态见顶部及[开发记录](docs/development-status.md)。
+**给组长：** 分享仍使用同一魔搭网址；当前运行来源为 `b8e9f5d`，16项公网HTTP、46项生产手机浏览器及独立容器检查通过。指南/信息源/美食继续公开浏览，原邮箱规则保持；实体鸿蒙、微信和真实账号写入未在本次验收。详情见[开发记录](docs/development-status.md)。
 
 本次源码来自 `codex/mobile-home-food-sort`，main仍为25f2e69。按PR #9→#8→#7功能分支顺序审阅后，再整体接入main沿用 **ModelScope website** 流程。资料编辑仍需按 [个人中心说明](docs/personal-center.md) 接入新增迁移；本次没有执行云端SQL。[PR #3 的搜索收藏等功能](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/3)仍待独立整合和迁移验收，原Sites不会随魔搭自动更新。
 
