@@ -158,9 +158,11 @@ for (const [label, data] of [
   })
 }
 
-test('身份恢复的服务错误不会被吞掉或触发后续数据请求', async () => {
-  const { api, calls } = makeClient({ getSession: { data: { session: null }, error: { message: 'session unavailable' } } })
-  await expectServiceError(api.listFoods(), 'AUTH_FAILED')
+test('私人查询的身份验证错误不会被吞掉或触发后续数据请求', async () => {
+  const { api, calls } = makeClient({ getUser: { data: { user: null }, error: { message: 'identity unavailable' } } })
+  await expectServiceError(api.myFoods(), 'AUTH_FAILED')
+  assert.equal(calls.getUser, 1)
+  assert.equal(calls.getSession, 0)
   assert.equal(calls.signInAnonymously, 0)
   assert.equal(calls.queries.length, 0)
 })
@@ -200,6 +202,27 @@ test('共享统计视图映射数字字符串，真实菜品不会标为示例',
   }])
   assert.deepEqual(calls.queries, [{ table: 'food_summaries', columns: '*', filters: [], order: { column: 'created_at', ascending: false } }])
 })
+
+for (const [label, options] of [
+  ['匿名注册禁用', { session: null, signInAnonymously: { data: { user: null }, error: { message: 'anonymous auth disabled' } } }],
+  ['会话服务报错', { getSession: () => { throw new Error('session service unavailable') }, signInAnonymously: () => { throw new Error('anonymous service unavailable') } }],
+]) {
+  test(`${label}时公开列表和详情仍可读取，且不调用身份服务`, async () => {
+    const { api, calls } = makeClient(options)
+    const foods = await api.listFoods()
+    const food = await api.getFood(FOOD_ID)
+    assert.equal(foods.length, 1)
+    assert.equal(foods[0].id, FOOD_ID)
+    assert.deepEqual(food, foods[0])
+    assert.equal(calls.getUser, 0)
+    assert.equal(calls.getSession, 0)
+    assert.equal(calls.signInAnonymously, 0)
+    assert.deepEqual(calls.queries.map((query) => query.table), ['food_summaries', 'food_summaries'])
+    assert.deepEqual(calls.inserts, [])
+    assert.deepEqual(calls.uploads, [])
+    assert.deepEqual(calls.rpc, [])
+  })
+}
 
 test('零人评分时保留空平均分，空可选字段使用正确默认值', async () => {
   const row = { ...FOOD_ROW, price: null, average_rating: null, rating_count: '0', description: null, tags: null }

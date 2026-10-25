@@ -61,7 +61,6 @@ export function createFoodApi(client: SupabaseClient, { profilesEnabled = false 
   }
 
   async function listFoods(): Promise<Food[]> {
-    await ensureIdentity()
     try {
       const { data, error } = await client.from('food_summaries').select('*').order('created_at', { ascending: false })
       if (error || !data) fail('LOAD_FAILED', '加载失败，请检查网络后重试。')
@@ -73,7 +72,6 @@ export function createFoodApi(client: SupabaseClient, { profilesEnabled = false 
   }
 
   async function getFood(id: string): Promise<Food | null> {
-    await ensureIdentity()
     try {
       const { data, error } = await client.from('food_summaries').select('*').eq('id', id).maybeSingle()
       if (error) fail('LOAD_FAILED', '加载失败，请检查网络后重试。')
