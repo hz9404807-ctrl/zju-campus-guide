@@ -1,0 +1,104 @@
+name: ModelScope container check
+
+# Temporary diagnostic: build and run the production container on a GitHub runner.
+# This workflow never deploys, uses deployment secrets, or contacts ModelScope.
+on:
+  push:
+    branches: [codex/mobile-home-food-sort]
+    paths: [.github/workflows/modelscope-container-check.yml]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    if: >-
+      github.repository == 'hz9404807-ctrl/zju-campus-guide' &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/codex/mobile-home-food-sort'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build shared-service website
+        env:
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.VITE_SUPABASE_PUBLISHABLE_KEY }}
+          VITE_FOOD_EMAIL_AUTH_READY: ${{ vars.VITE_FOOD_EMAIL_AUTH_READY }}
+          VITE_FOOD_PROFILES_READY: 'false'
+        run: |
+          npm run build
+          node --input-type=module -e "import { validatePublicConfig } from './scripts/modelscope-release.mjs'; validatePublicConfig(process.env)"
+      - name: Build and exercise the container
+        env:
+          CONTAINER_NAME: campus-container-check-${{ github.run_id }}
+          IMAGE_NAME: campus-container-check:${{ github.run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p scratch/container-check
+          cp -R dist scratch/container-check/dist
+          cp deployment/modelscope/Dockerfile deployment/modelscope/server.mjs scratch/container-check/
+          docker pull node:24-alpine >scratch/container-check/base-pull.log 2>&1 || {
+            tail -n 30 scratch/container-check/base-pull.log
+            exit 1
+          }
+          printf 'Base image RepoDigest: '
+          docker image inspect node:24-alpine --format '{{json .RepoDigests}}'
+          docker build --pull=false -t "$IMAGE_NAME" scratch/container-check >scratch/container-check/build.log 2>&1 || {
+            tail -n 40 scratch/container-check/build.log
+            exit 1
+          }
+          docker run -d --name "$CONTAINER_NAME" -p 127.0.0.1:17860:7860 "$IMAGE_NAME" >/dev/null
+          ready=false
+          for attempt in $(seq 1 20); do
+            if curl --silent --fail --max-time 2 http://127.0.0.1:17860/healthz >scratch/container-check/health.txt; then
+              ready=true
+              break
+            fi
+            if [ "$(docker inspect --format '{{.State.Running}}' "$CONTAINER_NAME")" != true ]; then
+              break
+            fi
+            sleep 1
+          done
+          test "$ready" = true
+          test "$(cat scratch/container-check/health.txt)" = ok
+          printf 'Container Node version: '
+          docker exec "$CONTAINER_NAME" node --version
+          for route in /healthz / /food /guides/campus-card-replacement /account; do
+            status=$(curl --silent --show-error --max-time 5 -H 'Accept: text/html' -o /dev/null -w '%{http_code}' "http://127.0.0.1:17860$route")
+            printf 'HTTP %s: %s\n' "$route" "$status"
+            test "$status" = 200
+          done
+          docker logs "$CONTAINER_NAME" >scratch/container-check/run.log 2>&1
+          grep -Fq 'Campus guide listening on port 7860' scratch/container-check/run.log
+          printf 'Startup log: confirmed\n'
+          for attempt in $(seq 1 40); do
+            health=$(docker inspect --format '{{.State.Health.Status}}' "$CONTAINER_NAME")
+            [ "$health" = healthy ] && break
+            [ "$health" = unhealthy ] && break
+            sleep 1
+          done
+          test "$health" = healthy
+      - name: Report bounded runtime diagnostics and clean up
+        if: always()
+        env:
+          CONTAINER_NAME: campus-container-check-${{ github.run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          trap 'docker rm -f "$CONTAINER_NAME" >/dev/null 2>&1 || true' EXIT
+          if docker container inspect "$CONTAINER_NAME" >/dev/null 2>&1; then
+            docker inspect --format 'Runtime: running={{.State.Running}}, exitCode={{.State.ExitCode}}, health={{if .State.Health}}{{.State.Health.Status}}{{else}}unavailable{{end}}' "$CONTAINER_NAME"
+            docker logs --tail 30 "$CONTAINER_NAME" 2>&1
+          else
+            printf 'Runtime: container was not created\n'
+          fi
