@@ -449,3 +449,31 @@ button:focus-visible, a:focus-visible {
   .home-page .hero-art { position: absolute; padding: 0; border: 0; }
   .home-page .module-category b { font-size: 19px; margin-right: 5px; }
 }
+
+/* Keep the three service entrances together on phone screens. */
+@media (max-width: 600px) {
+  .home-page .hero { min-height: 0; padding: 18px; margin-bottom: 18px; border-radius: 16px 16px 30px 16px; }
+  .home-page .hero-edition, .home-page .hero-description { display: none; }
+  .home-page .hero .eyebrow { margin-bottom: 8px; font-size: 10px; letter-spacing: .04em; }
+  .home-page .hero h1 { font-size: 22px; line-height: 1.32; }
+  .home-page .hero-action { min-height: 44px; padding: 10px 14px; margin-top: 14px; gap: 12px; font-size: 12px; }
+  .home-page .hero-art { position: absolute; width: 100px; right: 4px; bottom: 2px; padding: 0; border: 0; opacity: .5; pointer-events: none; }
+  .home-page .hero-art-caption, .home-page .home-section-heading > span { display: none; }
+  .home-page .home-section-heading { margin-bottom: 10px; }
+  .home-page .home-section-heading h2 { font-size: 16px; }
+  .home-page .module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .home-page .module-card { min-height: 0; padding: 14px 12px; border-radius: 12px; }
+  .home-page .card-top { margin-bottom: 8px; }
+  .home-page .module-icon { width: 32px; height: 32px; border-radius: 10px; }
+  .home-page .module-icon svg { width: 18px; height: 18px; }
+  .home-page .module-category, .home-page .module-card > p, .home-page .card-tags, .home-page .food-card > .food-artwork { display: none; }
+  .home-page .module-card h2 { margin-bottom: 3px; font-size: 16px; line-height: 1.5; }
+  .home-page .card-link { min-height: 44px; margin-top: 6px; gap: 4px; font-size: 12px; }
+  .home-page .card-link svg { width: 14px; height: 14px; }
+  .home-page .source-banner { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 4px 10px; margin-top: 10px; padding: 12px; border-radius: 12px; }
+  .home-page .source-icon { width: 32px; height: 32px; border-radius: 8px; }
+  .home-page .source-icon svg { width: 18px; height: 18px; }
+  .home-page .source-banner h2 { font-size: 15px; }
+  .home-page .source-banner p { display: none; }
+  .home-page .source-status { grid-column: 2; margin-left: 0; padding: 0; font-size: 11px; white-space: normal; }
+}
