@@ -2,6 +2,8 @@
 
 ## 评分样本展示（2026-10-26）
 
+已发布到同一魔搭空间：[打开评分样本](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full&app_path=%2Ffood%3Fratings%3Dsample)，[PR #10](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/10)交付源码并等待审阅。运行来源f120c93/connected，免费空间Running；发布流程40269049891成功，18项公网HTTP检查通过。
+
 美食页默认继续展示真实评分，点击“体验评分样本”或访问 `/food?ratings=sample` 可切换课程展示视图。说明放在“关于浙里有方 → 信息从哪里来？”，美食页的“评分说明”直接定位该段。样本以每道菜最初一条真实评分为基准，在±1星且1–5星内生成15–100份；同一道菜刷新、排序和查看详情保持一致，缺初评或读取失败时不猜测。
 
 该视图只读取现有公开数据并生成展示样本，不创建空账号、不写入共享评分，个人评分记录继续真实读取。点击“查看真实评分”立即退出，样本详情不提供真实提交按钮。无需迁移或新配置。修改前代码已保存为 [回退标签](https://github.com/hz9404807-ctrl/zju-campus-guide/tree/checkpoint/pre-rating-change-20261026)，开发分支 `codex/rating-demo` 基于 PR #9 的5e1ad2a，main仍待组长审阅。

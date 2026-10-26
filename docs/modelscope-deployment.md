@@ -1,3 +1,9 @@
+## 评分样本发布（2026-10-26）
+
+当前来源 `f120c93cd88baac84cc7a9673d16ed417c5b47e8` / connected，通过[发布流程40269049891](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40269049891)更新原免费Studio；API Running，runtime创建于2026-10-26T04:28:09Z。安装、449项Node、类型检查、构建、文件推送及部署API全流程成功；18项公网HTTP确认精确版本、About/样本入口、原深链与资源可用。未改永久main流程，也未合并main；不能据此声称首次main自动发布已验收。
+
+[打开评分样本](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full&app_path=%2Ffood%3Fratings%3Dsample)；[About来源说明](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full&app_path=%2Fabout%23rating-data)。默认入口仍真实评分，样本只在ratings=sample时生成展示投影。无需云端SQL、测试账号或数据清理；关闭模式即回真实统计，移除功能则审核撤销PR #10并重新构建部署。原Sites没有更新。
+
 # 共同使用的魔搭网站
 
 ## 10月25日部署状态：访问已恢复
