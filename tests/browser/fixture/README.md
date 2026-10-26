@@ -70,3 +70,5 @@ playwright-cli -s=food-display --raw run-code --filename=tests/browser/food-disp
 ```
 
 分别49/86/37项。页头检查包含状态/键盘/退出失败和换号；数字分页检查真实指南、个人子页及独立大页码边界，覆盖焦点、URL、当前页与44px。空价格检查仅在本机把两条夹具设置为空值和0元，并使用合法长度的长名称/地点；确认列表、详情的提示与样式、评分人数、无溢出和返回。截图在忽略目录 `scratch/records-header/`、`scratch/result-pager-*.png`、`scratch/continued-polish/`。各组有重叠，不累加成独立用户场景。编辑夹具模块后应重启测试服务器并重新打开页面，避免热更新前后的模块实例混用；不要在测试运行中编辑服务夹具。
+
+评分样本回归：`playwright-cli -s=rating-samples open about:blank`，再运行 `playwright-cli -s=rating-samples --raw run-code --filename=tests/browser/rating-samples.js`，结束后关闭自有会话。当前75项检查覆盖320/375/390/1280px、固定工作簿的4.0/29与4.6/69、缺ID留空、排序、详情/返回/刷新、About短说明及真实评分恢复。`__rating_fixture=fixed`仅由本机服务替换模块识别，复用两条测试菜映射表格ID；正式构建不含该夹具。初评请求、外部网络、评分写入均0。截图在忽略目录 `scratch/rating-samples/`。

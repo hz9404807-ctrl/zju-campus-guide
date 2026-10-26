@@ -164,7 +164,7 @@ function AboutPage() {
       </div>
       <div className="about-grid">
         <article className="about-card"><h2>为什么做这个网站？</h2><p>校园信息分散在不同网站、公众号和群聊中。我们希望把常用信息重新整理，让办事和寻找美食更方便。</p></article>
-        <article className="about-card"><h2>信息从哪里来？</h2><p>办事指南来自小组问题收集表，公众号来自截图与整理清单；每条保留来源，部分内容已官网核对。美食点评由使用者共同分享。</p></article>
+        <article className="about-card" id="rating-data" tabIndex={-1}><h2>信息从哪里来？</h2><p>办事指南来自小组问题收集表，公众号来自截图与整理清单；每条保留来源，部分内容已官网核对。美食菜品与真实评价由使用者分享。</p><p><strong>评分数据说明：</strong>“评分样本”为导入的模拟数据，用于Demo展示；真实评价独立保留。</p><Link className="text-link" to="/food?ratings=sample">体验评分样本 <ArrowRight size={16} aria-hidden="true" /></Link></article>
         <article className="about-card"><h2>现在进展到哪里？</h2><p>办事搜索、公众号与网站导航已补入小组资料；美食上传、发布和评分已连接共享服务。这里是《人类工效学》课程项目，不是学校官方平台。</p></article>
       </div>
       <Link to="/" className="text-link">返回首页 <ArrowRight size={18} aria-hidden="true" /></Link>
@@ -202,7 +202,12 @@ export default function App() {
       mainContent.current?.focus({ preventScroll: true })
       previousPath.current = location.pathname
     }
-  }, [location.pathname])
+    if (location.pathname === '/about' && location.hash === '#rating-data') {
+      const section = document.getElementById('rating-data')
+      section?.scrollIntoView({ block: 'start', behavior: 'instant' })
+      section?.focus({ preventScroll: true })
+    }
+  }, [location.pathname, location.hash])
 
   return (
     <div className={`app-shell ${location.pathname.startsWith('/food') && location.pathname !== '/food/login' ? 'theme-food' : 'theme-information'}`}>

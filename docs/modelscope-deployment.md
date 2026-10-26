@@ -1,3 +1,21 @@
+## 固定工作簿Demo发布（2026-10-26）
+
+当前来源 `e1e3d49d4ad12f40c0a5e8cbc13adcaa95a15d0c` / connected，原免费空间Running，runtime于2026-10-26T09:42:57Z创建。[发布40301500965](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40301500965)全部成功，457项Node、类型检查、构建、18项HTTP和18项生产390px访客检查通过。UI校内/校外各24道、去重48、合计2510份，精确使用导入的固定计数；默认仍为原线上评分。真实登录/真机未验收，宿主异常与图片占位边界见开发记录。
+
+[打开Demo评分页](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full&app_path=%2Ffood%3Fratings%3Dsample)；关于页保留一句模拟说明。没有账号、评分或结构写入，不需要云端SQL或配置，原Sites未更新。临时发布流程已移除，永久main流程不变，PR #10待审阅；关闭ratings=sample或撤销数据/投影提交后重建即可回退，代码标签checkpoint/pre-workbook-demo-20261026。
+
+## 评分说明精简发布（2026-10-26）
+
+当前运行来源 `cc95bff0a53404d32ec3ec0b32193dc675b6ca91` / connected，沿用同一免费空间。[发布40274026270](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40274026270)全部成功，runtime创建于2026-10-26T05:26:58Z后Running，18项HTTP通过。仅将About说明精简为一句，默认美食页的样本入口仍保留。无SQL、账号创建、真实评分导入或配置变化；本次临时发布流程已移除，永久main流程不变。纸质记录尚待提供与核对，不把已有模拟样本改称真实纸质评分。
+
+生产390px访客最小检查11项通过：About短说明、来源锚点/焦点、默认美食页44px入口和样本切换正确；校内24菜、样本数26–100。所有Auth/REST/Storage非读请求拦截，旧匿名初始化1次被阻止、业务/OTP写入尝试0，应用异常0、魔搭宿主异常1。已查看scratch/rating-copy下两张生产截图，首图仍占位；未验证真实登录、真实纸质数据或实体手机。
+
+## 评分样本发布（2026-10-26）
+
+当前来源 `f120c93cd88baac84cc7a9673d16ed417c5b47e8` / connected，通过[发布流程40269049891](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40269049891)更新原免费Studio；API Running，runtime创建于2026-10-26T04:28:09Z。安装、449项Node、类型检查、构建、文件推送及部署API全流程成功；18项公网HTTP确认精确版本、About/样本入口、原深链与资源可用。未改永久main流程，也未合并main；不能据此声称首次main自动发布已验收。
+
+[打开评分样本](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full&app_path=%2Ffood%3Fratings%3Dsample)；[About来源说明](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full&app_path=%2Fabout%23rating-data)。默认入口仍真实评分，样本只在ratings=sample时生成展示投影。无需云端SQL、测试账号或数据清理；关闭模式即回真实统计，移除功能则审核撤销PR #10并重新构建部署。原Sites没有更新。
+
 # 共同使用的魔搭网站
 
 ## 10月25日部署状态：访问已恢复

@@ -13,6 +13,11 @@ let identity: Identity = 'a'
 let readMode: ReadMode = 'normal'
 let mutationFailure = false
 let delay = 100
+let initialRatingDelay = 100
+let initialRatingFailure = false
+let missingInitialRatingIds: string[] = []
+let initialRatingReads = 0
+let ratingWriteAttempts = 0
 const publishLog: { attempts: number; successes: number; lastPublish: { name: string; rating: number; imageName: string | null } | null } = { attempts: 0, successes: 0, lastPublish: null }
 const watchers = new Set<(event: string, userId: string | null) => void>()
 const ids = { a: '11111111-1111-4111-8111-111111111111', b: '22222222-2222-4222-8222-222222222222' }
@@ -31,6 +36,18 @@ const rows: Food[] = [
 ].map((row) => ({ location: '本地测试 · 紫蓝色长地点长地点长地点名称', area: 'campus', category: '测试', price: 12, description: '仅供浏览器隔离测试，内容不对应真实菜品。', tags: [], average_rating: 4, rating_count: 1, updated_at: initial, isExample: false, ...row }))
 // Explicitly local fixtures exceed two pages without adding anything to production data.
 for (let index = 5; index <= 14; index += 1) rows.push({ ...rows[0]!, id: `f0000000-0000-4000-8000-${String(index).padStart(12, '0')}`, name: `A的分页测试菜品 ${index}`, image_url: index % 2 ? '/__fixture/food.svg' : null })
+
+/** Opt-in local mapping for the fixed workbook display test; content remains fake. */
+export function useFixtureWorkbookFoodIds() {
+  const mapping = new Map([
+    ['aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa', '335f9643-764c-4ce4-96d8-8d5f1f349e11'],
+    ['cccccccc-cccc-4ccc-8ccc-cccccccccccc', 'da41234b-8ba3-4548-984d-a28577f0faa2'],
+  ])
+  for (const row of rows) row.id = mapping.get(row.id) ?? row.id
+}
+// This URL is interpreted only by the local replacement module. Normal browser
+// suites keep their original IDs and behavior; full reloads preserve this test.
+if (new URLSearchParams(location.search).get('__rating_fixture') === 'fixed') useFixtureWorkbookFoodIds()
 
 export function fixturePublishLog() { return copy(publishLog) }
 
@@ -60,10 +77,23 @@ export async function sendFoodCode() { await write(); return 'email' as const }
 export async function verifyFoodCode(email: string) { await write(); setFixtureState({ identity: email.includes('fixture-b') ? 'b' : 'a' }) }
 export async function listFoods() { return read(rows.filter((row) => !row.deleted_at)) }
 export async function getFood(id: string) { return read(rows.find((row) => row.id === id && !row.deleted_at) ?? null) }
+export function setFixtureInitialRatings(next: { delay?: number; failure?: boolean; missingIds?: string[] }) {
+  if (next.delay !== undefined) initialRatingDelay = next.delay
+  if (next.failure !== undefined) initialRatingFailure = next.failure
+  if (next.missingIds !== undefined) missingInitialRatingIds = [...next.missingIds]
+}
+export function fixtureRatingSampleLog() { return { initialRatingReads, ratingWriteAttempts } }
+export async function getInitialFoodRatings(foodIds: string[]): Promise<Record<string, number>> {
+  initialRatingReads += 1
+  const response = { delay: initialRatingDelay, failure: initialRatingFailure, missing: [...missingInitialRatingIds] }
+  await new Promise((resolve) => setTimeout(resolve, response.delay))
+  if (response.failure) throw new Error('本地测试：初始评分读取失败，请重试。')
+  return Object.fromEntries(rows.filter((row) => foodIds.includes(row.id) && !row.deleted_at && !response.missing.includes(row.id)).map((row) => [row.id, 4]))
+}
 export async function myFoods() { const owner = requireUser(); return read(readMode === 'empty' ? [] : rows.filter((row) => row.created_by === owner)) }
 export async function myRatings() { const owner = requireUser(); return read(readMode === 'empty' ? [] : rows.filter((row) => row.created_by === owner).map((row) => ({ food_id: row.id, rating: 4, created_at: initial, food: row.deleted_at ? null : { id: row.id, name: row.name, location: row.location, image_url: row.image_url } }))) }
 export async function getMyRating() { return read(identity === 'guest' ? null : 4) }
-export async function rateFood() { requireUser(); await write() }
+export async function rateFood() { ratingWriteAttempts += 1; requireUser(); await write() }
 export async function setFoodDeleted(id: string, _updatedAt: string, deleted: boolean) { const owner = requireUser(); await write(); const row = rows.find((row) => row.id === id && row.created_by === owner); if (!row) throw new Error('无权管理该本地测试条目'); row.deleted_at = deleted ? initial : null; row.updated_at = new Date().toISOString() }
 export async function updateFood(id: string, _updatedAt: string, input: FoodPublishInput) { const owner = requireUser(); await write(); const row = rows.find((row) => row.id === id && row.created_by === owner); if (!row) throw new Error('无权管理该本地测试条目'); Object.assign(row, input); row.updated_at = new Date().toISOString() }
 export async function publishFood(input: FoodPublishInput, image: File | null) {

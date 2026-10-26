@@ -1,0 +1,589 @@
+{
+  "source": {
+    "kind": "simulation",
+    "sourceFile": "菜品评分数值收集.xlsx",
+    "sourceSha256": "f867831dd4dcb971b82c6c1ba266c62f976e15ad14a7ac76fa06a789cdfb38b7",
+    "sourceSheet": "菜品模拟汇总",
+    "detailSheet": "逐条模拟评分",
+    "importedOn": "2026-10-26",
+    "recordCount": 2510
+  },
+  "ratings": [
+    {
+      "foodId": "335f9643-764c-4ce4-96d8-8d5f1f349e11",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        8,
+        13,
+        8
+      ],
+      "sourceRow": 2
+    },
+    {
+      "foodId": "a0d57c8e-2211-4814-a982-ce2af56afbe4",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        9,
+        17,
+        5
+      ],
+      "sourceRow": 3
+    },
+    {
+      "foodId": "707e55a6-7f7b-465c-9738-0e75dee69f2f",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        13,
+        16,
+        16
+      ],
+      "sourceRow": 4
+    },
+    {
+      "foodId": "0c29c274-8a48-4509-95c9-3fa916c3da5d",
+      "initialRating": 5,
+      "histogram": [
+        0,
+        0,
+        0,
+        9,
+        16
+      ],
+      "sourceRow": 5
+    },
+    {
+      "foodId": "da41234b-8ba3-4548-984d-a28577f0faa2",
+      "initialRating": 5,
+      "histogram": [
+        0,
+        0,
+        0,
+        28,
+        41
+      ],
+      "sourceRow": 6
+    },
+    {
+      "foodId": "ec6db012-6246-4002-bb88-bd64776f5846",
+      "initialRating": 5,
+      "histogram": [
+        0,
+        0,
+        0,
+        24,
+        18
+      ],
+      "sourceRow": 7
+    },
+    {
+      "foodId": "1593410d-6db4-46fa-a20f-67ba2a3aae18",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        7,
+        12,
+        15
+      ],
+      "sourceRow": 8
+    },
+    {
+      "foodId": "87dd6285-36b7-4cf1-8897-75dfb6dca815",
+      "initialRating": 2,
+      "histogram": [
+        8,
+        7,
+        8,
+        0,
+        0
+      ],
+      "sourceRow": 9
+    },
+    {
+      "foodId": "b1d8f064-c5a7-4993-a2ad-0ec311a991e0",
+      "initialRating": 3,
+      "histogram": [
+        0,
+        6,
+        5,
+        8,
+        0
+      ],
+      "sourceRow": 10
+    },
+    {
+      "foodId": "e4da92c8-d8ff-4c7e-89a0-a0bcde1f570f",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        19,
+        23,
+        21
+      ],
+      "sourceRow": 11
+    },
+    {
+      "foodId": "28c86a9a-4731-41bb-8536-220b6233daf6",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        10,
+        8,
+        8
+      ],
+      "sourceRow": 12
+    },
+    {
+      "foodId": "572b6d56-7bbd-47d0-a0f4-560d51bc8d24",
+      "initialRating": 5,
+      "histogram": [
+        0,
+        0,
+        0,
+        34,
+        44
+      ],
+      "sourceRow": 13
+    },
+    {
+      "foodId": "93d22dde-cbc9-4686-93a2-6c43fe953633",
+      "initialRating": 5,
+      "histogram": [
+        0,
+        0,
+        0,
+        26,
+        33
+      ],
+      "sourceRow": 14
+    },
+    {
+      "foodId": "e4f2e7b4-c78c-4c42-93e4-04a4f541c047",
+      "initialRating": 3,
+      "histogram": [
+        0,
+        32,
+        29,
+        29,
+        0
+      ],
+      "sourceRow": 15
+    },
+    {
+      "foodId": "47df640f-e4e0-4793-8c12-0cc481aa6d2f",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        23,
+        28,
+        16
+      ],
+      "sourceRow": 16
+    },
+    {
+      "foodId": "51399f58-093f-4f29-9465-2f6f3569c9c8",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        10,
+        16,
+        9
+      ],
+      "sourceRow": 17
+    },
+    {
+      "foodId": "b6ab8bd0-d47c-455b-bb0a-47e1fb9bd9b9",
+      "initialRating": 5,
+      "histogram": [
+        0,
+        0,
+        0,
+        32,
+        17
+      ],
+      "sourceRow": 18
+    },
+    {
+      "foodId": "ddbdfcb1-0fd6-43af-898c-dd99d08d66e2",
+      "initialRating": 2,
+      "histogram": [
+        30,
+        24,
+        23,
+        0,
+        0
+      ],
+      "sourceRow": 19
+    },
+    {
+      "foodId": "a09df337-0421-4035-8a97-120ce8951414",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        5,
+        8,
+        14
+      ],
+      "sourceRow": 20
+    },
+    {
+      "foodId": "3ef842b6-4113-4e00-a085-0a0a0a3297dd",
+      "initialRating": 5,
+      "histogram": [
+        0,
+        0,
+        0,
+        24,
+        28
+      ],
+      "sourceRow": 21
+    },
+    {
+      "foodId": "24d4d8c5-b8e0-4d8d-a5d1-28fcd856e710",
+      "initialRating": 2,
+      "histogram": [
+        37,
+        20,
+        35,
+        0,
+        0
+      ],
+      "sourceRow": 22
+    },
+    {
+      "foodId": "5e3c06fb-690c-40b1-9e57-f5d7f1d5cb91",
+      "initialRating": 3,
+      "histogram": [
+        0,
+        37,
+        37,
+        22,
+        0
+      ],
+      "sourceRow": 23
+    },
+    {
+      "foodId": "b11985f0-3ae8-432a-acfb-a2098acadeae",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        30,
+        33,
+        26
+      ],
+      "sourceRow": 24
+    },
+    {
+      "foodId": "8f961eef-4f76-43be-9589-321143286ec0",
+      "initialRating": 5,
+      "histogram": [
+        0,
+        0,
+        0,
+        35,
+        40
+      ],
+      "sourceRow": 25
+    },
+    {
+      "foodId": "eda74a94-4c43-43bf-a4f1-9484bafa087a",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        17,
+        21,
+        21
+      ],
+      "sourceRow": 26
+    },
+    {
+      "foodId": "175a3e85-f5b0-4cb4-877a-6bafa77580c1",
+      "initialRating": 5,
+      "histogram": [
+        0,
+        0,
+        0,
+        16,
+        19
+      ],
+      "sourceRow": 27
+    },
+    {
+      "foodId": "709bb093-4995-4443-8f2c-aa718f3541dc",
+      "initialRating": 5,
+      "histogram": [
+        0,
+        0,
+        0,
+        7,
+        9
+      ],
+      "sourceRow": 28
+    },
+    {
+      "foodId": "3985c03b-8cae-4e6a-8768-af4ddeac76fd",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        9,
+        3,
+        8
+      ],
+      "sourceRow": 29
+    },
+    {
+      "foodId": "c92f86a8-6b38-4c6a-b0d7-4730710f48b7",
+      "initialRating": 3,
+      "histogram": [
+        0,
+        25,
+        29,
+        27,
+        0
+      ],
+      "sourceRow": 30
+    },
+    {
+      "foodId": "c2ee07e7-fa41-4c72-93c6-0201c0ec65d9",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        24,
+        37,
+        31
+      ],
+      "sourceRow": 31
+    },
+    {
+      "foodId": "dc859d70-e76a-43ab-83b0-02ebda264c57",
+      "initialRating": 3,
+      "histogram": [
+        0,
+        15,
+        11,
+        15,
+        0
+      ],
+      "sourceRow": 32
+    },
+    {
+      "foodId": "094ca16c-21b5-4af2-bde3-8a87dd1250bd",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        29,
+        33,
+        19
+      ],
+      "sourceRow": 33
+    },
+    {
+      "foodId": "bc7708b9-c187-4ca7-84c8-be81003cd9c0",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        15,
+        12,
+        16
+      ],
+      "sourceRow": 34
+    },
+    {
+      "foodId": "a77cd8f3-bddb-4d9c-98b5-db5c8424b1c4",
+      "initialRating": 1,
+      "histogram": [
+        16,
+        11,
+        0,
+        0,
+        0
+      ],
+      "sourceRow": 35
+    },
+    {
+      "foodId": "5e0daea3-ab4f-431c-935d-705ffd4a3ac8",
+      "initialRating": 3,
+      "histogram": [
+        0,
+        18,
+        31,
+        26,
+        0
+      ],
+      "sourceRow": 36
+    },
+    {
+      "foodId": "d12f3eb9-d77a-4fd7-ac68-ccbe3770c584",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        29,
+        20,
+        23
+      ],
+      "sourceRow": 37
+    },
+    {
+      "foodId": "79792182-455b-45c9-ba49-80d361f17fd9",
+      "initialRating": 5,
+      "histogram": [
+        0,
+        0,
+        0,
+        15,
+        12
+      ],
+      "sourceRow": 38
+    },
+    {
+      "foodId": "57cf1387-4c3f-4af7-b212-04e24cb70d4d",
+      "initialRating": 5,
+      "histogram": [
+        0,
+        0,
+        0,
+        19,
+        17
+      ],
+      "sourceRow": 39
+    },
+    {
+      "foodId": "834c56ec-1d6d-40a0-95ce-3434965f8cf1",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        29,
+        38,
+        33
+      ],
+      "sourceRow": 40
+    },
+    {
+      "foodId": "62873f94-0662-4dc6-816a-22ad4d97e57e",
+      "initialRating": 1,
+      "histogram": [
+        35,
+        29,
+        0,
+        0,
+        0
+      ],
+      "sourceRow": 41
+    },
+    {
+      "foodId": "f30bc800-2232-4c48-9417-2c565e9cf018",
+      "initialRating": 5,
+      "histogram": [
+        0,
+        0,
+        0,
+        7,
+        8
+      ],
+      "sourceRow": 42
+    },
+    {
+      "foodId": "60bd005e-559e-4c91-849e-62e5c091ff6e",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        12,
+        9,
+        8
+      ],
+      "sourceRow": 43
+    },
+    {
+      "foodId": "1e202e3c-3ea4-44b8-b622-696a604ea4e9",
+      "initialRating": 5,
+      "histogram": [
+        0,
+        0,
+        0,
+        47,
+        46
+      ],
+      "sourceRow": 44
+    },
+    {
+      "foodId": "ea3fc0b6-1ecb-471d-9489-76a6a35bcfef",
+      "initialRating": 2,
+      "histogram": [
+        9,
+        9,
+        6,
+        0,
+        0
+      ],
+      "sourceRow": 45
+    },
+    {
+      "foodId": "6774bb07-215f-40cc-aea9-ade3ff6d425d",
+      "initialRating": 2,
+      "histogram": [
+        13,
+        11,
+        9,
+        0,
+        0
+      ],
+      "sourceRow": 46
+    },
+    {
+      "foodId": "437b7f05-7614-43f1-9fa7-94945371cb69",
+      "initialRating": 4,
+      "histogram": [
+        0,
+        0,
+        23,
+        29,
+        28
+      ],
+      "sourceRow": 47
+    },
+    {
+      "foodId": "ac2161ef-d421-49d4-83d3-a2e43a776bbc",
+      "initialRating": 5,
+      "histogram": [
+        0,
+        0,
+        0,
+        22,
+        18
+      ],
+      "sourceRow": 48
+    },
+    {
+      "foodId": "19222348-4ac0-41d9-a76d-d7a47b7723b8",
+      "initialRating": 3,
+      "histogram": [
+        0,
+        9,
+        12,
+        14,
+        0
+      ],
+      "sourceRow": 49
+    }
+  ]
+}

@@ -1,5 +1,13 @@
 # 浙大校园指南
 
+## 评分样本展示（2026-10-26）
+
+[打开Demo评分页](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full&app_path=%2Ffood%3Fratings%3Dsample)。当前展示用户Excel的48道菜、2510份固定样本，按原五档计数核算均分；列表/详情/排序/刷新保持一致，不再运行时重新生成。说明集中在About一句话，正常入口仍可查看原线上评分。数据保留来源文件SHA256和原行号，原文件不随代码上传。
+
+已通过[发布40301500965](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40301500965)更新原免费魔搭空间，来源e1e3d49d4ad12f40c0a5e8cbc13adcaa95a15d0c / connected、Running。[PR #10](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/10)交付源码，等待审阅，不合main。457项Node、类型检查、构建、本机四宽75项浏览器、18项HTTP及18项生产访客浏览器检查通过。无新依赖、迁移、业务写入或云端配置；实体手机和真实登录未在本次验收。
+
+关闭ratings=sample即可恢复原统计。接入前代码标签为`checkpoint/pre-workbook-demo-20261026`；完整验证与回退说明见开发记录。
+
 ## 手机版首页、反馈精简与美食排序（2026-10-25）
 
 [PR #9](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/9)完成三项：手机首页封面缩小、三个入口同屏，桌面不变；截图所指区域只保留反馈入口；美食增加价格/评分各自升降序，未知价格和无评分始终靠后。另修复公开美食浏览被匿名注册失败阻断的问题。425项测试、类型检查和构建在本机及CI通过，本机38/54/106项界面检查通过。无需新依赖、迁移或云端配置。
