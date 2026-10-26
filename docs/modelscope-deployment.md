@@ -1,3 +1,9 @@
+## 固定工作簿Demo发布（2026-10-26）
+
+当前来源 `e1e3d49d4ad12f40c0a5e8cbc13adcaa95a15d0c` / connected，原免费空间Running，runtime于2026-10-26T09:42:57Z创建。[发布40301500965](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40301500965)全部成功，457项Node、类型检查、构建、18项HTTP和18项生产390px访客检查通过。UI校内/校外各24道、去重48、合计2510份，精确使用导入的固定计数；默认仍为原线上评分。真实登录/真机未验收，宿主异常与图片占位边界见开发记录。
+
+[打开Demo评分页](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full&app_path=%2Ffood%3Fratings%3Dsample)；关于页保留一句模拟说明。没有账号、评分或结构写入，不需要云端SQL或配置，原Sites未更新。临时发布流程已移除，永久main流程不变，PR #10待审阅；关闭ratings=sample或撤销数据/投影提交后重建即可回退，代码标签checkpoint/pre-workbook-demo-20261026。
+
 ## 评分说明精简发布（2026-10-26）
 
 当前运行来源 `cc95bff0a53404d32ec3ec0b32193dc675b6ca91` / connected，沿用同一免费空间。[发布40274026270](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40274026270)全部成功，runtime创建于2026-10-26T05:26:58Z后Running，18项HTTP通过。仅将About说明精简为一句，默认美食页的样本入口仍保留。无SQL、账号创建、真实评分导入或配置变化；本次临时发布流程已移除，永久main流程不变。纸质记录尚待提供与核对，不把已有模拟样本改称真实纸质评分。

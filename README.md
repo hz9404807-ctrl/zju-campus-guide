@@ -2,15 +2,11 @@
 
 ## 评分样本展示（2026-10-26）
 
-Demo后续接入用户提供Excel的固定值：48道菜、2510份，按原五档计数核算均分，不再运行时随机生成或读取初评。仅作用于`ratings=sample`，关于页保留一句模拟说明，真实线上评分不改。数据文件保留工作表、行号及SHA256，便于复核；接入前代码标签为`checkpoint/pre-workbook-demo-20261026`。
+[打开Demo评分页](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full&app_path=%2Ffood%3Fratings%3Dsample)。当前展示用户Excel的48道菜、2510份固定样本，按原五档计数核算均分；列表/详情/排序/刷新保持一致，不再运行时重新生成。说明集中在About一句话，正常入口仍可查看原线上评分。数据保留来源文件SHA256和原行号，原文件不随代码上传。
 
-说明已精简为一句；美食页自身也有“体验评分样本”入口，无需先访问About。文案更新已通过[发布40274026270](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40274026270)上线，当前来源cc95bff/connected、Running，18项HTTP通过。纸质真实评分尚缺原始记录，未导入数据或创建账号。
+已通过[发布40301500965](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40301500965)更新原免费魔搭空间，来源e1e3d49d4ad12f40c0a5e8cbc13adcaa95a15d0c / connected、Running。[PR #10](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/10)交付源码，等待审阅，不合main。457项Node、类型检查、构建、本机四宽75项浏览器、18项HTTP及18项生产访客浏览器检查通过。无新依赖、迁移、业务写入或云端配置；实体手机和真实登录未在本次验收。
 
-已发布到同一魔搭空间：[打开评分样本](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full&app_path=%2Ffood%3Fratings%3Dsample)，[PR #10](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/10)交付源码并等待审阅。运行来源f120c93/connected，免费空间Running；发布流程40269049891成功，18项公网HTTP检查通过。
-
-美食页默认继续展示真实评分，点击“体验评分样本”或访问 `/food?ratings=sample` 可切换课程展示视图。说明放在“关于浙里有方 → 信息从哪里来？”，美食页的“评分说明”直接定位该段。样本以每道菜最初一条真实评分为基准，在±1星且1–5星内生成15–100份；同一道菜刷新、排序和查看详情保持一致，缺初评或读取失败时不猜测。
-
-该视图只读取现有公开数据并生成展示样本，不创建空账号、不写入共享评分，个人评分记录继续真实读取。点击“查看真实评分”立即退出，样本详情不提供真实提交按钮。无需迁移或新配置。修改前代码已保存为 [回退标签](https://github.com/hz9404807-ctrl/zju-campus-guide/tree/checkpoint/pre-rating-change-20261026)，开发分支 `codex/rating-demo` 基于 PR #9 的5e1ad2a，main仍待组长审阅。
+关闭ratings=sample即可恢复原统计。接入前代码标签为`checkpoint/pre-workbook-demo-20261026`；完整验证与回退说明见开发记录。
 
 ## 手机版首页、反馈精简与美食排序（2026-10-25）
 
