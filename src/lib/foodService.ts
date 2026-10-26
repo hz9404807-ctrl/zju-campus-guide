@@ -59,6 +59,11 @@ export async function getFood(id: string): Promise<Food | null> {
   return getApi().getFood(id)
 }
 
+export async function getInitialFoodRatings(foodIds: string[]): Promise<Record<string, number>> {
+  if (!hasAnyConfiguration) return {}
+  return getApi().getInitialFoodRatings(foodIds)
+}
+
 export async function getMyRating(foodId: string): Promise<number | null> {
   if (!isFoodBackendConfigured) return null
   return getApi().getMyRating(foodId)

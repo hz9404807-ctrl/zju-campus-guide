@@ -25,6 +25,10 @@
 .food-area-tab.active { color: var(--blue); background: white; font-weight: 600; box-shadow: 0 2px 6px rgb(28 49 81 / 7%); }
 .food-filters { display: flex; align-items: flex-end; flex-wrap: wrap; gap: 15px; margin-top: 19px; }
 .food-sort-description { grid-column: 1 / -1; margin-top: 12px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.food-rating-data-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; margin: 0 0 10px; color: var(--muted); font-size: 13px; }
+.food-rating-data-controls a, .food-rating-data-controls button { display: inline-flex; align-items: center; min-height: 44px; color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.food-rating-data-controls button { border: 0; background: transparent; padding: 0; font: inherit; cursor: pointer; }
+.food-sample-status { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin: 6px 0 14px; color: var(--muted); font-size: 13px; line-height: 1.8; }
 .food-select-field { display: flex; flex-direction: column; gap: 7px; min-width: 170px; color: #46566b; font-size: 13px; line-height: 1.6; }
 .food-select-field select { width: 100%; min-height: 44px; max-width: 100%; padding: 9px 32px 9px 12px; color: var(--ink); background: #fff; border: 1px solid #cdd7e3; border-radius: 9px; font-size: 14px; }
 .food-select-field select:focus-visible { outline: 3px solid #b7d1f1; outline-offset: 2px; border-color: var(--blue); }

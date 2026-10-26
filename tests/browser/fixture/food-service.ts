@@ -13,6 +13,11 @@ let identity: Identity = 'a'
 let readMode: ReadMode = 'normal'
 let mutationFailure = false
 let delay = 100
+let initialRatingDelay = 100
+let initialRatingFailure = false
+let missingInitialRatingIds: string[] = []
+let initialRatingReads = 0
+let ratingWriteAttempts = 0
 const publishLog: { attempts: number; successes: number; lastPublish: { name: string; rating: number; imageName: string | null } | null } = { attempts: 0, successes: 0, lastPublish: null }
 const watchers = new Set<(event: string, userId: string | null) => void>()
 const ids = { a: '11111111-1111-4111-8111-111111111111', b: '22222222-2222-4222-8222-222222222222' }
@@ -60,10 +65,23 @@ export async function sendFoodCode() { await write(); return 'email' as const }
 export async function verifyFoodCode(email: string) { await write(); setFixtureState({ identity: email.includes('fixture-b') ? 'b' : 'a' }) }
 export async function listFoods() { return read(rows.filter((row) => !row.deleted_at)) }
 export async function getFood(id: string) { return read(rows.find((row) => row.id === id && !row.deleted_at) ?? null) }
+export function setFixtureInitialRatings(next: { delay?: number; failure?: boolean; missingIds?: string[] }) {
+  if (next.delay !== undefined) initialRatingDelay = next.delay
+  if (next.failure !== undefined) initialRatingFailure = next.failure
+  if (next.missingIds !== undefined) missingInitialRatingIds = [...next.missingIds]
+}
+export function fixtureRatingSampleLog() { return { initialRatingReads, ratingWriteAttempts } }
+export async function getInitialFoodRatings(foodIds: string[]): Promise<Record<string, number>> {
+  initialRatingReads += 1
+  const response = { delay: initialRatingDelay, failure: initialRatingFailure, missing: [...missingInitialRatingIds] }
+  await new Promise((resolve) => setTimeout(resolve, response.delay))
+  if (response.failure) throw new Error('本地测试：初始评分读取失败，请重试。')
+  return Object.fromEntries(rows.filter((row) => foodIds.includes(row.id) && !row.deleted_at && !response.missing.includes(row.id)).map((row) => [row.id, 4]))
+}
 export async function myFoods() { const owner = requireUser(); return read(readMode === 'empty' ? [] : rows.filter((row) => row.created_by === owner)) }
 export async function myRatings() { const owner = requireUser(); return read(readMode === 'empty' ? [] : rows.filter((row) => row.created_by === owner).map((row) => ({ food_id: row.id, rating: 4, created_at: initial, food: row.deleted_at ? null : { id: row.id, name: row.name, location: row.location, image_url: row.image_url } }))) }
 export async function getMyRating() { return read(identity === 'guest' ? null : 4) }
-export async function rateFood() { requireUser(); await write() }
+export async function rateFood() { ratingWriteAttempts += 1; requireUser(); await write() }
 export async function setFoodDeleted(id: string, _updatedAt: string, deleted: boolean) { const owner = requireUser(); await write(); const row = rows.find((row) => row.id === id && row.created_by === owner); if (!row) throw new Error('无权管理该本地测试条目'); row.deleted_at = deleted ? initial : null; row.updated_at = new Date().toISOString() }
 export async function updateFood(id: string, _updatedAt: string, input: FoodPublishInput) { const owner = requireUser(); await write(); const row = rows.find((row) => row.id === id && row.created_by === owner); if (!row) throw new Error('无权管理该本地测试条目'); Object.assign(row, input); row.updated_at = new Date().toISOString() }
 export async function publishFood(input: FoodPublishInput, image: File | null) {

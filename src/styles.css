@@ -224,6 +224,8 @@ button:focus-visible, a:focus-visible {
 .about-card h2 { margin-bottom: 11px; font-size: 18px; line-height: 1.6; }
 .about-card p { color: var(--muted); font-size: 14px; line-height: 1.9; }
 .about-card p + p { margin-top: 12px; }
+.about-card > .text-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+.about-card#rating-data { scroll-margin-top: 96px; }
 .text-link { color: var(--blue); text-decoration: underline; text-underline-offset: 4px; border-radius: 3px; }
 .text-link:hover { color: var(--blue-dark); }
 .about-page > .text-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 24px; }

@@ -82,6 +82,41 @@ export function createFoodApi(client: SupabaseClient, { profilesEnabled = false 
     }
   }
 
+  async function getInitialFoodRatings(foodIds: string[]): Promise<Record<string, number>> {
+    const ids = [...new Set(foodIds)]
+    const initial = new Map<string, number>()
+    try {
+      for (let offset = 0; offset < ids.length; offset += 100) {
+        const chunk = ids.slice(offset, offset + 100)
+        const requested = new Set(chunk)
+        const seen = new Set<string>()
+        // Limit the embedded ratings, not the foods: each food has its own
+        // earliest rating. No user identity or personal rating history is read.
+        const { data, error } = await client.from('foods').select('id,ratings(rating)')
+          .in('id', chunk).is('deleted_at', null)
+          .order('created_at', { referencedTable: 'ratings', ascending: true })
+          .order('id', { referencedTable: 'ratings', ascending: true })
+          .limit(1, { referencedTable: 'ratings' }).limit(chunk.length)
+        if (error || !Array.isArray(data)) fail('LOAD_FAILED', '初始评分暂时无法读取，请重试。')
+        for (const row of data) {
+          if (!row || typeof row.id !== 'string' || !requested.has(row.id) || seen.has(row.id)
+            || !Array.isArray(row.ratings) || row.ratings.length > 1) {
+            fail('LOAD_FAILED', '初始评分暂时无法读取，请重试。')
+          }
+          seen.add(row.id)
+          if (row.ratings.length === 0) continue
+          const rating = row.ratings[0]?.rating
+          if (!Number.isInteger(rating) || rating < 1 || rating > 5) fail('LOAD_FAILED', '初始评分暂时无法读取，请重试。')
+          initial.set(row.id, rating)
+        }
+      }
+      return Object.fromEntries(initial)
+    } catch (error) {
+      if (error instanceof FoodServiceError) throw error
+      fail('LOAD_FAILED', '初始评分暂时无法读取，请重试。')
+    }
+  }
+
   async function getMyRating(foodId: string): Promise<number | null> {
     const userId = await ensureIdentity()
     try {
@@ -239,6 +274,6 @@ export function createFoodApi(client: SupabaseClient, { profilesEnabled = false 
     const { error } = await client.rpc(profile ? 'set_profile_food_deleted' : 'set_own_food_deleted', { ...(profile ? { p_profile_id: profile } : {}), p_food_id: id, p_expected_updated_at: updatedAt, p_deleted: deleted })
     mutationError(error)
   }
-  return { ensureIdentity, listFoods, getFood, getMyRating, rateFood, publishFood, myFoods, myRatings, updateFood, setFoodDeleted }
+  return { ensureIdentity, listFoods, getFood, getInitialFoodRatings, getMyRating, rateFood, publishFood, myFoods, myRatings, updateFood, setFoodDeleted }
 
 }
