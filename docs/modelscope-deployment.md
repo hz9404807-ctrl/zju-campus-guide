@@ -1,3 +1,9 @@
+## 评分说明精简发布（2026-10-26）
+
+当前运行来源 `cc95bff0a53404d32ec3ec0b32193dc675b6ca91` / connected，沿用同一免费空间。[发布40274026270](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40274026270)全部成功，runtime创建于2026-10-26T05:26:58Z后Running，18项HTTP通过。仅将About说明精简为一句，默认美食页的样本入口仍保留。无SQL、账号创建、真实评分导入或配置变化；本次临时发布流程已移除，永久main流程不变。纸质记录尚待提供与核对，不把已有模拟样本改称真实纸质评分。
+
+生产390px访客最小检查11项通过：About短说明、来源锚点/焦点、默认美食页44px入口和样本切换正确；校内24菜、样本数26–100。所有Auth/REST/Storage非读请求拦截，旧匿名初始化1次被阻止、业务/OTP写入尝试0，应用异常0、魔搭宿主异常1。已查看scratch/rating-copy下两张生产截图，首图仍占位；未验证真实登录、真实纸质数据或实体手机。
+
 ## 评分样本发布（2026-10-26）
 
 当前来源 `f120c93cd88baac84cc7a9673d16ed417c5b47e8` / connected，通过[发布流程40269049891](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40269049891)更新原免费Studio；API Running，runtime创建于2026-10-26T04:28:09Z。安装、449项Node、类型检查、构建、文件推送及部署API全流程成功；18项公网HTTP确认精确版本、About/样本入口、原深链与资源可用。未改永久main流程，也未合并main；不能据此声称首次main自动发布已验收。
