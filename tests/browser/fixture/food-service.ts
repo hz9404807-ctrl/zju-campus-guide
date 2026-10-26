@@ -37,6 +37,18 @@ const rows: Food[] = [
 // Explicitly local fixtures exceed two pages without adding anything to production data.
 for (let index = 5; index <= 14; index += 1) rows.push({ ...rows[0]!, id: `f0000000-0000-4000-8000-${String(index).padStart(12, '0')}`, name: `A的分页测试菜品 ${index}`, image_url: index % 2 ? '/__fixture/food.svg' : null })
 
+/** Opt-in local mapping for the fixed workbook display test; content remains fake. */
+export function useFixtureWorkbookFoodIds() {
+  const mapping = new Map([
+    ['aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa', '335f9643-764c-4ce4-96d8-8d5f1f349e11'],
+    ['cccccccc-cccc-4ccc-8ccc-cccccccccccc', 'da41234b-8ba3-4548-984d-a28577f0faa2'],
+  ])
+  for (const row of rows) row.id = mapping.get(row.id) ?? row.id
+}
+// This URL is interpreted only by the local replacement module. Normal browser
+// suites keep their original IDs and behavior; full reloads preserve this test.
+if (new URLSearchParams(location.search).get('__rating_fixture') === 'fixed') useFixtureWorkbookFoodIds()
+
 export function fixturePublishLog() { return copy(publishLog) }
 
 /** Local display edge cases only; no ownership, identity or backend configuration overrides. */
