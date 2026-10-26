@@ -2,6 +2,8 @@
 
 ## 评分样本展示（2026-10-26）
 
+Demo后续接入用户提供Excel的固定值：48道菜、2510份，按原五档计数核算均分，不再运行时随机生成或读取初评。仅作用于`ratings=sample`，关于页保留一句模拟说明，真实线上评分不改。数据文件保留工作表、行号及SHA256，便于复核；接入前代码标签为`checkpoint/pre-workbook-demo-20261026`。
+
 说明已精简为一句；美食页自身也有“体验评分样本”入口，无需先访问About。文案更新已通过[发布40274026270](https://github.com/hz9404807-ctrl/zju-campus-guide/actions/runs/40274026270)上线，当前来源cc95bff/connected、Running，18项HTTP通过。纸质真实评分尚缺原始记录，未导入数据或创建账号。
 
 已发布到同一魔搭空间：[打开评分样本](https://www.modelscope.cn/studios/zzzhr777/zju-campus-guide?mode=full&app_path=%2Ffood%3Fratings%3Dsample)，[PR #10](https://github.com/hz9404807-ctrl/zju-campus-guide/pull/10)交付源码并等待审阅。运行来源f120c93/connected，免费空间Running；发布流程40269049891成功，18项公网HTTP检查通过。

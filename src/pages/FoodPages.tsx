@@ -129,8 +129,6 @@ export function FoodPage() {
       <FoodAccountBar auth={auth} compact />
       {isFoodExampleMode && <ExampleNotice />}
       <RatingDataControls sampleMode={sampleMode} onToggle={() => updateFilter('ratings', sampleMode ? '' : 'sample')} />
-      {samples.loading && <p className="food-sample-status" role="status">正在准备评分样本…</p>}
-      {samples.error && <div className="food-sample-status" role="alert"><span>{samples.error}</span><button type="button" className="food-clear-filters" onClick={samples.retry}>重试评分样本</button></div>}
       <section className="food-search-panel" aria-label="搜索和筛选美食">
         <div className="food-area-tabs" role="group" aria-label="选择美食范围">
           <button type="button" className={`food-area-tab${area === 'campus' ? ' active' : ''}`} aria-pressed={area === 'campus'} onClick={() => changeArea('campus')}>校内食堂</button>
@@ -197,8 +195,6 @@ export function FoodDetailPage() {
       <FoodAccountBar auth={auth} />
       {food.isExample && <ExampleNotice />}
       <RatingDataControls sampleMode={sampleMode} onToggle={() => { const next = new URLSearchParams(searchParams); if (sampleMode) next.delete('ratings'); else next.set('ratings', 'sample'); setSearchParams(next, { replace: true }) }} />
-      {samples.loading && <p className="food-sample-status" role="status">正在准备评分样本…</p>}
-      {samples.error && <div className="food-sample-status" role="alert"><span>{samples.error}</span><button type="button" className="food-clear-filters" onClick={samples.retry}>重试评分样本</button></div>}
       <article className="food-detail-card">
         <FoodImage food={food} large />
         <div className="food-detail-content">
